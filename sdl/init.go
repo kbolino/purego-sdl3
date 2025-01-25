@@ -34,7 +34,10 @@ func init() {
 		filename = "libSDL3.dylib"
 	}
 
-	lib := must(shared.Load(filename))
+	lib, err := shared.Load(filename)
+	if err != nil {
+		panic(err)
+	}
 
 	purego.RegisterLibFunc(&sdlInit, lib, "SDL_Init")
 	purego.RegisterLibFunc(&sdlQuit, lib, "SDL_Quit")
@@ -47,11 +50,4 @@ func init() {
 	purego.RegisterLibFunc(&sdlDestroyWindow, lib, "SDL_DestroyWindow")
 	purego.RegisterLibFunc(&sdlPollEvent, lib, "SDL_PollEvent")
 	purego.RegisterLibFunc(&sdlSetHint, lib, "SDL_SetHint")
-}
-
-func must[T any](v T, err error) T {
-	if err != nil {
-		panic(err)
-	}
-	return v
 }
