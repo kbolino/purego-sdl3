@@ -4,16 +4,16 @@
 A cgo-free SDL3 binding.
 
 ## About
-This library doesn't require cgo. It uses [dynamic loading]("https://en.wikipedia.org/wiki/Dynamic_loading") with the help of [purego](https://github.com/ebitengine/purego).
+This library doesn't require cgo. It uses [dynamic loading](https://en.wikipedia.org/wiki/Dynamic_loading) with the help of [purego](https://github.com/ebitengine/purego).
 
 ## Status
 This project is in a very, very early stage and currently only a proof of concept.
 
 ## Requirements
 You need to have SDL3 installed as shared library. That means at runtime, it is trying to load SDL:
-- macOS: libSDL3.dylib
-- Linux and FreeBSD: libSDL3.so.0
-- Windows: SDL3.dll
+- macOS: `libSDL3.dylib`
+- Linux and FreeBSD: `libSDL3.so.0`
+- Windows: `SDL3.dll`
 
 Only the above-mentioned operating systems with AMD64 or ARM64 architecture are supported.
 
