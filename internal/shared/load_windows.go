@@ -4,12 +4,11 @@ package shared
 
 import (
 	"fmt"
-
-	"golang.org/x/sys/windows"
+	"syscall"
 )
 
 func Load(name string) (uintptr, error) {
-	handle, err := windows.LoadLibrary(name)
+	handle, err := syscall.LoadLibrary(name)
 	if err != nil {
 		err = fmt.Errorf("%s: error loading library: %w", name, err)
 	}
