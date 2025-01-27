@@ -21,6 +21,7 @@ var (
 	sdlDestroyWindow           func(Window)
 	sdlPollEvent               func(*Event) bool
 	sdlSetHint                 func(string, string) bool
+	sdlGetPowerInfo            func(*int32, *int32) PowerState
 )
 
 func init() {
@@ -54,4 +55,5 @@ func init() {
 	purego.RegisterLibFunc(&sdlDestroyWindow, lib, "SDL_DestroyWindow")
 	purego.RegisterLibFunc(&sdlPollEvent, lib, "SDL_PollEvent")
 	purego.RegisterLibFunc(&sdlSetHint, lib, "SDL_SetHint")
+	purego.RegisterLibFunc(&sdlGetPowerInfo, lib, "SDL_GetPowerInfo")
 }
