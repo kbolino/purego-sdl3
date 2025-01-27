@@ -18,7 +18,21 @@ func Init(flags InitFlags) bool {
 	return sdlInit(flags)
 }
 
+// InitSubSystem is a compatibility function to initialize the SDL library.
+//
+// This function and [Init] are interchangeable.
+func InitSubSystem(flags InitFlags) bool {
+	return sdlInit(flags)
+}
+
 // Quit cleans up all initialized subsystems.
 func Quit() {
 	sdlQuit()
+}
+
+// QuitSubSystem shuts down specific SDL subsystems.
+//
+// You still need to call [Quit] even if you close all open subsystems with this function.
+func QuitSubSystem(flags InitFlags) {
+	sdlQuitSubSystem(flags)
 }

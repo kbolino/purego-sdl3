@@ -9,8 +9,10 @@ import (
 
 var (
 	sdlInit                    func(InitFlags) bool
+	sdlQuitSubSystem           func(InitFlags)
 	sdlQuit                    func()
 	sdlGetError                func() string
+	sdlClearError              func() bool
 	sdlCreateWindowAndRenderer func(string, int32, int32, WindowFlags, *Window, *Renderer) bool
 	sdlSetRenderDrawColor      func(Renderer, uint8, uint8, uint8, uint8) bool
 	sdlRenderClear             func(Renderer) bool
@@ -40,8 +42,10 @@ func init() {
 	}
 
 	purego.RegisterLibFunc(&sdlInit, lib, "SDL_Init")
+	purego.RegisterLibFunc(&sdlQuitSubSystem, lib, "SDL_QuitSubSystem")
 	purego.RegisterLibFunc(&sdlQuit, lib, "SDL_Quit")
 	purego.RegisterLibFunc(&sdlGetError, lib, "SDL_GetError")
+	purego.RegisterLibFunc(&sdlClearError, lib, "SDL_ClearError")
 	purego.RegisterLibFunc(&sdlCreateWindowAndRenderer, lib, "SDL_CreateWindowAndRenderer")
 	purego.RegisterLibFunc(&sdlSetRenderDrawColor, lib, "SDL_SetRenderDrawColor")
 	purego.RegisterLibFunc(&sdlRenderClear, lib, "SDL_RenderClear")

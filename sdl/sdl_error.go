@@ -4,3 +4,8 @@ package sdl
 func GetError() string {
 	return sdlGetError()
 }
+
+// ClearError clears any previous error message for this thread.
+func ClearError() bool {
+	return sdlClearError()
+}
