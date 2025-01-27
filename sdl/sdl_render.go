@@ -30,3 +30,18 @@ func RenderClear(renderer Renderer) bool {
 func DestroyRenderer(renderer Renderer) {
 	sdlDestroyRenderer(renderer)
 }
+
+// RenderRect draws a rectangle on the current rendering target at subpixel precision.
+func RenderRect(renderer Renderer, rect *FRect) bool {
+	return sdlRenderRect(renderer, rect)
+}
+
+// RenderFillRect fills a rectangle on the current rendering target with the drawing color at subpixel precision.
+func RenderFillRect(renderer Renderer, rect *FRect) bool {
+	return sdlRenderFillRect(renderer, rect)
+}
+
+// RenderDebugText draws debug text to an SDL_Renderer.
+func RenderDebugText(renderer Renderer, x, y float32, str string) bool {
+	return sdlRenderDebugText(renderer, x, y, str)
+}

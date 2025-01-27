@@ -22,6 +22,9 @@ var (
 	sdlPollEvent               func(*Event) bool
 	sdlSetHint                 func(string, string) bool
 	sdlGetPowerInfo            func(*int32, *int32) PowerState
+	sdlRenderRect              func(Renderer, *FRect) bool
+	sdlRenderFillRect          func(Renderer, *FRect) bool
+	sdlRenderDebugText         func(Renderer, float32, float32, string) bool
 )
 
 func init() {
@@ -56,4 +59,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlPollEvent, lib, "SDL_PollEvent")
 	purego.RegisterLibFunc(&sdlSetHint, lib, "SDL_SetHint")
 	purego.RegisterLibFunc(&sdlGetPowerInfo, lib, "SDL_GetPowerInfo")
+	purego.RegisterLibFunc(&sdlRenderRect, lib, "SDL_RenderRect")
+	purego.RegisterLibFunc(&sdlRenderFillRect, lib, "SDL_RenderFillRect")
+	purego.RegisterLibFunc(&sdlRenderDebugText, lib, "SDL_RenderDebugText")
 }
