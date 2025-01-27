@@ -25,6 +25,7 @@ var (
 	sdlRenderRect              func(Renderer, *FRect) bool
 	sdlRenderFillRect          func(Renderer, *FRect) bool
 	sdlRenderDebugText         func(Renderer, float32, float32, string) bool
+	sdlGetPreferredLocales     func(*int32) **Locale
 )
 
 func init() {
@@ -62,4 +63,5 @@ func init() {
 	purego.RegisterLibFunc(&sdlRenderRect, lib, "SDL_RenderRect")
 	purego.RegisterLibFunc(&sdlRenderFillRect, lib, "SDL_RenderFillRect")
 	purego.RegisterLibFunc(&sdlRenderDebugText, lib, "SDL_RenderDebugText")
+	purego.RegisterLibFunc(&sdlGetPreferredLocales, lib, "SDL_GetPreferredLocales")
 }
