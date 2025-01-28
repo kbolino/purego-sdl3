@@ -8,24 +8,31 @@ import (
 )
 
 var (
-	sdlInit                    func(InitFlags) bool
-	sdlQuitSubSystem           func(InitFlags)
-	sdlQuit                    func()
-	sdlGetError                func() string
-	sdlClearError              func() bool
-	sdlCreateWindowAndRenderer func(string, int32, int32, WindowFlags, *Window, *Renderer) bool
-	sdlSetRenderDrawColor      func(Renderer, uint8, uint8, uint8, uint8) bool
-	sdlRenderClear             func(Renderer) bool
-	sdlRenderPresent           func(Renderer) bool
-	sdlDestroyRenderer         func(Renderer)
-	sdlDestroyWindow           func(Window)
-	sdlPollEvent               func(*Event) bool
-	sdlSetHint                 func(string, string) bool
-	sdlGetPowerInfo            func(*int32, *int32) PowerState
-	sdlRenderRect              func(Renderer, *FRect) bool
-	sdlRenderFillRect          func(Renderer, *FRect) bool
-	sdlRenderDebugText         func(Renderer, float32, float32, string) bool
-	sdlGetPreferredLocales     func(*int32) **Locale
+	sdlInit                     func(InitFlags) bool
+	sdlQuitSubSystem            func(InitFlags)
+	sdlQuit                     func()
+	sdlGetError                 func() string
+	sdlClearError               func() bool
+	sdlCreateWindowAndRenderer  func(string, int32, int32, WindowFlags, *Window, *Renderer) bool
+	sdlSetRenderDrawColor       func(Renderer, uint8, uint8, uint8, uint8) bool
+	sdlRenderClear              func(Renderer) bool
+	sdlRenderPresent            func(Renderer) bool
+	sdlDestroyRenderer          func(Renderer)
+	sdlDestroyWindow            func(Window)
+	sdlPollEvent                func(*Event) bool
+	sdlSetHint                  func(string, string) bool
+	sdlGetPowerInfo             func(*int32, *int32) PowerState
+	sdlRenderRect               func(Renderer, *FRect) bool
+	sdlRenderFillRect           func(Renderer, *FRect) bool
+	sdlRenderDebugText          func(Renderer, float32, float32, string) bool
+	sdlGetPreferredLocales      func(*int32) **Locale
+	sdlIOFromConstMem           func([]byte, int) IOStream
+	sdlCloseIO                  func(IOStream) bool
+	sdlLoadBMPIO                func(IOStream, bool) *Surface
+	sdlDestroySurface           func(*Surface)
+	sdlCreateTextureFromSurface func(Renderer, *Surface) *Texture
+	sdlRenderTexture            func(Renderer, *Texture, *FRect, *FRect) bool
+	sdlDestroyTexture           func(*Texture)
 )
 
 func init() {
@@ -64,4 +71,11 @@ func init() {
 	purego.RegisterLibFunc(&sdlRenderFillRect, lib, "SDL_RenderFillRect")
 	purego.RegisterLibFunc(&sdlRenderDebugText, lib, "SDL_RenderDebugText")
 	purego.RegisterLibFunc(&sdlGetPreferredLocales, lib, "SDL_GetPreferredLocales")
+	purego.RegisterLibFunc(&sdlIOFromConstMem, lib, "SDL_IOFromConstMem")
+	purego.RegisterLibFunc(&sdlCloseIO, lib, "SDL_CloseIO")
+	purego.RegisterLibFunc(&sdlLoadBMPIO, lib, "SDL_LoadBMP_IO")
+	purego.RegisterLibFunc(&sdlDestroySurface, lib, "SDL_DestroySurface")
+	purego.RegisterLibFunc(&sdlCreateTextureFromSurface, lib, "SDL_CreateTextureFromSurface")
+	purego.RegisterLibFunc(&sdlRenderTexture, lib, "SDL_RenderTexture")
+	purego.RegisterLibFunc(&sdlDestroyTexture, lib, "SDL_DestroyTexture")
 }

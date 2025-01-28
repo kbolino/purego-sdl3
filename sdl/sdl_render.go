@@ -6,6 +6,14 @@ import (
 
 type Renderer unsafe.Pointer
 
+// Texture is a efficient driver-specific representation of pixel data.
+type Texture struct {
+	Format   PixelFormat
+	W        int32
+	H        int32
+	Refcount int32
+}
+
 // CreateWindowAndRenderer creates a window and default renderer.
 func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlags, window *Window, renderer *Renderer) bool {
 	return sdlCreateWindowAndRenderer(title, width, height, flags, window, renderer)
@@ -41,7 +49,22 @@ func RenderFillRect(renderer Renderer, rect *FRect) bool {
 	return sdlRenderFillRect(renderer, rect)
 }
 
-// RenderDebugText draws debug text to an SDL_Renderer.
+// RenderDebugText draws debug text to a [Renderer].
 func RenderDebugText(renderer Renderer, x, y float32, str string) bool {
 	return sdlRenderDebugText(renderer, x, y, str)
+}
+
+// CreateTextureFromSurface creates a texture from an existing surface.
+func CreateTextureFromSurface(renderer Renderer, surface *Surface) *Texture {
+	return sdlCreateTextureFromSurface(renderer, surface)
+}
+
+// RenderTexture copies a portion of the texture to the current rendering target at subpixel precision.
+func RenderTexture(renderer Renderer, texture *Texture, srcrect *FRect, dstrect *FRect) bool {
+	return sdlRenderTexture(renderer, texture, srcrect, dstrect)
+}
+
+// DestroyTexture destroys the specified texture.
+func DestroyTexture(texture *Texture) {
+	sdlDestroyTexture(texture)
 }
