@@ -13,25 +13,25 @@ var (
 	sdlQuit                     func()
 	sdlGetError                 func() string
 	sdlClearError               func() bool
-	sdlCreateWindowAndRenderer  func(string, int32, int32, WindowFlags, *Window, *Renderer) bool
-	sdlSetRenderDrawColor       func(Renderer, uint8, uint8, uint8, uint8) bool
-	sdlRenderClear              func(Renderer) bool
-	sdlRenderPresent            func(Renderer) bool
-	sdlDestroyRenderer          func(Renderer)
-	sdlDestroyWindow            func(Window)
+	sdlCreateWindowAndRenderer  func(string, int32, int32, WindowFlags, **Window, **Renderer) bool
+	sdlSetRenderDrawColor       func(*Renderer, uint8, uint8, uint8, uint8) bool
+	sdlRenderClear              func(*Renderer) bool
+	sdlRenderPresent            func(*Renderer) bool
+	sdlDestroyRenderer          func(*Renderer)
+	sdlDestroyWindow            func(*Window)
 	sdlPollEvent                func(*Event) bool
 	sdlSetHint                  func(string, string) bool
 	sdlGetPowerInfo             func(*int32, *int32) PowerState
-	sdlRenderRect               func(Renderer, *FRect) bool
-	sdlRenderFillRect           func(Renderer, *FRect) bool
-	sdlRenderDebugText          func(Renderer, float32, float32, string) bool
+	sdlRenderRect               func(*Renderer, *FRect) bool
+	sdlRenderFillRect           func(*Renderer, *FRect) bool
+	sdlRenderDebugText          func(*Renderer, float32, float32, string) bool
 	sdlGetPreferredLocales      func(*int32) **Locale
-	sdlIOFromConstMem           func([]byte, int) IOStream
-	sdlCloseIO                  func(IOStream) bool
-	sdlLoadBMPIO                func(IOStream, bool) *Surface
+	sdlIOFromConstMem           func([]byte, int) *IOStream
+	sdlCloseIO                  func(*IOStream) bool
+	sdlLoadBMPIO                func(*IOStream, bool) *Surface
 	sdlDestroySurface           func(*Surface)
-	sdlCreateTextureFromSurface func(Renderer, *Surface) *Texture
-	sdlRenderTexture            func(Renderer, *Texture, *FRect, *FRect) bool
+	sdlCreateTextureFromSurface func(*Renderer, *Surface) *Texture
+	sdlRenderTexture            func(*Renderer, *Texture, *FRect, *FRect) bool
 	sdlDestroyTexture           func(*Texture)
 )
 

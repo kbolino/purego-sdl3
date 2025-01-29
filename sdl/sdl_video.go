@@ -1,8 +1,6 @@
 package sdl
 
-import "unsafe"
-
-type Window unsafe.Pointer
+type Window struct{}
 
 type WindowFlags uint64
 
@@ -14,6 +12,6 @@ const (
 type WindowID uint32
 
 // DestroyWindow destroys a window.
-func DestroyWindow(window Window) {
+func DestroyWindow(window *Window) {
 	sdlDestroyWindow(window)
 }

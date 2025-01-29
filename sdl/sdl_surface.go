@@ -24,7 +24,7 @@ type Surface struct {
 }
 
 // LoadBMPIO loads a BMP image from a seekable SDL data stream.
-func LoadBMPIO(src IOStream, closeio bool) *Surface {
+func LoadBMPIO(src *IOStream, closeio bool) *Surface {
 	return sdlLoadBMPIO(src, closeio)
 }
 
