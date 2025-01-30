@@ -37,8 +37,8 @@ func main() {
 		panic(sdl.GetError())
 	}
 
-	var window sdl.Window
-	var renderer sdl.Renderer
+	var window *sdl.Window
+	var renderer *sdl.Renderer
 	if !sdl.CreateWindowAndRenderer("Hello, World!", 1280, 720, sdl.WindowResizable, &window, &renderer) {
 		panic(sdl.GetError())
 	}
