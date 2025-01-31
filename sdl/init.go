@@ -1077,14 +1077,14 @@ var (
 	// sdlsqrtf                                 func(float32) float32
 	// sdlsrand                                 func(uint64)
 	// sdlsscanf                                func(string, string) int32
-	// sdlStartTextInput                        func(*Window) bool
+	sdlStartTextInput func(*Window) bool
 	// sdlStartTextInputWithProperties          func(*Window, PropertiesID) bool
 	// sdlStepBackUTF8                          func(string, **byte) uint32
 	// sdlStepUTF8                              func(**byte, *uint64) uint32
 	// sdlStopHapticEffect                      func(*Haptic, int32) bool
 	// sdlStopHapticEffects                     func(*Haptic) bool
 	// sdlStopHapticRumble                      func(*Haptic) bool
-	// sdlStopTextInput                         func(*Window) bool
+	sdlStopTextInput func(*Window) bool
 	// sdlStorageReady                          func(*Storage) bool
 	// sdlstrcasecmp                            func(string, string) int32
 	// sdlstrcasestr                            func(string, string) string
@@ -2311,14 +2311,14 @@ func init() {
 	// purego.RegisterLibFunc(&sdlsqrtf, lib, "SDL_sqrtf")
 	// purego.RegisterLibFunc(&sdlsrand, lib, "SDL_srand")
 	// purego.RegisterLibFunc(&sdlsscanf, lib, "SDL_sscanf")
-	// purego.RegisterLibFunc(&sdlStartTextInput, lib, "SDL_StartTextInput")
+	purego.RegisterLibFunc(&sdlStartTextInput, lib, "SDL_StartTextInput")
 	// purego.RegisterLibFunc(&sdlStartTextInputWithProperties, lib, "SDL_StartTextInputWithProperties")
 	// purego.RegisterLibFunc(&sdlStepBackUTF8, lib, "SDL_StepBackUTF8")
 	// purego.RegisterLibFunc(&sdlStepUTF8, lib, "SDL_StepUTF8")
 	// purego.RegisterLibFunc(&sdlStopHapticEffect, lib, "SDL_StopHapticEffect")
 	// purego.RegisterLibFunc(&sdlStopHapticEffects, lib, "SDL_StopHapticEffects")
 	// purego.RegisterLibFunc(&sdlStopHapticRumble, lib, "SDL_StopHapticRumble")
-	// purego.RegisterLibFunc(&sdlStopTextInput, lib, "SDL_StopTextInput")
+	purego.RegisterLibFunc(&sdlStopTextInput, lib, "SDL_StopTextInput")
 	// purego.RegisterLibFunc(&sdlStorageReady, lib, "SDL_StorageReady")
 	// purego.RegisterLibFunc(&sdlstrcasecmp, lib, "SDL_strcasecmp")
 	// purego.RegisterLibFunc(&sdlstrcasestr, lib, "SDL_strcasestr")

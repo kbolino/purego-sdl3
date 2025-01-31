@@ -82,17 +82,17 @@ func GetModState() Keymod {
 //	return sdlSetTextInputArea(window, rect, cursor)
 // }
 
-// func StartTextInput(window *Window) bool {
-//	return sdlStartTextInput(window)
-// }
+func StartTextInput(window *Window) bool {
+	return sdlStartTextInput(window)
+}
 
 // func StartTextInputWithProperties(window *Window, props PropertiesID) bool {
 //	return sdlStartTextInputWithProperties(window, props)
 // }
 
-// func StopTextInput(window *Window) bool {
-//	return sdlStopTextInput(window)
-// }
+func StopTextInput(window *Window) bool {
+	return sdlStopTextInput(window)
+}
 
 // func TextInputActive(window *Window) bool {
 //	return sdlTextInputActive(window)
