@@ -725,7 +725,7 @@ var (
 	// sdlLockRWLockForReading                  func(*RWLock)
 	// sdlLockRWLockForWriting                  func(*RWLock)
 	// sdlLockSpinlock                          func(*SpinLock)
-	// sdlLockSurface                           func(*Surface) bool
+	sdlLockSurface func(*Surface) bool
 	// sdlLockTexture                           func(*Texture, *Rect, *unsafe.Pointer, *int32) bool
 	// sdlLockTextureToSurface                  func(*Texture, *Rect, **Surface) bool
 	// sdlLog                                   func(string)
@@ -1149,7 +1149,7 @@ var (
 	// sdlUnlockProperties                      func(PropertiesID)
 	// sdlUnlockRWLock                          func(*RWLock)
 	// sdlUnlockSpinlock                        func(*SpinLock)
-	// sdlUnlockSurface                         func(*Surface)
+	sdlUnlockSurface func(*Surface)
 	// sdlUnlockTexture                         func(*Texture)
 	// sdlUnmapGPUTransferBuffer                func(*GPUDevice, *GPUTransferBuffer)
 	// sdlunsetenv_unsafe                       func(string) int32
@@ -1959,7 +1959,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlLockRWLockForReading, lib, "SDL_LockRWLockForReading")
 	// purego.RegisterLibFunc(&sdlLockRWLockForWriting, lib, "SDL_LockRWLockForWriting")
 	// purego.RegisterLibFunc(&sdlLockSpinlock, lib, "SDL_LockSpinlock")
-	// purego.RegisterLibFunc(&sdlLockSurface, lib, "SDL_LockSurface")
+	purego.RegisterLibFunc(&sdlLockSurface, lib, "SDL_LockSurface")
 	// purego.RegisterLibFunc(&sdlLockTexture, lib, "SDL_LockTexture")
 	// purego.RegisterLibFunc(&sdlLockTextureToSurface, lib, "SDL_LockTextureToSurface")
 	// purego.RegisterLibFunc(&sdlLog, lib, "SDL_Log")
@@ -2383,7 +2383,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlUnlockProperties, lib, "SDL_UnlockProperties")
 	// purego.RegisterLibFunc(&sdlUnlockRWLock, lib, "SDL_UnlockRWLock")
 	// purego.RegisterLibFunc(&sdlUnlockSpinlock, lib, "SDL_UnlockSpinlock")
-	// purego.RegisterLibFunc(&sdlUnlockSurface, lib, "SDL_UnlockSurface")
+	purego.RegisterLibFunc(&sdlUnlockSurface, lib, "SDL_UnlockSurface")
 	// purego.RegisterLibFunc(&sdlUnlockTexture, lib, "SDL_UnlockTexture")
 	// purego.RegisterLibFunc(&sdlUnmapGPUTransferBuffer, lib, "SDL_UnmapGPUTransferBuffer")
 	// purego.RegisterLibFunc(&sdlunsetenv_unsafe, lib, "SDL_unsetenv_unsafe")

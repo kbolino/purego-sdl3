@@ -153,9 +153,9 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 //	return sdlLoadBMP(file)
 // }
 
-// func LockSurface(surface *Surface) bool {
-//	return sdlLockSurface(surface)
-// }
+func LockSurface(surface *Surface) bool {
+	return sdlLockSurface(surface)
+}
 
 // func MapSurfaceRGB(surface *Surface, r uint8, g uint8, b uint8) uint32 {
 //	return sdlMapSurfaceRGB(surface, r, g, b)
@@ -241,9 +241,9 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 //	return sdlSurfaceHasRLE(surface)
 // }
 
-// func UnlockSurface(surface *Surface)  {
-//	sdlUnlockSurface(surface)
-// }
+func UnlockSurface(surface *Surface) {
+	sdlUnlockSurface(surface)
+}
 
 // func WriteSurfacePixel(surface *Surface, x int32, y int32, r uint8, g uint8, b uint8, a uint8) bool {
 //	return sdlWriteSurfacePixel(surface, x, y, r, g, b, a)
