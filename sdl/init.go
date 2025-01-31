@@ -142,7 +142,7 @@ var (
 	// sdlCreateSemaphore                       func(uint32) *Semaphore
 	// sdlCreateSoftwareRenderer                func(*Surface) *Renderer
 	// sdlCreateStorageDirectory                func(*Storage, string) bool
-	// sdlCreateSurface                         func(int32, int32, PixelFormat) *Surface
+	sdlCreateSurface func(int32, int32, PixelFormat) *Surface
 	// sdlCreateSurfaceFrom                     func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
 	// sdlCreateSurfacePalette                  func(*Surface) *Palette
 	// sdlCreateSystemCursor                    func(SystemCursor) *Cursor
@@ -1376,7 +1376,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCreateSemaphore, lib, "SDL_CreateSemaphore")
 	// purego.RegisterLibFunc(&sdlCreateSoftwareRenderer, lib, "SDL_CreateSoftwareRenderer")
 	// purego.RegisterLibFunc(&sdlCreateStorageDirectory, lib, "SDL_CreateStorageDirectory")
-	// purego.RegisterLibFunc(&sdlCreateSurface, lib, "SDL_CreateSurface")
+	purego.RegisterLibFunc(&sdlCreateSurface, lib, "SDL_CreateSurface")
 	// purego.RegisterLibFunc(&sdlCreateSurfaceFrom, lib, "SDL_CreateSurfaceFrom")
 	// purego.RegisterLibFunc(&sdlCreateSurfacePalette, lib, "SDL_CreateSurfacePalette")
 	// purego.RegisterLibFunc(&sdlCreateSystemCursor, lib, "SDL_CreateSystemCursor")

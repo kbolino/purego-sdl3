@@ -85,9 +85,9 @@ func DestroySurface(surface *Surface) {
 //	return sdlConvertSurfaceAndColorspace(surface, format, palette, colorspace, props)
 // }
 
-// func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
-//	return sdlCreateSurface(width, height, format)
-// }
+func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
+	return sdlCreateSurface(width, height, format)
+}
 
 // func CreateSurfaceFrom(width int32, height int32, format PixelFormat, pixels unsafe.Pointer, pitch int32) *Surface {
 //	return sdlCreateSurfaceFrom(width, height, format, pixels, pitch)
