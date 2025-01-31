@@ -36,3 +36,31 @@ func Quit() {
 func QuitSubSystem(flags InitFlags) {
 	sdlQuitSubSystem(flags)
 }
+
+// func GetAppMetadataProperty(name string) string {
+//	return sdlGetAppMetadataProperty(name)
+// }
+
+// func IsMainThread() bool {
+//	return sdlIsMainThread()
+// }
+
+// func Quit()  {
+//	sdlQuit()
+// }
+
+// func RunOnMainThread(callback MainThreadCallback, userdata unsafe.Pointer, wait_complete bool) bool {
+//	return sdlRunOnMainThread(callback, userdata, wait_complete)
+// }
+
+// func SetAppMetadata(appname string, appversion string, appidentifier string) bool {
+//	return sdlSetAppMetadata(appname, appversion, appidentifier)
+// }
+
+// func SetAppMetadataProperty(name string, value string) bool {
+//	return sdlSetAppMetadataProperty(name, value)
+// }
+
+// func WasInit(flags InitFlags) InitFlags {
+//	return sdlWasInit(flags)
+// }

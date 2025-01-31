@@ -9,3 +9,15 @@ func GetError() string {
 func ClearError() bool {
 	return sdlClearError()
 }
+
+// func OutOfMemory() bool {
+//	return sdlOutOfMemory()
+// }
+
+// func SetError(fmt string) bool {
+//	return sdlSetError(fmt)
+// }
+
+// func SetErrorV(fmt string, ap va_list) bool {
+//	return sdlSetErrorV(fmt, ap)
+// }
