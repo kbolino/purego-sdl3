@@ -425,7 +425,7 @@ var (
 	// sdlGetModState                           func() Keymod
 	// sdlGetMouseFocus                         func() *Window
 	// sdlGetMouseNameForID                     func(MouseID) string
-	// sdlGetMouseState                         func(*float32, *float32) MouseButtonFlags
+	sdlGetMouseState func(*float32, *float32) MouseButtonFlags
 	// sdlGetNaturalDisplayOrientation          func(DisplayID) DisplayOrientation
 	// sdlGetNumAllocations                     func() int32
 	// sdlGetNumAudioDrivers                    func() int32
@@ -1659,7 +1659,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetModState, lib, "SDL_GetModState")
 	// purego.RegisterLibFunc(&sdlGetMouseFocus, lib, "SDL_GetMouseFocus")
 	// purego.RegisterLibFunc(&sdlGetMouseNameForID, lib, "SDL_GetMouseNameForID")
-	// purego.RegisterLibFunc(&sdlGetMouseState, lib, "SDL_GetMouseState")
+	purego.RegisterLibFunc(&sdlGetMouseState, lib, "SDL_GetMouseState")
 	// purego.RegisterLibFunc(&sdlGetNaturalDisplayOrientation, lib, "SDL_GetNaturalDisplayOrientation")
 	// purego.RegisterLibFunc(&sdlGetNumAllocations, lib, "SDL_GetNumAllocations")
 	// purego.RegisterLibFunc(&sdlGetNumAudioDrivers, lib, "SDL_GetNumAudioDrivers")

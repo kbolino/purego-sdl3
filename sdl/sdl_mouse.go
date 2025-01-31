@@ -64,9 +64,9 @@ const (
 //	return sdlGetMouseNameForID(instance_id)
 // }
 
-// func GetMouseState(x *float32, y *float32) MouseButtonFlags {
-//	return sdlGetMouseState(x, y)
-// }
+func GetMouseState(x *float32, y *float32) MouseButtonFlags {
+	return sdlGetMouseState(x, y)
+}
 
 // func GetRelativeMouseState(x *float32, y *float32) MouseButtonFlags {
 //	return sdlGetRelativeMouseState(x, y)
