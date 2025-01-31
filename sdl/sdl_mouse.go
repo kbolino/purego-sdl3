@@ -1,5 +1,7 @@
 package sdl
 
+type MouseID uint32
+
 type MouseButtonFlags uint32
 
 const (
