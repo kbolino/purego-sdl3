@@ -231,4 +231,3 @@ package sdl
 // func UpdateJoysticks()  {
 //	sdlUpdateJoysticks()
 // }
-

@@ -83,4 +83,3 @@ package sdl
 // func UnlockProperties(props PropertiesID)  {
 //	sdlUnlockProperties(props)
 // }
-

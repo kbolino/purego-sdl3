@@ -87,4 +87,3 @@ package sdl
 // func hid_write(dev *hid_device, data *uint8, length uint64) int32 {
 //	return sdlhid_write(dev, data, length)
 // }
-

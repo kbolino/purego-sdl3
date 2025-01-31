@@ -7,4 +7,3 @@ package sdl
 // func ShowSimpleMessageBox(flags MessageBoxFlags, title string, message string, window *Window) bool {
 //	return sdlShowSimpleMessageBox(flags, title, message, window)
 // }
-

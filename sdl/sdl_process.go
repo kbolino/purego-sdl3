@@ -35,4 +35,3 @@ package sdl
 // func WaitProcess(process *Process, block bool, exitcode *int32) bool {
 //	return sdlWaitProcess(process, block, exitcode)
 // }
-

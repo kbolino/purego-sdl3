@@ -367,4 +367,3 @@ package sdl
 // func WindowSupportsGPUSwapchainComposition(device *GPUDevice, window *Window, swapchain_composition GPUSwapchainComposition) bool {
 //	return sdlWindowSupportsGPUSwapchainComposition(device, window, swapchain_composition)
 // }
-

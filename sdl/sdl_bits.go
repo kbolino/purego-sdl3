@@ -7,4 +7,3 @@ package sdl
 // func MostSignificantBitIndex32(x uint32) int32 {
 //	return sdlMostSignificantBitIndex32(x)
 // }
-

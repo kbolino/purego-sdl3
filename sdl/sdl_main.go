@@ -19,4 +19,3 @@ package sdl
 // func SetMainReady()  {
 //	sdlSetMainReady()
 // }
-

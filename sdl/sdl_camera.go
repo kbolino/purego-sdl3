@@ -59,4 +59,3 @@ package sdl
 // func ReleaseCameraFrame(camera *Camera, frame *Surface)  {
 //	sdlReleaseCameraFrame(camera, frame)
 // }
-

@@ -11,4 +11,3 @@ package sdl
 // func Metal_GetLayer(view MetalView) unsafe.Pointer {
 //	return sdlMetal_GetLayer(view)
 // }
-

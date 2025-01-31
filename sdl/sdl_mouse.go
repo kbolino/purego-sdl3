@@ -87,4 +87,3 @@ package sdl
 // func WarpMouseInWindow(window *Window, x float32, y float32)  {
 //	sdlWarpMouseInWindow(window, x, y)
 // }
-

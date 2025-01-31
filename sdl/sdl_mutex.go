@@ -111,4 +111,3 @@ package sdl
 // func WaitSemaphoreTimeout(sem *Semaphore, timeoutMS int32) bool {
 //	return sdlWaitSemaphoreTimeout(sem, timeoutMS)
 // }
-

@@ -59,4 +59,3 @@ package sdl
 // func UnlockSpinlock(lock *SpinLock)  {
 //	sdlUnlockSpinlock(lock)
 // }
-

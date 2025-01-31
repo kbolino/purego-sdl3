@@ -7,4 +7,3 @@ package sdl
 // func GetVersion() int32 {
 //	return sdlGetVersion()
 // }
-

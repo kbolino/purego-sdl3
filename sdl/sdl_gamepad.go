@@ -291,4 +291,3 @@ package sdl
 // func UpdateGamepads()  {
 //	sdlUpdateGamepads()
 // }
-

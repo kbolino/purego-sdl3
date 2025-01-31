@@ -71,4 +71,3 @@ package sdl
 // func HasSSE42() bool {
 //	return sdlHasSSE42()
 // }
-

@@ -87,4 +87,3 @@ package sdl
 // func SetTrayTooltip(tray *Tray, tooltip string)  {
 //	sdlSetTrayTooltip(tray, tooltip)
 // }
-
