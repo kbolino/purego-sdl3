@@ -37,9 +37,9 @@ func DestroySurface(surface *Surface) {
 //	return sdlAddSurfaceAlternateImage(surface, image)
 // }
 
-// func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool {
-//	return sdlBlitSurface(src, srcrect, dst, dstrect)
-// }
+func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool {
+	return sdlBlitSurface(src, srcrect, dst, dstrect)
+}
 
 // func BlitSurface9Grid(src *Surface, srcrect *Rect, left_width int32, right_width int32, top_height int32, bottom_height int32, scale float32, scaleMode ScaleMode, dst *Surface, dstrect *Rect) bool {
 //	return sdlBlitSurface9Grid(src, srcrect, left_width, right_width, top_height, bottom_height, scale, scaleMode, dst, dstrect)
