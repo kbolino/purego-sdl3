@@ -10,6 +10,7 @@ const (
 	EventFirst       EventType = 0
 	EventQuit        EventType = 0x100
 	EventKeyDown     EventType = 0x300
+	EventKeyUp       EventType = 0x301
 	EventMouseMotion EventType = 0x400
 )
 
