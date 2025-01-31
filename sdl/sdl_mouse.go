@@ -64,9 +64,9 @@ package sdl
 //	return sdlHasMouse()
 // }
 
-// func HideCursor() bool {
-//	return sdlHideCursor()
-// }
+func HideCursor() bool {
+	return sdlHideCursor()
+}
 
 // func SetCursor(cursor *Cursor) bool {
 //	return sdlSetCursor(cursor)
@@ -76,9 +76,9 @@ package sdl
 //	return sdlSetWindowRelativeMouseMode(window, enabled)
 // }
 
-// func ShowCursor() bool {
-//	return sdlShowCursor()
-// }
+func ShowCursor() bool {
+	return sdlShowCursor()
+}
 
 // func WarpMouseGlobal(x float32, y float32) bool {
 //	return sdlWarpMouseGlobal(x, y)
