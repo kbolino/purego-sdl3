@@ -804,7 +804,7 @@ var (
 	// sdlpowf                                  func(float32, float32) float32
 	// sdlPremultiplyAlpha                      func(int32, int32, PixelFormat, unsafe.Pointer, int32, PixelFormat, unsafe.Pointer, int32, bool) bool
 	// sdlPremultiplySurfaceAlpha               func(*Surface, bool) bool
-	// sdlPumpEvents                            func()
+	sdlPumpEvents func()
 	// sdlPushEvent                             func(*Event) bool
 	// sdlPushGPUComputeUniformData             func(*GPUCommandBuffer, uint32, unsafe.Pointer, uint32)
 	// sdlPushGPUDebugGroup                     func(*GPUCommandBuffer, string)
@@ -2038,7 +2038,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlpowf, lib, "SDL_powf")
 	// purego.RegisterLibFunc(&sdlPremultiplyAlpha, lib, "SDL_PremultiplyAlpha")
 	// purego.RegisterLibFunc(&sdlPremultiplySurfaceAlpha, lib, "SDL_PremultiplySurfaceAlpha")
-	// purego.RegisterLibFunc(&sdlPumpEvents, lib, "SDL_PumpEvents")
+	purego.RegisterLibFunc(&sdlPumpEvents, lib, "SDL_PumpEvents")
 	// purego.RegisterLibFunc(&sdlPushEvent, lib, "SDL_PushEvent")
 	// purego.RegisterLibFunc(&sdlPushGPUComputeUniformData, lib, "SDL_PushGPUComputeUniformData")
 	// purego.RegisterLibFunc(&sdlPushGPUDebugGroup, lib, "SDL_PushGPUDebugGroup")

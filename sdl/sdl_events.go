@@ -81,9 +81,9 @@ func PollEvent(event *Event) bool {
 //	return sdlPeepEvents(events, numevents, action, minType, maxType)
 // }
 
-// func PumpEvents()  {
-//	sdlPumpEvents()
-// }
+func PumpEvents() {
+	sdlPumpEvents()
+}
 
 // func PushEvent(event *Event) bool {
 //	return sdlPushEvent(event)
