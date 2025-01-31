@@ -7,11 +7,13 @@ import (
 type EventType uint32
 
 const (
-	EventFirst       EventType = 0
-	EventQuit        EventType = 0x100
-	EventKeyDown     EventType = 0x300
-	EventKeyUp       EventType = 0x301
-	EventMouseMotion EventType = 0x400
+	EventFirst           EventType = 0
+	EventQuit            EventType = 0x100
+	EventKeyDown         EventType = 0x300
+	EventKeyUp           EventType = 0x301
+	EventMouseMotion     EventType = 0x400
+	EventMouseButtonDown EventType = 0x401
+	EventMouseButtonUp   EventType = 0x402
 )
 
 type Event [128]byte
@@ -26,6 +28,10 @@ func (e *Event) Key() KeyboardEvent {
 
 func (e *Event) MouseMotion() MouseMotionEvent {
 	return *(*MouseMotionEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) MouseButton() MouseButtonEvent {
+	return *(*MouseButtonEvent)(unsafe.Pointer(e))
 }
 
 type KeyboardEvent struct {
@@ -53,6 +59,20 @@ type MouseMotionEvent struct {
 	Y         float32
 	Xrel      float32
 	Yrel      float32
+}
+
+type MouseButtonEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Which     MouseID
+	Button    uint8
+	Down      bool
+	Clicks    uint8
+	Padding   uint8
+	X         float32
+	Y         float32
 }
 
 // PollEvent polls for currently pending events.
