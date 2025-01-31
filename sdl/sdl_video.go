@@ -312,9 +312,9 @@ func DestroyWindow(window *Window) {
 //	sdlGL_UnloadLibrary()
 // }
 
-// func HideWindow(window *Window) bool {
-//	return sdlHideWindow(window)
-// }
+func HideWindow(window *Window) bool {
+	return sdlHideWindow(window)
+}
 
 // func MaximizeWindow(window *Window) bool {
 //	return sdlMaximizeWindow(window)
@@ -424,9 +424,9 @@ func DestroyWindow(window *Window) {
 //	return sdlSetWindowTitle(window, title)
 // }
 
-// func ShowWindow(window *Window) bool {
-//	return sdlShowWindow(window)
-// }
+func ShowWindow(window *Window) bool {
+	return sdlShowWindow(window)
+}
 
 // func ShowWindowSystemMenu(window *Window, x int32, y int32) bool {
 //	return sdlShowWindowSystemMenu(window, x, y)

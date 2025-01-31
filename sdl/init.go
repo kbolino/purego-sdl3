@@ -663,7 +663,7 @@ var (
 	// sdlhid_set_nonblocking                   func(*hid_device, int32) int32
 	// sdlhid_write                             func(*hid_device, *uint8, uint64) int32
 	// sdlHideCursor                            func() bool
-	// sdlHideWindow                            func(*Window) bool
+	sdlHideWindow func(*Window) bool
 	// sdliconv                                 func(iconv_t, **byte, *uint64, **byte, *uint64) uint64
 	// sdliconv_close                           func(iconv_t) int32
 	// sdliconv_open                            func(string, string) iconv_t
@@ -1061,7 +1061,7 @@ var (
 	// sdlShowOpenFolderDialog                  func(DialogFileCallback, unsafe.Pointer, *Window, string, bool)
 	// sdlShowSaveFileDialog                    func(DialogFileCallback, unsafe.Pointer, *Window, *DialogFileFilter, int32, string)
 	// sdlShowSimpleMessageBox                  func(MessageBoxFlags, string, string, *Window) bool
-	// sdlShowWindow                            func(*Window) bool
+	sdlShowWindow func(*Window) bool
 	// sdlShowWindowSystemMenu                  func(*Window, int32, int32) bool
 	// sdlSignalAsyncIOQueue                    func(*AsyncIOQueue)
 	// sdlSignalCondition                       func(*Condition)
@@ -1897,7 +1897,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlhid_set_nonblocking, lib, "SDL_hid_set_nonblocking")
 	// purego.RegisterLibFunc(&sdlhid_write, lib, "SDL_hid_write")
 	// purego.RegisterLibFunc(&sdlHideCursor, lib, "SDL_HideCursor")
-	// purego.RegisterLibFunc(&sdlHideWindow, lib, "SDL_HideWindow")
+	purego.RegisterLibFunc(&sdlHideWindow, lib, "SDL_HideWindow")
 	// purego.RegisterLibFunc(&sdliconv, lib, "SDL_iconv")
 	// purego.RegisterLibFunc(&sdliconv_close, lib, "SDL_iconv_close")
 	// purego.RegisterLibFunc(&sdliconv_open, lib, "SDL_iconv_open")
@@ -2295,7 +2295,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlShowOpenFolderDialog, lib, "SDL_ShowOpenFolderDialog")
 	// purego.RegisterLibFunc(&sdlShowSaveFileDialog, lib, "SDL_ShowSaveFileDialog")
 	// purego.RegisterLibFunc(&sdlShowSimpleMessageBox, lib, "SDL_ShowSimpleMessageBox")
-	// purego.RegisterLibFunc(&sdlShowWindow, lib, "SDL_ShowWindow")
+	purego.RegisterLibFunc(&sdlShowWindow, lib, "SDL_ShowWindow")
 	// purego.RegisterLibFunc(&sdlShowWindowSystemMenu, lib, "SDL_ShowWindowSystemMenu")
 	// purego.RegisterLibFunc(&sdlSignalAsyncIOQueue, lib, "SDL_SignalAsyncIOQueue")
 	// purego.RegisterLibFunc(&sdlSignalCondition, lib, "SDL_SignalCondition")
