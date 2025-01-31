@@ -1,5 +1,21 @@
 package sdl
 
+type MouseButtonFlags uint32
+
+const (
+	ButtonLeft   MouseButtonFlags = 1
+	ButtonMiddle MouseButtonFlags = 2
+	ButtonRight  MouseButtonFlags = 3
+	ButtonX1     MouseButtonFlags = 4
+	ButtonX2     MouseButtonFlags = 5
+
+	ButtonLmask  = 1 << (ButtonLeft - 1)
+	ButtonMmask  = 1 << (ButtonMiddle - 1)
+	ButtonRmask  = 1 << (ButtonRight - 1)
+	ButtonX1mask = 1 << (ButtonX1 - 1)
+	ButtonX2mask = 1 << (ButtonX2 - 1)
+)
+
 // func CaptureMouse(enabled bool) bool {
 //	return sdlCaptureMouse(enabled)
 // }
