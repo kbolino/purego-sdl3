@@ -240,9 +240,9 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowSizeInPixels(window, w, h)
 // }
 
-// func GetWindowSurface(window *Window) *Surface {
-//	return sdlGetWindowSurface(window)
-// }
+func GetWindowSurface(window *Window) *Surface {
+	return sdlGetWindowSurface(window)
+}
 
 // func GetWindowSurfaceVSync(window *Window, vsync *int32) bool {
 //	return sdlGetWindowSurfaceVSync(window, vsync)
@@ -436,9 +436,9 @@ func ShowWindow(window *Window) bool {
 //	return sdlSyncWindow(window)
 // }
 
-// func UpdateWindowSurface(window *Window) bool {
-//	return sdlUpdateWindowSurface(window)
-// }
+func UpdateWindowSurface(window *Window) bool {
+	return sdlUpdateWindowSurface(window)
+}
 
 // func UpdateWindowSurfaceRects(window *Window, rects *Rect, numrects int32) bool {
 //	return sdlUpdateWindowSurfaceRects(window, rects, numrects)

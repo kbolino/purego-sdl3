@@ -584,7 +584,7 @@ var (
 	// sdlGetWindowSafeArea                     func(*Window, *Rect) bool
 	// sdlGetWindowSize                         func(*Window, *int32, *int32) bool
 	// sdlGetWindowSizeInPixels                 func(*Window, *int32, *int32) bool
-	// sdlGetWindowSurface                      func(*Window) *Surface
+	sdlGetWindowSurface func(*Window) *Surface
 	// sdlGetWindowSurfaceVSync                 func(*Window, *int32) bool
 	// sdlGetWindowTitle                        func(*Window) string
 	// sdlGL_CreateContext                      func(*Window) GLContext
@@ -1160,7 +1160,7 @@ var (
 	// sdlUpdateNVTexture                       func(*Texture, *Rect, *uint8, int32, *uint8, int32) bool
 	// sdlUpdateSensors                         func()
 	// sdlUpdateTexture                         func(*Texture, *Rect, unsafe.Pointer, int32) bool
-	// sdlUpdateWindowSurface                   func(*Window) bool
+	sdlUpdateWindowSurface func(*Window) bool
 	// sdlUpdateWindowSurfaceRects              func(*Window, *Rect, int32) bool
 	// sdlUpdateYUVTexture                      func(*Texture, *Rect, *uint8, int32, *uint8, int32, *uint8, int32) bool
 	// sdlUploadToGPUBuffer                     func(*GPUCopyPass, *GPUTransferBufferLocation, *GPUBufferRegion, bool)
@@ -1818,7 +1818,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetWindowSafeArea, lib, "SDL_GetWindowSafeArea")
 	// purego.RegisterLibFunc(&sdlGetWindowSize, lib, "SDL_GetWindowSize")
 	// purego.RegisterLibFunc(&sdlGetWindowSizeInPixels, lib, "SDL_GetWindowSizeInPixels")
-	// purego.RegisterLibFunc(&sdlGetWindowSurface, lib, "SDL_GetWindowSurface")
+	purego.RegisterLibFunc(&sdlGetWindowSurface, lib, "SDL_GetWindowSurface")
 	// purego.RegisterLibFunc(&sdlGetWindowSurfaceVSync, lib, "SDL_GetWindowSurfaceVSync")
 	// purego.RegisterLibFunc(&sdlGetWindowTitle, lib, "SDL_GetWindowTitle")
 	// purego.RegisterLibFunc(&sdlGL_CreateContext, lib, "SDL_GL_CreateContext")
@@ -2394,7 +2394,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlUpdateNVTexture, lib, "SDL_UpdateNVTexture")
 	// purego.RegisterLibFunc(&sdlUpdateSensors, lib, "SDL_UpdateSensors")
 	// purego.RegisterLibFunc(&sdlUpdateTexture, lib, "SDL_UpdateTexture")
-	// purego.RegisterLibFunc(&sdlUpdateWindowSurface, lib, "SDL_UpdateWindowSurface")
+	purego.RegisterLibFunc(&sdlUpdateWindowSurface, lib, "SDL_UpdateWindowSurface")
 	// purego.RegisterLibFunc(&sdlUpdateWindowSurfaceRects, lib, "SDL_UpdateWindowSurfaceRects")
 	// purego.RegisterLibFunc(&sdlUpdateYUVTexture, lib, "SDL_UpdateYUVTexture")
 	// purego.RegisterLibFunc(&sdlUploadToGPUBuffer, lib, "SDL_UploadToGPUBuffer")
