@@ -422,7 +422,7 @@ var (
 	// sdlGetMaxHapticEffectsPlaying            func(*Haptic) int32
 	// sdlGetMemoryFunctions                    func(*malloc_func, *calloc_func, *realloc_func, *free_func)
 	// sdlGetMice                               func(*int32) *MouseID
-	// sdlGetModState                           func() Keymod
+	sdlGetModState func() Keymod
 	// sdlGetMouseFocus                         func() *Window
 	// sdlGetMouseNameForID                     func(MouseID) string
 	sdlGetMouseState func(*float32, *float32) MouseButtonFlags
@@ -1656,7 +1656,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetMaxHapticEffectsPlaying, lib, "SDL_GetMaxHapticEffectsPlaying")
 	// purego.RegisterLibFunc(&sdlGetMemoryFunctions, lib, "SDL_GetMemoryFunctions")
 	// purego.RegisterLibFunc(&sdlGetMice, lib, "SDL_GetMice")
-	// purego.RegisterLibFunc(&sdlGetModState, lib, "SDL_GetModState")
+	purego.RegisterLibFunc(&sdlGetModState, lib, "SDL_GetModState")
 	// purego.RegisterLibFunc(&sdlGetMouseFocus, lib, "SDL_GetMouseFocus")
 	// purego.RegisterLibFunc(&sdlGetMouseNameForID, lib, "SDL_GetMouseNameForID")
 	purego.RegisterLibFunc(&sdlGetMouseState, lib, "SDL_GetMouseState")

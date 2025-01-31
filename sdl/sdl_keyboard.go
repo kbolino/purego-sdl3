@@ -34,9 +34,9 @@ type KeyboardID uint32
 //	return sdlGetKeyName(key)
 // }
 
-// func GetModState() Keymod {
-//	return sdlGetModState()
-// }
+func GetModState() Keymod {
+	return sdlGetModState()
+}
 
 // func GetScancodeFromKey(key Keycode, modstate *Keymod) Scancode {
 //	return sdlGetScancodeFromKey(key, modstate)
