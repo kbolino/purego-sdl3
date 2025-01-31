@@ -240,6 +240,7 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowSizeInPixels(window, w, h)
 // }
 
+// GetWindowSurface gets the SDL surface associated with the window.
 func GetWindowSurface(window *Window) *Surface {
 	return sdlGetWindowSurface(window)
 }
@@ -312,6 +313,7 @@ func GetWindowSurface(window *Window) *Surface {
 //	sdlGL_UnloadLibrary()
 // }
 
+// HideWindow hides a window.
 func HideWindow(window *Window) bool {
 	return sdlHideWindow(window)
 }
@@ -424,6 +426,7 @@ func HideWindow(window *Window) bool {
 //	return sdlSetWindowTitle(window, title)
 // }
 
+// ShowWindow shows a window.
 func ShowWindow(window *Window) bool {
 	return sdlShowWindow(window)
 }
@@ -436,6 +439,7 @@ func ShowWindow(window *Window) bool {
 //	return sdlSyncWindow(window)
 // }
 
+// UpdateWindowSurface copies the window surface to the screen.
 func UpdateWindowSurface(window *Window) bool {
 	return sdlUpdateWindowSurface(window)
 }

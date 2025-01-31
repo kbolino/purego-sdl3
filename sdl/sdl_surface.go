@@ -37,6 +37,7 @@ func DestroySurface(surface *Surface) {
 //	return sdlAddSurfaceAlternateImage(surface, image)
 // }
 
+// BlitSurface performs a fast blit from the source surface to the destination surface with clipping.
 func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool {
 	return sdlBlitSurface(src, srcrect, dst, dstrect)
 }
@@ -85,6 +86,7 @@ func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool 
 //	return sdlConvertSurfaceAndColorspace(surface, format, palette, colorspace, props)
 // }
 
+// CreateSurface allocates a new surface with a specific pixel format.
 func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 	return sdlCreateSurface(width, height, format)
 }
@@ -153,6 +155,7 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 //	return sdlLoadBMP(file)
 // }
 
+// LockSurface sets up a surface for directly accessing the pixels.
 func LockSurface(surface *Surface) bool {
 	return sdlLockSurface(surface)
 }
@@ -241,6 +244,7 @@ func LockSurface(surface *Surface) bool {
 //	return sdlSurfaceHasRLE(surface)
 // }
 
+// UnlockSurface releases a surface after directly accessing the pixels.
 func UnlockSurface(surface *Surface) {
 	sdlUnlockSurface(surface)
 }

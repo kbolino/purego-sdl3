@@ -81,6 +81,7 @@ func PollEvent(event *Event) bool {
 //	return sdlPeepEvents(events, numevents, action, minType, maxType)
 // }
 
+// PumpEvents updates the event queue and internal input device state.
 func PumpEvents() {
 	sdlPumpEvents()
 }

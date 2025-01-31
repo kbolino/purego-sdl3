@@ -34,6 +34,7 @@ type KeyboardID uint32
 //	return sdlGetKeyName(key)
 // }
 
+// GetModState returns an OR'd combination of the modifier keys for the keyboard.
 func GetModState() Keymod {
 	return sdlGetModState()
 }
@@ -82,6 +83,7 @@ func GetModState() Keymod {
 //	return sdlSetTextInputArea(window, rect, cursor)
 // }
 
+// StartTextInput starts accepting Unicode text input events in a window.
 func StartTextInput(window *Window) bool {
 	return sdlStartTextInput(window)
 }
@@ -90,6 +92,7 @@ func StartTextInput(window *Window) bool {
 //	return sdlStartTextInputWithProperties(window, props)
 // }
 
+// StopTextInput stops receiving any text input events in a window.
 func StopTextInput(window *Window) bool {
 	return sdlStopTextInput(window)
 }
