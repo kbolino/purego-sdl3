@@ -1186,7 +1186,7 @@ var (
 	// sdlWaitSemaphoreTimeout                  func(*Semaphore, int32) bool
 	// sdlWaitThread                            func(*Thread, *int32)
 	// sdlWarpMouseGlobal                       func(float32, float32) bool
-	// sdlWarpMouseInWindow                     func(*Window, float32, float32)
+	sdlWarpMouseInWindow func(*Window, float32, float32)
 	// sdlWasInit                               func(InitFlags) InitFlags
 	// sdlwcscasecmp                            func(*wchar_t, *wchar_t) int32
 	// sdlwcscmp                                func(*wchar_t, *wchar_t) int32
@@ -2420,7 +2420,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlWaitSemaphoreTimeout, lib, "SDL_WaitSemaphoreTimeout")
 	// purego.RegisterLibFunc(&sdlWaitThread, lib, "SDL_WaitThread")
 	// purego.RegisterLibFunc(&sdlWarpMouseGlobal, lib, "SDL_WarpMouseGlobal")
-	// purego.RegisterLibFunc(&sdlWarpMouseInWindow, lib, "SDL_WarpMouseInWindow")
+	purego.RegisterLibFunc(&sdlWarpMouseInWindow, lib, "SDL_WarpMouseInWindow")
 	// purego.RegisterLibFunc(&sdlWasInit, lib, "SDL_WasInit")
 	// purego.RegisterLibFunc(&sdlwcscasecmp, lib, "SDL_wcscasecmp")
 	// purego.RegisterLibFunc(&sdlwcscmp, lib, "SDL_wcscmp")
