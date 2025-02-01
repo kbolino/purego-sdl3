@@ -2,6 +2,8 @@ package sdl
 
 import (
 	"unsafe"
+
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
 
 type EventType uint32
@@ -11,6 +13,7 @@ const (
 	EventQuit            EventType = 0x100
 	EventKeyDown         EventType = 0x300
 	EventKeyUp           EventType = 0x301
+	EventTextInput       EventType = 0x303
 	EventMouseMotion     EventType = 0x400
 	EventMouseButtonDown EventType = 0x401
 	EventMouseButtonUp   EventType = 0x402
@@ -24,6 +27,17 @@ func (e *Event) Type() EventType {
 
 func (e *Event) Key() KeyboardEvent {
 	return *(*KeyboardEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) TextInput() TextInputEvent {
+	te := *(*textInputEvent)(unsafe.Pointer(e))
+	return TextInputEvent{
+		Type:      te.Type,
+		Reserved:  te.Reserved,
+		Timestamp: te.Timestamp,
+		WindowID:  te.WindowID,
+		Text:      convert.ToString(te.Text),
+	}
 }
 
 func (e *Event) MouseMotion() MouseMotionEvent {
@@ -46,6 +60,22 @@ type KeyboardEvent struct {
 	Raw       uint16
 	Down      bool
 	Repeat    bool
+}
+
+type textInputEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Text      *byte
+}
+
+type TextInputEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Text      string
 }
 
 type MouseMotionEvent struct {
