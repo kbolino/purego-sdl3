@@ -234,7 +234,7 @@ var (
 	// sdlGamepadSensorEnabled                  func(*Gamepad, SensorType) bool
 	// sdlGDKSuspendComplete                    func()
 	// sdlGenerateMipmapsForGPUTexture          func(*GPUCommandBuffer, *GPUTexture)
-	// sdlGetAppMetadataProperty                func(string) string
+	sdlGetAppMetadataProperty func(string) string
 	// sdlGetAssertionHandler                   func(*unsafe.Pointer) AssertionHandler
 	// sdlGetAssertionReport                    func() *AssertData
 	// sdlGetAsyncIOResult                      func(*AsyncIOQueue, *AsyncIOOutcome) bool
@@ -492,7 +492,7 @@ var (
 	// sdlGetRenderViewport                     func(*Renderer, *Rect) bool
 	// sdlGetRenderVSync                        func(*Renderer, *int32) bool
 	// sdlGetRenderWindow                       func(*Renderer) *Window
-	// sdlGetRevision                           func() string
+	sdlGetRevision func() string
 	// sdlGetRGB                                func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8)
 	// sdlGetRGBA                               func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8, *uint8)
 	// sdlGetSandbox                            func() Sandbox
@@ -557,7 +557,7 @@ var (
 	// sdlGetTrayMenuParentTray                 func(*TrayMenu) *Tray
 	// sdlGetTraySubmenu                        func(*TrayEntry) *TrayMenu
 	// sdlGetUserFolder                         func(Folder) string
-	// sdlGetVersion                            func() int32
+	sdlGetVersion func() int32
 	// sdlGetVideoDriver                        func(int32) string
 	// sdlGetWindowAspectRatio                  func(*Window, *float32, *float32) bool
 	// sdlGetWindowBordersSize                  func(*Window, *int32, *int32, *int32, *int32) bool
@@ -693,7 +693,7 @@ var (
 	// sdlIsJoystickHaptic                      func(*Joystick) bool
 	// sdlIsJoystickVirtual                     func(JoystickID) bool
 	// sdlislower                               func(int32) int32
-	// sdlIsMainThread                          func() bool
+	sdlIsMainThread func() bool
 	// sdlIsMouseHaptic                         func() bool
 	// sdlisnan                                 func(float64) int32
 	// sdlisnanf                                func(float32) int32
@@ -1468,7 +1468,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGamepadSensorEnabled, lib, "SDL_GamepadSensorEnabled")
 	// purego.RegisterLibFunc(&sdlGDKSuspendComplete, lib, "SDL_GDKSuspendComplete")
 	// purego.RegisterLibFunc(&sdlGenerateMipmapsForGPUTexture, lib, "SDL_GenerateMipmapsForGPUTexture")
-	// purego.RegisterLibFunc(&sdlGetAppMetadataProperty, lib, "SDL_GetAppMetadataProperty")
+	purego.RegisterLibFunc(&sdlGetAppMetadataProperty, lib, "SDL_GetAppMetadataProperty")
 	// purego.RegisterLibFunc(&sdlGetAssertionHandler, lib, "SDL_GetAssertionHandler")
 	// purego.RegisterLibFunc(&sdlGetAssertionReport, lib, "SDL_GetAssertionReport")
 	// purego.RegisterLibFunc(&sdlGetAsyncIOResult, lib, "SDL_GetAsyncIOResult")
@@ -1726,7 +1726,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRenderViewport, lib, "SDL_GetRenderViewport")
 	// purego.RegisterLibFunc(&sdlGetRenderVSync, lib, "SDL_GetRenderVSync")
 	// purego.RegisterLibFunc(&sdlGetRenderWindow, lib, "SDL_GetRenderWindow")
-	// purego.RegisterLibFunc(&sdlGetRevision, lib, "SDL_GetRevision")
+	purego.RegisterLibFunc(&sdlGetRevision, lib, "SDL_GetRevision")
 	// purego.RegisterLibFunc(&sdlGetRGB, lib, "SDL_GetRGB")
 	// purego.RegisterLibFunc(&sdlGetRGBA, lib, "SDL_GetRGBA")
 	// purego.RegisterLibFunc(&sdlGetSandbox, lib, "SDL_GetSandbox")
@@ -1791,7 +1791,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetTrayMenuParentTray, lib, "SDL_GetTrayMenuParentTray")
 	// purego.RegisterLibFunc(&sdlGetTraySubmenu, lib, "SDL_GetTraySubmenu")
 	// purego.RegisterLibFunc(&sdlGetUserFolder, lib, "SDL_GetUserFolder")
-	// purego.RegisterLibFunc(&sdlGetVersion, lib, "SDL_GetVersion")
+	purego.RegisterLibFunc(&sdlGetVersion, lib, "SDL_GetVersion")
 	// purego.RegisterLibFunc(&sdlGetVideoDriver, lib, "SDL_GetVideoDriver")
 	// purego.RegisterLibFunc(&sdlGetWindowAspectRatio, lib, "SDL_GetWindowAspectRatio")
 	// purego.RegisterLibFunc(&sdlGetWindowBordersSize, lib, "SDL_GetWindowBordersSize")
@@ -1927,7 +1927,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlIsJoystickHaptic, lib, "SDL_IsJoystickHaptic")
 	// purego.RegisterLibFunc(&sdlIsJoystickVirtual, lib, "SDL_IsJoystickVirtual")
 	// purego.RegisterLibFunc(&sdlislower, lib, "SDL_islower")
-	// purego.RegisterLibFunc(&sdlIsMainThread, lib, "SDL_IsMainThread")
+	purego.RegisterLibFunc(&sdlIsMainThread, lib, "SDL_IsMainThread")
 	// purego.RegisterLibFunc(&sdlIsMouseHaptic, lib, "SDL_IsMouseHaptic")
 	// purego.RegisterLibFunc(&sdlisnan, lib, "SDL_isnan")
 	// purego.RegisterLibFunc(&sdlisnanf, lib, "SDL_isnanf")

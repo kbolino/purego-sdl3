@@ -37,17 +37,15 @@ func QuitSubSystem(flags InitFlags) {
 	sdlQuitSubSystem(flags)
 }
 
-// func GetAppMetadataProperty(name string) string {
-//	return sdlGetAppMetadataProperty(name)
-// }
+// GetAppMetadataProperty gets metadata about your app.
+func GetAppMetadataProperty(name string) string {
+	return sdlGetAppMetadataProperty(name)
+}
 
-// func IsMainThread() bool {
-//	return sdlIsMainThread()
-// }
-
-// func Quit()  {
-//	sdlQuit()
-// }
+// IsMainThread returns true if this is the main thread.
+func IsMainThread() bool {
+	return sdlIsMainThread()
+}
 
 // func RunOnMainThread(callback MainThreadCallback, userdata unsafe.Pointer, wait_complete bool) bool {
 //	return sdlRunOnMainThread(callback, userdata, wait_complete)
