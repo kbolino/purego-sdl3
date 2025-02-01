@@ -67,4 +67,3 @@ package sdl
 // func WriteStorageFile(storage *Storage, path string, source unsafe.Pointer, length uint64) bool {
 //	return sdlWriteStorageFile(storage, path, source, length)
 // }
-

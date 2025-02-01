@@ -123,4 +123,3 @@ package sdl
 // func UpdateHapticEffect(haptic *Haptic, effect int32, data *HapticEffect) bool {
 //	return sdlUpdateHapticEffect(haptic, effect, data)
 // }
-

@@ -5,8 +5,31 @@ type Window struct{}
 type WindowFlags uint64
 
 const (
-	WindowOpenGL    WindowFlags = 0x0000000000000002
-	WindowResizable WindowFlags = 0x0000000000000020
+	WindowFullscreen        WindowFlags = 0x0000000000000001
+	WindowOpenGL            WindowFlags = 0x0000000000000002
+	WindowOccluded          WindowFlags = 0x0000000000000004
+	WindowHidden            WindowFlags = 0x0000000000000008
+	WindowBorderless        WindowFlags = 0x0000000000000010
+	WindowResizable         WindowFlags = 0x0000000000000020
+	WindowMinimized         WindowFlags = 0x0000000000000040
+	WindowMaximized         WindowFlags = 0x0000000000000080
+	WindowMouseGrabbed      WindowFlags = 0x0000000000000100
+	WindowInputFocus        WindowFlags = 0x0000000000000200
+	WindowMouseFocus        WindowFlags = 0x0000000000000400
+	WindowExternal          WindowFlags = 0x0000000000000800
+	WindowModal             WindowFlags = 0x0000000000001000
+	WindowHighPixelDensity  WindowFlags = 0x0000000000002000
+	WindowMouseCapture      WindowFlags = 0x0000000000004000
+	WindowMouseRelativeMode WindowFlags = 0x0000000000008000
+	WindowAlwaysOnTop       WindowFlags = 0x0000000000010000
+	WindowUtility           WindowFlags = 0x0000000000020000
+	WindowTooltip           WindowFlags = 0x0000000000040000
+	WindowPopupMenu         WindowFlags = 0x0000000000080000
+	WindowKeyboardGrabbed   WindowFlags = 0x0000000000100000
+	WindowVulkan            WindowFlags = 0x0000000010000000
+	WindowMetal             WindowFlags = 0x0000000020000000
+	WindowTransparent       WindowFlags = 0x0000000040000000
+	WindowNotFocusable      WindowFlags = 0x0000000080000000
 )
 
 type WindowID uint32
@@ -240,9 +263,10 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowSizeInPixels(window, w, h)
 // }
 
-// func GetWindowSurface(window *Window) *Surface {
-//	return sdlGetWindowSurface(window)
-// }
+// GetWindowSurface gets the SDL surface associated with the window.
+func GetWindowSurface(window *Window) *Surface {
+	return sdlGetWindowSurface(window)
+}
 
 // func GetWindowSurfaceVSync(window *Window, vsync *int32) bool {
 //	return sdlGetWindowSurfaceVSync(window, vsync)
@@ -312,9 +336,10 @@ func DestroyWindow(window *Window) {
 //	sdlGL_UnloadLibrary()
 // }
 
-// func HideWindow(window *Window) bool {
-//	return sdlHideWindow(window)
-// }
+// HideWindow hides a window.
+func HideWindow(window *Window) bool {
+	return sdlHideWindow(window)
+}
 
 // func MaximizeWindow(window *Window) bool {
 //	return sdlMaximizeWindow(window)
@@ -424,9 +449,10 @@ func DestroyWindow(window *Window) {
 //	return sdlSetWindowTitle(window, title)
 // }
 
-// func ShowWindow(window *Window) bool {
-//	return sdlShowWindow(window)
-// }
+// ShowWindow shows a window.
+func ShowWindow(window *Window) bool {
+	return sdlShowWindow(window)
+}
 
 // func ShowWindowSystemMenu(window *Window, x int32, y int32) bool {
 //	return sdlShowWindowSystemMenu(window, x, y)
@@ -436,9 +462,10 @@ func DestroyWindow(window *Window) {
 //	return sdlSyncWindow(window)
 // }
 
-// func UpdateWindowSurface(window *Window) bool {
-//	return sdlUpdateWindowSurface(window)
-// }
+// UpdateWindowSurface copies the window surface to the screen.
+func UpdateWindowSurface(window *Window) bool {
+	return sdlUpdateWindowSurface(window)
+}
 
 // func UpdateWindowSurfaceRects(window *Window, rects *Rect, numrects int32) bool {
 //	return sdlUpdateWindowSurfaceRects(window, rects, numrects)

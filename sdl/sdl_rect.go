@@ -1,5 +1,10 @@
 package sdl
 
+// Rect is a rectangle, with the origin at the upper left (using integers).
+type Rect struct {
+	X, Y, W, H int32
+}
+
 // FRect is a rectangle, with the origin at the upper left (using floating point values).
 type FRect struct {
 	X, Y, W, H float32

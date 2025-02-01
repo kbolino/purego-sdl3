@@ -47,4 +47,3 @@ package sdl
 // func SetX11EventHook(callback X11EventHook, userdata unsafe.Pointer)  {
 //	sdlSetX11EventHook(callback, userdata)
 // }
-

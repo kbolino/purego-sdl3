@@ -2,14 +2,21 @@ package sdl
 
 import (
 	"unsafe"
+
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
 
 type EventType uint32
 
 const (
-	EventFirst   EventType = 0
-	EventQuit    EventType = 0x100
-	EventKeyDown EventType = 0x300
+	EventFirst           EventType = 0
+	EventQuit            EventType = 0x100
+	EventKeyDown         EventType = 0x300
+	EventKeyUp           EventType = 0x301
+	EventTextInput       EventType = 0x303
+	EventMouseMotion     EventType = 0x400
+	EventMouseButtonDown EventType = 0x401
+	EventMouseButtonUp   EventType = 0x402
 )
 
 type Event [128]byte
@@ -20,6 +27,25 @@ func (e *Event) Type() EventType {
 
 func (e *Event) Key() KeyboardEvent {
 	return *(*KeyboardEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) TextInput() TextInputEvent {
+	te := *(*textInputEvent)(unsafe.Pointer(e))
+	return TextInputEvent{
+		Type:      te.Type,
+		Reserved:  te.Reserved,
+		Timestamp: te.Timestamp,
+		WindowID:  te.WindowID,
+		Text:      convert.ToString(te.Text),
+	}
+}
+
+func (e *Event) MouseMotion() MouseMotionEvent {
+	return *(*MouseMotionEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) MouseButton() MouseButtonEvent {
+	return *(*MouseButtonEvent)(unsafe.Pointer(e))
 }
 
 type KeyboardEvent struct {
@@ -34,6 +60,49 @@ type KeyboardEvent struct {
 	Raw       uint16
 	Down      bool
 	Repeat    bool
+}
+
+type textInputEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Text      *byte
+}
+
+type TextInputEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Text      string
+}
+
+type MouseMotionEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Which     MouseID
+	State     MouseButtonFlags
+	X         float32
+	Y         float32
+	Xrel      float32
+	Yrel      float32
+}
+
+type MouseButtonEvent struct {
+	Type      EventType
+	Reserved  uint32
+	Timestamp uint64
+	WindowID  WindowID
+	Which     MouseID
+	Button    uint8
+	Down      bool
+	Clicks    uint8
+	Padding   uint8
+	X         float32
+	Y         float32
 }
 
 // PollEvent polls for currently pending events.
@@ -81,9 +150,10 @@ func PollEvent(event *Event) bool {
 //	return sdlPeepEvents(events, numevents, action, minType, maxType)
 // }
 
-// func PumpEvents()  {
-//	sdlPumpEvents()
-// }
+// PumpEvents updates the event queue and internal input device state.
+func PumpEvents() {
+	sdlPumpEvents()
+}
 
 // func PushEvent(event *Event) bool {
 //	return sdlPushEvent(event)

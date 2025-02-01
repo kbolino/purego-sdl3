@@ -47,4 +47,3 @@ package sdl
 // func WaitThread(thread *Thread, status *int32)  {
 //	sdlWaitThread(thread, status)
 // }
-

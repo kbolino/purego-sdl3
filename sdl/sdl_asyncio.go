@@ -43,4 +43,3 @@ package sdl
 // func WriteAsyncIO(asyncio *AsyncIO, ptr unsafe.Pointer, offset uint64, size uint64, queue *AsyncIOQueue, userdata unsafe.Pointer) bool {
 //	return sdlWriteAsyncIO(asyncio, ptr, offset, size, queue, userdata)
 // }
-

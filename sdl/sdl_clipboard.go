@@ -43,4 +43,3 @@ package sdl
 // func SetPrimarySelectionText(text string) bool {
 //	return sdlSetPrimarySelectionText(text)
 // }
-

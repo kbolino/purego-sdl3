@@ -15,4 +15,3 @@ package sdl
 // func ShowSaveFileDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, filters *DialogFileFilter, nfilters int32, default_location string)  {
 //	sdlShowSaveFileDialog(callback, userdata, window, filters, nfilters, default_location)
 // }
-

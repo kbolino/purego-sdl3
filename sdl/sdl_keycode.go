@@ -2,8 +2,6 @@ package sdl
 
 type Keycode uint32
 
-type Keymod uint16
-
 const (
 	KeycodeScancodeMask       Keycode = 0x40000000
 	KeycodeUnknown            Keycode = 0x00000000
@@ -262,4 +260,28 @@ const (
 	KeycodeRmeta              Keycode = 0x20000005
 	KeycodeLhyper             Keycode = 0x20000006
 	KeycodeRhyper             Keycode = 0x20000007
+)
+
+type Keymod uint16
+
+const (
+	KeymodNone   Keymod = 0x0000
+	KeymodLshift Keymod = 0x0001
+	KeymodRshift Keymod = 0x0002
+	KeymodLevel5 Keymod = 0x0004
+	KeymodLctrl  Keymod = 0x0040
+	KeymodRctrl  Keymod = 0x0080
+	KeymodLalt   Keymod = 0x0100
+	KeymodRalt   Keymod = 0x0200
+	KeymodLgui   Keymod = 0x0400
+	KeymodRgui   Keymod = 0x0800
+	KeymodNum    Keymod = 0x1000
+	KeymodCaps   Keymod = 0x2000
+	KeymodMode   Keymod = 0x4000
+	KeymodScroll Keymod = 0x8000
+
+	KeymodCtrl  Keymod = KeymodLctrl | KeymodRctrl
+	KeymodShift Keymod = KeymodLshift | KeymodRshift
+	KeymodAlt   Keymod = KeymodLalt | KeymodRalt
+	KeymodGui   Keymod = KeymodLgui | KeymodRgui
 )

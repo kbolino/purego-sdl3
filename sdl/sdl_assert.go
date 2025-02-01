@@ -23,4 +23,3 @@ package sdl
 // func SetAssertionHandler(handler AssertionHandler, userdata unsafe.Pointer)  {
 //	sdlSetAssertionHandler(handler, userdata)
 // }
-

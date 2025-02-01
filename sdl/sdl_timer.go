@@ -39,4 +39,3 @@ package sdl
 // func RemoveTimer(id TimerID) bool {
 //	return sdlRemoveTimer(id)
 // }
-

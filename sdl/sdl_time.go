@@ -35,4 +35,3 @@ package sdl
 // func TimeToWindows(ticks Time, dwLowDateTime *uint32, dwHighDateTime *uint32)  {
 //	sdlTimeToWindows(ticks, dwLowDateTime, dwHighDateTime)
 // }
-

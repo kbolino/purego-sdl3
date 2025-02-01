@@ -1,5 +1,23 @@
 package sdl
 
+type MouseID uint32
+
+type MouseButtonFlags uint32
+
+const (
+	ButtonLeft   MouseButtonFlags = 1
+	ButtonMiddle MouseButtonFlags = 2
+	ButtonRight  MouseButtonFlags = 3
+	ButtonX1     MouseButtonFlags = 4
+	ButtonX2     MouseButtonFlags = 5
+
+	ButtonLmask  = 1 << (ButtonLeft - 1)
+	ButtonMmask  = 1 << (ButtonMiddle - 1)
+	ButtonRmask  = 1 << (ButtonRight - 1)
+	ButtonX1mask = 1 << (ButtonX1 - 1)
+	ButtonX2mask = 1 << (ButtonX2 - 1)
+)
+
 // func CaptureMouse(enabled bool) bool {
 //	return sdlCaptureMouse(enabled)
 // }
@@ -48,9 +66,10 @@ package sdl
 //	return sdlGetMouseNameForID(instance_id)
 // }
 
-// func GetMouseState(x *float32, y *float32) MouseButtonFlags {
-//	return sdlGetMouseState(x, y)
-// }
+// GetMouseState queries SDL's cache for the synchronous mouse button state and the window-relative SDL-cursor position.
+func GetMouseState(x *float32, y *float32) MouseButtonFlags {
+	return sdlGetMouseState(x, y)
+}
 
 // func GetRelativeMouseState(x *float32, y *float32) MouseButtonFlags {
 //	return sdlGetRelativeMouseState(x, y)
@@ -64,9 +83,10 @@ package sdl
 //	return sdlHasMouse()
 // }
 
-// func HideCursor() bool {
-//	return sdlHideCursor()
-// }
+// HideCursor hides the cursor.
+func HideCursor() bool {
+	return sdlHideCursor()
+}
 
 // func SetCursor(cursor *Cursor) bool {
 //	return sdlSetCursor(cursor)
@@ -76,15 +96,16 @@ package sdl
 //	return sdlSetWindowRelativeMouseMode(window, enabled)
 // }
 
-// func ShowCursor() bool {
-//	return sdlShowCursor()
-// }
+// ShowCursor shows the cursor.
+func ShowCursor() bool {
+	return sdlShowCursor()
+}
 
 // func WarpMouseGlobal(x float32, y float32) bool {
 //	return sdlWarpMouseGlobal(x, y)
 // }
 
-// func WarpMouseInWindow(window *Window, x float32, y float32)  {
-//	sdlWarpMouseInWindow(window, x, y)
-// }
-
+// WarpMouseInWindow moves the mouse cursor to the given position within the window.
+func WarpMouseInWindow(window *Window, x float32, y float32) {
+	sdlWarpMouseInWindow(window, x, y)
+}

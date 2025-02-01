@@ -679,4 +679,3 @@ package sdl
 // func wcstol(str *wchar_t, endp **wchar_t, base int32) int64 {
 //	return sdlwcstol(str, endp, base)
 // }
-

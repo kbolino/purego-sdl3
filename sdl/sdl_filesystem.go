@@ -43,4 +43,3 @@ package sdl
 // func RenamePath(oldpath string, newpath string) bool {
 //	return sdlRenamePath(oldpath, newpath)
 // }
-

@@ -7,4 +7,3 @@ package sdl
 // func StringToGUID(pchGUID string) GUID {
 //	return sdlStringToGUID(pchGUID)
 // }
-

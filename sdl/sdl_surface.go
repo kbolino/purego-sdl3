@@ -37,9 +37,10 @@ func DestroySurface(surface *Surface) {
 //	return sdlAddSurfaceAlternateImage(surface, image)
 // }
 
-// func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool {
-//	return sdlBlitSurface(src, srcrect, dst, dstrect)
-// }
+// BlitSurface performs a fast blit from the source surface to the destination surface with clipping.
+func BlitSurface(src *Surface, srcrect *Rect, dst *Surface, dstrect *Rect) bool {
+	return sdlBlitSurface(src, srcrect, dst, dstrect)
+}
 
 // func BlitSurface9Grid(src *Surface, srcrect *Rect, left_width int32, right_width int32, top_height int32, bottom_height int32, scale float32, scaleMode ScaleMode, dst *Surface, dstrect *Rect) bool {
 //	return sdlBlitSurface9Grid(src, srcrect, left_width, right_width, top_height, bottom_height, scale, scaleMode, dst, dstrect)
@@ -85,9 +86,10 @@ func DestroySurface(surface *Surface) {
 //	return sdlConvertSurfaceAndColorspace(surface, format, palette, colorspace, props)
 // }
 
-// func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
-//	return sdlCreateSurface(width, height, format)
-// }
+// CreateSurface allocates a new surface with a specific pixel format.
+func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
+	return sdlCreateSurface(width, height, format)
+}
 
 // func CreateSurfaceFrom(width int32, height int32, format PixelFormat, pixels unsafe.Pointer, pitch int32) *Surface {
 //	return sdlCreateSurfaceFrom(width, height, format, pixels, pitch)
@@ -153,9 +155,10 @@ func DestroySurface(surface *Surface) {
 //	return sdlLoadBMP(file)
 // }
 
-// func LockSurface(surface *Surface) bool {
-//	return sdlLockSurface(surface)
-// }
+// LockSurface sets up a surface for directly accessing the pixels.
+func LockSurface(surface *Surface) bool {
+	return sdlLockSurface(surface)
+}
 
 // func MapSurfaceRGB(surface *Surface, r uint8, g uint8, b uint8) uint32 {
 //	return sdlMapSurfaceRGB(surface, r, g, b)
@@ -241,9 +244,10 @@ func DestroySurface(surface *Surface) {
 //	return sdlSurfaceHasRLE(surface)
 // }
 
-// func UnlockSurface(surface *Surface)  {
-//	sdlUnlockSurface(surface)
-// }
+// UnlockSurface releases a surface after directly accessing the pixels.
+func UnlockSurface(surface *Surface) {
+	sdlUnlockSurface(surface)
+}
 
 // func WriteSurfacePixel(surface *Surface, x int32, y int32, r uint8, g uint8, b uint8, a uint8) bool {
 //	return sdlWriteSurfacePixel(surface, x, y, r, g, b, a)

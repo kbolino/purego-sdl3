@@ -11,4 +11,3 @@ package sdl
 // func UnloadObject(handle *SharedObject)  {
 //	sdlUnloadObject(handle)
 // }
-

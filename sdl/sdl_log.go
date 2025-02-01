@@ -71,4 +71,3 @@ package sdl
 // func SetLogPriorityPrefix(priority LogPriority, prefix string) bool {
 //	return sdlSetLogPriorityPrefix(priority, prefix)
 // }
-
