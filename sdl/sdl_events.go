@@ -139,22 +139,15 @@ func (e *Event) Key() KeyboardEvent {
 	return *(*KeyboardEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) TextInput() TextInputEvent {
-	te := *(*textInputEvent)(unsafe.Pointer(e))
-	return TextInputEvent{
-		Type:      te.Type,
-		Reserved:  te.Reserved,
-		Timestamp: te.Timestamp,
-		WindowID:  te.WindowID,
-		Text:      convert.ToString(te.Text),
-	}
+func (e *Event) Text() TextInputEvent {
+	return *(*TextInputEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) MouseMotion() MouseMotionEvent {
+func (e *Event) Motion() MouseMotionEvent {
 	return *(*MouseMotionEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) MouseButton() MouseButtonEvent {
+func (e *Event) Button() MouseButtonEvent {
 	return *(*MouseButtonEvent)(unsafe.Pointer(e))
 }
 
@@ -172,20 +165,16 @@ type KeyboardEvent struct {
 	Repeat    bool
 }
 
-type textInputEvent struct {
-	Type      EventType
-	Reserved  uint32
-	Timestamp uint64
-	WindowID  WindowID
-	Text      *byte
-}
-
 type TextInputEvent struct {
 	Type      EventType
 	Reserved  uint32
 	Timestamp uint64
 	WindowID  WindowID
-	Text      string
+	text      *byte
+}
+
+func (t *TextInputEvent) Text() string {
+	return convert.ToString(t.text)
 }
 
 type MouseMotionEvent struct {
