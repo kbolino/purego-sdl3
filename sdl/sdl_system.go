@@ -1,5 +1,15 @@
 package sdl
 
+type Sandbox uint32
+
+const (
+	SandboxNone Sandbox = iota
+	SandboxUnknownContainer
+	SandboxFlatpak
+	SandboxSnap
+	SandboxMacos
+)
+
 // func GetSandbox() Sandbox {
 //	return sdlGetSandbox()
 // }

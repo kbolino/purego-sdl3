@@ -1,5 +1,24 @@
 package sdl
 
+type IoStatus uint32
+
+const (
+	IoStatusReady IoStatus = iota
+	IoStatusError
+	IoStatusEof
+	IoStatusNotReady
+	IoStatusReadOnly
+	IoStatusWriteOnly
+)
+
+type IoWhence uint32
+
+const (
+	IoSeekSet IoWhence = iota
+	IoSeekCur
+	IoSeekEnd
+)
+
 type IOStream struct{}
 
 // IOFromConstMem returns a read-only memory buffer for use with [IOStream] or nil on failure.

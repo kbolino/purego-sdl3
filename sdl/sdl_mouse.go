@@ -1,5 +1,38 @@
 package sdl
 
+type MouseWheelDirection uint32
+
+const (
+	MouseWheelNormal MouseWheelDirection = iota
+	MouseWheelFlipped
+)
+
+type SystemCursor uint32
+
+const (
+	SystemCursorDefault SystemCursor = iota
+	SystemCursorText
+	SystemCursorWait
+	SystemCursorCrosshair
+	SystemCursorProgress
+	SystemCursorNwseResize
+	SystemCursorNeswResize
+	SystemCursorEwResize
+	SystemCursorNsResize
+	SystemCursorMove
+	SystemCursorNotAllowed
+	SystemCursorPointer
+	SystemCursorNwResize
+	SystemCursorNResize
+	SystemCursorNeResize
+	SystemCursorEResize
+	SystemCursorSeResize
+	SystemCursorSResize
+	SystemCursorSwResize
+	SystemCursorWResize
+	SystemCursorCount
+)
+
 type MouseID uint32
 
 type MouseButtonFlags uint32

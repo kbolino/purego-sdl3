@@ -1,5 +1,30 @@
 package sdl
 
+type JoystickConnectionState int32
+
+const (
+	JoystickConnectionInvalid JoystickConnectionState = iota - 1
+	JoystickConnectionUnknown
+	JoystickConnectionWired
+	JoystickConnectionWireless
+)
+
+type JoystickType uint32
+
+const (
+	JoystickTypeUnknown JoystickType = iota
+	JoystickTypeGamepad
+	JoystickTypeWheel
+	JoystickTypeArcadeStick
+	JoystickTypeFlightStick
+	JoystickTypeDancePad
+	JoystickTypeGuitar
+	JoystickTypeDrumKit
+	JoystickTypeArcadePad
+	JoystickTypeThrottle
+	JoystickTypeCount
+)
+
 // func AttachVirtualJoystick(desc *VirtualJoystickDesc) JoystickID {
 //	return sdlAttachVirtualJoystick(desc)
 // }

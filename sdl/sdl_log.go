@@ -1,5 +1,44 @@
 package sdl
 
+type LogPriority uint32
+
+const (
+	LogPriorityInvalid LogPriority = iota
+	LogPriorityTrace
+	LogPriorityVerbose
+	LogPriorityDebug
+	LogPriorityInfo
+	LogPriorityWarn
+	LogPriorityError
+	LogPriorityCritical
+	LogPriorityCount
+)
+
+type LogCategory uint32
+
+const (
+	LogCategoryApplication LogCategory = iota
+	LogCategoryError
+	LogCategoryAssert
+	LogCategorySystem
+	LogCategoryAudio
+	LogCategoryVideo
+	LogCategoryRender
+	LogCategoryInput
+	LogCategoryTest
+	LogCategoryGpu
+	LogCategoryReserved2
+	LogCategoryReserved3
+	LogCategoryReserved4
+	LogCategoryReserved5
+	LogCategoryReserved6
+	LogCategoryReserved7
+	LogCategoryReserved8
+	LogCategoryReserved9
+	LogCategoryReserved10
+	LogCategoryCustom
+)
+
 // func GetDefaultLogOutputFunction() LogOutputFunction {
 //	return sdlGetDefaultLogOutputFunction()
 // }

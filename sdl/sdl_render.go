@@ -1,5 +1,23 @@
 package sdl
 
+type RendererLogicalPresentation uint32
+
+const (
+	LogicalPresentationDisabled RendererLogicalPresentation = iota
+	LogicalPresentationStretch
+	LogicalPresentationLetterbox
+	LogicalPresentationOverscan
+	LogicalPresentationIntegerScale
+)
+
+type TextureAccess uint32
+
+const (
+	TextureAccessStatic TextureAccess = iota
+	TextureAccessStreaming
+	TextureAccessTarget
+)
+
 type Renderer struct{}
 
 // Texture is a efficient driver-specific representation of pixel data.

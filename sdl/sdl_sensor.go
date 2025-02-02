@@ -1,5 +1,18 @@
 package sdl
 
+type SensorType int32
+
+const (
+	SensorInvalid SensorType = iota - 1
+	SensorUnknown
+	SensorAccel
+	SensorGyro
+	SensorAccelL
+	SensorGyroL
+	SensorAccelR
+	SensorGyroR
+)
+
 // func CloseSensor(sensor *Sensor)  {
 //	sdlCloseSensor(sensor)
 // }

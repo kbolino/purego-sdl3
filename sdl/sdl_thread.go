@@ -1,5 +1,23 @@
 package sdl
 
+type ThreadPriority uint32
+
+const (
+	ThreadPriorityLow ThreadPriority = iota
+	ThreadPriorityNormal
+	ThreadPriorityHigh
+	ThreadPriorityTimeCritical
+)
+
+type ThreadState uint32
+
+const (
+	ThreadUnknown ThreadState = iota
+	ThreadAlive
+	ThreadDetached
+	ThreadComplete
+)
+
 // func CleanupTLS()  {
 //	sdlCleanupTLS()
 // }

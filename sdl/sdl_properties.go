@@ -1,5 +1,16 @@
 package sdl
 
+type PropertyType uint32
+
+const (
+	PropertyTypeInvalid PropertyType = iota
+	PropertyTypePointer
+	PropertyTypeString
+	PropertyTypeNumber
+	PropertyTypeFloat
+	PropertyTypeBoolean
+)
+
 // func ClearProperty(props PropertiesID, name string) bool {
 //	return sdlClearProperty(props, name)
 // }

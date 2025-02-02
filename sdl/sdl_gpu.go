@@ -1,5 +1,355 @@
 package sdl
 
+type GPUSwapchainComposition uint32
+
+const (
+	GPUSwapchainCompositionSdr GPUSwapchainComposition = iota
+	GPUSwapchainCompositionSdrLinear
+	GPUSwapchainCompositionHdrExtendedLinear
+	GPUSwapchainCompositionHdr10St2084
+)
+
+type GPUPresentMode uint32
+
+const (
+	GPUPresentModeVsync GPUPresentMode = iota
+	GPUPresentModeImmediate
+	GPUPresentModeMailbox
+)
+
+type GPUSamplerAddressMode uint32
+
+const (
+	GPUSamplerAddressModeRepeat GPUSamplerAddressMode = iota
+	GPUSamplerAddressModeMirroredRepeat
+	GPUSamplerAddressModeClampToEdge
+)
+
+type GPUSamplerMipmapMode uint32
+
+const (
+	GPUSamplerMipmapModeNearest GPUSamplerMipmapMode = iota
+	GPUSamplerMipmapModeLinear
+)
+
+type GPUFilter uint32
+
+const (
+	GPUFilterNearest GPUFilter = iota
+	GPUFilterLinear
+)
+
+type GPUBlendFactor uint32
+
+const (
+	GPUBlendFactorInvalid GPUBlendFactor = iota
+	GPUBlendFactorZero
+	GPUBlendFactorOne
+	GPUBlendFactorSrcColor
+	GPUBlendFactorOneMinusSrcColor
+	GPUBlendFactorDstColor
+	GPUBlendFactorOneMinusDstColor
+	GPUBlendFactorSrcAlpha
+	GPUBlendFactorOneMinusSrcAlpha
+	GPUBlendFactorDstAlpha
+	GPUBlendFactorOneMinusDstAlpha
+	GPUBlendFactorConstantColor
+	GPUBlendFactorOneMinusConstantColor
+	GPUBlendFactorSrcAlphaSaturate
+)
+
+type GPUBlendOp uint32
+
+const (
+	GPUBlendOpInvalid GPUBlendOp = iota
+	GPUBlendOpAdd
+	GPUBlendOpSubtract
+	GPUBlendOpReverseSubtract
+	GPUBlendOpMin
+	GPUBlendOpMax
+)
+
+type GPUStencilOp uint32
+
+const (
+	GPUStencilOpInvalid GPUStencilOp = iota
+	GPUStencilOpKeep
+	GPUStencilOpZero
+	GPUStencilOpReplace
+	GPUStencilOpIncrementAndClamp
+	GPUStencilOpDecrementAndClamp
+	GPUStencilOpInvert
+	GPUStencilOpIncrementAndWrap
+	GPUStencilOpDecrementAndWrap
+)
+
+type GPUCompareOp uint32
+
+const (
+	GPUCompareOpInvalid GPUCompareOp = iota
+	GPUCompareOpNever
+	GPUCompareOpLess
+	GPUCompareOpEqual
+	GPUCompareOpLessOrEqual
+	GPUCompareOpGreater
+	GPUCompareOpNotEqual
+	GPUCompareOpGreaterOrEqual
+	GPUCompareOpAlways
+)
+
+type GPUFrontFace uint32
+
+const (
+	GPUFrontFaceCounterClockwise GPUFrontFace = iota
+	GPUFrontFaceClockwise
+)
+
+type GPUCullMode uint32
+
+const (
+	GPUCullModeNone GPUCullMode = iota
+	GPUCullModeFront
+	GPUCullModeBack
+)
+
+type GPUFillMode uint32
+
+const (
+	GPUFillModeFill GPUFillMode = iota
+	GPUFillModeLine
+)
+
+type GPUVertexInputRate uint32
+
+const (
+	GPUVertexInputRateVertex GPUVertexInputRate = iota
+	GPUVertexInputRateInstance
+)
+
+type GPUVertexElementFormat uint32
+
+const (
+	GPUVertexElementFormatInvalid GPUVertexElementFormat = iota
+	GPUVertexElementFormatInt
+	GPUVertexElementFormatInt2
+	GPUVertexElementFormatInt3
+	GPUVertexElementFormatInt4
+	GPUVertexElementFormatUint
+	GPUVertexElementFormatUint2
+	GPUVertexElementFormatUint3
+	GPUVertexElementFormatUint4
+	GPUVertexElementFormatFloat
+	GPUVertexElementFormatFloat2
+	GPUVertexElementFormatFloat3
+	GPUVertexElementFormatFloat4
+	GPUVertexElementFormatByte2
+	GPUVertexElementFormatByte4
+	GPUVertexElementFormatUbyte2
+	GPUVertexElementFormatUbyte4
+	GPUVertexElementFormatByte2Norm
+	GPUVertexElementFormatByte4Norm
+	GPUVertexElementFormatUbyte2Norm
+	GPUVertexElementFormatUbyte4Norm
+	GPUVertexElementFormatShort2
+	GPUVertexElementFormatShort4
+	GPUVertexElementFormatUshort2
+	GPUVertexElementFormatUshort4
+	GPUVertexElementFormatShort2Norm
+	GPUVertexElementFormatShort4Norm
+	GPUVertexElementFormatUshort2Norm
+	GPUVertexElementFormatUshort4Norm
+	GPUVertexElementFormatHalf2
+	GPUVertexElementFormatHalf4
+)
+
+type GPUShaderStage uint32
+
+const (
+	GPUShaderStageVertex GPUShaderStage = iota
+	GPUShaderStageFragment
+)
+
+type GPUTransferBufferUsage uint32
+
+const (
+	GPUTransferBufferUsageUpload GPUTransferBufferUsage = iota
+	GPUTransferBufferUsageDownload
+)
+
+type GPUCubeMapFace uint32
+
+const (
+	GPUCubeMapFacePositiveX GPUCubeMapFace = iota
+	GPUCubeMapFaceNegativeX
+	GPUCubeMapFacePositiveY
+	GPUCubeMapFaceNegativeY
+	GPUCubeMapFacePositiveZ
+	GPUCubeMapFaceNegativeZ
+)
+
+type GPUSampleCount uint32
+
+const (
+	GPUSampleCount1 GPUSampleCount = iota
+	GPUSampleCount2
+	GPUSampleCount4
+	GPUSampleCount8
+)
+
+type GPUTextureType uint32
+
+const (
+	GPUTextureType2D GPUTextureType = iota
+	GPUTextureType2DArray
+	GPUTextureType3D
+	GPUTextureTypeCube
+	GPUTextureTypeCubeArray
+)
+
+type GPUTextureFormat uint32
+
+const (
+	GPUTextureFormatInvalid GPUTextureFormat = iota
+	GPUTextureFormatA8Unorm
+	GPUTextureFormatR8Unorm
+	GPUTextureFormatR8G8Unorm
+	GPUTextureFormatR8G8B8A8Unorm
+	GPUTextureFormatR16Unorm
+	GPUTextureFormatR16G16Unorm
+	GPUTextureFormatR16G16B16A16Unorm
+	GPUTextureFormatR10G10B10A2Unorm
+	GPUTextureFormatB5G6R5Unorm
+	GPUTextureFormatB5G5R5A1Unorm
+	GPUTextureFormatB4G4R4A4Unorm
+	GPUTextureFormatB8G8R8A8Unorm
+	GPUTextureFormatBc1RgbaUnorm
+	GPUTextureFormatBc2RgbaUnorm
+	GPUTextureFormatBc3RgbaUnorm
+	GPUTextureFormatBc4RUnorm
+	GPUTextureFormatBc5RgUnorm
+	GPUTextureFormatBc7RgbaUnorm
+	GPUTextureFormatBc6HRgbFloat
+	GPUTextureFormatBc6HRgbUfloat
+	GPUTextureFormatR8Snorm
+	GPUTextureFormatR8G8Snorm
+	GPUTextureFormatR8G8B8A8Snorm
+	GPUTextureFormatR16Snorm
+	GPUTextureFormatR16G16Snorm
+	GPUTextureFormatR16G16B16A16Snorm
+	GPUTextureFormatR16Float
+	GPUTextureFormatR16G16Float
+	GPUTextureFormatR16G16B16A16Float
+	GPUTextureFormatR32Float
+	GPUTextureFormatR32G32Float
+	GPUTextureFormatR32G32B32A32Float
+	GPUTextureFormatR11G11B10Ufloat
+	GPUTextureFormatR8Uint
+	GPUTextureFormatR8G8Uint
+	GPUTextureFormatR8G8B8A8Uint
+	GPUTextureFormatR16Uint
+	GPUTextureFormatR16G16Uint
+	GPUTextureFormatR16G16B16A16Uint
+	GPUTextureFormatR32Uint
+	GPUTextureFormatR32G32Uint
+	GPUTextureFormatR32G32B32A32Uint
+	GPUTextureFormatR8Int
+	GPUTextureFormatR8G8Int
+	GPUTextureFormatR8G8B8A8Int
+	GPUTextureFormatR16Int
+	GPUTextureFormatR16G16Int
+	GPUTextureFormatR16G16B16A16Int
+	GPUTextureFormatR32Int
+	GPUTextureFormatR32G32Int
+	GPUTextureFormatR32G32B32A32Int
+	GPUTextureFormatR8G8B8A8UnormSrgb
+	GPUTextureFormatB8G8R8A8UnormSrgb
+	GPUTextureFormatBc1RgbaUnormSrgb
+	GPUTextureFormatBc2RgbaUnormSrgb
+	GPUTextureFormatBc3RgbaUnormSrgb
+	GPUTextureFormatBc7RgbaUnormSrgb
+	GPUTextureFormatD16Unorm
+	GPUTextureFormatD24Unorm
+	GPUTextureFormatD32Float
+	GPUTextureFormatD24UnormS8Uint
+	GPUTextureFormatD32FloatS8Uint
+	GPUTextureFormatAstc4x4Unorm
+	GPUTextureFormatAstc5x4Unorm
+	GPUTextureFormatAstc5x5Unorm
+	GPUTextureFormatAstc6x5Unorm
+	GPUTextureFormatAstc6x6Unorm
+	GPUTextureFormatAstc8x5Unorm
+	GPUTextureFormatAstc8x6Unorm
+	GPUTextureFormatAstc8x8Unorm
+	GPUTextureFormatAstc10x5Unorm
+	GPUTextureFormatAstc10x6Unorm
+	GPUTextureFormatAstc10x8Unorm
+	GPUTextureFormatAstc10x10Unorm
+	GPUTextureFormatAstc12x10Unorm
+	GPUTextureFormatAstc12x12Unorm
+	GPUTextureFormatAstc4x4UnormSrgb
+	GPUTextureFormatAstc5x4UnormSrgb
+	GPUTextureFormatAstc5x5UnormSrgb
+	GPUTextureFormatAstc6x5UnormSrgb
+	GPUTextureFormatAstc6x6UnormSrgb
+	GPUTextureFormatAstc8x5UnormSrgb
+	GPUTextureFormatAstc8x6UnormSrgb
+	GPUTextureFormatAstc8x8UnormSrgb
+	GPUTextureFormatAstc10x5UnormSrgb
+	GPUTextureFormatAstc10x6UnormSrgb
+	GPUTextureFormatAstc10x8UnormSrgb
+	GPUTextureFormatAstc10x10UnormSrgb
+	GPUTextureFormatAstc12x10UnormSrgb
+	GPUTextureFormatAstc12x12UnormSrgb
+	GPUTextureFormatAstc4x4Float
+	GPUTextureFormatAstc5x4Float
+	GPUTextureFormatAstc5x5Float
+	GPUTextureFormatAstc6x5Float
+	GPUTextureFormatAstc6x6Float
+	GPUTextureFormatAstc8x5Float
+	GPUTextureFormatAstc8x6Float
+	GPUTextureFormatAstc8x8Float
+	GPUTextureFormatAstc10x5Float
+	GPUTextureFormatAstc10x6Float
+	GPUTextureFormatAstc10x8Float
+	GPUTextureFormatAstc10x10Float
+	GPUTextureFormatAstc12x10Float
+	GPUTextureFormatAstc12x12Float
+)
+
+type GPUIndexElementSize uint32
+
+const (
+	GPUIndexElementSize16Bit GPUIndexElementSize = iota
+	GPUIndexElementSize32Bit
+)
+
+type GPUStoreOp uint32
+
+const (
+	GPUStoreOpStore GPUStoreOp = iota
+	GPUStoreOpDontCare
+	GPUStoreOpResolve
+	GPUStoreOpResolveAndStore
+)
+
+type GPULoadOp uint32
+
+const (
+	GPULoadOpLoad GPULoadOp = iota
+	GPULoadOpClear
+	GPULoadOpDontCare
+)
+
+type GPUPrimitiveType uint32
+
+const (
+	GPUPrimitiveTypeTrianglelist GPUPrimitiveType = iota
+	GPUPrimitiveTypeTrianglestrip
+	GPUPrimitiveTypeLinelist
+	GPUPrimitiveTypeLinestrip
+	GPUPrimitiveTypePointlist
+)
+
 // func AcquireGPUCommandBuffer(device *GPUDevice) *GPUCommandBuffer {
 //	return sdlAcquireGPUCommandBuffer(device)
 // }

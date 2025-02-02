@@ -1,5 +1,15 @@
 package sdl
 
+type AssertState uint32
+
+const (
+	AssertionRetry AssertState = iota
+	AssertionBreak
+	AssertionAbort
+	AssertionIgnore
+	AssertionAlwaysIgnore
+)
+
 // func GetAssertionHandler(puserdata *unsafe.Pointer) AssertionHandler {
 //	return sdlGetAssertionHandler(puserdata)
 // }

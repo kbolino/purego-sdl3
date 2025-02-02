@@ -1,5 +1,15 @@
 package sdl
 
+type HidBusType uint32
+
+const (
+	HidApiBusUnknown HidBusType = iota
+	HidApiBusUsb
+	HidApiBusBluetooth
+	HidApiBusI2C
+	HidApiBusSpi
+)
+
 // func hid_ble_scan(active bool)  {
 //	sdlhid_ble_scan(active)
 // }

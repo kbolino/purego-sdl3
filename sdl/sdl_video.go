@@ -1,5 +1,79 @@
 package sdl
 
+type HitTestResult uint32
+
+const (
+	HitTestNormal HitTestResult = iota
+	HitTestDraggable
+	HitTestResizeTopleft
+	HitTestResizeTop
+	HitTestResizeTopright
+	HitTestResizeRight
+	HitTestResizeBottomright
+	HitTestResizeBottom
+	HitTestResizeBottomleft
+	HitTestResizeLeft
+)
+
+type GlAttr uint32
+
+const (
+	GlRedSize GlAttr = iota
+	GlGreenSize
+	GlBlueSize
+	GlAlphaSize
+	GlBufferSize
+	GlDoublebuffer
+	GlDepthSize
+	GlStencilSize
+	GlAccumRedSize
+	GlAccumGreenSize
+	GlAccumBlueSize
+	GlAccumAlphaSize
+	GlStereo
+	GlMultisamplebuffers
+	GlMultisamplesamples
+	GlAcceleratedVisual
+	GlRetainedBacking
+	GlContextMajorVersion
+	GlContextMinorVersion
+	GlContextFlags
+	GlContextProfileMask
+	GlShareWithCurrentContext
+	GlFramebufferSrgbCapable
+	GlContextReleaseBehavior
+	GlContextResetNotification
+	GlContextNoError
+	GlFloatbuffers
+	GlEglPlatform
+)
+
+type FlashOperation uint32
+
+const (
+	FlashCancel FlashOperation = iota
+	FlashBriefly
+	FlashUntilFocused
+)
+
+type DisplayOrientation uint32
+
+const (
+	OrientationUnknown DisplayOrientation = iota
+	OrientationLandscape
+	OrientationLandscapeFlipped
+	OrientationPortrait
+	OrientationPortraitFlipped
+)
+
+type SystemTheme uint32
+
+const (
+	SystemThemeUnknown SystemTheme = iota
+	SystemThemeLight
+	SystemThemeDark
+)
+
 type Window struct{}
 
 type WindowFlags uint64

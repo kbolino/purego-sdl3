@@ -1,5 +1,39 @@
 package sdl
 
+type EnumerationResult uint32
+
+const (
+	EnumContinue EnumerationResult = iota
+	EnumSuccess
+	EnumFailure
+)
+
+type PathType uint32
+
+const (
+	PathTypeNone PathType = iota
+	PathTypeFile
+	PathTypeDirectory
+	PathTypeOther
+)
+
+type Folder uint32
+
+const (
+	FolderHome Folder = iota
+	FolderDesktop
+	FolderDocuments
+	FolderDownloads
+	FolderMusic
+	FolderPictures
+	FolderPublicShare
+	FolderSavedGames
+	FolderScreenshots
+	FolderTemplates
+	FolderVideos
+	FolderCount
+)
+
 // func CopyFile(oldpath string, newpath string) bool {
 //	return sdlCopyFile(oldpath, newpath)
 // }

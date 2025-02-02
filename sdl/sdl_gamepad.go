@@ -1,5 +1,91 @@
 package sdl
 
+type GamepadBindingType uint32
+
+const (
+	GamepadBindTypeNone GamepadBindingType = iota
+	GamepadBindTypeButton
+	GamepadBindTypeAxis
+	GamepadBindTypeHat
+)
+
+type GamepadAxis int32
+
+const (
+	GamepadAxisInvalid GamepadAxis = iota - 1
+	GamepadAxisLeftx
+	GamepadAxisLefty
+	GamepadAxisRightx
+	GamepadAxisRighty
+	GamepadAxisLeftTrigger
+	GamepadAxisRightTrigger
+	GamepadAxisCount
+)
+
+type GamepadButtonLabel uint32
+
+const (
+	GamepadButtonLabelUnknown GamepadButtonLabel = iota
+	GamepadButtonLabelA
+	GamepadButtonLabelB
+	GamepadButtonLabelX
+	GamepadButtonLabelY
+	GamepadButtonLabelCross
+	GamepadButtonLabelCircle
+	GamepadButtonLabelSquare
+	GamepadButtonLabelTriangle
+)
+
+type GamepadButton int32
+
+const (
+	GamepadButtonInvalid GamepadButton = iota - 1
+	GamepadButtonSouth
+	GamepadButtonEast
+	GamepadButtonWest
+	GamepadButtonNorth
+	GamepadButtonBack
+	GamepadButtonGuide
+	GamepadButtonStart
+	GamepadButtonLeftStick
+	GamepadButtonRightStick
+	GamepadButtonLeftShoulder
+	GamepadButtonRightShoulder
+	GamepadButtonDpadUp
+	GamepadButtonDpadDown
+	GamepadButtonDpadLeft
+	GamepadButtonDpadRight
+	GamepadButtonMisc1
+	GamepadButtonRightPaddle1
+	GamepadButtonLeftPaddle1
+	GamepadButtonRightPaddle2
+	GamepadButtonLeftPaddle2
+	GamepadButtonTouchpad
+	GamepadButtonMisc2
+	GamepadButtonMisc3
+	GamepadButtonMisc4
+	GamepadButtonMisc5
+	GamepadButtonMisc6
+	GamepadButtonCount
+)
+
+type GamepadType uint32
+
+const (
+	GamepadTypeUnknown GamepadType = iota
+	GamepadTypeStandard
+	GamepadTypeXbox360
+	GamepadTypeXboxone
+	GamepadTypePs3
+	GamepadTypePs4
+	GamepadTypePs5
+	GamepadTypeNintendoSwitchPro
+	GamepadTypeNintendoSwitchJoyconLeft
+	GamepadTypeNintendoSwitchJoyconRight
+	GamepadTypeNintendoSwitchJoyconPair
+	GamepadTypeCount
+)
+
 // func AddGamepadMapping(mapping string) int32 {
 //	return sdlAddGamepadMapping(mapping)
 // }

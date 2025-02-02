@@ -1,5 +1,13 @@
 package sdl
 
+type FileDialogType uint32
+
+const (
+	FileDialogOpenFile FileDialogType = iota
+	FileDialogSaveFile
+	FileDialogOpenFolder
+)
+
 // func ShowFileDialogWithProperties(type FileDialogType, callback DialogFileCallback, userdata unsafe.Pointer, props PropertiesID)  {
 //	sdlShowFileDialogWithProperties(type, callback, userdata, props)
 // }

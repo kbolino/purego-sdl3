@@ -2,6 +2,21 @@ package sdl
 
 import "unsafe"
 
+type FlipMode uint32
+
+const (
+	FlipNone FlipMode = iota
+	FlipHorizontal
+	FlipVertical
+)
+
+type ScaleMode uint32
+
+const (
+	ScaleModeNearest ScaleMode = iota
+	ScaleModeLinear
+)
+
 type SurfaceFlags uint32
 
 const (

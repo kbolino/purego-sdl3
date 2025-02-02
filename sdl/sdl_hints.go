@@ -1,5 +1,13 @@
 package sdl
 
+type HintPriority uint32
+
+const (
+	HintDefault HintPriority = iota
+	HintNormal
+	HintOverride
+)
+
 const (
 	HintRenderDriver = "SDL_RENDER_DRIVER"
 	HintRenderVsync  = "SDL_RENDER_VSYNC"

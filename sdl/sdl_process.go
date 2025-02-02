@@ -1,5 +1,14 @@
 package sdl
 
+type ProcessIO uint32
+
+const (
+	ProcessStdioInherited ProcessIO = iota
+	ProcessStdioNull
+	ProcessStdioApp
+	ProcessStdioRedirect
+)
+
 // func CreateProcess(args **byte, pipe_stdio bool) *Process {
 //	return sdlCreateProcess(args, pipe_stdio)
 // }

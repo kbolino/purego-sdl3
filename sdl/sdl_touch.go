@@ -1,5 +1,14 @@
 package sdl
 
+type TouchDeviceType int32
+
+const (
+	TouchDeviceInvalid TouchDeviceType = iota - 1
+	TouchDeviceDirect
+	TouchDeviceIndirectAbsolute
+	TouchDeviceIndirectRelative
+)
+
 // func GetTouchDeviceName(touchID TouchID) string {
 //	return sdlGetTouchDeviceName(touchID)
 // }

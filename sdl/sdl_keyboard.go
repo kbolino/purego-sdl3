@@ -1,5 +1,28 @@
 package sdl
 
+type Capitalization uint32
+
+const (
+	CapitalizeNone Capitalization = iota
+	CapitalizeSentences
+	CapitalizeWords
+	CapitalizeLetters
+)
+
+type TextInputType uint32
+
+const (
+	TextInputTypeText TextInputType = iota
+	TextInputTypeTextName
+	TextInputTypeTextEmail
+	TextInputTypeTextUsername
+	TextInputTypeTextPasswordHidden
+	TextInputTypeTextPasswordVisible
+	TextInputTypeNumber
+	TextInputTypeNumberPasswordHidden
+	TextInputTypeNumberPasswordVisible
+)
+
 type KeyboardID uint32
 
 // func ClearComposition(window *Window) bool {

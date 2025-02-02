@@ -1,5 +1,13 @@
 package sdl
 
+type CameraPosition uint32
+
+const (
+	CameraPositionUnknown CameraPosition = iota
+	CameraPositionFrontFacing
+	CameraPositionBackFacing
+)
+
 // func AcquireCameraFrame(camera *Camera, timestampNS *uint64) *Surface {
 //	return sdlAcquireCameraFrame(camera, timestampNS)
 // }

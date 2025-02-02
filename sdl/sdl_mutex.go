@@ -1,5 +1,14 @@
 package sdl
 
+type InitStatus uint32
+
+const (
+	InitStatusUninitialized InitStatus = iota
+	InitStatusInitializing
+	InitStatusInitialized
+	InitStatusUninitializing
+)
+
 // func BroadcastCondition(cond *Condition)  {
 //	sdlBroadcastCondition(cond)
 // }

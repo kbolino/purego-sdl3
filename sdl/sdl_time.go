@@ -1,5 +1,20 @@
 package sdl
 
+type DateFormat uint32
+
+const (
+	DateFormatYyyymmdd DateFormat = iota
+	DateFormatDdmmyyyy
+	DateFormatMmddyyyy
+)
+
+type TimeFormat uint32
+
+const (
+	TimeFormat24Hr TimeFormat = iota
+	TimeFormat12Hr
+)
+
 // func DateTimeToTime(dt *DateTime, ticks *Time) bool {
 //	return sdlDateTimeToTime(dt, ticks)
 // }

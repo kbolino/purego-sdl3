@@ -6,6 +6,14 @@ import (
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
 
+type EventAction uint32
+
+const (
+	AddEvent EventAction = iota
+	PeekEvent
+	GetEvent
+)
+
 type EventType uint32
 
 const (

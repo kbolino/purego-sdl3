@@ -1,5 +1,13 @@
 package sdl
 
+type AppResult uint32
+
+const (
+	AppContinue AppResult = iota
+	AppSuccess
+	AppFailure
+)
+
 type InitFlags uint32
 
 const (

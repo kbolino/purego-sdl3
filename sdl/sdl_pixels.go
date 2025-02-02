@@ -1,5 +1,177 @@
 package sdl
 
+type Colorspace uint32
+
+const (
+	ColorspaceUnknown       Colorspace = 0
+	ColorspaceSrgb          Colorspace = 0x120005a0
+	ColorspaceSrgbLinear    Colorspace = 0x12000500
+	ColorspaceHdr10         Colorspace = 0x12002600
+	ColorspaceJpeg          Colorspace = 0x220004c6
+	ColorspaceBt601Limited  Colorspace = 0x211018c6
+	ColorspaceBt601Full     Colorspace = 0x221018c6
+	ColorspaceBt709Limited  Colorspace = 0x21100421
+	ColorspaceBt709Full     Colorspace = 0x22100421
+	ColorspaceBt2020Limited Colorspace = 0x21102609
+	ColorspaceBt2020Full    Colorspace = 0x22102609
+	ColorspaceRgbDefault    Colorspace = ColorspaceSrgb
+	ColorspaceYuvDefault    Colorspace = ColorspaceJpeg
+)
+
+type ChromaLocation uint32
+
+const (
+	ChromaLocationNone ChromaLocation = iota
+	ChromaLocationLeft
+	ChromaLocationCenter
+	ChromaLocationTopleft
+)
+
+type MatrixCoefficients uint32
+
+const (
+	MatrixCoefficientsIdentity         MatrixCoefficients = 0
+	MatrixCoefficientsBt709            MatrixCoefficients = 1
+	MatrixCoefficientsUnspecified      MatrixCoefficients = 2
+	MatrixCoefficientsFcc              MatrixCoefficients = 4
+	MatrixCoefficientsBt470Bg          MatrixCoefficients = 5
+	MatrixCoefficientsBt601            MatrixCoefficients = 6
+	MatrixCoefficientsSmpte240         MatrixCoefficients = 7
+	MatrixCoefficientsYcgco            MatrixCoefficients = 8
+	MatrixCoefficientsBt2020Ncl        MatrixCoefficients = 9
+	MatrixCoefficientsBt2020Cl         MatrixCoefficients = 10
+	MatrixCoefficientsSmpte2085        MatrixCoefficients = 11
+	MatrixCoefficientsChromaDerivedNcl MatrixCoefficients = 12
+	MatrixCoefficientsChromaDerivedCl  MatrixCoefficients = 13
+	MatrixCoefficientsIctcp            MatrixCoefficients = 14
+	MatrixCoefficientsCustom           MatrixCoefficients = 31
+)
+
+type TransferCharacteristics uint32
+
+const (
+	TransferCharacteristicsUnknown      TransferCharacteristics = 0
+	TransferCharacteristicsBt709        TransferCharacteristics = 1
+	TransferCharacteristicsUnspecified  TransferCharacteristics = 2
+	TransferCharacteristicsGamma22      TransferCharacteristics = 4
+	TransferCharacteristicsGamma28      TransferCharacteristics = 5
+	TransferCharacteristicsBt601        TransferCharacteristics = 6
+	TransferCharacteristicsSmpte240     TransferCharacteristics = 7
+	TransferCharacteristicsLinear       TransferCharacteristics = 8
+	TransferCharacteristicsLog100       TransferCharacteristics = 9
+	TransferCharacteristicsLog100Sqrt10 TransferCharacteristics = 10
+	TransferCharacteristicsIec61966     TransferCharacteristics = 11
+	TransferCharacteristicsBt1361       TransferCharacteristics = 12
+	TransferCharacteristicsSrgb         TransferCharacteristics = 13
+	TransferCharacteristicsBt202010Bit  TransferCharacteristics = 14
+	TransferCharacteristicsBt202012Bit  TransferCharacteristics = 15
+	TransferCharacteristicsPq           TransferCharacteristics = 16
+	TransferCharacteristicsSmpte428     TransferCharacteristics = 17
+	TransferCharacteristicsHlg          TransferCharacteristics = 18
+	TransferCharacteristicsCustom       TransferCharacteristics = 31
+)
+
+type ColorPrimaries uint32
+
+const (
+	ColorPrimariesUnknown     ColorPrimaries = 0
+	ColorPrimariesBt709       ColorPrimaries = 1
+	ColorPrimariesUnspecified ColorPrimaries = 2
+	ColorPrimariesBt470M      ColorPrimaries = 4
+	ColorPrimariesBt470Bg     ColorPrimaries = 5
+	ColorPrimariesBt601       ColorPrimaries = 6
+	ColorPrimariesSmpte240    ColorPrimaries = 7
+	ColorPrimariesGenericFilm ColorPrimaries = 8
+	ColorPrimariesBt2020      ColorPrimaries = 9
+	ColorPrimariesXyz         ColorPrimaries = 10
+	ColorPrimariesSmpte431    ColorPrimaries = 11
+	ColorPrimariesSmpte432    ColorPrimaries = 12
+	ColorPrimariesEbu3213     ColorPrimaries = 22
+	ColorPrimariesCustom      ColorPrimaries = 31
+)
+
+type ColorRange uint32
+
+const (
+	ColorRangeUnknown ColorRange = iota
+	ColorRangeLimited
+	ColorRangeFull
+)
+
+type ColorType uint32
+
+const (
+	ColorTypeUnknown ColorType = iota
+	ColorTypeRgb
+	ColorTypeYcbcr
+)
+
+type PixelType uint32
+
+const (
+	PixelTypeUnknown PixelType = iota
+	PixelTypeIndex1
+	PixelTypeIndex4
+	PixelTypeIndex8
+	PixelTypePacked8
+	PixelTypePacked16
+	PixelTypePacked32
+	PixelTypeArrayu8
+	PixelTypeArrayu16
+	PixelTypeArrayu32
+	PixelTypeArrayf16
+	PixelTypeArrayf32
+	PixelTypeIndex2
+)
+
+type BitmapOrder uint32
+
+const (
+	BitmapOrderNone BitmapOrder = iota
+	BitmapOrder4321
+	BitmapOrder1234
+)
+
+type PackedOrder uint32
+
+const (
+	PackedOrderNone PackedOrder = iota
+	PackedOrderXrgb
+	PackedOrderRgbx
+	PackedOrderArgb
+	PackedOrderRgba
+	PackedOrderXbgr
+	PackedOrderBgrx
+	PackedOrderAbgr
+	PackedOrderBgra
+)
+
+type ArrayOrder uint32
+
+const (
+	ArrayOrderNone ArrayOrder = iota
+	ArrayOrderRgb
+	ArrayOrderRgba
+	ArrayOrderArgb
+	ArrayOrderBgr
+	ArrayOrderBgra
+	ArrayOrderAbgr
+)
+
+type PackedLayout uint32
+
+const (
+	PackedLayoutNone PackedLayout = iota
+	PackedLayout332
+	PackedLayout4444
+	PackedLayout1555
+	PackedLayout5551
+	PackedLayout565
+	PackedLayout8888
+	PackedLayout2101010
+	PackedLayout1010102
+)
+
 type PixelFormat uint32
 
 const (
@@ -67,6 +239,14 @@ const (
 	PixelFormatNv21         PixelFormat = 0x3132564E
 	PixelFormatP010         PixelFormat = 0x30313050
 	PixelFormatExternalOes  PixelFormat = 0x2053454F
+	PixelFormatRgba32       PixelFormat = PixelFormatAbgr8888
+	PixelFormatArgb32       PixelFormat = PixelFormatBgra8888
+	PixelFormatBgra32       PixelFormat = PixelFormatArgb8888
+	PixelFormatAbgr32       PixelFormat = PixelFormatRgba8888
+	PixelFormatRgbx32       PixelFormat = PixelFormatXbgr8888
+	PixelFormatXrgb32       PixelFormat = PixelFormatBgrx8888
+	PixelFormatBgrx32       PixelFormat = PixelFormatXrgb8888
+	PixelFormatXbgr32       PixelFormat = PixelFormatRgbx8888
 )
 
 // func CreatePalette(ncolors int32) *Palette {

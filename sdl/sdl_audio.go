@@ -1,5 +1,22 @@
 package sdl
 
+type AudioFormat uint32
+
+const (
+	AudioUnknown AudioFormat = 0x0000
+	AudioU8      AudioFormat = 0x0008
+	AudioS8      AudioFormat = 0x8008
+	AudioS16Le   AudioFormat = 0x8010
+	AudioS16Be   AudioFormat = 0x9010
+	AudioS32Le   AudioFormat = 0x8020
+	AudioS32Be   AudioFormat = 0x9020
+	AudioF32Le   AudioFormat = 0x8120
+	AudioF32Be   AudioFormat = 0x9120
+	AudioS16     AudioFormat = AudioS16Le
+	AudioS32     AudioFormat = AudioS32Le
+	AudioF32     AudioFormat = AudioF32Le
+)
+
 // func AudioDevicePaused(dev AudioDeviceID) bool {
 //	return sdlAudioDevicePaused(dev)
 // }
