@@ -2,6 +2,7 @@ package sdl
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/ebitengine/purego"
 	"github.com/jupiterrider/purego-sdl3/internal/shared"
@@ -71,7 +72,7 @@ var (
 	// sdlCalculateGPUTextureFormatSize         func(GPUTextureFormat, uint32, uint32, uint32) uint32
 	// sdlcalloc                                func(uint64, uint64) unsafe.Pointer
 	// sdlCancelGPUCommandBuffer                func(*GPUCommandBuffer) bool
-	// sdlCaptureMouse                          func(bool) bool
+	sdlCaptureMouse func(bool) bool
 	// sdlceil                                  func(float64) float64
 	// sdlceilf                                 func(float32) float32
 	// sdlClaimWindowForGPUDevice               func(*GPUDevice, *Window) bool
@@ -115,9 +116,9 @@ var (
 	// sdlcrc32                                 func(uint32, unsafe.Pointer, uint64) uint32
 	// sdlCreateAsyncIOQueue                    func() *AsyncIOQueue
 	// sdlCreateAudioStream                     func(*AudioSpec, *AudioSpec) *AudioStream
-	// sdlCreateColorCursor                     func(*Surface, int32, int32) *Cursor
+	sdlCreateColorCursor func(*Surface, int32, int32) *Cursor
 	// sdlCreateCondition                       func() *Condition
-	// sdlCreateCursor                          func(*uint8, *uint8, int32, int32, int32, int32) *Cursor
+	sdlCreateCursor func(*uint8, *uint8, int32, int32, int32, int32) *Cursor
 	// sdlCreateDirectory                       func(string) bool
 	// sdlCreateEnvironment                     func(bool) *Environment
 	// sdlCreateGPUBuffer                       func(*GPUDevice, *GPUBufferCreateInfo) *GPUBuffer
@@ -145,7 +146,7 @@ var (
 	sdlCreateSurface func(int32, int32, PixelFormat) *Surface
 	// sdlCreateSurfaceFrom                     func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
 	// sdlCreateSurfacePalette                  func(*Surface) *Palette
-	// sdlCreateSystemCursor                    func(SystemCursor) *Cursor
+	sdlCreateSystemCursor func(SystemCursor) *Cursor
 	// sdlCreateTexture                         func(*Renderer, PixelFormat, TextureAccess, int32, int32) *Texture
 	sdlCreateTextureFromSurface func(*Renderer, *Surface) *Texture
 	// sdlCreateTextureWithProperties           func(*Renderer, PropertiesID) *Texture
@@ -157,7 +158,7 @@ var (
 	// sdlCreateWindow                          func(string, int32, int32, WindowFlags) *Window
 	sdlCreateWindowAndRenderer func(string, int32, int32, WindowFlags, **Window, **Renderer) bool
 	// sdlCreateWindowWithProperties            func(PropertiesID) *Window
-	// sdlCursorVisible                         func() bool
+	sdlCursorVisible func() bool
 	// sdlDateTimeToTime                        func(*DateTime, *Time) bool
 	// sdlDelay                                 func(uint32)
 	// sdlDelayNS                               func(uint64)
@@ -165,7 +166,7 @@ var (
 	// sdlDestroyAsyncIOQueue                   func(*AsyncIOQueue)
 	// sdlDestroyAudioStream                    func(*AudioStream)
 	// sdlDestroyCondition                      func(*Condition)
-	// sdlDestroyCursor                         func(*Cursor)
+	sdlDestroyCursor func(*Cursor)
 	// sdlDestroyEnvironment                    func(*Environment)
 	// sdlDestroyGPUDevice                      func(*GPUDevice)
 	// sdlDestroyHapticEffect                   func(*Haptic, int32)
@@ -225,7 +226,7 @@ var (
 	// sdlFlushRenderer                         func(*Renderer) bool
 	// sdlfmod                                  func(float64, float64) float64
 	// sdlfmodf                                 func(float32, float32) float32
-	// sdlfree                                  func(unsafe.Pointer)
+	sdlfree func(unsafe.Pointer)
 	// sdlGamepadConnected                      func(*Gamepad) bool
 	// sdlGamepadEventsEnabled                  func() bool
 	// sdlGamepadHasAxis                        func(*Gamepad, GamepadAxis) bool
@@ -285,13 +286,13 @@ var (
 	// sdlGetCurrentThreadID                    func() ThreadID
 	// sdlGetCurrentTime                        func(*Time) bool
 	// sdlGetCurrentVideoDriver                 func() string
-	// sdlGetCursor                             func() *Cursor
+	sdlGetCursor func() *Cursor
 	// sdlGetDateTimeLocalePreferences          func(*DateFormat, *TimeFormat) bool
 	// sdlGetDayOfWeek                          func(int32, int32, int32) int32
 	// sdlGetDayOfYear                          func(int32, int32, int32) int32
 	// sdlGetDaysInMonth                        func(int32, int32) int32
 	// sdlGetDefaultAssertionHandler            func() AssertionHandler
-	// sdlGetDefaultCursor                      func() *Cursor
+	sdlGetDefaultCursor func() *Cursor
 	// sdlGetDefaultLogOutputFunction           func() LogOutputFunction
 	// sdlGetDesktopDisplayMode                 func(DisplayID) *DisplayMode
 	// sdlGetDisplayBounds                      func(DisplayID, *Rect) bool
@@ -358,7 +359,7 @@ var (
 	// sdlGetGamepadTypeFromString              func(string) GamepadType
 	// sdlGetGamepadVendor                      func(*Gamepad) uint16
 	// sdlGetGamepadVendorForID                 func(JoystickID) uint16
-	// sdlGetGlobalMouseState                   func(*float32, *float32) MouseButtonFlags
+	sdlGetGlobalMouseState func(*float32, *float32) MouseButtonFlags
 	// sdlGetGlobalProperties                   func() PropertiesID
 	// sdlGetGPUDeviceDriver                    func(*GPUDevice) string
 	// sdlGetGPUDriver                          func(int32) string
@@ -421,11 +422,11 @@ var (
 	// sdlGetMaxHapticEffects                   func(*Haptic) int32
 	// sdlGetMaxHapticEffectsPlaying            func(*Haptic) int32
 	// sdlGetMemoryFunctions                    func(*malloc_func, *calloc_func, *realloc_func, *free_func)
-	// sdlGetMice                               func(*int32) *MouseID
-	sdlGetModState func() Keymod
-	// sdlGetMouseFocus                         func() *Window
-	// sdlGetMouseNameForID                     func(MouseID) string
-	sdlGetMouseState func(*float32, *float32) MouseButtonFlags
+	sdlGetMice           func(*int32) *MouseID
+	sdlGetModState       func() Keymod
+	sdlGetMouseFocus     func() *Window
+	sdlGetMouseNameForID func(MouseID) *byte
+	sdlGetMouseState     func(*float32, *float32) MouseButtonFlags
 	// sdlGetNaturalDisplayOrientation          func(DisplayID) DisplayOrientation
 	// sdlGetNumAllocations                     func() int32
 	// sdlGetNumAudioDrivers                    func() int32
@@ -470,7 +471,7 @@ var (
 	// sdlGetRectIntersectionFloat              func(*FRect, *FRect, *FRect) bool
 	// sdlGetRectUnion                          func(*Rect, *Rect, *Rect) bool
 	// sdlGetRectUnionFloat                     func(*FRect, *FRect, *FRect) bool
-	// sdlGetRelativeMouseState                 func(*float32, *float32) MouseButtonFlags
+	sdlGetRelativeMouseState func(*float32, *float32) MouseButtonFlags
 	// sdlGetRenderClipRect                     func(*Renderer, *Rect) bool
 	// sdlGetRenderColorScale                   func(*Renderer, *float32) bool
 	// sdlGetRenderDrawBlendMode                func(*Renderer, *BlendMode) bool
@@ -579,7 +580,7 @@ var (
 	// sdlGetWindowPixelFormat                  func(*Window) PixelFormat
 	// sdlGetWindowPosition                     func(*Window, *int32, *int32) bool
 	// sdlGetWindowProperties                   func(*Window) PropertiesID
-	// sdlGetWindowRelativeMouseMode            func(*Window) bool
+	sdlGetWindowRelativeMouseMode func(*Window) bool
 	// sdlGetWindows                            func(*int32) **Window
 	// sdlGetWindowSafeArea                     func(*Window, *Rect) bool
 	// sdlGetWindowSize                         func(*Window, *int32, *int32) bool
@@ -628,7 +629,7 @@ var (
 	// sdlHasLASX                               func() bool
 	// sdlHasLSX                                func() bool
 	// sdlHasMMX                                func() bool
-	// sdlHasMouse                              func() bool
+	sdlHasMouse func() bool
 	// sdlHasNEON                               func() bool
 	// sdlHasPrimarySelectionText               func() bool
 	// sdlHasProperty                           func(PropertiesID, string) bool
@@ -946,7 +947,7 @@ var (
 	// sdlSetClipboardData                      func(ClipboardDataCallback, ClipboardCleanupCallback, unsafe.Pointer, **byte, uint64) bool
 	// sdlSetClipboardText                      func(string) bool
 	// sdlSetCurrentThreadPriority              func(ThreadPriority) bool
-	// sdlSetCursor                             func(*Cursor) bool
+	sdlSetCursor func(*Cursor) bool
 	// sdlsetenv_unsafe                         func(string, string, int32) int32
 	// sdlSetEnvironmentVariable                func(*Environment, string, string, bool) bool
 	// sdlSetError                              func(string) bool
@@ -1045,7 +1046,7 @@ var (
 	// sdlSetWindowOpacity                      func(*Window, float32) bool
 	// sdlSetWindowParent                       func(*Window, *Window) bool
 	// sdlSetWindowPosition                     func(*Window, int32, int32) bool
-	// sdlSetWindowRelativeMouseMode            func(*Window, bool) bool
+	sdlSetWindowRelativeMouseMode func(*Window, bool) bool
 	// sdlSetWindowResizable                    func(*Window, bool) bool
 	// sdlSetWindowShape                        func(*Window, *Surface) bool
 	// sdlSetWindowSize                         func(*Window, int32, int32) bool
@@ -1185,7 +1186,7 @@ var (
 	// sdlWaitSemaphore                         func(*Semaphore)
 	// sdlWaitSemaphoreTimeout                  func(*Semaphore, int32) bool
 	// sdlWaitThread                            func(*Thread, *int32)
-	// sdlWarpMouseGlobal                       func(float32, float32) bool
+	sdlWarpMouseGlobal   func(float32, float32) bool
 	sdlWarpMouseInWindow func(*Window, float32, float32)
 	// sdlWasInit                               func(InitFlags) InitFlags
 	// sdlwcscasecmp                            func(*wchar_t, *wchar_t) int32
@@ -1305,7 +1306,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCalculateGPUTextureFormatSize, lib, "SDL_CalculateGPUTextureFormatSize")
 	// purego.RegisterLibFunc(&sdlcalloc, lib, "SDL_calloc")
 	// purego.RegisterLibFunc(&sdlCancelGPUCommandBuffer, lib, "SDL_CancelGPUCommandBuffer")
-	// purego.RegisterLibFunc(&sdlCaptureMouse, lib, "SDL_CaptureMouse")
+	purego.RegisterLibFunc(&sdlCaptureMouse, lib, "SDL_CaptureMouse")
 	// purego.RegisterLibFunc(&sdlceil, lib, "SDL_ceil")
 	// purego.RegisterLibFunc(&sdlceilf, lib, "SDL_ceilf")
 	// purego.RegisterLibFunc(&sdlClaimWindowForGPUDevice, lib, "SDL_ClaimWindowForGPUDevice")
@@ -1349,9 +1350,9 @@ func init() {
 	// purego.RegisterLibFunc(&sdlcrc32, lib, "SDL_crc32")
 	// purego.RegisterLibFunc(&sdlCreateAsyncIOQueue, lib, "SDL_CreateAsyncIOQueue")
 	// purego.RegisterLibFunc(&sdlCreateAudioStream, lib, "SDL_CreateAudioStream")
-	// purego.RegisterLibFunc(&sdlCreateColorCursor, lib, "SDL_CreateColorCursor")
+	purego.RegisterLibFunc(&sdlCreateColorCursor, lib, "SDL_CreateColorCursor")
 	// purego.RegisterLibFunc(&sdlCreateCondition, lib, "SDL_CreateCondition")
-	// purego.RegisterLibFunc(&sdlCreateCursor, lib, "SDL_CreateCursor")
+	purego.RegisterLibFunc(&sdlCreateCursor, lib, "SDL_CreateCursor")
 	// purego.RegisterLibFunc(&sdlCreateDirectory, lib, "SDL_CreateDirectory")
 	// purego.RegisterLibFunc(&sdlCreateEnvironment, lib, "SDL_CreateEnvironment")
 	// purego.RegisterLibFunc(&sdlCreateGPUBuffer, lib, "SDL_CreateGPUBuffer")
@@ -1379,7 +1380,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlCreateSurface, lib, "SDL_CreateSurface")
 	// purego.RegisterLibFunc(&sdlCreateSurfaceFrom, lib, "SDL_CreateSurfaceFrom")
 	// purego.RegisterLibFunc(&sdlCreateSurfacePalette, lib, "SDL_CreateSurfacePalette")
-	// purego.RegisterLibFunc(&sdlCreateSystemCursor, lib, "SDL_CreateSystemCursor")
+	purego.RegisterLibFunc(&sdlCreateSystemCursor, lib, "SDL_CreateSystemCursor")
 	// purego.RegisterLibFunc(&sdlCreateTexture, lib, "SDL_CreateTexture")
 	purego.RegisterLibFunc(&sdlCreateTextureFromSurface, lib, "SDL_CreateTextureFromSurface")
 	// purego.RegisterLibFunc(&sdlCreateTextureWithProperties, lib, "SDL_CreateTextureWithProperties")
@@ -1391,7 +1392,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCreateWindow, lib, "SDL_CreateWindow")
 	purego.RegisterLibFunc(&sdlCreateWindowAndRenderer, lib, "SDL_CreateWindowAndRenderer")
 	// purego.RegisterLibFunc(&sdlCreateWindowWithProperties, lib, "SDL_CreateWindowWithProperties")
-	// purego.RegisterLibFunc(&sdlCursorVisible, lib, "SDL_CursorVisible")
+	purego.RegisterLibFunc(&sdlCursorVisible, lib, "SDL_CursorVisible")
 	// purego.RegisterLibFunc(&sdlDateTimeToTime, lib, "SDL_DateTimeToTime")
 	// purego.RegisterLibFunc(&sdlDelay, lib, "SDL_Delay")
 	// purego.RegisterLibFunc(&sdlDelayNS, lib, "SDL_DelayNS")
@@ -1399,7 +1400,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlDestroyAsyncIOQueue, lib, "SDL_DestroyAsyncIOQueue")
 	// purego.RegisterLibFunc(&sdlDestroyAudioStream, lib, "SDL_DestroyAudioStream")
 	// purego.RegisterLibFunc(&sdlDestroyCondition, lib, "SDL_DestroyCondition")
-	// purego.RegisterLibFunc(&sdlDestroyCursor, lib, "SDL_DestroyCursor")
+	purego.RegisterLibFunc(&sdlDestroyCursor, lib, "SDL_DestroyCursor")
 	// purego.RegisterLibFunc(&sdlDestroyEnvironment, lib, "SDL_DestroyEnvironment")
 	// purego.RegisterLibFunc(&sdlDestroyGPUDevice, lib, "SDL_DestroyGPUDevice")
 	// purego.RegisterLibFunc(&sdlDestroyHapticEffect, lib, "SDL_DestroyHapticEffect")
@@ -1459,7 +1460,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlFlushRenderer, lib, "SDL_FlushRenderer")
 	// purego.RegisterLibFunc(&sdlfmod, lib, "SDL_fmod")
 	// purego.RegisterLibFunc(&sdlfmodf, lib, "SDL_fmodf")
-	// purego.RegisterLibFunc(&sdlfree, lib, "SDL_free")
+	purego.RegisterLibFunc(&sdlfree, lib, "SDL_free")
 	// purego.RegisterLibFunc(&sdlGamepadConnected, lib, "SDL_GamepadConnected")
 	// purego.RegisterLibFunc(&sdlGamepadEventsEnabled, lib, "SDL_GamepadEventsEnabled")
 	// purego.RegisterLibFunc(&sdlGamepadHasAxis, lib, "SDL_GamepadHasAxis")
@@ -1519,13 +1520,13 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetCurrentThreadID, lib, "SDL_GetCurrentThreadID")
 	// purego.RegisterLibFunc(&sdlGetCurrentTime, lib, "SDL_GetCurrentTime")
 	// purego.RegisterLibFunc(&sdlGetCurrentVideoDriver, lib, "SDL_GetCurrentVideoDriver")
-	// purego.RegisterLibFunc(&sdlGetCursor, lib, "SDL_GetCursor")
+	purego.RegisterLibFunc(&sdlGetCursor, lib, "SDL_GetCursor")
 	// purego.RegisterLibFunc(&sdlGetDateTimeLocalePreferences, lib, "SDL_GetDateTimeLocalePreferences")
 	// purego.RegisterLibFunc(&sdlGetDayOfWeek, lib, "SDL_GetDayOfWeek")
 	// purego.RegisterLibFunc(&sdlGetDayOfYear, lib, "SDL_GetDayOfYear")
 	// purego.RegisterLibFunc(&sdlGetDaysInMonth, lib, "SDL_GetDaysInMonth")
 	// purego.RegisterLibFunc(&sdlGetDefaultAssertionHandler, lib, "SDL_GetDefaultAssertionHandler")
-	// purego.RegisterLibFunc(&sdlGetDefaultCursor, lib, "SDL_GetDefaultCursor")
+	purego.RegisterLibFunc(&sdlGetDefaultCursor, lib, "SDL_GetDefaultCursor")
 	// purego.RegisterLibFunc(&sdlGetDefaultLogOutputFunction, lib, "SDL_GetDefaultLogOutputFunction")
 	// purego.RegisterLibFunc(&sdlGetDesktopDisplayMode, lib, "SDL_GetDesktopDisplayMode")
 	// purego.RegisterLibFunc(&sdlGetDisplayBounds, lib, "SDL_GetDisplayBounds")
@@ -1592,7 +1593,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetGamepadTypeFromString, lib, "SDL_GetGamepadTypeFromString")
 	// purego.RegisterLibFunc(&sdlGetGamepadVendor, lib, "SDL_GetGamepadVendor")
 	// purego.RegisterLibFunc(&sdlGetGamepadVendorForID, lib, "SDL_GetGamepadVendorForID")
-	// purego.RegisterLibFunc(&sdlGetGlobalMouseState, lib, "SDL_GetGlobalMouseState")
+	purego.RegisterLibFunc(&sdlGetGlobalMouseState, lib, "SDL_GetGlobalMouseState")
 	// purego.RegisterLibFunc(&sdlGetGlobalProperties, lib, "SDL_GetGlobalProperties")
 	// purego.RegisterLibFunc(&sdlGetGPUDeviceDriver, lib, "SDL_GetGPUDeviceDriver")
 	// purego.RegisterLibFunc(&sdlGetGPUDriver, lib, "SDL_GetGPUDriver")
@@ -1655,10 +1656,10 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetMaxHapticEffects, lib, "SDL_GetMaxHapticEffects")
 	// purego.RegisterLibFunc(&sdlGetMaxHapticEffectsPlaying, lib, "SDL_GetMaxHapticEffectsPlaying")
 	// purego.RegisterLibFunc(&sdlGetMemoryFunctions, lib, "SDL_GetMemoryFunctions")
-	// purego.RegisterLibFunc(&sdlGetMice, lib, "SDL_GetMice")
+	purego.RegisterLibFunc(&sdlGetMice, lib, "SDL_GetMice")
 	purego.RegisterLibFunc(&sdlGetModState, lib, "SDL_GetModState")
-	// purego.RegisterLibFunc(&sdlGetMouseFocus, lib, "SDL_GetMouseFocus")
-	// purego.RegisterLibFunc(&sdlGetMouseNameForID, lib, "SDL_GetMouseNameForID")
+	purego.RegisterLibFunc(&sdlGetMouseFocus, lib, "SDL_GetMouseFocus")
+	purego.RegisterLibFunc(&sdlGetMouseNameForID, lib, "SDL_GetMouseNameForID")
 	purego.RegisterLibFunc(&sdlGetMouseState, lib, "SDL_GetMouseState")
 	// purego.RegisterLibFunc(&sdlGetNaturalDisplayOrientation, lib, "SDL_GetNaturalDisplayOrientation")
 	// purego.RegisterLibFunc(&sdlGetNumAllocations, lib, "SDL_GetNumAllocations")
@@ -1704,7 +1705,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRectIntersectionFloat, lib, "SDL_GetRectIntersectionFloat")
 	// purego.RegisterLibFunc(&sdlGetRectUnion, lib, "SDL_GetRectUnion")
 	// purego.RegisterLibFunc(&sdlGetRectUnionFloat, lib, "SDL_GetRectUnionFloat")
-	// purego.RegisterLibFunc(&sdlGetRelativeMouseState, lib, "SDL_GetRelativeMouseState")
+	purego.RegisterLibFunc(&sdlGetRelativeMouseState, lib, "SDL_GetRelativeMouseState")
 	// purego.RegisterLibFunc(&sdlGetRenderClipRect, lib, "SDL_GetRenderClipRect")
 	// purego.RegisterLibFunc(&sdlGetRenderColorScale, lib, "SDL_GetRenderColorScale")
 	// purego.RegisterLibFunc(&sdlGetRenderDrawBlendMode, lib, "SDL_GetRenderDrawBlendMode")
@@ -1813,7 +1814,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetWindowPixelFormat, lib, "SDL_GetWindowPixelFormat")
 	// purego.RegisterLibFunc(&sdlGetWindowPosition, lib, "SDL_GetWindowPosition")
 	// purego.RegisterLibFunc(&sdlGetWindowProperties, lib, "SDL_GetWindowProperties")
-	// purego.RegisterLibFunc(&sdlGetWindowRelativeMouseMode, lib, "SDL_GetWindowRelativeMouseMode")
+	purego.RegisterLibFunc(&sdlGetWindowRelativeMouseMode, lib, "SDL_GetWindowRelativeMouseMode")
 	// purego.RegisterLibFunc(&sdlGetWindows, lib, "SDL_GetWindows")
 	// purego.RegisterLibFunc(&sdlGetWindowSafeArea, lib, "SDL_GetWindowSafeArea")
 	// purego.RegisterLibFunc(&sdlGetWindowSize, lib, "SDL_GetWindowSize")
@@ -1862,7 +1863,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlHasLASX, lib, "SDL_HasLASX")
 	// purego.RegisterLibFunc(&sdlHasLSX, lib, "SDL_HasLSX")
 	// purego.RegisterLibFunc(&sdlHasMMX, lib, "SDL_HasMMX")
-	// purego.RegisterLibFunc(&sdlHasMouse, lib, "SDL_HasMouse")
+	purego.RegisterLibFunc(&sdlHasMouse, lib, "SDL_HasMouse")
 	// purego.RegisterLibFunc(&sdlHasNEON, lib, "SDL_HasNEON")
 	// purego.RegisterLibFunc(&sdlHasPrimarySelectionText, lib, "SDL_HasPrimarySelectionText")
 	// purego.RegisterLibFunc(&sdlHasProperty, lib, "SDL_HasProperty")
@@ -2180,7 +2181,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetClipboardData, lib, "SDL_SetClipboardData")
 	// purego.RegisterLibFunc(&sdlSetClipboardText, lib, "SDL_SetClipboardText")
 	// purego.RegisterLibFunc(&sdlSetCurrentThreadPriority, lib, "SDL_SetCurrentThreadPriority")
-	// purego.RegisterLibFunc(&sdlSetCursor, lib, "SDL_SetCursor")
+	purego.RegisterLibFunc(&sdlSetCursor, lib, "SDL_SetCursor")
 	// purego.RegisterLibFunc(&sdlsetenv_unsafe, lib, "SDL_setenv_unsafe")
 	// purego.RegisterLibFunc(&sdlSetEnvironmentVariable, lib, "SDL_SetEnvironmentVariable")
 	// purego.RegisterLibFunc(&sdlSetError, lib, "SDL_SetError")
@@ -2279,7 +2280,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetWindowOpacity, lib, "SDL_SetWindowOpacity")
 	// purego.RegisterLibFunc(&sdlSetWindowParent, lib, "SDL_SetWindowParent")
 	// purego.RegisterLibFunc(&sdlSetWindowPosition, lib, "SDL_SetWindowPosition")
-	// purego.RegisterLibFunc(&sdlSetWindowRelativeMouseMode, lib, "SDL_SetWindowRelativeMouseMode")
+	purego.RegisterLibFunc(&sdlSetWindowRelativeMouseMode, lib, "SDL_SetWindowRelativeMouseMode")
 	// purego.RegisterLibFunc(&sdlSetWindowResizable, lib, "SDL_SetWindowResizable")
 	// purego.RegisterLibFunc(&sdlSetWindowShape, lib, "SDL_SetWindowShape")
 	// purego.RegisterLibFunc(&sdlSetWindowSize, lib, "SDL_SetWindowSize")
@@ -2419,7 +2420,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlWaitSemaphore, lib, "SDL_WaitSemaphore")
 	// purego.RegisterLibFunc(&sdlWaitSemaphoreTimeout, lib, "SDL_WaitSemaphoreTimeout")
 	// purego.RegisterLibFunc(&sdlWaitThread, lib, "SDL_WaitThread")
-	// purego.RegisterLibFunc(&sdlWarpMouseGlobal, lib, "SDL_WarpMouseGlobal")
+	purego.RegisterLibFunc(&sdlWarpMouseGlobal, lib, "SDL_WarpMouseGlobal")
 	purego.RegisterLibFunc(&sdlWarpMouseInWindow, lib, "SDL_WarpMouseInWindow")
 	// purego.RegisterLibFunc(&sdlWasInit, lib, "SDL_WasInit")
 	// purego.RegisterLibFunc(&sdlwcscasecmp, lib, "SDL_wcscasecmp")

@@ -1,5 +1,7 @@
 package sdl
 
+import "unsafe"
+
 // func abs(x int32) int32 {
 //	return sdlabs(x)
 // }
@@ -140,9 +142,12 @@ package sdl
 //	return sdlfmodf(x, y)
 // }
 
-// func free(mem unsafe.Pointer)  {
-//	sdlfree(mem)
-// }
+// Free frees allocated memory.
+//
+// If mem is nil, this function does nothing.
+func Free(mem unsafe.Pointer) {
+	sdlfree(mem)
+}
 
 // func getenv(name string) string {
 //	return sdlgetenv(name)

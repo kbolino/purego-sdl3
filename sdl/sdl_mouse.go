@@ -1,5 +1,13 @@
 package sdl
 
+import (
+	"errors"
+	"unsafe"
+
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
+	"github.com/jupiterrider/purego-sdl3/internal/mem"
+)
+
 type MouseWheelDirection uint32
 
 const (
@@ -51,92 +59,108 @@ const (
 	ButtonX2mask = 1 << (ButtonX2 - 1)
 )
 
-// func CaptureMouse(enabled bool) bool {
-//	return sdlCaptureMouse(enabled)
-// }
+type Cursor struct{}
 
-// func CreateColorCursor(surface *Surface, hot_x int32, hot_y int32) *Cursor {
-//	return sdlCreateColorCursor(surface, hot_x, hot_y)
-// }
+func CaptureMouse(enabled bool) bool {
+	return sdlCaptureMouse(enabled)
+}
 
-// func CreateCursor(data *uint8, mask *uint8, w int32, h int32, hot_x int32, hot_y int32) *Cursor {
-//	return sdlCreateCursor(data, mask, w, h, hot_x, hot_y)
-// }
+func CreateColorCursor(surface *Surface, hotX int32, hotY int32) *Cursor {
+	return sdlCreateColorCursor(surface, hotX, hotY)
+}
 
-// func CreateSystemCursor(id SystemCursor) *Cursor {
-//	return sdlCreateSystemCursor(id)
-// }
+func CreateCursor(data *uint8, mask *uint8, w int32, h int32, hotX int32, hotY int32) *Cursor {
+	return sdlCreateCursor(data, mask, w, h, hotX, hotY)
+}
 
-// func CursorVisible() bool {
-//	return sdlCursorVisible()
-// }
+func CreateSystemCursor(id SystemCursor) *Cursor {
+	return sdlCreateSystemCursor(id)
+}
 
-// func DestroyCursor(cursor *Cursor)  {
-//	sdlDestroyCursor(cursor)
-// }
+// CursorVisible returns true if the cursor is being shown, or false if the cursor is hidden.
+func CursorVisible() bool {
+	return sdlCursorVisible()
+}
 
-// func GetCursor() *Cursor {
-//	return sdlGetCursor()
-// }
+func DestroyCursor(cursor *Cursor) {
+	sdlDestroyCursor(cursor)
+}
 
-// func GetDefaultCursor() *Cursor {
-//	return sdlGetDefaultCursor()
-// }
+func GetCursor() *Cursor {
+	return sdlGetCursor()
+}
 
-// func GetGlobalMouseState(x *float32, y *float32) MouseButtonFlags {
-//	return sdlGetGlobalMouseState(x, y)
-// }
+func GetDefaultCursor() *Cursor {
+	return sdlGetDefaultCursor()
+}
 
-// func GetMice(count *int32) *MouseID {
-//	return sdlGetMice(count)
-// }
+func GetGlobalMouseState(x *float32, y *float32) MouseButtonFlags {
+	return sdlGetGlobalMouseState(x, y)
+}
 
-// func GetMouseFocus() *Window {
-//	return sdlGetMouseFocus()
-// }
+// GetMice returns a list of currently connected mice or nil on failure.
+func GetMice() []MouseID {
+	var count int32
+	mice := sdlGetMice(&count)
+	defer Free(unsafe.Pointer(mice))
+	return mem.Copy(mice, count)
+}
 
-// func GetMouseNameForID(instance_id MouseID) string {
-//	return sdlGetMouseNameForID(instance_id)
-// }
+// GetMouseFocus returns the window with mouse focus.
+func GetMouseFocus() *Window {
+	return sdlGetMouseFocus()
+}
+
+// GetMouseNameForID returns the name of the selected mouse, or error on failure.
+//
+// This function returns "" if the mouse doesn't have a name.
+func GetMouseNameForID(instanceId MouseID) (string, error) {
+	ret := sdlGetMouseNameForID(instanceId)
+	if ret == nil {
+		return "", errors.New(GetError())
+	}
+	return convert.ToString(ret), nil
+}
 
 // GetMouseState queries SDL's cache for the synchronous mouse button state and the window-relative SDL-cursor position.
 func GetMouseState(x *float32, y *float32) MouseButtonFlags {
 	return sdlGetMouseState(x, y)
 }
 
-// func GetRelativeMouseState(x *float32, y *float32) MouseButtonFlags {
-//	return sdlGetRelativeMouseState(x, y)
-// }
+func GetRelativeMouseState(x *float32, y *float32) MouseButtonFlags {
+	return sdlGetRelativeMouseState(x, y)
+}
 
-// func GetWindowRelativeMouseMode(window *Window) bool {
-//	return sdlGetWindowRelativeMouseMode(window)
-// }
+func GetWindowRelativeMouseMode(window *Window) bool {
+	return sdlGetWindowRelativeMouseMode(window)
+}
 
-// func HasMouse() bool {
-//	return sdlHasMouse()
-// }
+// HasMouse returns true if a mouse is connected, false otherwise.
+func HasMouse() bool {
+	return sdlHasMouse()
+}
 
 // HideCursor hides the cursor.
 func HideCursor() bool {
 	return sdlHideCursor()
 }
 
-// func SetCursor(cursor *Cursor) bool {
-//	return sdlSetCursor(cursor)
-// }
+func SetCursor(cursor *Cursor) bool {
+	return sdlSetCursor(cursor)
+}
 
-// func SetWindowRelativeMouseMode(window *Window, enabled bool) bool {
-//	return sdlSetWindowRelativeMouseMode(window, enabled)
-// }
+func SetWindowRelativeMouseMode(window *Window, enabled bool) bool {
+	return sdlSetWindowRelativeMouseMode(window, enabled)
+}
 
 // ShowCursor shows the cursor.
 func ShowCursor() bool {
 	return sdlShowCursor()
 }
 
-// func WarpMouseGlobal(x float32, y float32) bool {
-//	return sdlWarpMouseGlobal(x, y)
-// }
+func WarpMouseGlobal(x float32, y float32) bool {
+	return sdlWarpMouseGlobal(x, y)
+}
 
 // WarpMouseInWindow moves the mouse cursor to the given position within the window.
 func WarpMouseInWindow(window *Window, x float32, y float32) {
