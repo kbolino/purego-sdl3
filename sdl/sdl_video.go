@@ -329,9 +329,9 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowSafeArea(window, rect)
 // }
 
-// func GetWindowSize(window *Window, w *int32, h *int32) bool {
-//	return sdlGetWindowSize(window, w, h)
-// }
+func GetWindowSize(window *Window, w *int32, h *int32) bool {
+	return sdlGetWindowSize(window, w, h)
+}
 
 // func GetWindowSizeInPixels(window *Window, w *int32, h *int32) bool {
 //	return sdlGetWindowSizeInPixels(window, w, h)
@@ -511,9 +511,9 @@ func HideWindow(window *Window) bool {
 //	return sdlSetWindowShape(window, shape)
 // }
 
-// func SetWindowSize(window *Window, w int32, h int32) bool {
-//	return sdlSetWindowSize(window, w, h)
-// }
+func SetWindowSize(window *Window, w int32, h int32) bool {
+	return sdlSetWindowSize(window, w, h)
+}
 
 // func SetWindowSurfaceVSync(window *Window, vsync int32) bool {
 //	return sdlSetWindowSurfaceVSync(window, vsync)
@@ -532,9 +532,9 @@ func ShowWindow(window *Window) bool {
 //	return sdlShowWindowSystemMenu(window, x, y)
 // }
 
-// func SyncWindow(window *Window) bool {
-//	return sdlSyncWindow(window)
-// }
+func SyncWindow(window *Window) bool {
+	return sdlSyncWindow(window)
+}
 
 // UpdateWindowSurface copies the window surface to the screen.
 func UpdateWindowSurface(window *Window) bool {

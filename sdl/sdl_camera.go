@@ -1,5 +1,13 @@
 package sdl
 
+import (
+	"errors"
+	"unsafe"
+
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
+	"github.com/jupiterrider/purego-sdl3/internal/mem"
+)
+
 type CameraPosition uint32
 
 const (
@@ -8,13 +16,26 @@ const (
 	CameraPositionBackFacing
 )
 
-// func AcquireCameraFrame(camera *Camera, timestampNS *uint64) *Surface {
-//	return sdlAcquireCameraFrame(camera, timestampNS)
-// }
+type CameraID uint32
 
-// func CloseCamera(camera *Camera)  {
-//	sdlCloseCamera(camera)
-// }
+type Camera struct{}
+
+type CameraSpec struct {
+	Format               PixelFormat
+	Colorspace           Colorspace
+	Width                int32
+	Height               int32
+	FramerateNumerator   int32
+	FramerateDenominator int32
+}
+
+func AcquireCameraFrame(camera *Camera, timestampNS *uint64) *Surface {
+	return sdlAcquireCameraFrame(camera, timestampNS)
+}
+
+func CloseCamera(camera *Camera) {
+	sdlCloseCamera(camera)
+}
 
 // func GetCameraDriver(index int32) string {
 //	return sdlGetCameraDriver(index)
@@ -28,9 +49,13 @@ const (
 //	return sdlGetCameraID(camera)
 // }
 
-// func GetCameraName(instance_id CameraID) string {
-//	return sdlGetCameraName(instance_id)
-// }
+func GetCameraName(instanceId CameraID) (string, error) {
+	ret := sdlGetCameraName(instanceId)
+	if ret == nil {
+		return "", errors.New(GetError())
+	}
+	return convert.ToString(ret), nil
+}
 
 // func GetCameraPermissionState(camera *Camera) int32 {
 //	return sdlGetCameraPermissionState(camera)
@@ -44,13 +69,19 @@ const (
 //	return sdlGetCameraProperties(camera)
 // }
 
-// func GetCameras(count *int32) *CameraID {
-//	return sdlGetCameras(count)
-// }
+func GetCameras() []CameraID {
+	var count int32
+	cameras := sdlGetCameras(&count)
+	defer Free(unsafe.Pointer(cameras))
+	return mem.Copy(cameras, count)
+}
 
-// func GetCameraSupportedFormats(devid CameraID, count *int32) **CameraSpec {
-//	return sdlGetCameraSupportedFormats(devid, count)
-// }
+func GetCameraSupportedFormats(instanceId CameraID) []*CameraSpec {
+	var count int32
+	formats := sdlGetCameraSupportedFormats(instanceId, &count)
+	defer Free(unsafe.Pointer(formats))
+	return mem.Copy(formats, count)
+}
 
 // func GetCurrentCameraDriver() string {
 //	return sdlGetCurrentCameraDriver()
@@ -60,10 +91,10 @@ const (
 //	return sdlGetNumCameraDrivers()
 // }
 
-// func OpenCamera(instance_id CameraID, spec *CameraSpec) *Camera {
-//	return sdlOpenCamera(instance_id, spec)
-// }
+func OpenCamera(instanceId CameraID, spec *CameraSpec) *Camera {
+	return sdlOpenCamera(instanceId, spec)
+}
 
-// func ReleaseCameraFrame(camera *Camera, frame *Surface)  {
-//	sdlReleaseCameraFrame(camera, frame)
-// }
+func ReleaseCameraFrame(camera *Camera, frame *Surface) {
+	sdlReleaseCameraFrame(camera, frame)
+}

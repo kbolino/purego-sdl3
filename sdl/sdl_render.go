@@ -1,5 +1,7 @@
 package sdl
 
+import "unsafe"
+
 type RendererLogicalPresentation uint32
 
 const (
@@ -103,9 +105,9 @@ func DestroyTexture(texture *Texture) {
 //	return sdlCreateSoftwareRenderer(surface)
 // }
 
-// func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess, w int32, h int32) *Texture {
-//	return sdlCreateTexture(renderer, format, access, w, h)
-// }
+func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess, w int32, h int32) *Texture {
+	return sdlCreateTexture(renderer, format, access, w, h)
+}
 
 // func CreateTextureWithProperties(renderer *Renderer, props PropertiesID) *Texture {
 //	return sdlCreateTextureWithProperties(renderer, props)
@@ -387,9 +389,9 @@ func DestroyTexture(texture *Texture) {
 //	return sdlUpdateNVTexture(texture, rect, Yplane, Ypitch, UVplane, UVpitch)
 // }
 
-// func UpdateTexture(texture *Texture, rect *Rect, pixels unsafe.Pointer, pitch int32) bool {
-//	return sdlUpdateTexture(texture, rect, pixels, pitch)
-// }
+func UpdateTexture(texture *Texture, rect *Rect, pixels unsafe.Pointer, pitch int32) bool {
+	return sdlUpdateTexture(texture, rect, pixels, pitch)
+}
 
 // func UpdateYUVTexture(texture *Texture, rect *Rect, Yplane *uint8, Ypitch int32, Uplane *uint8, Upitch int32, Vplane *uint8, Vpitch int32) bool {
 //	return sdlUpdateYUVTexture(texture, rect, Yplane, Ypitch, Uplane, Upitch, Vplane, Vpitch)
