@@ -353,9 +353,9 @@ func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess,
 //	return sdlSetRenderViewport(renderer, rect)
 // }
 
-// func SetRenderVSync(renderer *Renderer, vsync int32) bool {
-//	return sdlSetRenderVSync(renderer, vsync)
-// }
+func SetRenderVSync(renderer *Renderer, vsync int32) bool {
+	return sdlSetRenderVSync(renderer, vsync)
+}
 
 // func SetTextureAlphaMod(texture *Texture, alpha uint8) bool {
 //	return sdlSetTextureAlphaMod(texture, alpha)

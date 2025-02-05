@@ -4,6 +4,7 @@ import (
 	"unsafe"
 
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
+	"github.com/jupiterrider/purego-sdl3/internal/mem"
 )
 
 type Locale struct {
@@ -25,5 +26,6 @@ func GetPreferredLocales() []*Locale {
 	if locales == nil {
 		return nil
 	}
-	return unsafe.Slice(locales, count)
+	defer Free(unsafe.Pointer(locales))
+	return mem.Copy(locales, count)
 }

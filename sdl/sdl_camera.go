@@ -1,7 +1,6 @@
 package sdl
 
 import (
-	"errors"
 	"unsafe"
 
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
@@ -49,12 +48,13 @@ func CloseCamera(camera *Camera) {
 //	return sdlGetCameraID(camera)
 // }
 
-func GetCameraName(instanceId CameraID) (string, error) {
+func GetCameraName(instanceId CameraID) *string {
 	ret := sdlGetCameraName(instanceId)
 	if ret == nil {
-		return "", errors.New(GetError())
+		return nil
 	}
-	return convert.ToString(ret), nil
+	name := convert.ToString(ret)
+	return &name
 }
 
 // func GetCameraPermissionState(camera *Camera) int32 {
@@ -72,6 +72,9 @@ func GetCameraName(instanceId CameraID) (string, error) {
 func GetCameras() []CameraID {
 	var count int32
 	cameras := sdlGetCameras(&count)
+	if cameras == nil {
+		return nil
+	}
 	defer Free(unsafe.Pointer(cameras))
 	return mem.Copy(cameras, count)
 }
@@ -79,6 +82,9 @@ func GetCameras() []CameraID {
 func GetCameraSupportedFormats(instanceId CameraID) []*CameraSpec {
 	var count int32
 	formats := sdlGetCameraSupportedFormats(instanceId, &count)
+	if formats == nil {
+		return nil
+	}
 	defer Free(unsafe.Pointer(formats))
 	return mem.Copy(formats, count)
 }

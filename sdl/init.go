@@ -1004,7 +1004,7 @@ var (
 	// sdlSetRenderScale                        func(*Renderer, float32, float32) bool
 	// sdlSetRenderTarget                       func(*Renderer, *Texture) bool
 	// sdlSetRenderViewport                     func(*Renderer, *Rect) bool
-	// sdlSetRenderVSync                        func(*Renderer, int32) bool
+	sdlSetRenderVSync func(*Renderer, int32) bool
 	// sdlSetScancodeName                       func(Scancode, string) bool
 	// sdlSetStringProperty                     func(PropertiesID, string, string) bool
 	// sdlSetSurfaceAlphaMod                    func(*Surface, uint8) bool
@@ -2238,7 +2238,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetRenderScale, lib, "SDL_SetRenderScale")
 	// purego.RegisterLibFunc(&sdlSetRenderTarget, lib, "SDL_SetRenderTarget")
 	// purego.RegisterLibFunc(&sdlSetRenderViewport, lib, "SDL_SetRenderViewport")
-	// purego.RegisterLibFunc(&sdlSetRenderVSync, lib, "SDL_SetRenderVSync")
+	purego.RegisterLibFunc(&sdlSetRenderVSync, lib, "SDL_SetRenderVSync")
 	// purego.RegisterLibFunc(&sdlSetScancodeName, lib, "SDL_SetScancodeName")
 	// purego.RegisterLibFunc(&sdlSetStringProperty, lib, "SDL_SetStringProperty")
 	// purego.RegisterLibFunc(&sdlSetSurfaceAlphaMod, lib, "SDL_SetSurfaceAlphaMod")

@@ -1,7 +1,6 @@
 package sdl
 
 import (
-	"errors"
 	"unsafe"
 
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
@@ -111,15 +110,16 @@ func GetMouseFocus() *Window {
 	return sdlGetMouseFocus()
 }
 
-// GetMouseNameForID returns the name of the selected mouse, or error on failure.
+// GetMouseNameForID returns the name of the selected mouse, or nil on failure.
 //
 // This function returns "" if the mouse doesn't have a name.
-func GetMouseNameForID(instanceId MouseID) (string, error) {
+func GetMouseNameForID(instanceId MouseID) *string {
 	ret := sdlGetMouseNameForID(instanceId)
 	if ret == nil {
-		return "", errors.New(GetError())
+		return nil
 	}
-	return convert.ToString(ret), nil
+	name := convert.ToString(ret)
+	return &name
 }
 
 // GetMouseState queries SDL's cache for the synchronous mouse button state and the window-relative SDL-cursor position.
