@@ -45,17 +45,17 @@ type MouseID uint32
 type MouseButtonFlags uint32
 
 const (
-	ButtonLeft   MouseButtonFlags = 1
-	ButtonMiddle MouseButtonFlags = 2
-	ButtonRight  MouseButtonFlags = 3
-	ButtonX1     MouseButtonFlags = 4
-	ButtonX2     MouseButtonFlags = 5
+	ButtonLeft MouseButtonFlags = iota + 1
+	ButtonMiddle
+	ButtonRight
+	ButtonX1
+	ButtonX2
 
-	ButtonLmask  = 1 << (ButtonLeft - 1)
-	ButtonMmask  = 1 << (ButtonMiddle - 1)
-	ButtonRmask  = 1 << (ButtonRight - 1)
-	ButtonX1mask = 1 << (ButtonX1 - 1)
-	ButtonX2mask = 1 << (ButtonX2 - 1)
+	ButtonLmask  MouseButtonFlags = 1 << (ButtonLeft - 1)
+	ButtonMmask  MouseButtonFlags = 1 << (ButtonMiddle - 1)
+	ButtonRmask  MouseButtonFlags = 1 << (ButtonRight - 1)
+	ButtonX1mask MouseButtonFlags = 1 << (ButtonX1 - 1)
+	ButtonX2mask MouseButtonFlags = 1 << (ButtonX2 - 1)
 )
 
 type Cursor struct{}
