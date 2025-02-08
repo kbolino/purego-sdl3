@@ -280,9 +280,16 @@ func HasEvents(minType, maxType EventType) bool {
 	return sdlHasEvents(minType, maxType)
 }
 
-// func PeepEvents(events *Event, numevents int32, action EventAction, minType uint32, maxType uint32) int32 {
-//	return sdlPeepEvents(events, numevents, action, minType, maxType)
-// }
+// PeepEvents checks the event queue for messages and optionally return them.
+//
+// Example:
+//
+//	sdl.PumpEvents()
+//	var events [2]sdl.Event
+//	sdl.PeepEvents(&events[0], 2, sdl.PeekEvent, sdl.EventFirst, sdl.EventLast)
+func PeepEvents(events *Event, numevents int32, action EventAction, minType, maxType EventType) int32 {
+	return sdlPeepEvents(events, numevents, action, minType, maxType)
+}
 
 // PumpEvents updates the event queue and internal input device state.
 func PumpEvents() {

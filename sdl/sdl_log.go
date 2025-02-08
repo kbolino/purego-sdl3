@@ -1,5 +1,7 @@
 package sdl
 
+import "fmt"
+
 type LogPriority uint32
 
 const (
@@ -63,9 +65,9 @@ const (
 //	sdlLogDebug(category, fmt)
 // }
 
-// func LogError(category int32, fmt string)  {
-//	sdlLogError(category, fmt)
-// }
+func LogError(category LogCategory, format string, a ...any) {
+	sdlLogError(category, fmt.Sprintf(format, a...))
+}
 
 // func LogInfo(category int32, fmt string)  {
 //	sdlLogInfo(category, fmt)

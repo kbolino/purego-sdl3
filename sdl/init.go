@@ -735,7 +735,7 @@ var (
 	// sdllog10f                                func(float32) float32
 	// sdlLogCritical                           func(int32, string)
 	// sdlLogDebug                              func(int32, string)
-	// sdlLogError                              func(int32, string)
+	sdlLogError func(LogCategory, string)
 	// sdllogf                                  func(float32) float32
 	// sdlLogInfo                               func(int32, string)
 	// sdlLogMessage                            func(int32, LogPriority, string)
@@ -795,7 +795,7 @@ var (
 	// sdlPauseAudioDevice                      func(AudioDeviceID) bool
 	// sdlPauseAudioStreamDevice                func(*AudioStream) bool
 	// sdlPauseHaptic                           func(*Haptic) bool
-	// sdlPeepEvents                            func(*Event, int32, EventAction, uint32, uint32) int32
+	sdlPeepEvents func(*Event, int32, EventAction, EventType, EventType) int32
 	// sdlPlayHapticRumble                      func(*Haptic, float32, uint32) bool
 	// sdlPointInRect                           func(*Point, *Rect) bool
 	// sdlPointInRectFloat                      func(*FPoint, *FRect) bool
@@ -1969,7 +1969,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdllog10f, lib, "SDL_log10f")
 	// purego.RegisterLibFunc(&sdlLogCritical, lib, "SDL_LogCritical")
 	// purego.RegisterLibFunc(&sdlLogDebug, lib, "SDL_LogDebug")
-	// purego.RegisterLibFunc(&sdlLogError, lib, "SDL_LogError")
+	purego.RegisterLibFunc(&sdlLogError, lib, "SDL_LogError")
 	// purego.RegisterLibFunc(&sdllogf, lib, "SDL_logf")
 	// purego.RegisterLibFunc(&sdlLogInfo, lib, "SDL_LogInfo")
 	// purego.RegisterLibFunc(&sdlLogMessage, lib, "SDL_LogMessage")
@@ -2029,7 +2029,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlPauseAudioDevice, lib, "SDL_PauseAudioDevice")
 	// purego.RegisterLibFunc(&sdlPauseAudioStreamDevice, lib, "SDL_PauseAudioStreamDevice")
 	// purego.RegisterLibFunc(&sdlPauseHaptic, lib, "SDL_PauseHaptic")
-	// purego.RegisterLibFunc(&sdlPeepEvents, lib, "SDL_PeepEvents")
+	purego.RegisterLibFunc(&sdlPeepEvents, lib, "SDL_PeepEvents")
 	// purego.RegisterLibFunc(&sdlPlayHapticRumble, lib, "SDL_PlayHapticRumble")
 	// purego.RegisterLibFunc(&sdlPointInRect, lib, "SDL_PointInRect")
 	// purego.RegisterLibFunc(&sdlPointInRectFloat, lib, "SDL_PointInRectFloat")
