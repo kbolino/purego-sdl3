@@ -16,7 +16,7 @@ var (
 	// sdlAcquireGPUCommandBuffer               func(*GPUDevice) *GPUCommandBuffer
 	// sdlAcquireGPUSwapchainTexture            func(*GPUCommandBuffer, *Window, **GPUTexture, *uint32, *uint32) bool
 	// sdlAddAtomicInt                          func(*AtomicInt, int32) int32
-	sdlAddEventWatch func(uintptr, unsafe.Pointer) bool
+	sdlAddEventWatch func(EventFilter, unsafe.Pointer) bool
 	// sdlAddGamepadMapping                     func(string) int32
 	// sdlAddGamepadMappingsFromFile            func(string) int32
 	// sdlAddGamepadMappingsFromIO              func(*IOStream, bool) int32
@@ -214,7 +214,7 @@ var (
 	// sdlfabsf                                 func(float32) float32
 	// sdlFillSurfaceRect                       func(*Surface, *Rect, uint32) bool
 	// sdlFillSurfaceRects                      func(*Surface, *Rect, int32, uint32) bool
-	sdlFilterEvents func(uintptr, unsafe.Pointer)
+	sdlFilterEvents func(EventFilter, unsafe.Pointer)
 	// sdlFlashWindow                           func(*Window, FlashOperation) bool
 	// sdlFlipSurface                           func(*Surface, FlipMode) bool
 	// sdlfloor                                 func(float64) float64
@@ -309,8 +309,8 @@ var (
 	// sdlGetEnvironment                        func() *Environment
 	// sdlGetEnvironmentVariable                func(*Environment, string) string
 	// sdlGetEnvironmentVariables               func(*Environment) **byte
-	sdlGetError func() string
-	// sdlGetEventFilter                        func(*EventFilter, *unsafe.Pointer) bool
+	sdlGetError       func() string
+	sdlGetEventFilter func(*EventFilter, *unsafe.Pointer) bool
 	// sdlGetFloatProperty                      func(PropertiesID, string, float32) float32
 	// sdlGetFullscreenDisplayModes             func(DisplayID, *int32) **DisplayMode
 	// sdlGetGamepadAppleSFSymbolsNameForAxis   func(*Gamepad, GamepadAxis) string
@@ -851,7 +851,7 @@ var (
 	// sdlRectsEqualEpsilon                     func(*FRect, *FRect, float32) bool
 	// sdlRectsEqualFloat                       func(*FRect, *FRect) bool
 	// sdlRectToFRect                           func(*Rect, *FRect)
-	// sdlRegisterEvents                        func(int32) uint32
+	sdlRegisterEvents     func(int32) uint32
 	sdlReleaseCameraFrame func(*Camera, *Surface)
 	// sdlReleaseGPUBuffer                      func(*GPUDevice, *GPUBuffer)
 	// sdlReleaseGPUComputePipeline             func(*GPUDevice, *GPUComputePipeline)
@@ -863,7 +863,7 @@ var (
 	// sdlReleaseGPUTransferBuffer              func(*GPUDevice, *GPUTransferBuffer)
 	// sdlReleaseWindowFromGPUDevice            func(*GPUDevice, *Window)
 	// sdlReloadGamepadMappings                 func() bool
-	// sdlRemoveEventWatch                      func(EventFilter, unsafe.Pointer)
+	sdlRemoveEventWatch func(EventFilter, unsafe.Pointer)
 	// sdlRemoveHintCallback                    func(string, HintCallback, unsafe.Pointer)
 	// sdlRemovePath                            func(string) bool
 	// sdlRemoveStoragePath                     func(*Storage, string) bool
@@ -953,7 +953,7 @@ var (
 	// sdlSetError                              func(string) bool
 	// sdlSetErrorV                             func(string, va_list) bool
 	sdlSetEventEnabled func(EventType, bool)
-	sdlSetEventFilter  func(uintptr, unsafe.Pointer)
+	sdlSetEventFilter  func(EventFilter, unsafe.Pointer)
 	// sdlSetFloatProperty                      func(PropertiesID, string, float32) bool
 	// sdlSetGamepadEventsEnabled               func(bool)
 	// sdlSetGamepadLED                         func(*Gamepad, uint8, uint8, uint8) bool
@@ -1544,7 +1544,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetEnvironmentVariable, lib, "SDL_GetEnvironmentVariable")
 	// purego.RegisterLibFunc(&sdlGetEnvironmentVariables, lib, "SDL_GetEnvironmentVariables")
 	purego.RegisterLibFunc(&sdlGetError, lib, "SDL_GetError")
-	// purego.RegisterLibFunc(&sdlGetEventFilter, lib, "SDL_GetEventFilter")
+	purego.RegisterLibFunc(&sdlGetEventFilter, lib, "SDL_GetEventFilter")
 	// purego.RegisterLibFunc(&sdlGetFloatProperty, lib, "SDL_GetFloatProperty")
 	// purego.RegisterLibFunc(&sdlGetFullscreenDisplayModes, lib, "SDL_GetFullscreenDisplayModes")
 	// purego.RegisterLibFunc(&sdlGetGamepadAppleSFSymbolsNameForAxis, lib, "SDL_GetGamepadAppleSFSymbolsNameForAxis")
@@ -2085,7 +2085,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlRectsEqualEpsilon, lib, "SDL_RectsEqualEpsilon")
 	// purego.RegisterLibFunc(&sdlRectsEqualFloat, lib, "SDL_RectsEqualFloat")
 	// purego.RegisterLibFunc(&sdlRectToFRect, lib, "SDL_RectToFRect")
-	// purego.RegisterLibFunc(&sdlRegisterEvents, lib, "SDL_RegisterEvents")
+	purego.RegisterLibFunc(&sdlRegisterEvents, lib, "SDL_RegisterEvents")
 	purego.RegisterLibFunc(&sdlReleaseCameraFrame, lib, "SDL_ReleaseCameraFrame")
 	// purego.RegisterLibFunc(&sdlReleaseGPUBuffer, lib, "SDL_ReleaseGPUBuffer")
 	// purego.RegisterLibFunc(&sdlReleaseGPUComputePipeline, lib, "SDL_ReleaseGPUComputePipeline")
@@ -2097,7 +2097,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlReleaseGPUTransferBuffer, lib, "SDL_ReleaseGPUTransferBuffer")
 	// purego.RegisterLibFunc(&sdlReleaseWindowFromGPUDevice, lib, "SDL_ReleaseWindowFromGPUDevice")
 	// purego.RegisterLibFunc(&sdlReloadGamepadMappings, lib, "SDL_ReloadGamepadMappings")
-	// purego.RegisterLibFunc(&sdlRemoveEventWatch, lib, "SDL_RemoveEventWatch")
+	purego.RegisterLibFunc(&sdlRemoveEventWatch, lib, "SDL_RemoveEventWatch")
 	// purego.RegisterLibFunc(&sdlRemoveHintCallback, lib, "SDL_RemoveHintCallback")
 	// purego.RegisterLibFunc(&sdlRemovePath, lib, "SDL_RemovePath")
 	// purego.RegisterLibFunc(&sdlRemoveStoragePath, lib, "SDL_RemoveStoragePath")

@@ -213,17 +213,20 @@ type MouseButtonEvent struct {
 	Y         float32
 }
 
-type EventFilter func(userdata unsafe.Pointer, event *Event) bool
+// EventFilter is a C function pointer used for callbacks that watch the event queue. Use [NewEventFilter] for creation.
+type EventFilter uintptr
 
-func (e EventFilter) toCallback() uintptr {
+// NewEventFilter converts the Go function to a C function pointer.
+func NewEventFilter(filter func(userdata unsafe.Pointer, event *Event) bool) EventFilter {
 	// workaround to avoid panic "expected function with one uintptr-sized result" on Windows
-	return purego.NewCallback(func(userdata unsafe.Pointer, event *Event) uintptr {
-		if e(userdata, event) {
-			return 0
-		} else {
+	cb := purego.NewCallback(func(userdata unsafe.Pointer, event *Event) uintptr {
+		if filter(userdata, event) {
 			return 1
 		}
+		return 0
 	})
+
+	return EventFilter(cb)
 }
 
 // PollEvent polls for currently pending events.
@@ -233,7 +236,7 @@ func PollEvent(event *Event) bool {
 
 // AddEventWatch adds a callback to be triggered when an event is added to the event queue.
 func AddEventWatch(filter EventFilter, userdata unsafe.Pointer) bool {
-	return sdlAddEventWatch(filter.toCallback(), userdata)
+	return sdlAddEventWatch(filter, userdata)
 }
 
 // EventEnabled returns true if the event is being processed, false otherwise.
@@ -242,7 +245,7 @@ func EventEnabled(eventType EventType) bool {
 }
 
 func FilterEvents(filter EventFilter, userdata unsafe.Pointer) {
-	sdlFilterEvents(filter.toCallback(), userdata)
+	sdlFilterEvents(filter, userdata)
 }
 
 // FlushEvent clears events of a specific type from the event queue.
@@ -255,9 +258,10 @@ func FlushEvents(minType, maxType EventType) {
 	sdlFlushEvents(minType, maxType)
 }
 
-// func GetEventFilter(filter *EventFilter, userdata *unsafe.Pointer) bool {
-//	return sdlGetEventFilter(filter, userdata)
-// }
+// GetEventFilter queries the current event filter.
+func GetEventFilter(filter *EventFilter, userdata *unsafe.Pointer) bool {
+	return sdlGetEventFilter(filter, userdata)
+}
 
 // GetWindowFromEvent returns the associated window with an event or nil if there is none.
 func GetWindowFromEvent(event *Event) *Window {
@@ -290,21 +294,26 @@ func PushEvent(event *Event) bool {
 	return sdlPushEvent(event)
 }
 
-// func RegisterEvents(numevents int32) uint32 {
-//	return sdlRegisterEvents(numevents)
-// }
+// RegisterEvents allocates a set of user-defined events, and return the beginning event number for that set of events.
+func RegisterEvents(numevents int32) uint32 {
+	return sdlRegisterEvents(numevents)
+}
 
-// func RemoveEventWatch(filter EventFilter, userdata unsafe.Pointer)  {
-//	sdlRemoveEventWatch(filter, userdata)
-// }
+// RemoveEventWatch removes an event watch callback added with [AddEventWatch].
+//
+// This function takes the same input as [AddEventWatch] to identify and delete the corresponding callback.
+func RemoveEventWatch(filter EventFilter, userdata unsafe.Pointer) {
+	sdlRemoveEventWatch(filter, userdata)
+}
 
 // SetEventEnabled sets the state of processing events by type.
 func SetEventEnabled(eventType EventType, enabled bool) {
 	sdlSetEventEnabled(eventType, enabled)
 }
 
+// SetEventFilter sets up a filter to process all events before they are added to the internal event queue.
 func SetEventFilter(filter EventFilter, userdata unsafe.Pointer) {
-	sdlSetEventFilter(filter.toCallback(), userdata)
+	sdlSetEventFilter(filter, userdata)
 }
 
 // WaitEvent waits indefinitely for the next available event.
