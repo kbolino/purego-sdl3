@@ -16,7 +16,7 @@ var (
 	// sdlAcquireGPUCommandBuffer               func(*GPUDevice) *GPUCommandBuffer
 	// sdlAcquireGPUSwapchainTexture            func(*GPUCommandBuffer, *Window, **GPUTexture, *uint32, *uint32) bool
 	// sdlAddAtomicInt                          func(*AtomicInt, int32) int32
-	// sdlAddEventWatch                         func(EventFilter, unsafe.Pointer) bool
+	sdlAddEventWatch func(uintptr, unsafe.Pointer) bool
 	// sdlAddGamepadMapping                     func(string) int32
 	// sdlAddGamepadMappingsFromFile            func(string) int32
 	// sdlAddGamepadMappingsFromIO              func(*IOStream, bool) int32
@@ -207,21 +207,21 @@ var (
 	// sdlEnumerateDirectory                    func(string, EnumerateDirectoryCallback, unsafe.Pointer) bool
 	// sdlEnumerateProperties                   func(PropertiesID, EnumeratePropertiesCallback, unsafe.Pointer) bool
 	// sdlEnumerateStorageDirectory             func(*Storage, string, EnumerateDirectoryCallback, unsafe.Pointer) bool
-	// sdlEventEnabled                          func(uint32) bool
+	sdlEventEnabled func(EventType) bool
 	// sdlexp                                   func(float64) float64
 	// sdlexpf                                  func(float32) float32
 	// sdlfabs                                  func(float64) float64
 	// sdlfabsf                                 func(float32) float32
 	// sdlFillSurfaceRect                       func(*Surface, *Rect, uint32) bool
 	// sdlFillSurfaceRects                      func(*Surface, *Rect, int32, uint32) bool
-	// sdlFilterEvents                          func(EventFilter, unsafe.Pointer)
+	sdlFilterEvents func(uintptr, unsafe.Pointer)
 	// sdlFlashWindow                           func(*Window, FlashOperation) bool
 	// sdlFlipSurface                           func(*Surface, FlipMode) bool
 	// sdlfloor                                 func(float64) float64
 	// sdlfloorf                                func(float32) float32
 	// sdlFlushAudioStream                      func(*AudioStream) bool
-	// sdlFlushEvent                            func(uint32)
-	// sdlFlushEvents                           func(uint32, uint32)
+	sdlFlushEvent  func(EventType)
+	sdlFlushEvents func(EventType, EventType)
 	// sdlFlushIO                               func(*IOStream) bool
 	// sdlFlushRenderer                         func(*Renderer) bool
 	// sdlfmod                                  func(float64, float64) float64
@@ -564,7 +564,7 @@ var (
 	// sdlGetWindowBordersSize                  func(*Window, *int32, *int32, *int32, *int32) bool
 	// sdlGetWindowDisplayScale                 func(*Window) float32
 	// sdlGetWindowFlags                        func(*Window) WindowFlags
-	// sdlGetWindowFromEvent                    func(*Event) *Window
+	sdlGetWindowFromEvent func(*Event) *Window
 	// sdlGetWindowFromID                       func(WindowID) *Window
 	// sdlGetWindowFullscreenMode               func(*Window) *DisplayMode
 	// sdlGetWindowICCProfile                   func(*Window, *uint64) unsafe.Pointer
@@ -620,8 +620,8 @@ var (
 	// sdlHasAVX512F                            func() bool
 	// sdlHasClipboardData                      func(string) bool
 	// sdlHasClipboardText                      func() bool
-	// sdlHasEvent                              func(uint32) bool
-	// sdlHasEvents                             func(uint32, uint32) bool
+	sdlHasEvent  func(EventType) bool
+	sdlHasEvents func(EventType, EventType) bool
 	// sdlHasExactlyOneBitSet32                 func(uint32) bool
 	// sdlHasGamepad                            func() bool
 	// sdlHasJoystick                           func() bool
@@ -806,7 +806,7 @@ var (
 	// sdlPremultiplyAlpha                      func(int32, int32, PixelFormat, unsafe.Pointer, int32, PixelFormat, unsafe.Pointer, int32, bool) bool
 	// sdlPremultiplySurfaceAlpha               func(*Surface, bool) bool
 	sdlPumpEvents func()
-	// sdlPushEvent                             func(*Event) bool
+	sdlPushEvent  func(*Event) bool
 	// sdlPushGPUComputeUniformData             func(*GPUCommandBuffer, uint32, unsafe.Pointer, uint32)
 	// sdlPushGPUDebugGroup                     func(*GPUCommandBuffer, string)
 	// sdlPushGPUFragmentUniformData            func(*GPUCommandBuffer, uint32, unsafe.Pointer, uint32)
@@ -952,8 +952,8 @@ var (
 	// sdlSetEnvironmentVariable                func(*Environment, string, string, bool) bool
 	// sdlSetError                              func(string) bool
 	// sdlSetErrorV                             func(string, va_list) bool
-	// sdlSetEventEnabled                       func(uint32, bool)
-	// sdlSetEventFilter                        func(EventFilter, unsafe.Pointer)
+	sdlSetEventEnabled func(EventType, bool)
+	sdlSetEventFilter  func(uintptr, unsafe.Pointer)
 	// sdlSetFloatProperty                      func(PropertiesID, string, float32) bool
 	// sdlSetGamepadEventsEnabled               func(bool)
 	// sdlSetGamepadLED                         func(*Gamepad, uint8, uint8, uint8) bool
@@ -1177,8 +1177,8 @@ var (
 	// sdlWaitAsyncIOResult                     func(*AsyncIOQueue, *AsyncIOOutcome, int32) bool
 	// sdlWaitCondition                         func(*Condition, *Mutex)
 	// sdlWaitConditionTimeout                  func(*Condition, *Mutex, int32) bool
-	// sdlWaitEvent                             func(*Event) bool
-	// sdlWaitEventTimeout                      func(*Event, int32) bool
+	sdlWaitEvent        func(*Event) bool
+	sdlWaitEventTimeout func(*Event, int32) bool
 	// sdlWaitForGPUFences                      func(*GPUDevice, bool, **GPUFence, uint32) bool
 	// sdlWaitForGPUIdle                        func(*GPUDevice) bool
 	// sdlWaitForGPUSwapchain                   func(*GPUDevice, *Window) bool
@@ -1250,7 +1250,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlAcquireGPUCommandBuffer, lib, "SDL_AcquireGPUCommandBuffer")
 	// purego.RegisterLibFunc(&sdlAcquireGPUSwapchainTexture, lib, "SDL_AcquireGPUSwapchainTexture")
 	// purego.RegisterLibFunc(&sdlAddAtomicInt, lib, "SDL_AddAtomicInt")
-	// purego.RegisterLibFunc(&sdlAddEventWatch, lib, "SDL_AddEventWatch")
+	purego.RegisterLibFunc(&sdlAddEventWatch, lib, "SDL_AddEventWatch")
 	// purego.RegisterLibFunc(&sdlAddGamepadMapping, lib, "SDL_AddGamepadMapping")
 	// purego.RegisterLibFunc(&sdlAddGamepadMappingsFromFile, lib, "SDL_AddGamepadMappingsFromFile")
 	// purego.RegisterLibFunc(&sdlAddGamepadMappingsFromIO, lib, "SDL_AddGamepadMappingsFromIO")
@@ -1441,21 +1441,21 @@ func init() {
 	// purego.RegisterLibFunc(&sdlEnumerateDirectory, lib, "SDL_EnumerateDirectory")
 	// purego.RegisterLibFunc(&sdlEnumerateProperties, lib, "SDL_EnumerateProperties")
 	// purego.RegisterLibFunc(&sdlEnumerateStorageDirectory, lib, "SDL_EnumerateStorageDirectory")
-	// purego.RegisterLibFunc(&sdlEventEnabled, lib, "SDL_EventEnabled")
+	purego.RegisterLibFunc(&sdlEventEnabled, lib, "SDL_EventEnabled")
 	// purego.RegisterLibFunc(&sdlexp, lib, "SDL_exp")
 	// purego.RegisterLibFunc(&sdlexpf, lib, "SDL_expf")
 	// purego.RegisterLibFunc(&sdlfabs, lib, "SDL_fabs")
 	// purego.RegisterLibFunc(&sdlfabsf, lib, "SDL_fabsf")
 	// purego.RegisterLibFunc(&sdlFillSurfaceRect, lib, "SDL_FillSurfaceRect")
 	// purego.RegisterLibFunc(&sdlFillSurfaceRects, lib, "SDL_FillSurfaceRects")
-	// purego.RegisterLibFunc(&sdlFilterEvents, lib, "SDL_FilterEvents")
+	purego.RegisterLibFunc(&sdlFilterEvents, lib, "SDL_FilterEvents")
 	// purego.RegisterLibFunc(&sdlFlashWindow, lib, "SDL_FlashWindow")
 	// purego.RegisterLibFunc(&sdlFlipSurface, lib, "SDL_FlipSurface")
 	// purego.RegisterLibFunc(&sdlfloor, lib, "SDL_floor")
 	// purego.RegisterLibFunc(&sdlfloorf, lib, "SDL_floorf")
 	// purego.RegisterLibFunc(&sdlFlushAudioStream, lib, "SDL_FlushAudioStream")
-	// purego.RegisterLibFunc(&sdlFlushEvent, lib, "SDL_FlushEvent")
-	// purego.RegisterLibFunc(&sdlFlushEvents, lib, "SDL_FlushEvents")
+	purego.RegisterLibFunc(&sdlFlushEvent, lib, "SDL_FlushEvent")
+	purego.RegisterLibFunc(&sdlFlushEvents, lib, "SDL_FlushEvents")
 	// purego.RegisterLibFunc(&sdlFlushIO, lib, "SDL_FlushIO")
 	// purego.RegisterLibFunc(&sdlFlushRenderer, lib, "SDL_FlushRenderer")
 	// purego.RegisterLibFunc(&sdlfmod, lib, "SDL_fmod")
@@ -1798,7 +1798,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetWindowBordersSize, lib, "SDL_GetWindowBordersSize")
 	// purego.RegisterLibFunc(&sdlGetWindowDisplayScale, lib, "SDL_GetWindowDisplayScale")
 	// purego.RegisterLibFunc(&sdlGetWindowFlags, lib, "SDL_GetWindowFlags")
-	// purego.RegisterLibFunc(&sdlGetWindowFromEvent, lib, "SDL_GetWindowFromEvent")
+	purego.RegisterLibFunc(&sdlGetWindowFromEvent, lib, "SDL_GetWindowFromEvent")
 	// purego.RegisterLibFunc(&sdlGetWindowFromID, lib, "SDL_GetWindowFromID")
 	// purego.RegisterLibFunc(&sdlGetWindowFullscreenMode, lib, "SDL_GetWindowFullscreenMode")
 	// purego.RegisterLibFunc(&sdlGetWindowICCProfile, lib, "SDL_GetWindowICCProfile")
@@ -1854,8 +1854,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlHasAVX512F, lib, "SDL_HasAVX512F")
 	// purego.RegisterLibFunc(&sdlHasClipboardData, lib, "SDL_HasClipboardData")
 	// purego.RegisterLibFunc(&sdlHasClipboardText, lib, "SDL_HasClipboardText")
-	// purego.RegisterLibFunc(&sdlHasEvent, lib, "SDL_HasEvent")
-	// purego.RegisterLibFunc(&sdlHasEvents, lib, "SDL_HasEvents")
+	purego.RegisterLibFunc(&sdlHasEvent, lib, "SDL_HasEvent")
+	purego.RegisterLibFunc(&sdlHasEvents, lib, "SDL_HasEvents")
 	// purego.RegisterLibFunc(&sdlHasExactlyOneBitSet32, lib, "SDL_HasExactlyOneBitSet32")
 	// purego.RegisterLibFunc(&sdlHasGamepad, lib, "SDL_HasGamepad")
 	// purego.RegisterLibFunc(&sdlHasJoystick, lib, "SDL_HasJoystick")
@@ -2040,7 +2040,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlPremultiplyAlpha, lib, "SDL_PremultiplyAlpha")
 	// purego.RegisterLibFunc(&sdlPremultiplySurfaceAlpha, lib, "SDL_PremultiplySurfaceAlpha")
 	purego.RegisterLibFunc(&sdlPumpEvents, lib, "SDL_PumpEvents")
-	// purego.RegisterLibFunc(&sdlPushEvent, lib, "SDL_PushEvent")
+	purego.RegisterLibFunc(&sdlPushEvent, lib, "SDL_PushEvent")
 	// purego.RegisterLibFunc(&sdlPushGPUComputeUniformData, lib, "SDL_PushGPUComputeUniformData")
 	// purego.RegisterLibFunc(&sdlPushGPUDebugGroup, lib, "SDL_PushGPUDebugGroup")
 	// purego.RegisterLibFunc(&sdlPushGPUFragmentUniformData, lib, "SDL_PushGPUFragmentUniformData")
@@ -2186,8 +2186,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetEnvironmentVariable, lib, "SDL_SetEnvironmentVariable")
 	// purego.RegisterLibFunc(&sdlSetError, lib, "SDL_SetError")
 	// purego.RegisterLibFunc(&sdlSetErrorV, lib, "SDL_SetErrorV")
-	// purego.RegisterLibFunc(&sdlSetEventEnabled, lib, "SDL_SetEventEnabled")
-	// purego.RegisterLibFunc(&sdlSetEventFilter, lib, "SDL_SetEventFilter")
+	purego.RegisterLibFunc(&sdlSetEventEnabled, lib, "SDL_SetEventEnabled")
+	purego.RegisterLibFunc(&sdlSetEventFilter, lib, "SDL_SetEventFilter")
 	// purego.RegisterLibFunc(&sdlSetFloatProperty, lib, "SDL_SetFloatProperty")
 	// purego.RegisterLibFunc(&sdlSetGamepadEventsEnabled, lib, "SDL_SetGamepadEventsEnabled")
 	// purego.RegisterLibFunc(&sdlSetGamepadLED, lib, "SDL_SetGamepadLED")
@@ -2411,8 +2411,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlWaitAsyncIOResult, lib, "SDL_WaitAsyncIOResult")
 	// purego.RegisterLibFunc(&sdlWaitCondition, lib, "SDL_WaitCondition")
 	// purego.RegisterLibFunc(&sdlWaitConditionTimeout, lib, "SDL_WaitConditionTimeout")
-	// purego.RegisterLibFunc(&sdlWaitEvent, lib, "SDL_WaitEvent")
-	// purego.RegisterLibFunc(&sdlWaitEventTimeout, lib, "SDL_WaitEventTimeout")
+	purego.RegisterLibFunc(&sdlWaitEvent, lib, "SDL_WaitEvent")
+	purego.RegisterLibFunc(&sdlWaitEventTimeout, lib, "SDL_WaitEventTimeout")
 	// purego.RegisterLibFunc(&sdlWaitForGPUFences, lib, "SDL_WaitForGPUFences")
 	// purego.RegisterLibFunc(&sdlWaitForGPUIdle, lib, "SDL_WaitForGPUIdle")
 	// purego.RegisterLibFunc(&sdlWaitForGPUSwapchain, lib, "SDL_WaitForGPUSwapchain")

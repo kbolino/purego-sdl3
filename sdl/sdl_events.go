@@ -3,6 +3,7 @@ package sdl
 import (
 	"unsafe"
 
+	"github.com/ebitengine/purego"
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
 
@@ -212,46 +213,68 @@ type MouseButtonEvent struct {
 	Y         float32
 }
 
+type EventFilter func(userdata unsafe.Pointer, event *Event) bool
+
+func (e EventFilter) toCallback() uintptr {
+	// workaround to avoid panic "expected function with one uintptr-sized result" on Windows
+	return purego.NewCallback(func(userdata unsafe.Pointer, event *Event) uintptr {
+		if e(userdata, event) {
+			return 0
+		} else {
+			return 1
+		}
+	})
+}
+
 // PollEvent polls for currently pending events.
 func PollEvent(event *Event) bool {
 	return sdlPollEvent(event)
 }
 
-// func AddEventWatch(filter EventFilter, userdata unsafe.Pointer) bool {
-//	return sdlAddEventWatch(filter, userdata)
-// }
+// AddEventWatch adds a callback to be triggered when an event is added to the event queue.
+func AddEventWatch(filter EventFilter, userdata unsafe.Pointer) bool {
+	return sdlAddEventWatch(filter.toCallback(), userdata)
+}
 
-// func EventEnabled(type uint32) bool {
-//	return sdlEventEnabled(type)
-// }
+// EventEnabled returns true if the event is being processed, false otherwise.
+func EventEnabled(eventType EventType) bool {
+	return sdlEventEnabled(eventType)
+}
 
-// func FilterEvents(filter EventFilter, userdata unsafe.Pointer)  {
-//	sdlFilterEvents(filter, userdata)
-// }
+func FilterEvents(filter EventFilter, userdata unsafe.Pointer) {
+	sdlFilterEvents(filter.toCallback(), userdata)
+}
 
-// func FlushEvent(type uint32)  {
-//	sdlFlushEvent(type)
-// }
+// FlushEvent clears events of a specific type from the event queue.
+func FlushEvent(eventType EventType) {
+	sdlFlushEvent(eventType)
+}
 
-// func FlushEvents(minType uint32, maxType uint32)  {
-//	sdlFlushEvents(minType, maxType)
-// }
+// FlushEvents clears events of a range of types from the event queue.
+func FlushEvents(minType, maxType EventType) {
+	sdlFlushEvents(minType, maxType)
+}
 
 // func GetEventFilter(filter *EventFilter, userdata *unsafe.Pointer) bool {
 //	return sdlGetEventFilter(filter, userdata)
 // }
 
-// func GetWindowFromEvent(event *Event) *Window {
-//	return sdlGetWindowFromEvent(event)
-// }
+// GetWindowFromEvent returns the associated window with an event or nil if there is none.
+func GetWindowFromEvent(event *Event) *Window {
+	return sdlGetWindowFromEvent(event)
+}
 
-// func HasEvent(type uint32) bool {
-//	return sdlHasEvent(type)
-// }
+// HasEvent checks for the existence of a certain event type in the event queue.
+func HasEvent(eventType EventType) bool {
+	return sdlHasEvent(eventType)
+}
 
-// func HasEvents(minType uint32, maxType uint32) bool {
-//	return sdlHasEvents(minType, maxType)
-// }
+// HasEvents checks for the existence of certain event types in the event queue.
+//
+// Returns true if events with type >= minType and <= maxType are present, or false if not.
+func HasEvents(minType, maxType EventType) bool {
+	return sdlHasEvents(minType, maxType)
+}
 
 // func PeepEvents(events *Event, numevents int32, action EventAction, minType uint32, maxType uint32) int32 {
 //	return sdlPeepEvents(events, numevents, action, minType, maxType)
@@ -262,9 +285,10 @@ func PumpEvents() {
 	sdlPumpEvents()
 }
 
-// func PushEvent(event *Event) bool {
-//	return sdlPushEvent(event)
-// }
+// PushEvent adds an event to the event queue.
+func PushEvent(event *Event) bool {
+	return sdlPushEvent(event)
+}
 
 // func RegisterEvents(numevents int32) uint32 {
 //	return sdlRegisterEvents(numevents)
@@ -274,18 +298,21 @@ func PumpEvents() {
 //	sdlRemoveEventWatch(filter, userdata)
 // }
 
-// func SetEventEnabled(type uint32, enabled bool)  {
-//	sdlSetEventEnabled(type, enabled)
-// }
+// SetEventEnabled sets the state of processing events by type.
+func SetEventEnabled(eventType EventType, enabled bool) {
+	sdlSetEventEnabled(eventType, enabled)
+}
 
-// func SetEventFilter(filter EventFilter, userdata unsafe.Pointer)  {
-//	sdlSetEventFilter(filter, userdata)
-// }
+func SetEventFilter(filter EventFilter, userdata unsafe.Pointer) {
+	sdlSetEventFilter(filter.toCallback(), userdata)
+}
 
-// func WaitEvent(event *Event) bool {
-//	return sdlWaitEvent(event)
-// }
+// WaitEvent waits indefinitely for the next available event.
+func WaitEvent(event *Event) bool {
+	return sdlWaitEvent(event)
+}
 
-// func WaitEventTimeout(event *Event, timeoutMS int32) bool {
-//	return sdlWaitEventTimeout(event, timeoutMS)
-// }
+// WaitEventTimeout waits until the specified timeout (in milliseconds) for the next available event.
+func WaitEventTimeout(event *Event, timeoutMS int32) bool {
+	return sdlWaitEventTimeout(event, timeoutMS)
+}
