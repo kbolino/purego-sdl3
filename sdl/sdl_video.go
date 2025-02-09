@@ -1,5 +1,9 @@
 package sdl
 
+type DisplayID uint32
+
+type WindowID uint32
+
 type HitTestResult uint32
 
 const (
@@ -105,8 +109,6 @@ const (
 	WindowTransparent       WindowFlags = 0x0000000040000000
 	WindowNotFocusable      WindowFlags = 0x0000000080000000
 )
-
-type WindowID uint32
 
 // DestroyWindow destroys a window.
 func DestroyWindow(window *Window) {

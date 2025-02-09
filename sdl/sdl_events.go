@@ -144,12 +144,40 @@ func (e *Event) Type() EventType {
 	return *(*EventType)(unsafe.Pointer(e))
 }
 
+func (e *Event) Common() CommonEvent {
+	return *(*CommonEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Display() DisplayEvent {
+	return *(*DisplayEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Window() WindowEvent {
+	return *(*WindowEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Kdevice() KeyboardDeviceEvent {
+	return *(*KeyboardDeviceEvent)(unsafe.Pointer(e))
+}
+
 func (e *Event) Key() KeyboardEvent {
 	return *(*KeyboardEvent)(unsafe.Pointer(e))
 }
 
+func (e *Event) Edit() TextEditingEvent {
+	return *(*TextEditingEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) EditCandidates() TextEditingCandidatesEvent {
+	return *(*TextEditingCandidatesEvent)(unsafe.Pointer(e))
+}
+
 func (e *Event) Text() TextInputEvent {
 	return *(*TextInputEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Mdevice() MouseDeviceEvent {
+	return *(*MouseDeviceEvent)(unsafe.Pointer(e))
 }
 
 func (e *Event) Motion() MouseMotionEvent {
@@ -160,11 +188,39 @@ func (e *Event) Button() MouseButtonEvent {
 	return *(*MouseButtonEvent)(unsafe.Pointer(e))
 }
 
+func (e *Event) Wheel() MouseWheelEvent {
+	return *(*MouseWheelEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Quit() QuitEvent {
+	return *(*QuitEvent)(unsafe.Pointer(e))
+}
+
 // CommonEvent fields are shared by every event.
 type CommonEvent struct {
-	Type      EventType
-	Reserved  uint32
+	Type     EventType
+	Reserved uint32
+	// Timestamp in nanoseconds, populated using [GetTicksNS].
 	Timestamp uint64
+}
+
+type DisplayEvent struct {
+	CommonEvent
+	DisplayID DisplayID
+	Data1     int32
+	Data2     int32
+}
+
+type WindowEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Data1    int32
+	Data2    int32
+}
+
+type KeyboardDeviceEvent struct {
+	CommonEvent
+	Which KeyboardID
 }
 
 type KeyboardEvent struct {
@@ -179,6 +235,43 @@ type KeyboardEvent struct {
 	Repeat   bool
 }
 
+type TextEditingEvent struct {
+	CommonEvent
+	WindowID WindowID
+	text     *byte
+	Start    int32
+	Length   int32
+}
+
+func (t *TextEditingEvent) Text() string {
+	return convert.ToString(t.text)
+}
+
+type TextEditingCandidatesEvent struct {
+	CommonEvent
+	WindowID          WindowID
+	candidates        **byte
+	numCandidates     int32
+	SelectedCandidate int32
+	Horizontal        bool
+	Padding1          uint8
+	Padding2          uint8
+	Padding3          uint8
+}
+
+// Candidates returns the list of candidates,
+// or empty if there are no candidates available.
+func (t *TextEditingCandidatesEvent) Candidates() []string {
+	if t.candidates == nil || t.numCandidates <= 0 {
+		return []string{}
+	}
+	candidates := make([]string, t.numCandidates)
+	for i, v := range unsafe.Slice(t.candidates, t.numCandidates) {
+		candidates[i] = convert.ToString(v)
+	}
+	return candidates
+}
+
 type TextInputEvent struct {
 	CommonEvent
 	WindowID WindowID
@@ -187,6 +280,11 @@ type TextInputEvent struct {
 
 func (t *TextInputEvent) Text() string {
 	return convert.ToString(t.text)
+}
+
+type MouseDeviceEvent struct {
+	CommonEvent
+	Which MouseID
 }
 
 type MouseMotionEvent struct {
@@ -210,6 +308,21 @@ type MouseButtonEvent struct {
 	Padding  uint8
 	X        float32
 	Y        float32
+}
+
+type MouseWheelEvent struct {
+	CommonEvent
+	WindowID  WindowID
+	Which     MouseID
+	X         float32
+	Y         float32
+	Direction MouseWheelDirection
+	MouseX    float32
+	MouseY    float32
+}
+
+type QuitEvent struct {
+	CommonEvent
 }
 
 // EventFilter is a C function pointer used for callbacks that watch the event queue. Use [NewEventFilter] for creation.
