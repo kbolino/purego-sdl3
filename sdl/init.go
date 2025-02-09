@@ -542,7 +542,7 @@ var (
 	// sdlGetThreadName                         func(*Thread) string
 	// sdlGetThreadState                        func(*Thread) ThreadState
 	// sdlGetTicks                              func() uint64
-	// sdlGetTicksNS                            func() uint64
+	sdlGetTicksNS func() uint64
 	// sdlGetTLS                                func(*TLSID) unsafe.Pointer
 	// sdlGetTouchDeviceName                    func(TouchID) string
 	// sdlGetTouchDevices                       func(*int32) *TouchID
@@ -1776,7 +1776,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetThreadName, lib, "SDL_GetThreadName")
 	// purego.RegisterLibFunc(&sdlGetThreadState, lib, "SDL_GetThreadState")
 	// purego.RegisterLibFunc(&sdlGetTicks, lib, "SDL_GetTicks")
-	// purego.RegisterLibFunc(&sdlGetTicksNS, lib, "SDL_GetTicksNS")
+	purego.RegisterLibFunc(&sdlGetTicksNS, lib, "SDL_GetTicksNS")
 	// purego.RegisterLibFunc(&sdlGetTLS, lib, "SDL_GetTLS")
 	// purego.RegisterLibFunc(&sdlGetTouchDeviceName, lib, "SDL_GetTouchDeviceName")
 	// purego.RegisterLibFunc(&sdlGetTouchDevices, lib, "SDL_GetTouchDevices")

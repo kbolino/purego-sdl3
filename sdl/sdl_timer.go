@@ -32,9 +32,10 @@ package sdl
 //	return sdlGetTicks()
 // }
 
-// func GetTicksNS() uint64 {
-//	return sdlGetTicksNS()
-// }
+// GetTicksNS returns the number of nanoseconds since SDL library initialization.
+func GetTicksNS() uint64 {
+	return sdlGetTicksNS()
+}
 
 // func RemoveTimer(id TimerID) bool {
 //	return sdlRemoveTimer(id)
