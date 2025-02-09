@@ -3,7 +3,6 @@ package sdl
 import (
 	"unsafe"
 
-	"github.com/jupiterrider/purego-sdl3/internal/convert"
 	"github.com/jupiterrider/purego-sdl3/internal/mem"
 )
 
@@ -48,13 +47,9 @@ func CloseCamera(camera *Camera) {
 //	return sdlGetCameraID(camera)
 // }
 
-func GetCameraName(instanceId CameraID) *string {
-	ret := sdlGetCameraName(instanceId)
-	if ret == nil {
-		return nil
-	}
-	name := convert.ToString(ret)
-	return &name
+// GetCameraName returns a human-readable device name or "" on failure.
+func GetCameraName(instanceId CameraID) string {
+	return sdlGetCameraName(instanceId)
 }
 
 // func GetCameraPermissionState(camera *Camera) int32 {

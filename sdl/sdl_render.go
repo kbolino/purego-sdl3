@@ -1,6 +1,8 @@
 package sdl
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 type RendererLogicalPresentation uint32
 
@@ -157,9 +159,10 @@ func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess,
 //	return sdlGetRendererFromTexture(texture)
 // }
 
-// func GetRendererName(renderer *Renderer) string {
-//	return sdlGetRendererName(renderer)
-// }
+// GetRendererName returns the name of the selected renderer, or "" on failure.
+func GetRendererName(renderer *Renderer) string {
+	return sdlGetRendererName(renderer)
+}
 
 // func GetRendererProperties(renderer *Renderer) PropertiesID {
 //	return sdlGetRendererProperties(renderer)

@@ -266,7 +266,7 @@ var (
 	// sdlGetCameraDriver                       func(int32) string
 	// sdlGetCameraFormat                       func(*Camera, *CameraSpec) bool
 	// sdlGetCameraID                           func(*Camera) CameraID
-	sdlGetCameraName func(CameraID) *byte
+	sdlGetCameraName func(CameraID) string
 	// sdlGetCameraPermissionState              func(*Camera) int32
 	// sdlGetCameraPosition                     func(CameraID) CameraPosition
 	// sdlGetCameraProperties                   func(*Camera) PropertiesID
@@ -415,7 +415,7 @@ var (
 	// sdlGetKeyboardState                      func(*int32) *bool
 	// sdlGetKeyFromName                        func(string) Keycode
 	// sdlGetKeyFromScancode                    func(Scancode, Keymod, bool) Keycode
-	// sdlGetKeyName                            func(Keycode) string
+	sdlGetKeyName func(Keycode) string
 	// sdlGetLogOutputFunction                  func(*LogOutputFunction, *unsafe.Pointer)
 	// sdlGetLogPriority                        func(int32) LogPriority
 	// sdlGetMasksForPixelFormat                func(PixelFormat, *int32, *uint32, *uint32, *uint32, *uint32) bool
@@ -425,7 +425,7 @@ var (
 	sdlGetMice           func(*int32) *MouseID
 	sdlGetModState       func() Keymod
 	sdlGetMouseFocus     func() *Window
-	sdlGetMouseNameForID func(MouseID) *byte
+	sdlGetMouseNameForID func(MouseID) string
 	sdlGetMouseState     func(*float32, *float32) MouseButtonFlags
 	// sdlGetNaturalDisplayOrientation          func(DisplayID) DisplayOrientation
 	// sdlGetNumAllocations                     func() int32
@@ -480,7 +480,7 @@ var (
 	// sdlGetRenderDriver                       func(int32) string
 	// sdlGetRenderer                           func(*Window) *Renderer
 	// sdlGetRendererFromTexture                func(*Texture) *Renderer
-	// sdlGetRendererName                       func(*Renderer) string
+	sdlGetRendererName func(*Renderer) string
 	// sdlGetRendererProperties                 func(*Renderer) PropertiesID
 	// sdlGetRenderLogicalPresentation          func(*Renderer, *int32, *int32, *RendererLogicalPresentation) bool
 	// sdlGetRenderLogicalPresentationRect      func(*Renderer, *FRect) bool
@@ -1649,7 +1649,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetKeyboardState, lib, "SDL_GetKeyboardState")
 	// purego.RegisterLibFunc(&sdlGetKeyFromName, lib, "SDL_GetKeyFromName")
 	// purego.RegisterLibFunc(&sdlGetKeyFromScancode, lib, "SDL_GetKeyFromScancode")
-	// purego.RegisterLibFunc(&sdlGetKeyName, lib, "SDL_GetKeyName")
+	purego.RegisterLibFunc(&sdlGetKeyName, lib, "SDL_GetKeyName")
 	// purego.RegisterLibFunc(&sdlGetLogOutputFunction, lib, "SDL_GetLogOutputFunction")
 	// purego.RegisterLibFunc(&sdlGetLogPriority, lib, "SDL_GetLogPriority")
 	// purego.RegisterLibFunc(&sdlGetMasksForPixelFormat, lib, "SDL_GetMasksForPixelFormat")
@@ -1714,7 +1714,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRenderDriver, lib, "SDL_GetRenderDriver")
 	// purego.RegisterLibFunc(&sdlGetRenderer, lib, "SDL_GetRenderer")
 	// purego.RegisterLibFunc(&sdlGetRendererFromTexture, lib, "SDL_GetRendererFromTexture")
-	// purego.RegisterLibFunc(&sdlGetRendererName, lib, "SDL_GetRendererName")
+	purego.RegisterLibFunc(&sdlGetRendererName, lib, "SDL_GetRendererName")
 	// purego.RegisterLibFunc(&sdlGetRendererProperties, lib, "SDL_GetRendererProperties")
 	// purego.RegisterLibFunc(&sdlGetRenderLogicalPresentation, lib, "SDL_GetRenderLogicalPresentation")
 	// purego.RegisterLibFunc(&sdlGetRenderLogicalPresentationRect, lib, "SDL_GetRenderLogicalPresentationRect")

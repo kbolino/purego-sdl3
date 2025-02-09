@@ -53,9 +53,10 @@ type KeyboardID uint32
 //	return sdlGetKeyFromScancode(scancode, modstate, key_event)
 // }
 
-// func GetKeyName(key Keycode) string {
-//	return sdlGetKeyName(key)
-// }
+// GetKeyName returns a human-readable name for a key.
+func GetKeyName(key Keycode) string {
+	return sdlGetKeyName(key)
+}
 
 // GetModState returns an OR'd combination of the modifier keys for the keyboard.
 func GetModState() Keymod {
