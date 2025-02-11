@@ -350,6 +350,8 @@ const (
 	GPUPrimitiveTypePointlist
 )
 
+type GPUDevice struct{}
+
 // func AcquireGPUCommandBuffer(device *GPUDevice) *GPUCommandBuffer {
 //	return sdlAcquireGPUCommandBuffer(device)
 // }
