@@ -11,6 +11,7 @@ var (
 	ttfVersion            func() int32
 	ttfGetFreeTypeVersion func(*int32, *int32, *int32)
 	ttfInit               func() bool
+	ttfGetHarfBuzzVersion func(*int32, *int32, *int32)
 )
 
 func init() {
@@ -34,4 +35,5 @@ func init() {
 	purego.RegisterLibFunc(&ttfVersion, lib, "TTF_Version")
 	purego.RegisterLibFunc(&ttfGetFreeTypeVersion, lib, "TTF_GetFreeTypeVersion")
 	purego.RegisterLibFunc(&ttfInit, lib, "TTF_Init")
+	purego.RegisterLibFunc(&ttfGetHarfBuzzVersion, lib, "TTF_GetHarfBuzzVersion")
 }

@@ -6,10 +6,10 @@ func GetRevision() string {
 }
 
 // GetVersion get the version of SDL that is linked against your program.
-func GetVersion() (major, minor, micro int32) {
+func GetVersion() (major, minor, patch int32) {
 	version := sdlGetVersion()
 	major = version / 1000000
 	minor = version / 1000 % 1000
-	micro = version % 1000
+	patch = version % 1000
 	return
 }
