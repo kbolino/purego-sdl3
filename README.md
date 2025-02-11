@@ -1,5 +1,5 @@
 # purego-sdl3
-[![Go Reference](https://pkg.go.dev/badge/github.com/jupiterrider/purego-sdl3/sdl.svg)](https://pkg.go.dev/github.com/jupiterrider/purego-sdl3/sdl)
+[![Go Reference](https://pkg.go.dev/badge/github.com/jupiterrider/purego-sdl3.svg)](https://pkg.go.dev/github.com/jupiterrider/purego-sdl3)
 
 A cgo-free SDL3 binding.
 
