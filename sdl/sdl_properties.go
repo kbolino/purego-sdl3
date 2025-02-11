@@ -11,6 +11,8 @@ const (
 	PropertyTypeBoolean
 )
 
+type PropertiesID uint32
+
 // func ClearProperty(props PropertiesID, name string) bool {
 //	return sdlClearProperty(props, name)
 // }
