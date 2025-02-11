@@ -28,7 +28,7 @@ const (
 	LogCategoryRender
 	LogCategoryInput
 	LogCategoryTest
-	LogCategoryGpu
+	LogCategoryGPU
 	LogCategoryReserved2
 	LogCategoryReserved3
 	LogCategoryReserved4
