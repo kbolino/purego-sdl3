@@ -10,6 +10,10 @@ type FRect struct {
 	X, Y, W, H float32
 }
 
+type FPoint struct {
+	X, Y float32
+}
+
 // func GetRectAndLineIntersection(rect *Rect, X1 *int32, Y1 *int32, X2 *int32, Y2 *int32) bool {
 //	return sdlGetRectAndLineIntersection(rect, X1, Y1, X2, Y2)
 // }

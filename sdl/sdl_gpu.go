@@ -352,6 +352,8 @@ const (
 
 type GPUDevice struct{}
 
+type GPUTexture struct{}
+
 // func AcquireGPUCommandBuffer(device *GPUDevice) *GPUCommandBuffer {
 //	return sdlAcquireGPUCommandBuffer(device)
 // }

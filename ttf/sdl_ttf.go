@@ -122,6 +122,17 @@ type SubString struct {
 	Rect         sdl.Rect
 }
 
+type GPUAtlasDrawSequence struct {
+	AtlasTexture *sdl.GPUTexture
+	XY           *sdl.FPoint
+	UV           *sdl.FPoint
+	NumVertices  int32
+	Indices      *int32
+	NumIndices   int32
+	ImageType    ImageType
+	Next         *GPUAtlasDrawSequence
+}
+
 // Version gets the version of the dynamically linked SDL_ttf library.
 func Version() (major, minor, patch int32) {
 	version := ttfVersion()
@@ -152,8 +163,8 @@ func AddFallbackFont(font *Font, fallback *Font) bool {
 	return ttfAddFallbackFont(font, fallback)
 }
 
-func AppendTextString(text *Text, string string, length uint64) bool {
-	return ttfAppendTextString(text, string, length)
+func AppendTextString(text *Text, str string, length uint64) bool {
+	return ttfAppendTextString(text, str, length)
 }
 
 func ClearFallbackFonts(font *Font) {
@@ -304,28 +315,28 @@ func GetFontWrapAlignment(font *Font) HorizontalAlignment {
 	return ttfGetFontWrapAlignment(font)
 }
 
-func GetGlyphImage(font *Font, ch uint32, image_type *ImageType) *sdl.Surface {
-	return ttfGetGlyphImage(font, ch, image_type)
+func GetGlyphImage(font *Font, ch rune, imageType *ImageType) *sdl.Surface {
+	return ttfGetGlyphImage(font, ch, imageType)
 }
 
-func GetGlyphImageForIndex(font *Font, glyph_index uint32, image_type *ImageType) *sdl.Surface {
-	return ttfGetGlyphImageForIndex(font, glyph_index, image_type)
+func GetGlyphImageForIndex(font *Font, glyphIndex uint32, imageType *ImageType) *sdl.Surface {
+	return ttfGetGlyphImageForIndex(font, glyphIndex, imageType)
 }
 
-func GetGlyphKerning(font *Font, previous_ch uint32, ch uint32, kerning *int32) bool {
-	return ttfGetGlyphKerning(font, previous_ch, ch, kerning)
+func GetGlyphKerning(font *Font, previousCh, ch rune, kerning *int32) bool {
+	return ttfGetGlyphKerning(font, previousCh, ch, kerning)
 }
 
-func GetGlyphMetrics(font *Font, ch uint32, minx *int32, maxx *int32, miny *int32, maxy *int32, advance *int32) bool {
+func GetGlyphMetrics(font *Font, ch rune, minx *int32, maxx *int32, miny *int32, maxy *int32, advance *int32) bool {
 	return ttfGetGlyphMetrics(font, ch, minx, maxx, miny, maxy, advance)
 }
 
-func GetGlyphScript(ch uint32) uint32 {
+func GetGlyphScript(ch rune) uint32 {
 	return ttfGetGlyphScript(ch)
 }
 
-func GetGPUTextDrawData(text *Text) {
-	ttfGetGPUTextDrawData(text)
+func GetGPUTextDrawData(text *Text) *GPUAtlasDrawSequence {
+	return ttfGetGPUTextDrawData(text)
 }
 
 func GetGPUTextEngineWinding(engine *TextEngine) GPUTextEngineWinding {
@@ -340,81 +351,81 @@ func GetNumFontFaces(font *Font) int32 {
 	return ttfGetNumFontFaces(font)
 }
 
-// func GetPreviousTextSubString(text *Text, substring *SubString, previous *SubString) bool {
-//	return ttfGetPreviousTextSubString(text, substring, previous)
+func GetPreviousTextSubString(text *Text, substring *SubString, previous *SubString) bool {
+	return ttfGetPreviousTextSubString(text, substring, previous)
+}
+
+func GetStringSize(font *Font, text string, length uint64, w *int32, h *int32) bool {
+	return ttfGetStringSize(font, text, length, w, h)
+}
+
+func GetStringSizeWrapped(font *Font, text string, length uint64, wrapWidth int32, w *int32, h *int32) bool {
+	return ttfGetStringSizeWrapped(font, text, length, wrapWidth, w, h)
+}
+
+func GetTextColor(text *Text, r *uint8, g *uint8, b *uint8, a *uint8) bool {
+	return ttfGetTextColor(text, r, g, b, a)
+}
+
+func GetTextColorFloat(text *Text, r *float32, g *float32, b *float32, a *float32) bool {
+	return ttfGetTextColorFloat(text, r, g, b, a)
+}
+
+func GetTextDirection(text *Text) Direction {
+	return ttfGetTextDirection(text)
+}
+
+func GetTextEngine(text *Text) *TextEngine {
+	return ttfGetTextEngine(text)
+}
+
+func GetTextFont(text *Text) *Font {
+	return ttfGetTextFont(text)
+}
+
+func GetTextPosition(text *Text, x *int32, y *int32) bool {
+	return ttfGetTextPosition(text, x, y)
+}
+
+// func GetTextProperties(text *Text) sdl.PropertiesID {
+// 	return ttfGetTextProperties(text)
 // }
 
-// func GetStringSize(font *Font, text string, length uint64, w *int32, h *int32) bool {
-//	return ttfGetStringSize(font, text, length, w, h)
-// }
+func GetTextScript(text *Text) uint32 {
+	return ttfGetTextScript(text)
+}
 
-// func GetStringSizeWrapped(font *Font, text string, length uint64, wrap_width int32, w *int32, h *int32) bool {
-//	return ttfGetStringSizeWrapped(font, text, length, wrap_width, w, h)
-// }
+func GetTextSize(text *Text, w *int32, h *int32) bool {
+	return ttfGetTextSize(text, w, h)
+}
 
-// func GetTextColor(text *Text, r *uint8, g *uint8, b *uint8, a *uint8) bool {
-//	return ttfGetTextColor(text, r, g, b, a)
-// }
+func GetTextSubString(text *Text, offset int32, substring *SubString) bool {
+	return ttfGetTextSubString(text, offset, substring)
+}
 
-// func GetTextColorFloat(text *Text, r *float32, g *float32, b *float32, a *float32) bool {
-//	return ttfGetTextColorFloat(text, r, g, b, a)
-// }
+func GetTextSubStringForLine(text *Text, line int32, substring *SubString) bool {
+	return ttfGetTextSubStringForLine(text, line, substring)
+}
 
-// func GetTextDirection(text *Text) Direction {
-//	return ttfGetTextDirection(text)
-// }
+func GetTextSubStringForPoint(text *Text, x int32, y int32, substring *SubString) bool {
+	return ttfGetTextSubStringForPoint(text, x, y, substring)
+}
 
-// func GetTextEngine(text *Text) *TextEngine {
-//	return ttfGetTextEngine(text)
-// }
+func GetTextSubStringsForRange(text *Text, offset int32, length int32, count *int32) {
+	ttfGetTextSubStringsForRange(text, offset, length, count)
+}
 
-// func GetTextFont(text *Text) *Font {
-//	return ttfGetTextFont(text)
-// }
+func GetTextWrapWidth(text *Text, wrapWidth *int32) bool {
+	return ttfGetTextWrapWidth(text, wrapWidth)
+}
 
-// func GetTextPosition(text *Text, x *int32, y *int32) bool {
-//	return ttfGetTextPosition(text, x, y)
-// }
+func InsertTextString(text *Text, offset int32, str string, length uint64) bool {
+	return ttfInsertTextString(text, offset, str, length)
+}
 
-// func GetTextProperties(text *Text) PropertiesID {
-//	return ttfGetTextProperties(text)
-// }
-
-// func GetTextScript(text *Text) uint32 {
-//	return ttfGetTextScript(text)
-// }
-
-// func GetTextSize(text *Text, w *int32, h *int32) bool {
-//	return ttfGetTextSize(text, w, h)
-// }
-
-// func GetTextSubString(text *Text, offset int32, substring *SubString) bool {
-//	return ttfGetTextSubString(text, offset, substring)
-// }
-
-// func GetTextSubStringForLine(text *Text, line int32, substring *SubString) bool {
-//	return ttfGetTextSubStringForLine(text, line, substring)
-// }
-
-// func GetTextSubStringForPoint(text *Text, x int32, y int32, substring *SubString) bool {
-//	return ttfGetTextSubStringForPoint(text, x, y, substring)
-// }
-
-// func GetTextSubStringsForRange(text *Text, offset int32, length int32, count *int32)  {
-//	ttfGetTextSubStringsForRange(text, offset, length, count)
-// }
-
-// func GetTextWrapWidth(text *Text, wrap_width *int32) bool {
-//	return ttfGetTextWrapWidth(text, wrap_width)
-// }
-
-// func InsertTextString(text *Text, offset int32, string string, length uint64) bool {
-//	return ttfInsertTextString(text, offset, string, length)
-// }
-
-// func MeasureString(font *Font, text string, length uint64, max_width int32, measured_width *int32, measured_length *uint64) bool {
-//	return ttfMeasureString(font, text, length, max_width, measured_width, measured_length)
-// }
+func MeasureString(font *Font, text string, length uint64, maxWidth int32, measuredWidth *int32, measuredLength *uint64) bool {
+	return ttfMeasureString(font, text, length, maxWidth, measuredWidth, measuredLength)
+}
 
 func OpenFont(file string, ptsize float32) *Font {
 	return ttfOpenFont(file, ptsize)
@@ -424,166 +435,166 @@ func OpenFontIO(src *sdl.IOStream, closeio bool, ptsize float32) *Font {
 	return ttfOpenFontIO(src, closeio, ptsize)
 }
 
-// func OpenFontWithProperties(props PropertiesID) *Font {
-//	return ttfOpenFontWithProperties(props)
-// }
+func OpenFontWithProperties(props sdl.PropertiesID) *Font {
+	return ttfOpenFontWithProperties(props)
+}
 
 func Quit() {
 	ttfQuit()
 }
 
-// func RemoveFallbackFont(font *Font, fallback *Font)  {
-//	ttfRemoveFallbackFont(font, fallback)
-// }
+func RemoveFallbackFont(font *Font, fallback *Font) {
+	ttfRemoveFallbackFont(font, fallback)
+}
 
-// func RenderGlyph_Blended(font *Font, ch uint32, fg color.RGBA) *Surface {
-//	return ttfRenderGlyph_Blended(font, ch, fg)
-// }
+func RenderGlyphBlended(font *Font, ch rune, fg color.RGBA) *sdl.Surface {
+	return ttfRenderGlyphBlended(font, ch, *(*uintptr)(unsafe.Pointer(&fg)))
+}
 
-// func RenderGlyph_LCD(font *Font, ch uint32, fg color.RGBA, bg color.RGBA) *Surface {
-//	return ttfRenderGlyph_LCD(font, ch, fg, bg)
-// }
+func RenderGlyphLCD(font *Font, ch rune, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+	return ttfRenderGlyphLCD(font, ch, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
+}
 
-// func RenderGlyph_Shaded(font *Font, ch uint32, fg color.RGBA, bg color.RGBA) *Surface {
-//	return ttfRenderGlyph_Shaded(font, ch, fg, bg)
-// }
+func RenderGlyphShaded(font *Font, ch rune, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+	return ttfRenderGlyphShaded(font, ch, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
+}
 
-// func RenderGlyph_Solid(font *Font, ch uint32, fg color.RGBA) *Surface {
-//	return ttfRenderGlyph_Solid(font, ch, fg)
-// }
+func RenderGlyphSolid(font *Font, ch rune, fg color.RGBA) *sdl.Surface {
+	return ttfRenderGlyphSolid(font, ch, *(*uintptr)(unsafe.Pointer(&fg)))
+}
 
-// func RenderText_Blended(font *Font, text string, length uint64, fg color.RGBA) *Surface {
-//	return ttfRenderText_Blended(font, text, length, fg)
-// }
+func RenderTextBlended(font *Font, text string, length uint64, fg color.RGBA) *sdl.Surface {
+	return ttfRenderTextBlended(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)))
+}
 
-// func RenderText_Blended_Wrapped(font *Font, text string, length uint64, fg color.RGBA, wrap_width int32) *Surface {
-//	return ttfRenderText_Blended_Wrapped(font, text, length, fg, wrap_width)
-// }
+func RenderTextBlendedWrapped(font *Font, text string, length uint64, fg color.RGBA, wrapWidth int32) *sdl.Surface {
+	return ttfRenderTextBlendedWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), wrapWidth)
+}
 
-// func RenderText_LCD(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *Surface {
-//	return ttfRenderText_LCD(font, text, length, fg, bg)
-// }
+func RenderTextLCD(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+	return ttfRenderTextLCD(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
+}
 
-// func RenderText_LCD_Wrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrap_width int32) *Surface {
-//	return ttfRenderText_LCD_Wrapped(font, text, length, fg, bg, wrap_width)
-// }
+func RenderTextLCDWrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrapWidth int32) *sdl.Surface {
+	return ttfRenderTextLCDWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)), wrapWidth)
+}
 
-// func RenderText_Shaded(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *Surface {
-//	return ttfRenderText_Shaded(font, text, length, fg, bg)
-// }
+func RenderTextShaded(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+	return ttfRenderTextShaded(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
+}
 
-// func RenderText_Shaded_Wrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrap_width int32) *Surface {
-//	return ttfRenderText_Shaded_Wrapped(font, text, length, fg, bg, wrap_width)
-// }
+func RenderTextShadedWrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrapWidth int32) *sdl.Surface {
+	return ttfRenderTextShadedWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)), wrapWidth)
+}
 
 func RenderTextSolid(font *Font, text string, length uint64, fg color.RGBA) *sdl.Surface {
 	return ttfRenderTextSolid(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)))
 }
 
-// func RenderText_Solid_Wrapped(font *Font, text string, length uint64, fg color.RGBA, wrapLength int32) *Surface {
-//	return ttfRenderText_Solid_Wrapped(font, text, length, fg, wrapLength)
-// }
+func RenderTextSolidWrapped(font *Font, text string, length uint64, fg color.RGBA, wrapLength int32) *sdl.Surface {
+	return ttfRenderTextSolidWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), wrapLength)
+}
 
-// func SetFontDirection(font *Font, direction Direction) bool {
-//	return ttfSetFontDirection(font, direction)
-// }
+func SetFontDirection(font *Font, direction Direction) bool {
+	return ttfSetFontDirection(font, direction)
+}
 
-// func SetFontHinting(font *Font, hinting HintingFlags)  {
-//	ttfSetFontHinting(font, hinting)
-// }
+func SetFontHinting(font *Font, hinting HintingFlags) {
+	ttfSetFontHinting(font, hinting)
+}
 
-// func SetFontKerning(font *Font, enabled bool)  {
-//	ttfSetFontKerning(font, enabled)
-// }
+func SetFontKerning(font *Font, enabled bool) {
+	ttfSetFontKerning(font, enabled)
+}
 
-// func SetFontLanguage(font *Font, language_bcp47 string) bool {
-//	return ttfSetFontLanguage(font, language_bcp47)
-// }
+func SetFontLanguage(font *Font, languageBCP47 string) bool {
+	return ttfSetFontLanguage(font, languageBCP47)
+}
 
-// func SetFontLineSkip(font *Font, lineskip int32)  {
-//	ttfSetFontLineSkip(font, lineskip)
-// }
+func SetFontLineSkip(font *Font, lineskip int32) {
+	ttfSetFontLineSkip(font, lineskip)
+}
 
-// func SetFontOutline(font *Font, outline int32) bool {
-//	return ttfSetFontOutline(font, outline)
-// }
+func SetFontOutline(font *Font, outline int32) bool {
+	return ttfSetFontOutline(font, outline)
+}
 
-// func SetFontScript(font *Font, script uint32) bool {
-//	return ttfSetFontScript(font, script)
-// }
+func SetFontScript(font *Font, script uint32) bool {
+	return ttfSetFontScript(font, script)
+}
 
-// func SetFontSDF(font *Font, enabled bool) bool {
-//	return ttfSetFontSDF(font, enabled)
-// }
+func SetFontSDF(font *Font, enabled bool) bool {
+	return ttfSetFontSDF(font, enabled)
+}
 
-// func SetFontSize(font *Font, ptsize float32) bool {
-//	return ttfSetFontSize(font, ptsize)
-// }
+func SetFontSize(font *Font, ptsize float32) bool {
+	return ttfSetFontSize(font, ptsize)
+}
 
-// func SetFontSizeDPI(font *Font, ptsize float32, hdpi int32, vdpi int32) bool {
-//	return ttfSetFontSizeDPI(font, ptsize, hdpi, vdpi)
-// }
+func SetFontSizeDPI(font *Font, ptsize float32, hdpi int32, vdpi int32) bool {
+	return ttfSetFontSizeDPI(font, ptsize, hdpi, vdpi)
+}
 
-// func SetFontStyle(font *Font, style FontStyleFlags)  {
-//	ttfSetFontStyle(font, style)
-// }
+func SetFontStyle(font *Font, style FontStyleFlags) {
+	ttfSetFontStyle(font, style)
+}
 
-// func SetFontWrapAlignment(font *Font, align HorizontalAlignment)  {
-//	ttfSetFontWrapAlignment(font, align)
-// }
+func SetFontWrapAlignment(font *Font, align HorizontalAlignment) {
+	ttfSetFontWrapAlignment(font, align)
+}
 
-// func SetGPUTextEngineWinding(engine *TextEngine, winding GPUTextEngineWinding)  {
-//	ttfSetGPUTextEngineWinding(engine, winding)
-// }
+func SetGPUTextEngineWinding(engine *TextEngine, winding GPUTextEngineWinding) {
+	ttfSetGPUTextEngineWinding(engine, winding)
+}
 
-// func SetTextColor(text *Text, r uint8, g uint8, b uint8, a uint8) bool {
-//	return ttfSetTextColor(text, r, g, b, a)
-// }
+func SetTextColor(text *Text, r uint8, g uint8, b uint8, a uint8) bool {
+	return ttfSetTextColor(text, r, g, b, a)
+}
 
-// func SetTextColorFloat(text *Text, r float32, g float32, b float32, a float32) bool {
-//	return ttfSetTextColorFloat(text, r, g, b, a)
-// }
+func SetTextColorFloat(text *Text, r float32, g float32, b float32, a float32) bool {
+	return ttfSetTextColorFloat(text, r, g, b, a)
+}
 
-// func SetTextDirection(text *Text, direction Direction) bool {
-//	return ttfSetTextDirection(text, direction)
-// }
+func SetTextDirection(text *Text, direction Direction) bool {
+	return ttfSetTextDirection(text, direction)
+}
 
-// func SetTextEngine(text *Text, engine *TextEngine) bool {
-//	return ttfSetTextEngine(text, engine)
-// }
+func SetTextEngine(text *Text, engine *TextEngine) bool {
+	return ttfSetTextEngine(text, engine)
+}
 
-// func SetTextFont(text *Text, font *Font) bool {
-//	return ttfSetTextFont(text, font)
-// }
+func SetTextFont(text *Text, font *Font) bool {
+	return ttfSetTextFont(text, font)
+}
 
-// func SetTextPosition(text *Text, x int32, y int32) bool {
-//	return ttfSetTextPosition(text, x, y)
-// }
+func SetTextPosition(text *Text, x int32, y int32) bool {
+	return ttfSetTextPosition(text, x, y)
+}
 
-// func SetTextScript(text *Text, script uint32) bool {
-//	return ttfSetTextScript(text, script)
-// }
+func SetTextScript(text *Text, script uint32) bool {
+	return ttfSetTextScript(text, script)
+}
 
-// func SetTextString(text *Text, string string, length uint64) bool {
-//	return ttfSetTextString(text, string, length)
-// }
+func SetTextString(text *Text, str string, length uint64) bool {
+	return ttfSetTextString(text, str, length)
+}
 
-// func SetTextWrapWhitespaceVisible(text *Text, visible bool) bool {
-//	return ttfSetTextWrapWhitespaceVisible(text, visible)
-// }
+func SetTextWrapWhitespaceVisible(text *Text, visible bool) bool {
+	return ttfSetTextWrapWhitespaceVisible(text, visible)
+}
 
-// func SetTextWrapWidth(text *Text, wrap_width int32) bool {
-//	return ttfSetTextWrapWidth(text, wrap_width)
-// }
+func SetTextWrapWidth(text *Text, wrapWidth int32) bool {
+	return ttfSetTextWrapWidth(text, wrapWidth)
+}
 
-// func TextWrapWhitespaceVisible(text *Text) bool {
-//	return ttfTextWrapWhitespaceVisible(text)
-// }
+func TextWrapWhitespaceVisible(text *Text) bool {
+	return ttfTextWrapWhitespaceVisible(text)
+}
 
-// func UpdateText(text *Text) bool {
-//	return ttfUpdateText(text)
-// }
+func UpdateText(text *Text) bool {
+	return ttfUpdateText(text)
+}
 
-// func WasInit() int32 {
-//	return ttfWasInit()
-// }
+func WasInit() int32 {
+	return ttfWasInit()
+}
