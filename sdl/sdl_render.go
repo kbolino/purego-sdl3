@@ -372,9 +372,9 @@ func SetRenderVSync(renderer *Renderer, vsync int32) bool {
 //	return sdlSetTextureBlendMode(texture, blendMode)
 // }
 
-// func SetTextureColorMod(texture *Texture, r uint8, g uint8, b uint8) bool {
-//	return sdlSetTextureColorMod(texture, r, g, b)
-// }
+func SetTextureColorMod(texture *Texture, r uint8, g uint8, b uint8) bool {
+	return sdlSetTextureColorMod(texture, r, g, b)
+}
 
 // func SetTextureColorModFloat(texture *Texture, r float32, g float32, b float32) bool {
 //	return sdlSetTextureColorModFloat(texture, r, g, b)

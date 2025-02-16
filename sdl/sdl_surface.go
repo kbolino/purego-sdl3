@@ -166,9 +166,9 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 //	return sdlGetSurfaceProperties(surface)
 // }
 
-// func LoadBMP(file string) *Surface {
-//	return sdlLoadBMP(file)
-// }
+func LoadBMP(file string) *Surface {
+	return sdlLoadBMP(file)
+}
 
 // LockSurface sets up a surface for directly accessing the pixels.
 func LockSurface(surface *Surface) bool {

@@ -710,7 +710,7 @@ var (
 	// sdlJoystickEventsEnabled                 func() bool
 	// sdlKillProcess                           func(*Process, bool) bool
 	// sdllltoa                                 func(int64, string, int32) string
-	// sdlLoadBMP                               func(string) *Surface
+	sdlLoadBMP   func(string) *Surface
 	sdlLoadBMPIO func(*IOStream, bool) *Surface
 	// sdlLoadFile                              func(string, *uint64) unsafe.Pointer
 	// sdlLoadFile_IO                           func(*IOStream, *uint64, bool) unsafe.Pointer
@@ -1019,7 +1019,7 @@ var (
 	// sdlSetTextureAlphaMod                    func(*Texture, uint8) bool
 	// sdlSetTextureAlphaModFloat               func(*Texture, float32) bool
 	// sdlSetTextureBlendMode                   func(*Texture, BlendMode) bool
-	// sdlSetTextureColorMod                    func(*Texture, uint8, uint8, uint8) bool
+	sdlSetTextureColorMod func(*Texture, uint8, uint8, uint8) bool
 	// sdlSetTextureColorModFloat               func(*Texture, float32, float32, float32) bool
 	// sdlSetTextureScaleMode                   func(*Texture, ScaleMode) bool
 	// sdlSetTLS                                func(*TLSID, unsafe.Pointer, TLSDestructorCallback) bool
@@ -1944,7 +1944,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlJoystickEventsEnabled, lib, "SDL_JoystickEventsEnabled")
 	// purego.RegisterLibFunc(&sdlKillProcess, lib, "SDL_KillProcess")
 	// purego.RegisterLibFunc(&sdllltoa, lib, "SDL_lltoa")
-	// purego.RegisterLibFunc(&sdlLoadBMP, lib, "SDL_LoadBMP")
+	purego.RegisterLibFunc(&sdlLoadBMP, lib, "SDL_LoadBMP")
 	purego.RegisterLibFunc(&sdlLoadBMPIO, lib, "SDL_LoadBMP_IO")
 	// purego.RegisterLibFunc(&sdlLoadFile, lib, "SDL_LoadFile")
 	// purego.RegisterLibFunc(&sdlLoadFile_IO, lib, "SDL_LoadFile_IO")
@@ -2253,7 +2253,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetTextureAlphaMod, lib, "SDL_SetTextureAlphaMod")
 	// purego.RegisterLibFunc(&sdlSetTextureAlphaModFloat, lib, "SDL_SetTextureAlphaModFloat")
 	// purego.RegisterLibFunc(&sdlSetTextureBlendMode, lib, "SDL_SetTextureBlendMode")
-	// purego.RegisterLibFunc(&sdlSetTextureColorMod, lib, "SDL_SetTextureColorMod")
+	purego.RegisterLibFunc(&sdlSetTextureColorMod, lib, "SDL_SetTextureColorMod")
 	// purego.RegisterLibFunc(&sdlSetTextureColorModFloat, lib, "SDL_SetTextureColorModFloat")
 	// purego.RegisterLibFunc(&sdlSetTextureScaleMode, lib, "SDL_SetTextureScaleMode")
 	// purego.RegisterLibFunc(&sdlSetTLS, lib, "SDL_SetTLS")
