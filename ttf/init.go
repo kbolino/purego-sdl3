@@ -68,61 +68,63 @@ var (
 	ttfGetTextEngine                          func(*Text) *TextEngine
 	ttfGetTextFont                            func(*Text) *Font
 	ttfGetTextPosition                        func(*Text, *int32, *int32) bool
-	// ttfGetTextProperties                      func(*Text) sdl.PropertiesID
-	ttfGetTextScript                func(*Text) uint32
-	ttfGetTextSize                  func(*Text, *int32, *int32) bool
-	ttfGetTextSubString             func(*Text, int32, *SubString) bool
-	ttfGetTextSubStringForLine      func(*Text, int32, *SubString) bool
-	ttfGetTextSubStringForPoint     func(*Text, int32, int32, *SubString) bool
-	ttfGetTextSubStringsForRange    func(*Text, int32, int32, *int32)
-	ttfGetTextWrapWidth             func(*Text, *int32) bool
-	ttfInit                         func() bool
-	ttfInsertTextString             func(*Text, int32, string, uint64) bool
-	ttfMeasureString                func(*Font, string, uint64, int32, *int32, *uint64) bool
-	ttfOpenFont                     func(string, float32) *Font
-	ttfOpenFontIO                   func(*sdl.IOStream, bool, float32) *Font
-	ttfOpenFontWithProperties       func(sdl.PropertiesID) *Font
-	ttfQuit                         func()
-	ttfRemoveFallbackFont           func(*Font, *Font)
-	ttfRenderGlyphBlended           func(*Font, rune, uintptr) *sdl.Surface
-	ttfRenderGlyphLCD               func(*Font, rune, uintptr, uintptr) *sdl.Surface
-	ttfRenderGlyphShaded            func(*Font, rune, uintptr, uintptr) *sdl.Surface
-	ttfRenderGlyphSolid             func(*Font, rune, uintptr) *sdl.Surface
-	ttfRenderTextBlended            func(*Font, string, uint64, uintptr) *sdl.Surface
-	ttfRenderTextBlendedWrapped     func(*Font, string, uint64, uintptr, int32) *sdl.Surface
-	ttfRenderTextLCD                func(*Font, string, uint64, uintptr, uintptr) *sdl.Surface
-	ttfRenderTextLCDWrapped         func(*Font, string, uint64, uintptr, uintptr, int32) *sdl.Surface
-	ttfRenderTextShaded             func(*Font, string, uint64, uintptr, uintptr) *sdl.Surface
-	ttfRenderTextShadedWrapped      func(*Font, string, uint64, uintptr, uintptr, int32) *sdl.Surface
-	ttfRenderTextSolid              func(*Font, string, uint64, uintptr) *sdl.Surface
-	ttfRenderTextSolidWrapped       func(*Font, string, uint64, uintptr, int32) *sdl.Surface
-	ttfSetFontDirection             func(*Font, Direction) bool
-	ttfSetFontHinting               func(*Font, HintingFlags)
-	ttfSetFontKerning               func(*Font, bool)
-	ttfSetFontLanguage              func(*Font, string) bool
-	ttfSetFontLineSkip              func(*Font, int32)
-	ttfSetFontOutline               func(*Font, int32) bool
-	ttfSetFontScript                func(*Font, uint32) bool
-	ttfSetFontSDF                   func(*Font, bool) bool
-	ttfSetFontSize                  func(*Font, float32) bool
-	ttfSetFontSizeDPI               func(*Font, float32, int32, int32) bool
-	ttfSetFontStyle                 func(*Font, FontStyleFlags)
-	ttfSetFontWrapAlignment         func(*Font, HorizontalAlignment)
-	ttfSetGPUTextEngineWinding      func(*TextEngine, GPUTextEngineWinding)
-	ttfSetTextColor                 func(*Text, uint8, uint8, uint8, uint8) bool
-	ttfSetTextColorFloat            func(*Text, float32, float32, float32, float32) bool
-	ttfSetTextDirection             func(*Text, Direction) bool
-	ttfSetTextEngine                func(*Text, *TextEngine) bool
-	ttfSetTextFont                  func(*Text, *Font) bool
-	ttfSetTextPosition              func(*Text, int32, int32) bool
-	ttfSetTextScript                func(*Text, uint32) bool
-	ttfSetTextString                func(*Text, string, uint64) bool
-	ttfSetTextWrapWhitespaceVisible func(*Text, bool) bool
-	ttfSetTextWrapWidth             func(*Text, int32) bool
-	ttfTextWrapWhitespaceVisible    func(*Text) bool
-	ttfUpdateText                   func(*Text) bool
-	ttfVersion                      func() int32
-	ttfWasInit                      func() int32
+	ttfGetTextProperties                      func(*Text) sdl.PropertiesID
+	ttfGetTextScript                          func(*Text) uint32
+	ttfGetTextSize                            func(*Text, *int32, *int32) bool
+	ttfGetTextSubString                       func(*Text, int32, *SubString) bool
+	ttfGetTextSubStringForLine                func(*Text, int32, *SubString) bool
+	ttfGetTextSubStringForPoint               func(*Text, int32, int32, *SubString) bool
+	ttfGetTextSubStringsForRange              func(*Text, int32, int32, *int32)
+	ttfGetTextWrapWidth                       func(*Text, *int32) bool
+	ttfInit                                   func() bool
+	ttfInsertTextString                       func(*Text, int32, string, uint64) bool
+	ttfMeasureString                          func(*Font, string, uint64, int32, *int32, *uint64) bool
+	ttfOpenFont                               func(string, float32) *Font
+	ttfOpenFontIO                             func(*sdl.IOStream, bool, float32) *Font
+	ttfOpenFontWithProperties                 func(sdl.PropertiesID) *Font
+	ttfQuit                                   func()
+	ttfRemoveFallbackFont                     func(*Font, *Font)
+	ttfRenderGlyphBlended                     func(*Font, rune, uintptr) *sdl.Surface
+	ttfRenderGlyphLCD                         func(*Font, rune, uintptr, uintptr) *sdl.Surface
+	ttfRenderGlyphShaded                      func(*Font, rune, uintptr, uintptr) *sdl.Surface
+	ttfRenderGlyphSolid                       func(*Font, rune, uintptr) *sdl.Surface
+	ttfRenderTextBlended                      func(*Font, string, uint64, uintptr) *sdl.Surface
+	ttfRenderTextBlendedWrapped               func(*Font, string, uint64, uintptr, int32) *sdl.Surface
+	ttfRenderTextLCD                          func(*Font, string, uint64, uintptr, uintptr) *sdl.Surface
+	ttfRenderTextLCDWrapped                   func(*Font, string, uint64, uintptr, uintptr, int32) *sdl.Surface
+	ttfRenderTextShaded                       func(*Font, string, uint64, uintptr, uintptr) *sdl.Surface
+	ttfRenderTextShadedWrapped                func(*Font, string, uint64, uintptr, uintptr, int32) *sdl.Surface
+	ttfRenderTextSolid                        func(*Font, string, uint64, uintptr) *sdl.Surface
+	ttfRenderTextSolidWrapped                 func(*Font, string, uint64, uintptr, int32) *sdl.Surface
+	ttfSetFontDirection                       func(*Font, Direction) bool
+	ttfSetFontHinting                         func(*Font, HintingFlags)
+	ttfSetFontKerning                         func(*Font, bool)
+	ttfSetFontLanguage                        func(*Font, string) bool
+	ttfSetFontLineSkip                        func(*Font, int32)
+	ttfSetFontOutline                         func(*Font, int32) bool
+	ttfSetFontScript                          func(*Font, uint32) bool
+	ttfSetFontSDF                             func(*Font, bool) bool
+	ttfSetFontSize                            func(*Font, float32) bool
+	ttfSetFontSizeDPI                         func(*Font, float32, int32, int32) bool
+	ttfSetFontStyle                           func(*Font, FontStyleFlags)
+	ttfSetFontWrapAlignment                   func(*Font, HorizontalAlignment)
+	ttfSetGPUTextEngineWinding                func(*TextEngine, GPUTextEngineWinding)
+	ttfSetTextColor                           func(*Text, uint8, uint8, uint8, uint8) bool
+	ttfSetTextColorFloat                      func(*Text, float32, float32, float32, float32) bool
+	ttfSetTextDirection                       func(*Text, Direction) bool
+	ttfSetTextEngine                          func(*Text, *TextEngine) bool
+	ttfSetTextFont                            func(*Text, *Font) bool
+	ttfSetTextPosition                        func(*Text, int32, int32) bool
+	ttfSetTextScript                          func(*Text, uint32) bool
+	ttfSetTextString                          func(*Text, string, uint64) bool
+	ttfSetTextWrapWhitespaceVisible           func(*Text, bool) bool
+	ttfSetTextWrapWidth                       func(*Text, int32) bool
+	ttfStringToTag                            func(string) uint32
+	ttfTagToString                            func(uint32, *byte, uint64)
+	ttfTextWrapWhitespaceVisible              func(*Text) bool
+	ttfUpdateText                             func(*Text) bool
+	ttfVersion                                func() int32
+	ttfWasInit                                func() int32
 )
 
 func init() {
@@ -202,7 +204,7 @@ func init() {
 	purego.RegisterLibFunc(&ttfGetTextEngine, lib, "TTF_GetTextEngine")
 	purego.RegisterLibFunc(&ttfGetTextFont, lib, "TTF_GetTextFont")
 	purego.RegisterLibFunc(&ttfGetTextPosition, lib, "TTF_GetTextPosition")
-	// purego.RegisterLibFunc(&ttfGetTextProperties, lib, "TTF_GetTextProperties")
+	purego.RegisterLibFunc(&ttfGetTextProperties, lib, "TTF_GetTextProperties")
 	purego.RegisterLibFunc(&ttfGetTextScript, lib, "TTF_GetTextScript")
 	purego.RegisterLibFunc(&ttfGetTextSize, lib, "TTF_GetTextSize")
 	purego.RegisterLibFunc(&ttfGetTextSubString, lib, "TTF_GetTextSubString")
@@ -253,6 +255,8 @@ func init() {
 	purego.RegisterLibFunc(&ttfSetTextString, lib, "TTF_SetTextString")
 	purego.RegisterLibFunc(&ttfSetTextWrapWhitespaceVisible, lib, "TTF_SetTextWrapWhitespaceVisible")
 	purego.RegisterLibFunc(&ttfSetTextWrapWidth, lib, "TTF_SetTextWrapWidth")
+	purego.RegisterLibFunc(&ttfStringToTag, lib, "TTF_StringToTag")
+	purego.RegisterLibFunc(&ttfTagToString, lib, "TTF_TagToString")
 	purego.RegisterLibFunc(&ttfTextWrapWhitespaceVisible, lib, "TTF_TextWrapWhitespaceVisible")
 	purego.RegisterLibFunc(&ttfUpdateText, lib, "TTF_UpdateText")
 	purego.RegisterLibFunc(&ttfVersion, lib, "TTF_Version")

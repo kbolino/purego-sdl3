@@ -387,9 +387,9 @@ func GetTextPosition(text *Text, x *int32, y *int32) bool {
 	return ttfGetTextPosition(text, x, y)
 }
 
-// func GetTextProperties(text *Text) sdl.PropertiesID {
-// 	return ttfGetTextProperties(text)
-// }
+func GetTextProperties(text *Text) sdl.PropertiesID {
+	return ttfGetTextProperties(text)
+}
 
 func GetTextScript(text *Text) uint32 {
 	return ttfGetTextScript(text)
@@ -597,4 +597,15 @@ func UpdateText(text *Text) bool {
 
 func WasInit() int32 {
 	return ttfWasInit()
+}
+
+func StringToTag(str string) uint32 {
+	return ttfStringToTag(str)
+}
+
+func TagToString(tag uint32) string {
+	const size = 5
+	var buffer [size]byte
+	ttfTagToString(tag, &buffer[0], size)
+	return convert.ToString(&buffer[0])
 }
