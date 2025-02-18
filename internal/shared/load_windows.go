@@ -12,3 +12,11 @@ func Load(name string) (uintptr, error) {
 	}
 	return uintptr(handle), err
 }
+
+func Get(lib uintptr, name string) uintptr {
+	addr, err := syscall.GetProcAddress(syscall.Handle(lib), name)
+	if err != nil {
+		panic(err)
+	}
+	return addr
+}

@@ -1,6 +1,10 @@
 package sdl
 
-import "unsafe"
+import (
+	"unsafe"
+
+	"github.com/ebitengine/purego"
+)
 
 // func abs(x int32) int32 {
 //	return sdlabs(x)
@@ -146,7 +150,7 @@ import "unsafe"
 //
 // If mem is nil, this function does nothing.
 func Free(mem unsafe.Pointer) {
-	sdlfree(mem)
+	purego.SyscallN(sdlfree, uintptr(mem))
 }
 
 // func getenv(name string) string {

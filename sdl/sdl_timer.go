@@ -1,5 +1,7 @@
 package sdl
 
+import "github.com/ebitengine/purego"
+
 // func AddTimer(interval uint32, callback TimerCallback, userdata unsafe.Pointer) TimerID {
 //	return sdlAddTimer(interval, callback, userdata)
 // }
@@ -34,7 +36,8 @@ package sdl
 
 // GetTicksNS returns the number of nanoseconds since SDL library initialization.
 func GetTicksNS() uint64 {
-	return sdlGetTicksNS()
+	ret, _, _ := purego.SyscallN(sdlGetTicksNS)
+	return uint64(ret)
 }
 
 // func RemoveTimer(id TimerID) bool {

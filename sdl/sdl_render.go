@@ -2,6 +2,8 @@ package sdl
 
 import (
 	"unsafe"
+
+	"github.com/ebitengine/purego"
 )
 
 type RendererLogicalPresentation uint32
@@ -39,17 +41,20 @@ func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlag
 
 // SetRenderDrawColor sets the color used for drawing operations.
 func SetRenderDrawColor(renderer *Renderer, r, g, b, a uint8) bool {
-	return sdlSetRenderDrawColor(renderer, r, g, b, a)
+	ret, _, _ := purego.SyscallN(sdlSetRenderDrawColor, uintptr(unsafe.Pointer(renderer)), uintptr(r), uintptr(g), uintptr(b), uintptr(a))
+	return byte(ret) != 0
 }
 
 // RenderPresent updates the screen with any rendering performed since the previous call.
 func RenderPresent(renderer *Renderer) bool {
-	return sdlRenderPresent(renderer)
+	ret, _, _ := purego.SyscallN(sdlRenderPresent, uintptr(unsafe.Pointer(renderer)))
+	return byte(ret) != 0
 }
 
 // RenderClear clears the current rendering target with the drawing color.
 func RenderClear(renderer *Renderer) bool {
-	return sdlRenderClear(renderer)
+	ret, _, _ := purego.SyscallN(sdlRenderClear, uintptr(unsafe.Pointer(renderer)))
+	return byte(ret) != 0
 }
 
 // DestroyRenderer destroys the rendering context for a window and free all associated textures.
@@ -59,12 +64,14 @@ func DestroyRenderer(renderer *Renderer) {
 
 // RenderRect draws a rectangle on the current rendering target at subpixel precision.
 func RenderRect(renderer *Renderer, rect *FRect) bool {
-	return sdlRenderRect(renderer, rect)
+	ret, _, _ := purego.SyscallN(sdlRenderRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
+	return byte(ret) != 0
 }
 
 // RenderFillRect fills a rectangle on the current rendering target with the drawing color at subpixel precision.
 func RenderFillRect(renderer *Renderer, rect *FRect) bool {
-	return sdlRenderFillRect(renderer, rect)
+	ret, _, _ := purego.SyscallN(sdlRenderFillRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
+	return byte(ret) != 0
 }
 
 // RenderDebugText draws debug text to a [Renderer].
@@ -79,7 +86,8 @@ func CreateTextureFromSurface(renderer *Renderer, surface *Surface) *Texture {
 
 // RenderTexture copies a portion of the texture to the current rendering target at subpixel precision.
 func RenderTexture(renderer *Renderer, texture *Texture, srcrect *FRect, dstrect *FRect) bool {
-	return sdlRenderTexture(renderer, texture, srcrect, dstrect)
+	ret, _, _ := purego.SyscallN(sdlRenderTexture, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(texture)), uintptr(unsafe.Pointer(srcrect)), uintptr(unsafe.Pointer(dstrect)))
+	return byte(ret) != 0
 }
 
 // DestroyTexture destroys the specified texture.
@@ -373,7 +381,8 @@ func SetRenderVSync(renderer *Renderer, vsync int32) bool {
 // }
 
 func SetTextureColorMod(texture *Texture, r uint8, g uint8, b uint8) bool {
-	return sdlSetTextureColorMod(texture, r, g, b)
+	ret, _, _ := purego.SyscallN(sdlSetTextureColorMod, uintptr(unsafe.Pointer(texture)), uintptr(r), uintptr(g), uintptr(b))
+	return byte(ret) != 0
 }
 
 // func SetTextureColorModFloat(texture *Texture, r float32, g float32, b float32) bool {

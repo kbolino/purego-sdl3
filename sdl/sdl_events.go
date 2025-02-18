@@ -343,7 +343,8 @@ func NewEventFilter(filter func(userdata unsafe.Pointer, event *Event) bool) Eve
 
 // PollEvent polls for currently pending events.
 func PollEvent(event *Event) bool {
-	return sdlPollEvent(event)
+	ret, _, _ := purego.SyscallN(sdlPollEvent, uintptr(unsafe.Pointer(event)))
+	return byte(ret) != 0
 }
 
 // AddEventWatch adds a callback to be triggered when an event is added to the event queue.
