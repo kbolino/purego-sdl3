@@ -274,7 +274,7 @@ var (
 	sdlGetCameraSupportedFormats func(CameraID, *int32) **CameraSpec
 	// sdlGetClipboardData                      func(string, *uint64) unsafe.Pointer
 	// sdlGetClipboardMimeTypes                 func(*uint64) **byte
-	// sdlGetClipboardText                      func() string
+	sdlGetClipboardText func() *byte
 	// sdlGetClosestFullscreenDisplayMode       func(DisplayID, int32, int32, float32, bool, *DisplayMode) bool
 	// sdlGetCPUCacheLineSize                   func() int32
 	// sdlGetCurrentAudioDriver                 func() string
@@ -1508,7 +1508,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlGetCameraSupportedFormats, lib, "SDL_GetCameraSupportedFormats")
 	// purego.RegisterLibFunc(&sdlGetClipboardData, lib, "SDL_GetClipboardData")
 	// purego.RegisterLibFunc(&sdlGetClipboardMimeTypes, lib, "SDL_GetClipboardMimeTypes")
-	// purego.RegisterLibFunc(&sdlGetClipboardText, lib, "SDL_GetClipboardText")
+	purego.RegisterLibFunc(&sdlGetClipboardText, lib, "SDL_GetClipboardText")
 	// purego.RegisterLibFunc(&sdlGetClosestFullscreenDisplayMode, lib, "SDL_GetClosestFullscreenDisplayMode")
 	// purego.RegisterLibFunc(&sdlGetCPUCacheLineSize, lib, "SDL_GetCPUCacheLineSize")
 	// purego.RegisterLibFunc(&sdlGetCurrentAudioDriver, lib, "SDL_GetCurrentAudioDriver")

@@ -1,5 +1,11 @@
 package sdl
 
+import (
+	"unsafe"
+
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
+)
+
 // func ClearClipboardData() bool {
 //	return sdlClearClipboardData()
 // }
@@ -12,9 +18,11 @@ package sdl
 //	return sdlGetClipboardMimeTypes(num_mime_types)
 // }
 
-// func GetClipboardText() string {
-//	return sdlGetClipboardText()
-// }
+func GetClipboardText() string {
+	ret := sdlGetClipboardText()
+	defer Free(unsafe.Pointer(ret))
+	return convert.ToString(ret)
+}
 
 // func GetPrimarySelectionText() string {
 //	return sdlGetPrimarySelectionText()
