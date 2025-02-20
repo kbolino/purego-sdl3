@@ -729,7 +729,7 @@ var (
 	sdlLockSurface func(*Surface) bool
 	// sdlLockTexture                           func(*Texture, *Rect, *unsafe.Pointer, *int32) bool
 	// sdlLockTextureToSurface                  func(*Texture, *Rect, **Surface) bool
-	// sdlLog                                   func(string)
+	sdlLog func(string)
 	// sdllog                                   func(float64) float64
 	// sdllog10                                 func(float64) float64
 	// sdllog10f                                func(float32) float32
@@ -1057,12 +1057,12 @@ var (
 	// sdlShouldQuit                            func(*InitState) bool
 	sdlShowCursor func() bool
 	// sdlShowFileDialogWithProperties          func(FileDialogType, DialogFileCallback, unsafe.Pointer, PropertiesID)
-	// sdlShowMessageBox                        func(*MessageBoxData, *int32) bool
+	sdlShowMessageBox func(*MessageBoxData, *int32) bool
 	// sdlShowOpenFileDialog                    func(DialogFileCallback, unsafe.Pointer, *Window, *DialogFileFilter, int32, string, bool)
 	// sdlShowOpenFolderDialog                  func(DialogFileCallback, unsafe.Pointer, *Window, string, bool)
 	// sdlShowSaveFileDialog                    func(DialogFileCallback, unsafe.Pointer, *Window, *DialogFileFilter, int32, string)
-	// sdlShowSimpleMessageBox                  func(MessageBoxFlags, string, string, *Window) bool
-	sdlShowWindow func(*Window) bool
+	sdlShowSimpleMessageBox func(MessageBoxFlags, string, string, *Window) bool
+	sdlShowWindow           func(*Window) bool
 	// sdlShowWindowSystemMenu                  func(*Window, int32, int32) bool
 	// sdlSignalAsyncIOQueue                    func(*AsyncIOQueue)
 	// sdlSignalCondition                       func(*Condition)
@@ -1963,7 +1963,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlLockSurface, lib, "SDL_LockSurface")
 	// purego.RegisterLibFunc(&sdlLockTexture, lib, "SDL_LockTexture")
 	// purego.RegisterLibFunc(&sdlLockTextureToSurface, lib, "SDL_LockTextureToSurface")
-	// purego.RegisterLibFunc(&sdlLog, lib, "SDL_Log")
+	purego.RegisterLibFunc(&sdlLog, lib, "SDL_Log")
 	// purego.RegisterLibFunc(&sdllog, lib, "SDL_log")
 	// purego.RegisterLibFunc(&sdllog10, lib, "SDL_log10")
 	// purego.RegisterLibFunc(&sdllog10f, lib, "SDL_log10f")
@@ -2291,11 +2291,11 @@ func init() {
 	// purego.RegisterLibFunc(&sdlShouldQuit, lib, "SDL_ShouldQuit")
 	purego.RegisterLibFunc(&sdlShowCursor, lib, "SDL_ShowCursor")
 	// purego.RegisterLibFunc(&sdlShowFileDialogWithProperties, lib, "SDL_ShowFileDialogWithProperties")
-	// purego.RegisterLibFunc(&sdlShowMessageBox, lib, "SDL_ShowMessageBox")
+	purego.RegisterLibFunc(&sdlShowMessageBox, lib, "SDL_ShowMessageBox")
 	// purego.RegisterLibFunc(&sdlShowOpenFileDialog, lib, "SDL_ShowOpenFileDialog")
 	// purego.RegisterLibFunc(&sdlShowOpenFolderDialog, lib, "SDL_ShowOpenFolderDialog")
 	// purego.RegisterLibFunc(&sdlShowSaveFileDialog, lib, "SDL_ShowSaveFileDialog")
-	// purego.RegisterLibFunc(&sdlShowSimpleMessageBox, lib, "SDL_ShowSimpleMessageBox")
+	purego.RegisterLibFunc(&sdlShowSimpleMessageBox, lib, "SDL_ShowSimpleMessageBox")
 	purego.RegisterLibFunc(&sdlShowWindow, lib, "SDL_ShowWindow")
 	// purego.RegisterLibFunc(&sdlShowWindowSystemMenu, lib, "SDL_ShowWindowSystemMenu")
 	// purego.RegisterLibFunc(&sdlSignalAsyncIOQueue, lib, "SDL_SignalAsyncIOQueue")

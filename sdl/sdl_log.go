@@ -53,9 +53,9 @@ const (
 //	return sdlGetLogPriority(category)
 // }
 
-// func Log(fmt string)  {
-//	sdlLog(fmt)
-// }
+func Log(format string, a ...any) {
+	sdlLog(fmt.Sprintf(format, a...))
+}
 
 // func LogCritical(category int32, fmt string)  {
 //	sdlLogCritical(category, fmt)
