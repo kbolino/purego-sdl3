@@ -20,7 +20,7 @@ var (
 	// sdlAddGamepadMapping                     func(string) int32
 	// sdlAddGamepadMappingsFromFile            func(string) int32
 	// sdlAddGamepadMappingsFromIO              func(*IOStream, bool) int32
-	// sdlAddHintCallback                       func(string, HintCallback, unsafe.Pointer) bool
+	sdlAddHintCallback func(string, HintCallback, unsafe.Pointer) bool
 	// sdlAddSurfaceAlternateImage              func(*Surface, *Surface) bool
 	// sdlAddTimer                              func(uint32, TimerCallback, unsafe.Pointer) TimerID
 	// sdlAddTimerNS                            func(uint64, NSTimerCallback, unsafe.Pointer) TimerID
@@ -373,8 +373,8 @@ var (
 	// sdlGetHapticName                         func(*Haptic) string
 	// sdlGetHapticNameForID                    func(HapticID) string
 	// sdlGetHaptics                            func(*int32) *HapticID
-	// sdlGetHint                               func(string) string
-	// sdlGetHintBoolean                        func(string, bool) bool
+	sdlGetHint        func(string) string
+	sdlGetHintBoolean func(string, bool) bool
 	// sdlGetIOProperties                       func(*IOStream) PropertiesID
 	// sdlGetIOSize                             func(*IOStream) int64
 	// sdlGetIOStatus                           func(*IOStream) IOStatus
@@ -863,8 +863,8 @@ var (
 	// sdlReleaseGPUTransferBuffer              func(*GPUDevice, *GPUTransferBuffer)
 	// sdlReleaseWindowFromGPUDevice            func(*GPUDevice, *Window)
 	// sdlReloadGamepadMappings                 func() bool
-	sdlRemoveEventWatch func(EventFilter, unsafe.Pointer)
-	// sdlRemoveHintCallback                    func(string, HintCallback, unsafe.Pointer)
+	sdlRemoveEventWatch   func(EventFilter, unsafe.Pointer)
+	sdlRemoveHintCallback func(string, HintCallback, unsafe.Pointer)
 	// sdlRemovePath                            func(string) bool
 	// sdlRemoveStoragePath                     func(*Storage, string) bool
 	// sdlRemoveSurfaceAlternateImages          func(*Surface)
@@ -898,8 +898,8 @@ var (
 	// sdlRenderViewportSet                     func(*Renderer) bool
 	// sdlReportAssertion                       func(*AssertData, string, string, int32) AssertState
 	// sdlResetAssertionReport                  func()
-	// sdlResetHint                             func(string) bool
-	// sdlResetHints                            func()
+	sdlResetHint  func(string) bool
+	sdlResetHints func()
 	// sdlResetKeyboard                         func()
 	// sdlResetLogPriorities                    func()
 	// sdlRestoreWindow                         func(*Window) bool
@@ -970,8 +970,8 @@ var (
 	// sdlSetGPUViewport                        func(*GPURenderPass, *GPUViewport)
 	// sdlSetHapticAutocenter                   func(*Haptic, int32) bool
 	// sdlSetHapticGain                         func(*Haptic, int32) bool
-	sdlSetHint func(string, string) bool
-	// sdlSetHintWithPriority                   func(string, string, HintPriority) bool
+	sdlSetHint             func(string, string) bool
+	sdlSetHintWithPriority func(string, string, HintPriority) bool
 	// sdlSetInitialized                        func(*InitState, bool)
 	// sdlSetJoystickEventsEnabled              func(bool)
 	// sdlSetJoystickLED                        func(*Joystick, uint8, uint8, uint8) bool
@@ -1254,7 +1254,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlAddGamepadMapping, lib, "SDL_AddGamepadMapping")
 	// purego.RegisterLibFunc(&sdlAddGamepadMappingsFromFile, lib, "SDL_AddGamepadMappingsFromFile")
 	// purego.RegisterLibFunc(&sdlAddGamepadMappingsFromIO, lib, "SDL_AddGamepadMappingsFromIO")
-	// purego.RegisterLibFunc(&sdlAddHintCallback, lib, "SDL_AddHintCallback")
+	purego.RegisterLibFunc(&sdlAddHintCallback, lib, "SDL_AddHintCallback")
 	// purego.RegisterLibFunc(&sdlAddSurfaceAlternateImage, lib, "SDL_AddSurfaceAlternateImage")
 	// purego.RegisterLibFunc(&sdlAddTimer, lib, "SDL_AddTimer")
 	// purego.RegisterLibFunc(&sdlAddTimerNS, lib, "SDL_AddTimerNS")
@@ -1607,8 +1607,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetHapticName, lib, "SDL_GetHapticName")
 	// purego.RegisterLibFunc(&sdlGetHapticNameForID, lib, "SDL_GetHapticNameForID")
 	// purego.RegisterLibFunc(&sdlGetHaptics, lib, "SDL_GetHaptics")
-	// purego.RegisterLibFunc(&sdlGetHint, lib, "SDL_GetHint")
-	// purego.RegisterLibFunc(&sdlGetHintBoolean, lib, "SDL_GetHintBoolean")
+	purego.RegisterLibFunc(&sdlGetHint, lib, "SDL_GetHint")
+	purego.RegisterLibFunc(&sdlGetHintBoolean, lib, "SDL_GetHintBoolean")
 	// purego.RegisterLibFunc(&sdlGetIOProperties, lib, "SDL_GetIOProperties")
 	// purego.RegisterLibFunc(&sdlGetIOSize, lib, "SDL_GetIOSize")
 	// purego.RegisterLibFunc(&sdlGetIOStatus, lib, "SDL_GetIOStatus")
@@ -2098,7 +2098,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlReleaseWindowFromGPUDevice, lib, "SDL_ReleaseWindowFromGPUDevice")
 	// purego.RegisterLibFunc(&sdlReloadGamepadMappings, lib, "SDL_ReloadGamepadMappings")
 	purego.RegisterLibFunc(&sdlRemoveEventWatch, lib, "SDL_RemoveEventWatch")
-	// purego.RegisterLibFunc(&sdlRemoveHintCallback, lib, "SDL_RemoveHintCallback")
+	purego.RegisterLibFunc(&sdlRemoveHintCallback, lib, "SDL_RemoveHintCallback")
 	// purego.RegisterLibFunc(&sdlRemovePath, lib, "SDL_RemovePath")
 	// purego.RegisterLibFunc(&sdlRemoveStoragePath, lib, "SDL_RemoveStoragePath")
 	// purego.RegisterLibFunc(&sdlRemoveSurfaceAlternateImages, lib, "SDL_RemoveSurfaceAlternateImages")
@@ -2132,8 +2132,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlRenderViewportSet, lib, "SDL_RenderViewportSet")
 	// purego.RegisterLibFunc(&sdlReportAssertion, lib, "SDL_ReportAssertion")
 	// purego.RegisterLibFunc(&sdlResetAssertionReport, lib, "SDL_ResetAssertionReport")
-	// purego.RegisterLibFunc(&sdlResetHint, lib, "SDL_ResetHint")
-	// purego.RegisterLibFunc(&sdlResetHints, lib, "SDL_ResetHints")
+	purego.RegisterLibFunc(&sdlResetHint, lib, "SDL_ResetHint")
+	purego.RegisterLibFunc(&sdlResetHints, lib, "SDL_ResetHints")
 	// purego.RegisterLibFunc(&sdlResetKeyboard, lib, "SDL_ResetKeyboard")
 	// purego.RegisterLibFunc(&sdlResetLogPriorities, lib, "SDL_ResetLogPriorities")
 	// purego.RegisterLibFunc(&sdlRestoreWindow, lib, "SDL_RestoreWindow")
@@ -2205,7 +2205,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetHapticAutocenter, lib, "SDL_SetHapticAutocenter")
 	// purego.RegisterLibFunc(&sdlSetHapticGain, lib, "SDL_SetHapticGain")
 	purego.RegisterLibFunc(&sdlSetHint, lib, "SDL_SetHint")
-	// purego.RegisterLibFunc(&sdlSetHintWithPriority, lib, "SDL_SetHintWithPriority")
+	purego.RegisterLibFunc(&sdlSetHintWithPriority, lib, "SDL_SetHintWithPriority")
 	// purego.RegisterLibFunc(&sdlSetInitialized, lib, "SDL_SetInitialized")
 	// purego.RegisterLibFunc(&sdlSetJoystickEventsEnabled, lib, "SDL_SetJoystickEventsEnabled")
 	// purego.RegisterLibFunc(&sdlSetJoystickLED, lib, "SDL_SetJoystickLED")
