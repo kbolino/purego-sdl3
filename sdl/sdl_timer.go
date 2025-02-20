@@ -22,9 +22,9 @@ import "github.com/ebitengine/purego"
 //	sdlDelayPrecise(ns)
 // }
 
-// func GetPerformanceCounter() uint64 {
-//	return sdlGetPerformanceCounter()
-// }
+func GetPerformanceCounter() uint64 {
+	return sdlGetPerformanceCounter()
+}
 
 // func GetPerformanceFrequency() uint64 {
 //	return sdlGetPerformanceFrequency()

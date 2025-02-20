@@ -119,9 +119,9 @@ func DestroyWindow(window *Window) {
 //	return sdlCreatePopupWindow(parent, offset_x, offset_y, w, h, flags)
 // }
 
-// func CreateWindow(title string, w int32, h int32, flags WindowFlags) *Window {
-//	return sdlCreateWindow(title, w, h, flags)
-// }
+func CreateWindow(title string, w int32, h int32, flags WindowFlags) *Window {
+	return sdlCreateWindow(title, w, h, flags)
+}
 
 // func CreateWindowWithProperties(props PropertiesID) *Window {
 //	return sdlCreateWindowWithProperties(props)
@@ -187,9 +187,9 @@ func DestroyWindow(window *Window) {
 //	return sdlGetDisplayBounds(displayID, rect)
 // }
 
-// func GetDisplayContentScale(displayID DisplayID) float32 {
-//	return sdlGetDisplayContentScale(displayID)
-// }
+func GetDisplayContentScale(displayID DisplayID) float32 {
+	return sdlGetDisplayContentScale(displayID)
+}
 
 // func GetDisplayForPoint(point *Point) DisplayID {
 //	return sdlGetDisplayForPoint(point)
@@ -235,9 +235,9 @@ func DestroyWindow(window *Window) {
 //	return sdlGetNumVideoDrivers()
 // }
 
-// func GetPrimaryDisplay() DisplayID {
-//	return sdlGetPrimaryDisplay()
-// }
+func GetPrimaryDisplay() DisplayID {
+	return sdlGetPrimaryDisplay()
+}
 
 // func GetSystemTheme() SystemTheme {
 //	return sdlGetSystemTheme()
@@ -255,9 +255,9 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowBordersSize(window, top, left, bottom, right)
 // }
 
-// func GetWindowDisplayScale(window *Window) float32 {
-//	return sdlGetWindowDisplayScale(window)
-// }
+func GetWindowDisplayScale(window *Window) float32 {
+	return sdlGetWindowDisplayScale(window)
+}
 
 // func GetWindowFlags(window *Window) WindowFlags {
 //	return sdlGetWindowFlags(window)
@@ -307,17 +307,17 @@ func DestroyWindow(window *Window) {
 //	return sdlGetWindowParent(window)
 // }
 
-// func GetWindowPixelDensity(window *Window) float32 {
-//	return sdlGetWindowPixelDensity(window)
-// }
+func GetWindowPixelDensity(window *Window) float32 {
+	return sdlGetWindowPixelDensity(window)
+}
 
 // func GetWindowPixelFormat(window *Window) PixelFormat {
 //	return sdlGetWindowPixelFormat(window)
 // }
 
-// func GetWindowPosition(window *Window, x *int32, y *int32) bool {
-//	return sdlGetWindowPosition(window, x, y)
-// }
+func GetWindowPosition(window *Window, x *int32, y *int32) bool {
+	return sdlGetWindowPosition(window, x, y)
+}
 
 // func GetWindowProperties(window *Window) PropertiesID {
 //	return sdlGetWindowProperties(window)
@@ -335,9 +335,9 @@ func GetWindowSize(window *Window, w *int32, h *int32) bool {
 	return sdlGetWindowSize(window, w, h)
 }
 
-// func GetWindowSizeInPixels(window *Window, w *int32, h *int32) bool {
-//	return sdlGetWindowSizeInPixels(window, w, h)
-// }
+func GetWindowSizeInPixels(window *Window, w *int32, h *int32) bool {
+	return sdlGetWindowSizeInPixels(window, w, h)
+}
 
 // GetWindowSurface gets the SDL surface associated with the window.
 func GetWindowSurface(window *Window) *Surface {
@@ -429,9 +429,9 @@ func HideWindow(window *Window) bool {
 //	return sdlRaiseWindow(window)
 // }
 
-// func RestoreWindow(window *Window) bool {
-//	return sdlRestoreWindow(window)
-// }
+func RestoreWindow(window *Window) bool {
+	return sdlRestoreWindow(window)
+}
 
 // func ScreenSaverEnabled() bool {
 //	return sdlScreenSaverEnabled()
@@ -501,9 +501,9 @@ func HideWindow(window *Window) bool {
 //	return sdlSetWindowParent(window, parent)
 // }
 
-// func SetWindowPosition(window *Window, x int32, y int32) bool {
-//	return sdlSetWindowPosition(window, x, y)
-// }
+func SetWindowPosition(window *Window, x int32, y int32) bool {
+	return sdlSetWindowPosition(window, x, y)
+}
 
 // func SetWindowResizable(window *Window, resizable bool) bool {
 //	return sdlSetWindowResizable(window, resizable)
