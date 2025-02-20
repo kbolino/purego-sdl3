@@ -192,8 +192,98 @@ func (e *Event) Wheel() MouseWheelEvent {
 	return *(*MouseWheelEvent)(unsafe.Pointer(e))
 }
 
+func (e *Event) Jdevice() JoyDeviceEvent {
+	return *(*JoyDeviceEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Jaxis() JoyAxisEvent {
+	return *(*JoyAxisEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Jball() JoyBallEvent {
+	return *(*JoyBallEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Jhat() JoyHatEvent {
+	return *(*JoyHatEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Jbutton() JoyButtonEvent {
+	return *(*JoyButtonEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Jbattery() JoyBatteryEvent {
+	return *(*JoyBatteryEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Gdevice() GamepadDeviceEvent {
+	return *(*GamepadDeviceEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Gaxis() GamepadAxisEvent {
+	return *(*GamepadAxisEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Gbutton() GamepadButtonEvent {
+	return *(*GamepadButtonEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Gtouchpad() GamepadTouchpadEvent {
+	return *(*GamepadTouchpadEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Gsensor() GamepadSensorEvent {
+	return *(*GamepadSensorEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Adevice() AudioDeviceEvent {
+	return *(*AudioDeviceEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Cdevice() CameraDeviceEvent {
+	return *(*CameraDeviceEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Sensor() SensorEvent {
+	return *(*SensorEvent)(unsafe.Pointer(e))
+}
+
 func (e *Event) Quit() QuitEvent {
 	return *(*QuitEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) User() UserEvent {
+	return *(*UserEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Tfinger() TouchFingerEvent {
+	return *(*TouchFingerEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Pproximity() PenProximityEvent {
+	return *(*PenProximityEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Ptouch() PenTouchEvent {
+	return *(*PenTouchEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Pmotion() PenMotionEvent {
+	return *(*PenMotionEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Pbutton() PenButtonEvent {
+	return *(*PenButtonEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Paxis() PenAxisEvent {
+	return *(*PenAxisEvent)(unsafe.Pointer(e))
+}
+func (e *Event) Render() RenderEvent {
+	return *(*RenderEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Drop() DropEvent {
+	return *(*DropEvent)(unsafe.Pointer(e))
+}
+
+func (e *Event) Clipboard() ClipboardEvent {
+	return *(*ClipboardEvent)(unsafe.Pointer(e))
 }
 
 // CommonEvent fields are shared by every event.
@@ -321,8 +411,230 @@ type MouseWheelEvent struct {
 	MouseY    float32
 }
 
+type JoyAxisEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Axis     uint8
+	Padding1 uint8
+	Padding2 uint8
+	Padding3 uint8
+	Value    int16
+	Padding4 uint16
+}
+
+type JoyBallEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Ball     uint8
+	Padding1 uint8
+	Padding2 uint8
+	Padding3 uint8
+	Xrel     int16
+	Yrel     int16
+}
+
+type JoyHatEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Hat      uint8
+	Value    uint8
+	Padding1 uint8
+	Padding2 uint8
+}
+
+type JoyButtonEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Button   uint8
+	Down     bool
+	Padding1 uint8
+	Padding2 uint8
+}
+
+type JoyDeviceEvent struct {
+	CommonEvent
+	Which JoystickID
+}
+
+type JoyBatteryEvent struct {
+	CommonEvent
+	Which   JoystickID
+	State   PowerState
+	Percent int32
+}
+
+type GamepadAxisEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Axis     uint8
+	Padding1 uint8
+	Padding2 uint8
+	Padding3 uint8
+	Value    int16
+	Padding4 uint16
+}
+
+type GamepadButtonEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Button   uint8
+	Down     bool
+	Padding1 uint8
+	Padding2 uint8
+}
+
+type GamepadDeviceEvent struct {
+	CommonEvent
+	Which JoystickID
+}
+
+type GamepadTouchpadEvent struct {
+	CommonEvent
+	Which    JoystickID
+	Touchpad int32
+	Finger   int32
+	X        float32
+	Y        float32
+	Pressure float32
+}
+
+type GamepadSensorEvent struct {
+	CommonEvent
+	Which           JoystickID
+	Sensor          int32
+	Data            [3]float32
+	SensorTimestamp uint64
+}
+
+type AudioDeviceEvent struct {
+	CommonEvent
+	Which     AudioDeviceID
+	Recording bool
+	Padding1  uint8
+	Padding2  uint8
+	Padding3  uint8
+}
+
+type CameraDeviceEvent struct {
+	CommonEvent
+	Which CameraID
+}
+
+type RenderEvent struct {
+	CommonEvent
+	WindowID WindowID
+}
+
+type TouchFingerEvent struct {
+	CommonEvent
+	TouchID  TouchID
+	FingerID FingerID
+	X        float32
+	Y        float32
+	Dx       float32
+	Dy       float32
+	Pressure float32
+	WindowID WindowID
+}
+
+type PenProximityEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Which    PenID
+}
+
+type PenMotionEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Which    PenID
+	PenState PenInputFlags
+	X        float32
+	Y        float32
+}
+
+type PenTouchEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Which    PenID
+	PenState PenInputFlags
+	X        float32
+	Y        float32
+	Eraser   bool
+	Down     bool
+}
+
+type PenButtonEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Which    PenID
+	PenState PenInputFlags
+	X        float32
+	Y        float32
+	Button   uint8
+	Down     bool
+}
+
+type PenAxisEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Which    PenID
+	PenState PenInputFlags
+	X        float32
+	Y        float32
+	Axis     PenAxis
+	Value    float32
+}
+
+type DropEvent struct {
+	CommonEvent
+	WindowID WindowID
+	X        float32
+	Y        float32
+	source   *byte
+	data     *byte
+}
+
+func (d *DropEvent) Source() string {
+	return convert.ToString(d.source)
+}
+
+func (d *DropEvent) Data() string {
+	return convert.ToString(d.data)
+}
+
+type ClipboardEvent struct {
+	CommonEvent
+	Owner        bool
+	NumMimeTypes int32
+	mimeTypes    **byte
+}
+
+func (c *ClipboardEvent) MimeTypes() []string {
+	mimeTypes := make([]string, c.NumMimeTypes)
+	for i, v := range unsafe.Slice(c.mimeTypes, c.NumMimeTypes) {
+		mimeTypes[i] = convert.ToString(v)
+	}
+
+	return mimeTypes
+}
+
+type SensorEvent struct {
+	CommonEvent
+	Which           SensorID
+	Data            [6]float32
+	SensorTimestamp uint64
+}
+
 type QuitEvent struct {
 	CommonEvent
+}
+
+type UserEvent struct {
+	CommonEvent
+	WindowID WindowID
+	Code     int32
+	Data1    unsafe.Pointer
+	Data2    unsafe.Pointer
 }
 
 // EventFilter is a C function pointer used for callbacks that watch the event queue. Use [NewEventFilter] for creation.

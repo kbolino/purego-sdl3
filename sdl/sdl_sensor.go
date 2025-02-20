@@ -13,6 +13,8 @@ const (
 	SensorGyroR
 )
 
+type SensorID uint32
+
 // func CloseSensor(sensor *Sensor)  {
 //	sdlCloseSensor(sensor)
 // }

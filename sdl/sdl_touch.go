@@ -9,6 +9,10 @@ const (
 	TouchDeviceIndirectRelative
 )
 
+type TouchID uint64
+
+type FingerID uint64
+
 // func GetTouchDeviceName(touchID TouchID) string {
 //	return sdlGetTouchDeviceName(touchID)
 // }

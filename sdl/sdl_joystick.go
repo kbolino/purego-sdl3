@@ -25,6 +25,8 @@ const (
 	JoystickTypeCount
 )
 
+type JoystickID uint32
+
 // func AttachVirtualJoystick(desc *VirtualJoystickDesc) JoystickID {
 //	return sdlAttachVirtualJoystick(desc)
 // }

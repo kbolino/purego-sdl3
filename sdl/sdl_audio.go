@@ -17,6 +17,8 @@ const (
 	AudioF32     AudioFormat = AudioF32Le
 )
 
+type AudioDeviceID uint32
+
 // func AudioDevicePaused(dev AudioDeviceID) bool {
 //	return sdlAudioDevicePaused(dev)
 // }
