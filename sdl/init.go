@@ -463,15 +463,15 @@ var (
 	// sdlGetPropertyType                       func(PropertiesID, string) PropertyType
 	// sdlGetRealGamepadType                    func(*Gamepad) GamepadType
 	// sdlGetRealGamepadTypeForID               func(JoystickID) GamepadType
-	// sdlGetRectAndLineIntersection            func(*Rect, *int32, *int32, *int32, *int32) bool
-	// sdlGetRectAndLineIntersectionFloat       func(*FRect, *float32, *float32, *float32, *float32) bool
-	// sdlGetRectEnclosingPoints                func(*Point, int32, *Rect, *Rect) bool
-	// sdlGetRectEnclosingPointsFloat           func(*FPoint, int32, *FRect, *FRect) bool
-	// sdlGetRectIntersection                   func(*Rect, *Rect, *Rect) bool
-	// sdlGetRectIntersectionFloat              func(*FRect, *FRect, *FRect) bool
-	// sdlGetRectUnion                          func(*Rect, *Rect, *Rect) bool
-	// sdlGetRectUnionFloat                     func(*FRect, *FRect, *FRect) bool
-	sdlGetRelativeMouseState func(*float32, *float32) MouseButtonFlags
+	sdlGetRectAndLineIntersection      func(*Rect, *int32, *int32, *int32, *int32) bool
+	sdlGetRectAndLineIntersectionFloat func(*FRect, *float32, *float32, *float32, *float32) bool
+	sdlGetRectEnclosingPoints          func(*Point, int32, *Rect, *Rect) bool
+	sdlGetRectEnclosingPointsFloat     func(*FPoint, int32, *FRect, *FRect) bool
+	sdlGetRectIntersection             func(*Rect, *Rect, *Rect) bool
+	sdlGetRectIntersectionFloat        func(*FRect, *FRect, *FRect) bool
+	sdlGetRectUnion                    func(*Rect, *Rect, *Rect) bool
+	sdlGetRectUnionFloat               func(*FRect, *FRect, *FRect) bool
+	sdlGetRelativeMouseState           func(*float32, *float32) MouseButtonFlags
 	// sdlGetRenderClipRect                     func(*Renderer, *Rect) bool
 	// sdlGetRenderColorScale                   func(*Renderer, *float32) bool
 	// sdlGetRenderDrawBlendMode                func(*Renderer, *BlendMode) bool
@@ -633,8 +633,8 @@ var (
 	// sdlHasNEON                               func() bool
 	// sdlHasPrimarySelectionText               func() bool
 	// sdlHasProperty                           func(PropertiesID, string) bool
-	// sdlHasRectIntersection                   func(*Rect, *Rect) bool
-	// sdlHasRectIntersectionFloat              func(*FRect, *FRect) bool
+	sdlHasRectIntersection      func(*Rect, *Rect) bool
+	sdlHasRectIntersectionFloat func(*FRect, *FRect) bool
 	// sdlHasScreenKeyboardSupport              func() bool
 	// sdlHasSSE                                func() bool
 	// sdlHasSSE2                               func() bool
@@ -797,8 +797,6 @@ var (
 	// sdlPauseHaptic                           func(*Haptic) bool
 	sdlPeepEvents func(*Event, int32, EventAction, EventType, EventType) int32
 	// sdlPlayHapticRumble                      func(*Haptic, float32, uint32) bool
-	// sdlPointInRect                           func(*Point, *Rect) bool
-	// sdlPointInRectFloat                      func(*FPoint, *FRect) bool
 	sdlPollEvent uintptr
 	// sdlPopGPUDebugGroup                      func(*GPUCommandBuffer)
 	// sdlpow                                   func(float64, float64) float64
@@ -845,12 +843,6 @@ var (
 	// sdlReadU64LE                             func(*IOStream, *uint64) bool
 	// sdlReadU8                                func(*IOStream, *uint8) bool
 	// sdlrealloc                               func(unsafe.Pointer, uint64) unsafe.Pointer
-	// sdlRectEmpty                             func(*Rect) bool
-	// sdlRectEmptyFloat                        func(*FRect) bool
-	// sdlRectsEqual                            func(*Rect, *Rect) bool
-	// sdlRectsEqualEpsilon                     func(*FRect, *FRect, float32) bool
-	// sdlRectsEqualFloat                       func(*FRect, *FRect) bool
-	// sdlRectToFRect                           func(*Rect, *FRect)
 	sdlRegisterEvents     func(int32) uint32
 	sdlReleaseCameraFrame func(*Camera, *Surface)
 	// sdlReleaseGPUBuffer                      func(*GPUDevice, *GPUBuffer)
@@ -1697,14 +1689,14 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetPropertyType, lib, "SDL_GetPropertyType")
 	// purego.RegisterLibFunc(&sdlGetRealGamepadType, lib, "SDL_GetRealGamepadType")
 	// purego.RegisterLibFunc(&sdlGetRealGamepadTypeForID, lib, "SDL_GetRealGamepadTypeForID")
-	// purego.RegisterLibFunc(&sdlGetRectAndLineIntersection, lib, "SDL_GetRectAndLineIntersection")
-	// purego.RegisterLibFunc(&sdlGetRectAndLineIntersectionFloat, lib, "SDL_GetRectAndLineIntersectionFloat")
-	// purego.RegisterLibFunc(&sdlGetRectEnclosingPoints, lib, "SDL_GetRectEnclosingPoints")
-	// purego.RegisterLibFunc(&sdlGetRectEnclosingPointsFloat, lib, "SDL_GetRectEnclosingPointsFloat")
-	// purego.RegisterLibFunc(&sdlGetRectIntersection, lib, "SDL_GetRectIntersection")
-	// purego.RegisterLibFunc(&sdlGetRectIntersectionFloat, lib, "SDL_GetRectIntersectionFloat")
-	// purego.RegisterLibFunc(&sdlGetRectUnion, lib, "SDL_GetRectUnion")
-	// purego.RegisterLibFunc(&sdlGetRectUnionFloat, lib, "SDL_GetRectUnionFloat")
+	purego.RegisterLibFunc(&sdlGetRectAndLineIntersection, lib, "SDL_GetRectAndLineIntersection")
+	purego.RegisterLibFunc(&sdlGetRectAndLineIntersectionFloat, lib, "SDL_GetRectAndLineIntersectionFloat")
+	purego.RegisterLibFunc(&sdlGetRectEnclosingPoints, lib, "SDL_GetRectEnclosingPoints")
+	purego.RegisterLibFunc(&sdlGetRectEnclosingPointsFloat, lib, "SDL_GetRectEnclosingPointsFloat")
+	purego.RegisterLibFunc(&sdlGetRectIntersection, lib, "SDL_GetRectIntersection")
+	purego.RegisterLibFunc(&sdlGetRectIntersectionFloat, lib, "SDL_GetRectIntersectionFloat")
+	purego.RegisterLibFunc(&sdlGetRectUnion, lib, "SDL_GetRectUnion")
+	purego.RegisterLibFunc(&sdlGetRectUnionFloat, lib, "SDL_GetRectUnionFloat")
 	purego.RegisterLibFunc(&sdlGetRelativeMouseState, lib, "SDL_GetRelativeMouseState")
 	// purego.RegisterLibFunc(&sdlGetRenderClipRect, lib, "SDL_GetRenderClipRect")
 	// purego.RegisterLibFunc(&sdlGetRenderColorScale, lib, "SDL_GetRenderColorScale")
@@ -1867,8 +1859,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlHasNEON, lib, "SDL_HasNEON")
 	// purego.RegisterLibFunc(&sdlHasPrimarySelectionText, lib, "SDL_HasPrimarySelectionText")
 	// purego.RegisterLibFunc(&sdlHasProperty, lib, "SDL_HasProperty")
-	// purego.RegisterLibFunc(&sdlHasRectIntersection, lib, "SDL_HasRectIntersection")
-	// purego.RegisterLibFunc(&sdlHasRectIntersectionFloat, lib, "SDL_HasRectIntersectionFloat")
+	purego.RegisterLibFunc(&sdlHasRectIntersection, lib, "SDL_HasRectIntersection")
+	purego.RegisterLibFunc(&sdlHasRectIntersectionFloat, lib, "SDL_HasRectIntersectionFloat")
 	// purego.RegisterLibFunc(&sdlHasScreenKeyboardSupport, lib, "SDL_HasScreenKeyboardSupport")
 	// purego.RegisterLibFunc(&sdlHasSSE, lib, "SDL_HasSSE")
 	// purego.RegisterLibFunc(&sdlHasSSE2, lib, "SDL_HasSSE2")
@@ -2031,8 +2023,6 @@ func init() {
 	// purego.RegisterLibFunc(&sdlPauseHaptic, lib, "SDL_PauseHaptic")
 	purego.RegisterLibFunc(&sdlPeepEvents, lib, "SDL_PeepEvents")
 	// purego.RegisterLibFunc(&sdlPlayHapticRumble, lib, "SDL_PlayHapticRumble")
-	// purego.RegisterLibFunc(&sdlPointInRect, lib, "SDL_PointInRect")
-	// purego.RegisterLibFunc(&sdlPointInRectFloat, lib, "SDL_PointInRectFloat")
 	sdlPollEvent = shared.Get(lib, "SDL_PollEvent")
 	// purego.RegisterLibFunc(&sdlPopGPUDebugGroup, lib, "SDL_PopGPUDebugGroup")
 	// purego.RegisterLibFunc(&sdlpow, lib, "SDL_pow")
@@ -2079,12 +2069,6 @@ func init() {
 	// purego.RegisterLibFunc(&sdlReadU64LE, lib, "SDL_ReadU64LE")
 	// purego.RegisterLibFunc(&sdlReadU8, lib, "SDL_ReadU8")
 	// purego.RegisterLibFunc(&sdlrealloc, lib, "SDL_realloc")
-	// purego.RegisterLibFunc(&sdlRectEmpty, lib, "SDL_RectEmpty")
-	// purego.RegisterLibFunc(&sdlRectEmptyFloat, lib, "SDL_RectEmptyFloat")
-	// purego.RegisterLibFunc(&sdlRectsEqual, lib, "SDL_RectsEqual")
-	// purego.RegisterLibFunc(&sdlRectsEqualEpsilon, lib, "SDL_RectsEqualEpsilon")
-	// purego.RegisterLibFunc(&sdlRectsEqualFloat, lib, "SDL_RectsEqualFloat")
-	// purego.RegisterLibFunc(&sdlRectToFRect, lib, "SDL_RectToFRect")
 	purego.RegisterLibFunc(&sdlRegisterEvents, lib, "SDL_RegisterEvents")
 	purego.RegisterLibFunc(&sdlReleaseCameraFrame, lib, "SDL_ReleaseCameraFrame")
 	// purego.RegisterLibFunc(&sdlReleaseGPUBuffer, lib, "SDL_ReleaseGPUBuffer")

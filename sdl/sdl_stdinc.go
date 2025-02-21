@@ -6,6 +6,8 @@ import (
 	"github.com/ebitengine/purego"
 )
 
+const FltEpsilon = 0x0.000002p0
+
 // func abs(x int32) int32 {
 //	return sdlabs(x)
 // }
