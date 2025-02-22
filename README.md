@@ -23,9 +23,7 @@ This simple example just opens a resizable window with a blue background:
 ```golang
 package main
 
-import (
-	sdl "github.com/jupiterrider/purego-sdl3/sdl"
-)
+import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
 	if !sdl.SetHint(sdl.HintRenderVsync, "1") {

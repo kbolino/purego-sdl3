@@ -1,8 +1,6 @@
 package main
 
-import (
-	sdl "github.com/jupiterrider/purego-sdl3/sdl"
-)
+import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
 	var messageBox sdl.MessageBoxData
