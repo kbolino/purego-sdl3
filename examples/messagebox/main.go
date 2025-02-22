@@ -3,6 +3,8 @@ package main
 import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
+	defer sdl.Quit()
+
 	var messageBox sdl.MessageBoxData
 	messageBox.Flags = sdl.MessageBoxInformation
 	messageBox.SetTitle("Question")

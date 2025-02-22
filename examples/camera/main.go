@@ -3,10 +3,10 @@ package main
 import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
+	defer sdl.Quit()
 	if !sdl.Init(sdl.InitVideo | sdl.InitCamera) {
 		panic(sdl.GetError())
 	}
-	defer sdl.Quit()
 
 	var window *sdl.Window
 	var renderer *sdl.Renderer
