@@ -98,7 +98,7 @@ var (
 	// sdlCompareAndSwapAtomicU32               func(*AtomicU32, uint32, uint32) bool
 	// sdlComposeCustomBlendMode                func(BlendFactor, BlendFactor, BlendOperation, BlendFactor, BlendFactor, BlendOperation) BlendMode
 	// sdlConvertAudioSamples                   func(*AudioSpec, *uint8, int32, *AudioSpec, **uint8, *int32) bool
-	// sdlConvertEventToRenderCoordinates       func(*Renderer, *Event) bool
+	sdlConvertEventToRenderCoordinates func(*Renderer, *Event) bool
 	// sdlConvertPixels                         func(int32, int32, PixelFormat, unsafe.Pointer, int32, PixelFormat, unsafe.Pointer, int32) bool
 	// sdlConvertPixelsAndColorspace            func(int32, int32, PixelFormat, Colorspace, PropertiesID, unsafe.Pointer, int32, PixelFormat, Colorspace, PropertiesID, unsafe.Pointer, int32) bool
 	// sdlConvertSurface                        func(*Surface, PixelFormat) *Surface
@@ -146,10 +146,10 @@ var (
 	sdlCreateSurface func(int32, int32, PixelFormat) *Surface
 	// sdlCreateSurfaceFrom                     func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
 	// sdlCreateSurfacePalette                  func(*Surface) *Palette
-	sdlCreateSystemCursor       func(SystemCursor) *Cursor
-	sdlCreateTexture            func(*Renderer, PixelFormat, TextureAccess, int32, int32) *Texture
-	sdlCreateTextureFromSurface func(*Renderer, *Surface) *Texture
-	// sdlCreateTextureWithProperties           func(*Renderer, PropertiesID) *Texture
+	sdlCreateSystemCursor          func(SystemCursor) *Cursor
+	sdlCreateTexture               func(*Renderer, PixelFormat, TextureAccess, int32, int32) *Texture
+	sdlCreateTextureFromSurface    func(*Renderer, *Surface) *Texture
+	sdlCreateTextureWithProperties func(*Renderer, PropertiesID) *Texture
 	// sdlCreateThreadRuntime                   func(ThreadFunction, string, unsafe.Pointer, FunctionPointer, FunctionPointer) *Thread
 	// sdlCreateThreadWithPropertiesRuntime     func(PropertiesID, FunctionPointer, FunctionPointer) *Thread
 	// sdlCreateTray                            func(*Surface, string) *Tray
@@ -282,7 +282,7 @@ var (
 	// sdlGetCurrentDirectory                   func() string
 	// sdlGetCurrentDisplayMode                 func(DisplayID) *DisplayMode
 	// sdlGetCurrentDisplayOrientation          func(DisplayID) DisplayOrientation
-	// sdlGetCurrentRenderOutputSize            func(*Renderer, *int32, *int32) bool
+	sdlGetCurrentRenderOutputSize func(*Renderer, *int32, *int32) bool
 	// sdlGetCurrentThreadID                    func() ThreadID
 	// sdlGetCurrentTime                        func(*Time) bool
 	// sdlGetCurrentVideoDriver                 func() string
@@ -463,34 +463,34 @@ var (
 	sdlGetPropertyType func(PropertiesID, string) PropertyType
 	// sdlGetRealGamepadType                    func(*Gamepad) GamepadType
 	// sdlGetRealGamepadTypeForID               func(JoystickID) GamepadType
-	sdlGetRectAndLineIntersection      func(*Rect, *int32, *int32, *int32, *int32) bool
-	sdlGetRectAndLineIntersectionFloat func(*FRect, *float32, *float32, *float32, *float32) bool
-	sdlGetRectEnclosingPoints          func(*Point, int32, *Rect, *Rect) bool
-	sdlGetRectEnclosingPointsFloat     func(*FPoint, int32, *FRect, *FRect) bool
-	sdlGetRectIntersection             func(*Rect, *Rect, *Rect) bool
-	sdlGetRectIntersectionFloat        func(*FRect, *FRect, *FRect) bool
-	sdlGetRectUnion                    func(*Rect, *Rect, *Rect) bool
-	sdlGetRectUnionFloat               func(*FRect, *FRect, *FRect) bool
-	sdlGetRelativeMouseState           func(*float32, *float32) MouseButtonFlags
-	// sdlGetRenderClipRect                     func(*Renderer, *Rect) bool
-	// sdlGetRenderColorScale                   func(*Renderer, *float32) bool
-	// sdlGetRenderDrawBlendMode                func(*Renderer, *BlendMode) bool
-	// sdlGetRenderDrawColor                    func(*Renderer, *uint8, *uint8, *uint8, *uint8) bool
-	// sdlGetRenderDrawColorFloat               func(*Renderer, *float32, *float32, *float32, *float32) bool
-	sdlGetRenderDriver func(int32) string
-	sdlGetRenderer     func(*Window) *Renderer
-	// sdlGetRendererFromTexture                func(*Texture) *Renderer
-	sdlGetRendererName func(*Renderer) string
-	// sdlGetRendererProperties                 func(*Renderer) PropertiesID
-	// sdlGetRenderLogicalPresentation          func(*Renderer, *int32, *int32, *RendererLogicalPresentation) bool
-	// sdlGetRenderLogicalPresentationRect      func(*Renderer, *FRect) bool
+	sdlGetRectAndLineIntersection       func(*Rect, *int32, *int32, *int32, *int32) bool
+	sdlGetRectAndLineIntersectionFloat  func(*FRect, *float32, *float32, *float32, *float32) bool
+	sdlGetRectEnclosingPoints           func(*Point, int32, *Rect, *Rect) bool
+	sdlGetRectEnclosingPointsFloat      func(*FPoint, int32, *FRect, *FRect) bool
+	sdlGetRectIntersection              func(*Rect, *Rect, *Rect) bool
+	sdlGetRectIntersectionFloat         func(*FRect, *FRect, *FRect) bool
+	sdlGetRectUnion                     func(*Rect, *Rect, *Rect) bool
+	sdlGetRectUnionFloat                func(*FRect, *FRect, *FRect) bool
+	sdlGetRelativeMouseState            func(*float32, *float32) MouseButtonFlags
+	sdlGetRenderClipRect                func(*Renderer, *Rect) bool
+	sdlGetRenderColorScale              func(*Renderer, *float32) bool
+	sdlGetRenderDrawBlendMode           func(*Renderer, *BlendMode) bool
+	sdlGetRenderDrawColor               func(*Renderer, *uint8, *uint8, *uint8, *uint8) bool
+	sdlGetRenderDrawColorFloat          func(*Renderer, *float32, *float32, *float32, *float32) bool
+	sdlGetRenderDriver                  func(int32) string
+	sdlGetRenderer                      func(*Window) *Renderer
+	sdlGetRendererFromTexture           func(*Texture) *Renderer
+	sdlGetRendererName                  func(*Renderer) string
+	sdlGetRendererProperties            func(*Renderer) PropertiesID
+	sdlGetRenderLogicalPresentation     func(*Renderer, *int32, *int32, *RendererLogicalPresentation) bool
+	sdlGetRenderLogicalPresentationRect func(*Renderer, *FRect) bool
 	// sdlGetRenderMetalCommandEncoder          func(*Renderer) unsafe.Pointer
 	// sdlGetRenderMetalLayer                   func(*Renderer) unsafe.Pointer
-	// sdlGetRenderOutputSize                   func(*Renderer, *int32, *int32) bool
-	// sdlGetRenderSafeArea                     func(*Renderer, *Rect) bool
-	// sdlGetRenderScale                        func(*Renderer, *float32, *float32) bool
-	// sdlGetRenderTarget                       func(*Renderer) *Texture
-	// sdlGetRenderViewport                     func(*Renderer, *Rect) bool
+	sdlGetRenderOutputSize func(*Renderer, *int32, *int32) bool
+	sdlGetRenderSafeArea   func(*Renderer, *Rect) bool
+	sdlGetRenderScale      func(*Renderer, *float32, *float32) bool
+	sdlGetRenderTarget     func(*Renderer) *Texture
+	sdlGetRenderViewport   func(*Renderer, *Rect) bool
 	// sdlGetRenderVSync                        func(*Renderer, *int32) bool
 	sdlGetRenderWindow func(*Renderer) *Window
 	sdlGetRevision     func() string
@@ -530,14 +530,14 @@ var (
 	// sdlGetSystemRAM                          func() int32
 	// sdlGetSystemTheme                        func() SystemTheme
 	// sdlGetTextInputArea                      func(*Window, *Rect, *int32) bool
-	// sdlGetTextureAlphaMod                    func(*Texture, *uint8) bool
-	// sdlGetTextureAlphaModFloat               func(*Texture, *float32) bool
-	// sdlGetTextureBlendMode                   func(*Texture, *BlendMode) bool
-	// sdlGetTextureColorMod                    func(*Texture, *uint8, *uint8, *uint8) bool
-	// sdlGetTextureColorModFloat               func(*Texture, *float32, *float32, *float32) bool
-	// sdlGetTextureProperties                  func(*Texture) PropertiesID
-	// sdlGetTextureScaleMode                   func(*Texture, *ScaleMode) bool
-	// sdlGetTextureSize                        func(*Texture, *float32, *float32) bool
+	sdlGetTextureAlphaMod      func(*Texture, *uint8) bool
+	sdlGetTextureAlphaModFloat func(*Texture, *float32) bool
+	sdlGetTextureBlendMode     func(*Texture, *BlendMode) bool
+	sdlGetTextureColorMod      func(*Texture, *uint8, *uint8, *uint8) bool
+	sdlGetTextureColorModFloat func(*Texture, *float32, *float32, *float32) bool
+	sdlGetTextureProperties    func(*Texture) PropertiesID
+	sdlGetTextureScaleMode     func(*Texture, *ScaleMode) bool
+	sdlGetTextureSize          func(*Texture, *float32, *float32) bool
 	// sdlGetThreadID                           func(*Thread) ThreadID
 	// sdlGetThreadName                         func(*Thread) string
 	// sdlGetThreadState                        func(*Thread) ThreadState
@@ -726,10 +726,10 @@ var (
 	// sdlLockRWLockForReading                  func(*RWLock)
 	// sdlLockRWLockForWriting                  func(*RWLock)
 	// sdlLockSpinlock                          func(*SpinLock)
-	sdlLockSurface func(*Surface) bool
-	// sdlLockTexture                           func(*Texture, *Rect, *unsafe.Pointer, *int32) bool
-	// sdlLockTextureToSurface                  func(*Texture, *Rect, **Surface) bool
-	sdlLog func(string)
+	sdlLockSurface          func(*Surface) bool
+	sdlLockTexture          func(*Texture, *Rect, *unsafe.Pointer, *int32) bool
+	sdlLockTextureToSurface func(*Texture, *Rect, **Surface) bool
+	sdlLog                  func(string)
 	// sdllog                                   func(float64) float64
 	// sdllog10                                 func(float64) float64
 	// sdllog10f                                func(float32) float32
@@ -864,30 +864,30 @@ var (
 	// sdlRemoveTrayEntry                       func(*TrayEntry)
 	// sdlRenamePath                            func(string, string) bool
 	// sdlRenameStoragePath                     func(*Storage, string, string) bool
-	sdlRenderClear uintptr
-	// sdlRenderClipEnabled                     func(*Renderer) bool
-	// sdlRenderCoordinatesFromWindow           func(*Renderer, float32, float32, *float32, *float32) bool
-	// sdlRenderCoordinatesToWindow             func(*Renderer, float32, float32, *float32, *float32) bool
-	sdlRenderDebugText func(*Renderer, float32, float32, string) bool
+	sdlRenderClear                 uintptr
+	sdlRenderClipEnabled           func(*Renderer) bool
+	sdlRenderCoordinatesFromWindow func(*Renderer, float32, float32, *float32, *float32) bool
+	sdlRenderCoordinatesToWindow   func(*Renderer, float32, float32, *float32, *float32) bool
+	sdlRenderDebugText             func(*Renderer, float32, float32, string) bool
 	// sdlRenderDebugTextFormat                 func(*Renderer, float32, float32, string) bool
-	sdlRenderFillRect uintptr
-	// sdlRenderFillRects                       func(*Renderer, *FRect, int32) bool
+	sdlRenderFillRect  uintptr
+	sdlRenderFillRects uintptr
 	// sdlRenderGeometry                        func(*Renderer, *Texture, *Vertex, int32, *int32, int32) bool
 	// sdlRenderGeometryRaw                     func(*Renderer, *Texture, *float32, int32, *FColor, int32, *float32, int32, int32, unsafe.Pointer, int32, int32) bool
-	// sdlRenderLine                            func(*Renderer, float32, float32, float32, float32) bool
-	// sdlRenderLines                           func(*Renderer, *FPoint, int32) bool
-	// sdlRenderPoint                           func(*Renderer, float32, float32) bool
-	// sdlRenderPoints                          func(*Renderer, *FPoint, int32) bool
+	sdlRenderLine    func(*Renderer, float32, float32, float32, float32) bool
+	sdlRenderLines   uintptr
+	sdlRenderPoint   func(*Renderer, float32, float32) bool
+	sdlRenderPoints  uintptr
 	sdlRenderPresent uintptr
 	// sdlRenderReadPixels                      func(*Renderer, *Rect) *Surface
-	sdlRenderRect uintptr
-	// sdlRenderRects                           func(*Renderer, *FRect, int32) bool
-	sdlRenderTexture uintptr
-	// sdlRenderTexture9Grid                    func(*Renderer, *Texture, *FRect, float32, float32, float32, float32, float32, *FRect) bool
-	// sdlRenderTextureAffine                   func(*Renderer, *Texture, *FRect, *FPoint, *FPoint, *FPoint) bool
-	// sdlRenderTextureRotated                  func(*Renderer, *Texture, *FRect, *FRect, float64, *FPoint, FlipMode) bool
-	// sdlRenderTextureTiled                    func(*Renderer, *Texture, *FRect, float32, *FRect) bool
-	// sdlRenderViewportSet                     func(*Renderer) bool
+	sdlRenderRect           uintptr
+	sdlRenderRects          uintptr
+	sdlRenderTexture        uintptr
+	sdlRenderTexture9Grid   func(*Renderer, *Texture, *FRect, float32, float32, float32, float32, float32, *FRect) bool
+	sdlRenderTextureAffine  uintptr
+	sdlRenderTextureRotated func(*Renderer, *Texture, *FRect, *FRect, float64, *FPoint, FlipMode) bool
+	sdlRenderTextureTiled   func(*Renderer, *Texture, *FRect, float32, *FRect) bool
+	sdlRenderViewportSet    func(*Renderer) bool
 	// sdlReportAssertion                       func(*AssertData, string, string, int32) AssertState
 	// sdlResetAssertionReport                  func()
 	sdlResetHint  func(string) bool
@@ -987,16 +987,16 @@ var (
 	sdlSetPointerProperty            func(PropertiesID, string, unsafe.Pointer) bool
 	sdlSetPointerPropertyWithCleanup func(PropertiesID, string, unsafe.Pointer, CleanupPropertyCallback, unsafe.Pointer) bool
 	// sdlSetPrimarySelectionText               func(string) bool
-	// sdlSetRenderClipRect                     func(*Renderer, *Rect) bool
-	// sdlSetRenderColorScale                   func(*Renderer, float32) bool
-	// sdlSetRenderDrawBlendMode                func(*Renderer, BlendMode) bool
-	sdlSetRenderDrawColor uintptr
-	// sdlSetRenderDrawColorFloat               func(*Renderer, float32, float32, float32, float32) bool
-	// sdlSetRenderLogicalPresentation          func(*Renderer, int32, int32, RendererLogicalPresentation) bool
-	// sdlSetRenderScale                        func(*Renderer, float32, float32) bool
-	// sdlSetRenderTarget                       func(*Renderer, *Texture) bool
-	// sdlSetRenderViewport                     func(*Renderer, *Rect) bool
-	sdlSetRenderVSync func(*Renderer, int32) bool
+	sdlSetRenderClipRect            func(*Renderer, *Rect) bool
+	sdlSetRenderColorScale          func(*Renderer, float32) bool
+	sdlSetRenderDrawBlendMode       func(*Renderer, BlendMode) bool
+	sdlSetRenderDrawColor           uintptr
+	sdlSetRenderDrawColorFloat      func(*Renderer, float32, float32, float32, float32) bool
+	sdlSetRenderLogicalPresentation func(*Renderer, int32, int32, RendererLogicalPresentation) bool
+	sdlSetRenderScale               func(*Renderer, float32, float32) bool
+	sdlSetRenderTarget              func(*Renderer, *Texture) bool
+	sdlSetRenderViewport            func(*Renderer, *Rect) bool
+	sdlSetRenderVSync               func(*Renderer, int32) bool
 	// sdlSetScancodeName                       func(Scancode, string) bool
 	sdlSetStringProperty func(PropertiesID, string, string) bool
 	// sdlSetSurfaceAlphaMod                    func(*Surface, uint8) bool
@@ -1008,12 +1008,12 @@ var (
 	// sdlSetSurfacePalette                     func(*Surface, *Palette) bool
 	// sdlSetSurfaceRLE                         func(*Surface, bool) bool
 	// sdlSetTextInputArea                      func(*Window, *Rect, int32) bool
-	// sdlSetTextureAlphaMod                    func(*Texture, uint8) bool
-	// sdlSetTextureAlphaModFloat               func(*Texture, float32) bool
-	// sdlSetTextureBlendMode                   func(*Texture, BlendMode) bool
-	sdlSetTextureColorMod uintptr
-	// sdlSetTextureColorModFloat               func(*Texture, float32, float32, float32) bool
-	// sdlSetTextureScaleMode                   func(*Texture, ScaleMode) bool
+	sdlSetTextureAlphaMod      uintptr
+	sdlSetTextureAlphaModFloat func(*Texture, float32) bool
+	sdlSetTextureBlendMode     func(*Texture, BlendMode) bool
+	sdlSetTextureColorMod      uintptr
+	sdlSetTextureColorModFloat func(*Texture, float32, float32, float32) bool
+	sdlSetTextureScaleMode     func(*Texture, ScaleMode) bool
 	// sdlSetTLS                                func(*TLSID, unsafe.Pointer, TLSDestructorCallback) bool
 	// sdlSetTrayEntryCallback                  func(*TrayEntry, TrayCallback, unsafe.Pointer)
 	// sdlSetTrayEntryChecked                   func(*TrayEntry, bool)
@@ -1143,19 +1143,19 @@ var (
 	// sdlUnlockRWLock                          func(*RWLock)
 	// sdlUnlockSpinlock                        func(*SpinLock)
 	sdlUnlockSurface func(*Surface)
-	// sdlUnlockTexture                         func(*Texture)
+	sdlUnlockTexture func(*Texture)
 	// sdlUnmapGPUTransferBuffer                func(*GPUDevice, *GPUTransferBuffer)
 	// sdlunsetenv_unsafe                       func(string) int32
 	// sdlUnsetEnvironmentVariable              func(*Environment, string) bool
 	// sdlUpdateGamepads                        func()
 	// sdlUpdateHapticEffect                    func(*Haptic, int32, *HapticEffect) bool
 	// sdlUpdateJoysticks                       func()
-	// sdlUpdateNVTexture                       func(*Texture, *Rect, *uint8, int32, *uint8, int32) bool
+	sdlUpdateNVTexture uintptr
 	// sdlUpdateSensors                         func()
-	sdlUpdateTexture       func(*Texture, *Rect, unsafe.Pointer, int32) bool
+	sdlUpdateTexture       uintptr
 	sdlUpdateWindowSurface func(*Window) bool
 	// sdlUpdateWindowSurfaceRects              func(*Window, *Rect, int32) bool
-	// sdlUpdateYUVTexture                      func(*Texture, *Rect, *uint8, int32, *uint8, int32, *uint8, int32) bool
+	sdlUpdateYUVTexture uintptr
 	// sdlUploadToGPUBuffer                     func(*GPUCopyPass, *GPUTransferBufferLocation, *GPUBufferRegion, bool)
 	// sdlUploadToGPUTexture                    func(*GPUCopyPass, *GPUTextureTransferInfo, *GPUTextureRegion, bool)
 	// sdlutf8strlcpy                           func(string, string, uint64) uint64
@@ -1324,7 +1324,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCompareAndSwapAtomicU32, lib, "SDL_CompareAndSwapAtomicU32")
 	// purego.RegisterLibFunc(&sdlComposeCustomBlendMode, lib, "SDL_ComposeCustomBlendMode")
 	// purego.RegisterLibFunc(&sdlConvertAudioSamples, lib, "SDL_ConvertAudioSamples")
-	// purego.RegisterLibFunc(&sdlConvertEventToRenderCoordinates, lib, "SDL_ConvertEventToRenderCoordinates")
+	purego.RegisterLibFunc(&sdlConvertEventToRenderCoordinates, lib, "SDL_ConvertEventToRenderCoordinates")
 	// purego.RegisterLibFunc(&sdlConvertPixels, lib, "SDL_ConvertPixels")
 	// purego.RegisterLibFunc(&sdlConvertPixelsAndColorspace, lib, "SDL_ConvertPixelsAndColorspace")
 	// purego.RegisterLibFunc(&sdlConvertSurface, lib, "SDL_ConvertSurface")
@@ -1375,7 +1375,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlCreateSystemCursor, lib, "SDL_CreateSystemCursor")
 	purego.RegisterLibFunc(&sdlCreateTexture, lib, "SDL_CreateTexture")
 	purego.RegisterLibFunc(&sdlCreateTextureFromSurface, lib, "SDL_CreateTextureFromSurface")
-	// purego.RegisterLibFunc(&sdlCreateTextureWithProperties, lib, "SDL_CreateTextureWithProperties")
+	purego.RegisterLibFunc(&sdlCreateTextureWithProperties, lib, "SDL_CreateTextureWithProperties")
 	// purego.RegisterLibFunc(&sdlCreateThreadRuntime, lib, "SDL_CreateThreadRuntime")
 	// purego.RegisterLibFunc(&sdlCreateThreadWithPropertiesRuntime, lib, "SDL_CreateThreadWithPropertiesRuntime")
 	// purego.RegisterLibFunc(&sdlCreateTray, lib, "SDL_CreateTray")
@@ -1508,7 +1508,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetCurrentDirectory, lib, "SDL_GetCurrentDirectory")
 	// purego.RegisterLibFunc(&sdlGetCurrentDisplayMode, lib, "SDL_GetCurrentDisplayMode")
 	// purego.RegisterLibFunc(&sdlGetCurrentDisplayOrientation, lib, "SDL_GetCurrentDisplayOrientation")
-	// purego.RegisterLibFunc(&sdlGetCurrentRenderOutputSize, lib, "SDL_GetCurrentRenderOutputSize")
+	purego.RegisterLibFunc(&sdlGetCurrentRenderOutputSize, lib, "SDL_GetCurrentRenderOutputSize")
 	// purego.RegisterLibFunc(&sdlGetCurrentThreadID, lib, "SDL_GetCurrentThreadID")
 	// purego.RegisterLibFunc(&sdlGetCurrentTime, lib, "SDL_GetCurrentTime")
 	// purego.RegisterLibFunc(&sdlGetCurrentVideoDriver, lib, "SDL_GetCurrentVideoDriver")
@@ -1698,25 +1698,25 @@ func init() {
 	purego.RegisterLibFunc(&sdlGetRectUnion, lib, "SDL_GetRectUnion")
 	purego.RegisterLibFunc(&sdlGetRectUnionFloat, lib, "SDL_GetRectUnionFloat")
 	purego.RegisterLibFunc(&sdlGetRelativeMouseState, lib, "SDL_GetRelativeMouseState")
-	// purego.RegisterLibFunc(&sdlGetRenderClipRect, lib, "SDL_GetRenderClipRect")
-	// purego.RegisterLibFunc(&sdlGetRenderColorScale, lib, "SDL_GetRenderColorScale")
-	// purego.RegisterLibFunc(&sdlGetRenderDrawBlendMode, lib, "SDL_GetRenderDrawBlendMode")
-	// purego.RegisterLibFunc(&sdlGetRenderDrawColor, lib, "SDL_GetRenderDrawColor")
-	// purego.RegisterLibFunc(&sdlGetRenderDrawColorFloat, lib, "SDL_GetRenderDrawColorFloat")
+	purego.RegisterLibFunc(&sdlGetRenderClipRect, lib, "SDL_GetRenderClipRect")
+	purego.RegisterLibFunc(&sdlGetRenderColorScale, lib, "SDL_GetRenderColorScale")
+	purego.RegisterLibFunc(&sdlGetRenderDrawBlendMode, lib, "SDL_GetRenderDrawBlendMode")
+	purego.RegisterLibFunc(&sdlGetRenderDrawColor, lib, "SDL_GetRenderDrawColor")
+	purego.RegisterLibFunc(&sdlGetRenderDrawColorFloat, lib, "SDL_GetRenderDrawColorFloat")
 	purego.RegisterLibFunc(&sdlGetRenderDriver, lib, "SDL_GetRenderDriver")
 	purego.RegisterLibFunc(&sdlGetRenderer, lib, "SDL_GetRenderer")
-	// purego.RegisterLibFunc(&sdlGetRendererFromTexture, lib, "SDL_GetRendererFromTexture")
+	purego.RegisterLibFunc(&sdlGetRendererFromTexture, lib, "SDL_GetRendererFromTexture")
 	purego.RegisterLibFunc(&sdlGetRendererName, lib, "SDL_GetRendererName")
-	// purego.RegisterLibFunc(&sdlGetRendererProperties, lib, "SDL_GetRendererProperties")
-	// purego.RegisterLibFunc(&sdlGetRenderLogicalPresentation, lib, "SDL_GetRenderLogicalPresentation")
-	// purego.RegisterLibFunc(&sdlGetRenderLogicalPresentationRect, lib, "SDL_GetRenderLogicalPresentationRect")
+	purego.RegisterLibFunc(&sdlGetRendererProperties, lib, "SDL_GetRendererProperties")
+	purego.RegisterLibFunc(&sdlGetRenderLogicalPresentation, lib, "SDL_GetRenderLogicalPresentation")
+	purego.RegisterLibFunc(&sdlGetRenderLogicalPresentationRect, lib, "SDL_GetRenderLogicalPresentationRect")
 	// purego.RegisterLibFunc(&sdlGetRenderMetalCommandEncoder, lib, "SDL_GetRenderMetalCommandEncoder")
 	// purego.RegisterLibFunc(&sdlGetRenderMetalLayer, lib, "SDL_GetRenderMetalLayer")
-	// purego.RegisterLibFunc(&sdlGetRenderOutputSize, lib, "SDL_GetRenderOutputSize")
-	// purego.RegisterLibFunc(&sdlGetRenderSafeArea, lib, "SDL_GetRenderSafeArea")
-	// purego.RegisterLibFunc(&sdlGetRenderScale, lib, "SDL_GetRenderScale")
-	// purego.RegisterLibFunc(&sdlGetRenderTarget, lib, "SDL_GetRenderTarget")
-	// purego.RegisterLibFunc(&sdlGetRenderViewport, lib, "SDL_GetRenderViewport")
+	purego.RegisterLibFunc(&sdlGetRenderOutputSize, lib, "SDL_GetRenderOutputSize")
+	purego.RegisterLibFunc(&sdlGetRenderSafeArea, lib, "SDL_GetRenderSafeArea")
+	purego.RegisterLibFunc(&sdlGetRenderScale, lib, "SDL_GetRenderScale")
+	purego.RegisterLibFunc(&sdlGetRenderTarget, lib, "SDL_GetRenderTarget")
+	purego.RegisterLibFunc(&sdlGetRenderViewport, lib, "SDL_GetRenderViewport")
 	// purego.RegisterLibFunc(&sdlGetRenderVSync, lib, "SDL_GetRenderVSync")
 	purego.RegisterLibFunc(&sdlGetRenderWindow, lib, "SDL_GetRenderWindow")
 	purego.RegisterLibFunc(&sdlGetRevision, lib, "SDL_GetRevision")
@@ -1756,14 +1756,14 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetSystemRAM, lib, "SDL_GetSystemRAM")
 	// purego.RegisterLibFunc(&sdlGetSystemTheme, lib, "SDL_GetSystemTheme")
 	// purego.RegisterLibFunc(&sdlGetTextInputArea, lib, "SDL_GetTextInputArea")
-	// purego.RegisterLibFunc(&sdlGetTextureAlphaMod, lib, "SDL_GetTextureAlphaMod")
-	// purego.RegisterLibFunc(&sdlGetTextureAlphaModFloat, lib, "SDL_GetTextureAlphaModFloat")
-	// purego.RegisterLibFunc(&sdlGetTextureBlendMode, lib, "SDL_GetTextureBlendMode")
-	// purego.RegisterLibFunc(&sdlGetTextureColorMod, lib, "SDL_GetTextureColorMod")
-	// purego.RegisterLibFunc(&sdlGetTextureColorModFloat, lib, "SDL_GetTextureColorModFloat")
-	// purego.RegisterLibFunc(&sdlGetTextureProperties, lib, "SDL_GetTextureProperties")
-	// purego.RegisterLibFunc(&sdlGetTextureScaleMode, lib, "SDL_GetTextureScaleMode")
-	// purego.RegisterLibFunc(&sdlGetTextureSize, lib, "SDL_GetTextureSize")
+	purego.RegisterLibFunc(&sdlGetTextureAlphaMod, lib, "SDL_GetTextureAlphaMod")
+	purego.RegisterLibFunc(&sdlGetTextureAlphaModFloat, lib, "SDL_GetTextureAlphaModFloat")
+	purego.RegisterLibFunc(&sdlGetTextureBlendMode, lib, "SDL_GetTextureBlendMode")
+	purego.RegisterLibFunc(&sdlGetTextureColorMod, lib, "SDL_GetTextureColorMod")
+	purego.RegisterLibFunc(&sdlGetTextureColorModFloat, lib, "SDL_GetTextureColorModFloat")
+	purego.RegisterLibFunc(&sdlGetTextureProperties, lib, "SDL_GetTextureProperties")
+	purego.RegisterLibFunc(&sdlGetTextureScaleMode, lib, "SDL_GetTextureScaleMode")
+	purego.RegisterLibFunc(&sdlGetTextureSize, lib, "SDL_GetTextureSize")
 	// purego.RegisterLibFunc(&sdlGetThreadID, lib, "SDL_GetThreadID")
 	// purego.RegisterLibFunc(&sdlGetThreadName, lib, "SDL_GetThreadName")
 	// purego.RegisterLibFunc(&sdlGetThreadState, lib, "SDL_GetThreadState")
@@ -1953,8 +1953,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlLockRWLockForWriting, lib, "SDL_LockRWLockForWriting")
 	// purego.RegisterLibFunc(&sdlLockSpinlock, lib, "SDL_LockSpinlock")
 	purego.RegisterLibFunc(&sdlLockSurface, lib, "SDL_LockSurface")
-	// purego.RegisterLibFunc(&sdlLockTexture, lib, "SDL_LockTexture")
-	// purego.RegisterLibFunc(&sdlLockTextureToSurface, lib, "SDL_LockTextureToSurface")
+	purego.RegisterLibFunc(&sdlLockTexture, lib, "SDL_LockTexture")
+	purego.RegisterLibFunc(&sdlLockTextureToSurface, lib, "SDL_LockTextureToSurface")
 	purego.RegisterLibFunc(&sdlLog, lib, "SDL_Log")
 	// purego.RegisterLibFunc(&sdllog, lib, "SDL_log")
 	// purego.RegisterLibFunc(&sdllog10, lib, "SDL_log10")
@@ -2091,29 +2091,29 @@ func init() {
 	// purego.RegisterLibFunc(&sdlRenamePath, lib, "SDL_RenamePath")
 	// purego.RegisterLibFunc(&sdlRenameStoragePath, lib, "SDL_RenameStoragePath")
 	sdlRenderClear = shared.Get(lib, "SDL_RenderClear")
-	// purego.RegisterLibFunc(&sdlRenderClipEnabled, lib, "SDL_RenderClipEnabled")
-	// purego.RegisterLibFunc(&sdlRenderCoordinatesFromWindow, lib, "SDL_RenderCoordinatesFromWindow")
-	// purego.RegisterLibFunc(&sdlRenderCoordinatesToWindow, lib, "SDL_RenderCoordinatesToWindow")
+	purego.RegisterLibFunc(&sdlRenderClipEnabled, lib, "SDL_RenderClipEnabled")
+	purego.RegisterLibFunc(&sdlRenderCoordinatesFromWindow, lib, "SDL_RenderCoordinatesFromWindow")
+	purego.RegisterLibFunc(&sdlRenderCoordinatesToWindow, lib, "SDL_RenderCoordinatesToWindow")
 	purego.RegisterLibFunc(&sdlRenderDebugText, lib, "SDL_RenderDebugText")
 	// purego.RegisterLibFunc(&sdlRenderDebugTextFormat, lib, "SDL_RenderDebugTextFormat")
 	sdlRenderFillRect = shared.Get(lib, "SDL_RenderFillRect")
-	// purego.RegisterLibFunc(&sdlRenderFillRects, lib, "SDL_RenderFillRects")
+	sdlRenderFillRects = shared.Get(lib, "SDL_RenderFillRects")
 	// purego.RegisterLibFunc(&sdlRenderGeometry, lib, "SDL_RenderGeometry")
 	// purego.RegisterLibFunc(&sdlRenderGeometryRaw, lib, "SDL_RenderGeometryRaw")
-	// purego.RegisterLibFunc(&sdlRenderLine, lib, "SDL_RenderLine")
-	// purego.RegisterLibFunc(&sdlRenderLines, lib, "SDL_RenderLines")
-	// purego.RegisterLibFunc(&sdlRenderPoint, lib, "SDL_RenderPoint")
-	// purego.RegisterLibFunc(&sdlRenderPoints, lib, "SDL_RenderPoints")
+	purego.RegisterLibFunc(&sdlRenderLine, lib, "SDL_RenderLine")
+	sdlRenderLines = shared.Get(lib, "SDL_RenderLines")
+	purego.RegisterLibFunc(&sdlRenderPoint, lib, "SDL_RenderPoint")
+	sdlRenderPoints = shared.Get(lib, "SDL_RenderPoints")
 	sdlRenderPresent = shared.Get(lib, "SDL_RenderPresent")
 	// purego.RegisterLibFunc(&sdlRenderReadPixels, lib, "SDL_RenderReadPixels")
 	sdlRenderRect = shared.Get(lib, "SDL_RenderRect")
-	// purego.RegisterLibFunc(&sdlRenderRects, lib, "SDL_RenderRects")
+	sdlRenderRects = shared.Get(lib, "SDL_RenderRects")
 	sdlRenderTexture = shared.Get(lib, "SDL_RenderTexture")
-	// purego.RegisterLibFunc(&sdlRenderTexture9Grid, lib, "SDL_RenderTexture9Grid")
-	// purego.RegisterLibFunc(&sdlRenderTextureAffine, lib, "SDL_RenderTextureAffine")
-	// purego.RegisterLibFunc(&sdlRenderTextureRotated, lib, "SDL_RenderTextureRotated")
-	// purego.RegisterLibFunc(&sdlRenderTextureTiled, lib, "SDL_RenderTextureTiled")
-	// purego.RegisterLibFunc(&sdlRenderViewportSet, lib, "SDL_RenderViewportSet")
+	purego.RegisterLibFunc(&sdlRenderTexture9Grid, lib, "SDL_RenderTexture9Grid")
+	sdlRenderTextureAffine = shared.Get(lib, "SDL_RenderTextureAffine")
+	purego.RegisterLibFunc(&sdlRenderTextureRotated, lib, "SDL_RenderTextureRotated")
+	purego.RegisterLibFunc(&sdlRenderTextureTiled, lib, "SDL_RenderTextureTiled")
+	purego.RegisterLibFunc(&sdlRenderViewportSet, lib, "SDL_RenderViewportSet")
 	// purego.RegisterLibFunc(&sdlReportAssertion, lib, "SDL_ReportAssertion")
 	// purego.RegisterLibFunc(&sdlResetAssertionReport, lib, "SDL_ResetAssertionReport")
 	purego.RegisterLibFunc(&sdlResetHint, lib, "SDL_ResetHint")
@@ -2213,15 +2213,15 @@ func init() {
 	purego.RegisterLibFunc(&sdlSetPointerProperty, lib, "SDL_SetPointerProperty")
 	purego.RegisterLibFunc(&sdlSetPointerPropertyWithCleanup, lib, "SDL_SetPointerPropertyWithCleanup")
 	// purego.RegisterLibFunc(&sdlSetPrimarySelectionText, lib, "SDL_SetPrimarySelectionText")
-	// purego.RegisterLibFunc(&sdlSetRenderClipRect, lib, "SDL_SetRenderClipRect")
-	// purego.RegisterLibFunc(&sdlSetRenderColorScale, lib, "SDL_SetRenderColorScale")
-	// purego.RegisterLibFunc(&sdlSetRenderDrawBlendMode, lib, "SDL_SetRenderDrawBlendMode")
+	purego.RegisterLibFunc(&sdlSetRenderClipRect, lib, "SDL_SetRenderClipRect")
+	purego.RegisterLibFunc(&sdlSetRenderColorScale, lib, "SDL_SetRenderColorScale")
+	purego.RegisterLibFunc(&sdlSetRenderDrawBlendMode, lib, "SDL_SetRenderDrawBlendMode")
 	sdlSetRenderDrawColor = shared.Get(lib, "SDL_SetRenderDrawColor")
-	// purego.RegisterLibFunc(&sdlSetRenderDrawColorFloat, lib, "SDL_SetRenderDrawColorFloat")
-	// purego.RegisterLibFunc(&sdlSetRenderLogicalPresentation, lib, "SDL_SetRenderLogicalPresentation")
-	// purego.RegisterLibFunc(&sdlSetRenderScale, lib, "SDL_SetRenderScale")
-	// purego.RegisterLibFunc(&sdlSetRenderTarget, lib, "SDL_SetRenderTarget")
-	// purego.RegisterLibFunc(&sdlSetRenderViewport, lib, "SDL_SetRenderViewport")
+	purego.RegisterLibFunc(&sdlSetRenderDrawColorFloat, lib, "SDL_SetRenderDrawColorFloat")
+	purego.RegisterLibFunc(&sdlSetRenderLogicalPresentation, lib, "SDL_SetRenderLogicalPresentation")
+	purego.RegisterLibFunc(&sdlSetRenderScale, lib, "SDL_SetRenderScale")
+	purego.RegisterLibFunc(&sdlSetRenderTarget, lib, "SDL_SetRenderTarget")
+	purego.RegisterLibFunc(&sdlSetRenderViewport, lib, "SDL_SetRenderViewport")
 	purego.RegisterLibFunc(&sdlSetRenderVSync, lib, "SDL_SetRenderVSync")
 	// purego.RegisterLibFunc(&sdlSetScancodeName, lib, "SDL_SetScancodeName")
 	purego.RegisterLibFunc(&sdlSetStringProperty, lib, "SDL_SetStringProperty")
@@ -2234,12 +2234,12 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetSurfacePalette, lib, "SDL_SetSurfacePalette")
 	// purego.RegisterLibFunc(&sdlSetSurfaceRLE, lib, "SDL_SetSurfaceRLE")
 	// purego.RegisterLibFunc(&sdlSetTextInputArea, lib, "SDL_SetTextInputArea")
-	// purego.RegisterLibFunc(&sdlSetTextureAlphaMod, lib, "SDL_SetTextureAlphaMod")
-	// purego.RegisterLibFunc(&sdlSetTextureAlphaModFloat, lib, "SDL_SetTextureAlphaModFloat")
-	// purego.RegisterLibFunc(&sdlSetTextureBlendMode, lib, "SDL_SetTextureBlendMode")
+	sdlSetTextureAlphaMod = shared.Get(lib, "SDL_SetTextureAlphaMod")
+	purego.RegisterLibFunc(&sdlSetTextureAlphaModFloat, lib, "SDL_SetTextureAlphaModFloat")
+	purego.RegisterLibFunc(&sdlSetTextureBlendMode, lib, "SDL_SetTextureBlendMode")
 	sdlSetTextureColorMod = shared.Get(lib, "SDL_SetTextureColorMod")
-	// purego.RegisterLibFunc(&sdlSetTextureColorModFloat, lib, "SDL_SetTextureColorModFloat")
-	// purego.RegisterLibFunc(&sdlSetTextureScaleMode, lib, "SDL_SetTextureScaleMode")
+	purego.RegisterLibFunc(&sdlSetTextureColorModFloat, lib, "SDL_SetTextureColorModFloat")
+	purego.RegisterLibFunc(&sdlSetTextureScaleMode, lib, "SDL_SetTextureScaleMode")
 	// purego.RegisterLibFunc(&sdlSetTLS, lib, "SDL_SetTLS")
 	// purego.RegisterLibFunc(&sdlSetTrayEntryCallback, lib, "SDL_SetTrayEntryCallback")
 	// purego.RegisterLibFunc(&sdlSetTrayEntryChecked, lib, "SDL_SetTrayEntryChecked")
@@ -2369,19 +2369,19 @@ func init() {
 	// purego.RegisterLibFunc(&sdlUnlockRWLock, lib, "SDL_UnlockRWLock")
 	// purego.RegisterLibFunc(&sdlUnlockSpinlock, lib, "SDL_UnlockSpinlock")
 	purego.RegisterLibFunc(&sdlUnlockSurface, lib, "SDL_UnlockSurface")
-	// purego.RegisterLibFunc(&sdlUnlockTexture, lib, "SDL_UnlockTexture")
+	purego.RegisterLibFunc(&sdlUnlockTexture, lib, "SDL_UnlockTexture")
 	// purego.RegisterLibFunc(&sdlUnmapGPUTransferBuffer, lib, "SDL_UnmapGPUTransferBuffer")
 	// purego.RegisterLibFunc(&sdlunsetenv_unsafe, lib, "SDL_unsetenv_unsafe")
 	// purego.RegisterLibFunc(&sdlUnsetEnvironmentVariable, lib, "SDL_UnsetEnvironmentVariable")
 	// purego.RegisterLibFunc(&sdlUpdateGamepads, lib, "SDL_UpdateGamepads")
 	// purego.RegisterLibFunc(&sdlUpdateHapticEffect, lib, "SDL_UpdateHapticEffect")
 	// purego.RegisterLibFunc(&sdlUpdateJoysticks, lib, "SDL_UpdateJoysticks")
-	// purego.RegisterLibFunc(&sdlUpdateNVTexture, lib, "SDL_UpdateNVTexture")
+	sdlUpdateNVTexture = shared.Get(lib, "SDL_UpdateNVTexture")
 	// purego.RegisterLibFunc(&sdlUpdateSensors, lib, "SDL_UpdateSensors")
-	purego.RegisterLibFunc(&sdlUpdateTexture, lib, "SDL_UpdateTexture")
+	sdlUpdateTexture = shared.Get(lib, "SDL_UpdateTexture")
 	purego.RegisterLibFunc(&sdlUpdateWindowSurface, lib, "SDL_UpdateWindowSurface")
 	// purego.RegisterLibFunc(&sdlUpdateWindowSurfaceRects, lib, "SDL_UpdateWindowSurfaceRects")
-	// purego.RegisterLibFunc(&sdlUpdateYUVTexture, lib, "SDL_UpdateYUVTexture")
+	sdlUpdateYUVTexture = shared.Get(lib, "SDL_UpdateYUVTexture")
 	// purego.RegisterLibFunc(&sdlUploadToGPUBuffer, lib, "SDL_UploadToGPUBuffer")
 	// purego.RegisterLibFunc(&sdlUploadToGPUTexture, lib, "SDL_UploadToGPUTexture")
 	// purego.RegisterLibFunc(&sdlutf8strlcpy, lib, "SDL_utf8strlcpy")
