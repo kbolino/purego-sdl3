@@ -1,7 +1,6 @@
 package ttf
 
 import (
-	"image/color"
 	"unsafe"
 
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
@@ -447,51 +446,51 @@ func RemoveFallbackFont(font *Font, fallback *Font) {
 	ttfRemoveFallbackFont(font, fallback)
 }
 
-func RenderGlyphBlended(font *Font, ch rune, fg color.RGBA) *sdl.Surface {
+func RenderGlyphBlended(font *Font, ch rune, fg sdl.Color) *sdl.Surface {
 	return ttfRenderGlyphBlended(font, ch, *(*uintptr)(unsafe.Pointer(&fg)))
 }
 
-func RenderGlyphLCD(font *Font, ch rune, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+func RenderGlyphLCD(font *Font, ch rune, fg sdl.Color, bg sdl.Color) *sdl.Surface {
 	return ttfRenderGlyphLCD(font, ch, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
 }
 
-func RenderGlyphShaded(font *Font, ch rune, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+func RenderGlyphShaded(font *Font, ch rune, fg sdl.Color, bg sdl.Color) *sdl.Surface {
 	return ttfRenderGlyphShaded(font, ch, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
 }
 
-func RenderGlyphSolid(font *Font, ch rune, fg color.RGBA) *sdl.Surface {
+func RenderGlyphSolid(font *Font, ch rune, fg sdl.Color) *sdl.Surface {
 	return ttfRenderGlyphSolid(font, ch, *(*uintptr)(unsafe.Pointer(&fg)))
 }
 
-func RenderTextBlended(font *Font, text string, length uint64, fg color.RGBA) *sdl.Surface {
+func RenderTextBlended(font *Font, text string, length uint64, fg sdl.Color) *sdl.Surface {
 	return ttfRenderTextBlended(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)))
 }
 
-func RenderTextBlendedWrapped(font *Font, text string, length uint64, fg color.RGBA, wrapWidth int32) *sdl.Surface {
+func RenderTextBlendedWrapped(font *Font, text string, length uint64, fg sdl.Color, wrapWidth int32) *sdl.Surface {
 	return ttfRenderTextBlendedWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), wrapWidth)
 }
 
-func RenderTextLCD(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+func RenderTextLCD(font *Font, text string, length uint64, fg sdl.Color, bg sdl.Color) *sdl.Surface {
 	return ttfRenderTextLCD(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
 }
 
-func RenderTextLCDWrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrapWidth int32) *sdl.Surface {
+func RenderTextLCDWrapped(font *Font, text string, length uint64, fg sdl.Color, bg sdl.Color, wrapWidth int32) *sdl.Surface {
 	return ttfRenderTextLCDWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)), wrapWidth)
 }
 
-func RenderTextShaded(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA) *sdl.Surface {
+func RenderTextShaded(font *Font, text string, length uint64, fg sdl.Color, bg sdl.Color) *sdl.Surface {
 	return ttfRenderTextShaded(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)))
 }
 
-func RenderTextShadedWrapped(font *Font, text string, length uint64, fg color.RGBA, bg color.RGBA, wrapWidth int32) *sdl.Surface {
+func RenderTextShadedWrapped(font *Font, text string, length uint64, fg sdl.Color, bg sdl.Color, wrapWidth int32) *sdl.Surface {
 	return ttfRenderTextShadedWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), *(*uintptr)(unsafe.Pointer(&bg)), wrapWidth)
 }
 
-func RenderTextSolid(font *Font, text string, length uint64, fg color.RGBA) *sdl.Surface {
+func RenderTextSolid(font *Font, text string, length uint64, fg sdl.Color) *sdl.Surface {
 	return ttfRenderTextSolid(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)))
 }
 
-func RenderTextSolidWrapped(font *Font, text string, length uint64, fg color.RGBA, wrapLength int32) *sdl.Surface {
+func RenderTextSolidWrapped(font *Font, text string, length uint64, fg sdl.Color, wrapLength int32) *sdl.Surface {
 	return ttfRenderTextSolidWrapped(font, text, length, *(*uintptr)(unsafe.Pointer(&fg)), wrapLength)
 }
 

@@ -249,6 +249,14 @@ const (
 	PixelFormatXbgr32       PixelFormat = PixelFormatRgbx8888
 )
 
+type Color struct {
+	R, G, B, A uint8
+}
+
+type FColor struct {
+	R, G, B, A float32
+}
+
 // func CreatePalette(ncolors int32) *Palette {
 //	return sdlCreatePalette(ncolors)
 // }
