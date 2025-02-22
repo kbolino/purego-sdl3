@@ -136,12 +136,12 @@ var (
 	// sdlCreatePopupWindow                     func(*Window, int32, int32, int32, int32, WindowFlags) *Window
 	// sdlCreateProcess                         func(**byte, bool) *Process
 	// sdlCreateProcessWithProperties           func(PropertiesID) *Process
-	sdlCreateProperties func() PropertiesID
-	sdlCreateRenderer   func(*Window, *byte) *Renderer
-	// sdlCreateRendererWithProperties          func(PropertiesID) *Renderer
+	sdlCreateProperties             func() PropertiesID
+	sdlCreateRenderer               func(*Window, *byte) *Renderer
+	sdlCreateRendererWithProperties func(PropertiesID) *Renderer
 	// sdlCreateRWLock                          func() *RWLock
 	// sdlCreateSemaphore                       func(uint32) *Semaphore
-	// sdlCreateSoftwareRenderer                func(*Surface) *Renderer
+	sdlCreateSoftwareRenderer func(*Surface) *Renderer
 	// sdlCreateStorageDirectory                func(*Storage, string) bool
 	sdlCreateSurface func(int32, int32, PixelFormat) *Surface
 	// sdlCreateSurfaceFrom                     func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
@@ -478,7 +478,7 @@ var (
 	// sdlGetRenderDrawColor                    func(*Renderer, *uint8, *uint8, *uint8, *uint8) bool
 	// sdlGetRenderDrawColorFloat               func(*Renderer, *float32, *float32, *float32, *float32) bool
 	sdlGetRenderDriver func(int32) string
-	// sdlGetRenderer                           func(*Window) *Renderer
+	sdlGetRenderer     func(*Window) *Renderer
 	// sdlGetRendererFromTexture                func(*Texture) *Renderer
 	sdlGetRendererName func(*Renderer) string
 	// sdlGetRendererProperties                 func(*Renderer) PropertiesID
@@ -492,8 +492,8 @@ var (
 	// sdlGetRenderTarget                       func(*Renderer) *Texture
 	// sdlGetRenderViewport                     func(*Renderer, *Rect) bool
 	// sdlGetRenderVSync                        func(*Renderer, *int32) bool
-	// sdlGetRenderWindow                       func(*Renderer) *Window
-	sdlGetRevision func() string
+	sdlGetRenderWindow func(*Renderer) *Window
+	sdlGetRevision     func() string
 	// sdlGetRGB                                func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8)
 	// sdlGetRGBA                               func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8, *uint8)
 	// sdlGetSandbox                            func() Sandbox
@@ -1364,10 +1364,10 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCreateProcessWithProperties, lib, "SDL_CreateProcessWithProperties")
 	purego.RegisterLibFunc(&sdlCreateProperties, lib, "SDL_CreateProperties")
 	purego.RegisterLibFunc(&sdlCreateRenderer, lib, "SDL_CreateRenderer")
-	// purego.RegisterLibFunc(&sdlCreateRendererWithProperties, lib, "SDL_CreateRendererWithProperties")
+	purego.RegisterLibFunc(&sdlCreateRendererWithProperties, lib, "SDL_CreateRendererWithProperties")
 	// purego.RegisterLibFunc(&sdlCreateRWLock, lib, "SDL_CreateRWLock")
 	// purego.RegisterLibFunc(&sdlCreateSemaphore, lib, "SDL_CreateSemaphore")
-	// purego.RegisterLibFunc(&sdlCreateSoftwareRenderer, lib, "SDL_CreateSoftwareRenderer")
+	purego.RegisterLibFunc(&sdlCreateSoftwareRenderer, lib, "SDL_CreateSoftwareRenderer")
 	// purego.RegisterLibFunc(&sdlCreateStorageDirectory, lib, "SDL_CreateStorageDirectory")
 	purego.RegisterLibFunc(&sdlCreateSurface, lib, "SDL_CreateSurface")
 	// purego.RegisterLibFunc(&sdlCreateSurfaceFrom, lib, "SDL_CreateSurfaceFrom")
@@ -1704,7 +1704,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRenderDrawColor, lib, "SDL_GetRenderDrawColor")
 	// purego.RegisterLibFunc(&sdlGetRenderDrawColorFloat, lib, "SDL_GetRenderDrawColorFloat")
 	purego.RegisterLibFunc(&sdlGetRenderDriver, lib, "SDL_GetRenderDriver")
-	// purego.RegisterLibFunc(&sdlGetRenderer, lib, "SDL_GetRenderer")
+	purego.RegisterLibFunc(&sdlGetRenderer, lib, "SDL_GetRenderer")
 	// purego.RegisterLibFunc(&sdlGetRendererFromTexture, lib, "SDL_GetRendererFromTexture")
 	purego.RegisterLibFunc(&sdlGetRendererName, lib, "SDL_GetRendererName")
 	// purego.RegisterLibFunc(&sdlGetRendererProperties, lib, "SDL_GetRendererProperties")
@@ -1718,7 +1718,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRenderTarget, lib, "SDL_GetRenderTarget")
 	// purego.RegisterLibFunc(&sdlGetRenderViewport, lib, "SDL_GetRenderViewport")
 	// purego.RegisterLibFunc(&sdlGetRenderVSync, lib, "SDL_GetRenderVSync")
-	// purego.RegisterLibFunc(&sdlGetRenderWindow, lib, "SDL_GetRenderWindow")
+	purego.RegisterLibFunc(&sdlGetRenderWindow, lib, "SDL_GetRenderWindow")
 	purego.RegisterLibFunc(&sdlGetRevision, lib, "SDL_GetRevision")
 	// purego.RegisterLibFunc(&sdlGetRGB, lib, "SDL_GetRGB")
 	// purego.RegisterLibFunc(&sdlGetRGBA, lib, "SDL_GetRGBA")

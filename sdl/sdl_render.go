@@ -9,6 +9,20 @@ import (
 
 const SoftwareRenderer = "software"
 
+const (
+	PropRendererCreateNameString                           = "SDL.renderer.create.name"
+	PropRendererCreateWindowPointer                        = "SDL.renderer.create.window"
+	PropRendererCreateSurfacePointer                       = "SDL.renderer.create.surface"
+	PropRendererCreateOutputColorspaceNumber               = "SDL.renderer.create.output_colorspace"
+	PropRendererCreatePresentVsyncNumber                   = "SDL.renderer.create.present_vsync"
+	PropRendererCreateVulkanInstancePointer                = "SDL.renderer.create.vulkan.instance"
+	PropRendererCreateVulkanSurfaceNumber                  = "SDL.renderer.create.vulkan.surface"
+	PropRendererCreateVulkanPhysicalDevicePointer          = "SDL.renderer.create.vulkan.physical_device"
+	PropRendererCreateVulkanDevicePointer                  = "SDL.renderer.create.vulkan.device"
+	PropRendererCreateVulkanGraphicsQueueFamilyIndexNumber = "SDL.renderer.create.vulkan.graphics_queue_family_index"
+	PropRendererCreateVulkanPresentQueueFamilyIndexNumber  = "SDL.renderer.create.vulkan.present_queue_family_index"
+)
+
 type RendererLogicalPresentation uint32
 
 const (
@@ -121,13 +135,13 @@ func CreateRenderer(window *Window, name string) *Renderer {
 	return sdlCreateRenderer(window, convert.ToBytePtr(name))
 }
 
-// func CreateRendererWithProperties(props PropertiesID) *Renderer {
-//	return sdlCreateRendererWithProperties(props)
-// }
+func CreateRendererWithProperties(props PropertiesID) *Renderer {
+	return sdlCreateRendererWithProperties(props)
+}
 
-// func CreateSoftwareRenderer(surface *Surface) *Renderer {
-//	return sdlCreateSoftwareRenderer(surface)
-// }
+func CreateSoftwareRenderer(surface *Surface) *Renderer {
+	return sdlCreateSoftwareRenderer(surface)
+}
 
 func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess, w int32, h int32) *Texture {
 	return sdlCreateTexture(renderer, format, access, w, h)
@@ -173,9 +187,9 @@ func GetRenderDriver(index int32) string {
 	return sdlGetRenderDriver(index)
 }
 
-// func GetRenderer(window *Window) *Renderer {
-//	return sdlGetRenderer(window)
-// }
+func GetRenderer(window *Window) *Renderer {
+	return sdlGetRenderer(window)
+}
 
 // func GetRendererFromTexture(texture *Texture) *Renderer {
 //	return sdlGetRendererFromTexture(texture)
@@ -230,9 +244,9 @@ func GetRendererName(renderer *Renderer) string {
 //	return sdlGetRenderVSync(renderer, vsync)
 // }
 
-// func GetRenderWindow(renderer *Renderer) *Window {
-//	return sdlGetRenderWindow(renderer)
-// }
+func GetRenderWindow(renderer *Renderer) *Window {
+	return sdlGetRenderWindow(renderer)
+}
 
 // func GetTextureAlphaMod(texture *Texture, alpha *uint8) bool {
 //	return sdlGetTextureAlphaMod(texture, alpha)
