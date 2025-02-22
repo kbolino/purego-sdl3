@@ -137,7 +137,7 @@ var (
 	// sdlCreateProcess                         func(**byte, bool) *Process
 	// sdlCreateProcessWithProperties           func(PropertiesID) *Process
 	// sdlCreateProperties                      func() PropertiesID
-	// sdlCreateRenderer                        func(*Window, string) *Renderer
+	sdlCreateRenderer func(*Window, *byte) *Renderer
 	// sdlCreateRendererWithProperties          func(PropertiesID) *Renderer
 	// sdlCreateRWLock                          func() *RWLock
 	// sdlCreateSemaphore                       func(uint32) *Semaphore
@@ -441,7 +441,7 @@ var (
 	// sdlGetNumJoystickButtons                 func(*Joystick) int32
 	// sdlGetNumJoystickHats                    func(*Joystick) int32
 	// sdlGetNumLogicalCPUCores                 func() int32
-	// sdlGetNumRenderDrivers                   func() int32
+	sdlGetNumRenderDrivers func() int32
 	// sdlGetNumVideoDrivers                    func() int32
 	// sdlGetOriginalMemoryFunctions            func(*malloc_func, *calloc_func, *realloc_func, *free_func)
 	// sdlGetPathInfo                           func(string, *PathInfo) bool
@@ -477,7 +477,7 @@ var (
 	// sdlGetRenderDrawBlendMode                func(*Renderer, *BlendMode) bool
 	// sdlGetRenderDrawColor                    func(*Renderer, *uint8, *uint8, *uint8, *uint8) bool
 	// sdlGetRenderDrawColorFloat               func(*Renderer, *float32, *float32, *float32, *float32) bool
-	// sdlGetRenderDriver                       func(int32) string
+	sdlGetRenderDriver func(int32) string
 	// sdlGetRenderer                           func(*Window) *Renderer
 	// sdlGetRendererFromTexture                func(*Texture) *Renderer
 	sdlGetRendererName func(*Renderer) string
@@ -1363,7 +1363,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCreateProcess, lib, "SDL_CreateProcess")
 	// purego.RegisterLibFunc(&sdlCreateProcessWithProperties, lib, "SDL_CreateProcessWithProperties")
 	// purego.RegisterLibFunc(&sdlCreateProperties, lib, "SDL_CreateProperties")
-	// purego.RegisterLibFunc(&sdlCreateRenderer, lib, "SDL_CreateRenderer")
+	purego.RegisterLibFunc(&sdlCreateRenderer, lib, "SDL_CreateRenderer")
 	// purego.RegisterLibFunc(&sdlCreateRendererWithProperties, lib, "SDL_CreateRendererWithProperties")
 	// purego.RegisterLibFunc(&sdlCreateRWLock, lib, "SDL_CreateRWLock")
 	// purego.RegisterLibFunc(&sdlCreateSemaphore, lib, "SDL_CreateSemaphore")
@@ -1667,7 +1667,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetNumJoystickButtons, lib, "SDL_GetNumJoystickButtons")
 	// purego.RegisterLibFunc(&sdlGetNumJoystickHats, lib, "SDL_GetNumJoystickHats")
 	// purego.RegisterLibFunc(&sdlGetNumLogicalCPUCores, lib, "SDL_GetNumLogicalCPUCores")
-	// purego.RegisterLibFunc(&sdlGetNumRenderDrivers, lib, "SDL_GetNumRenderDrivers")
+	purego.RegisterLibFunc(&sdlGetNumRenderDrivers, lib, "SDL_GetNumRenderDrivers")
 	// purego.RegisterLibFunc(&sdlGetNumVideoDrivers, lib, "SDL_GetNumVideoDrivers")
 	// purego.RegisterLibFunc(&sdlGetOriginalMemoryFunctions, lib, "SDL_GetOriginalMemoryFunctions")
 	// purego.RegisterLibFunc(&sdlGetPathInfo, lib, "SDL_GetPathInfo")
@@ -1703,7 +1703,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRenderDrawBlendMode, lib, "SDL_GetRenderDrawBlendMode")
 	// purego.RegisterLibFunc(&sdlGetRenderDrawColor, lib, "SDL_GetRenderDrawColor")
 	// purego.RegisterLibFunc(&sdlGetRenderDrawColorFloat, lib, "SDL_GetRenderDrawColorFloat")
-	// purego.RegisterLibFunc(&sdlGetRenderDriver, lib, "SDL_GetRenderDriver")
+	purego.RegisterLibFunc(&sdlGetRenderDriver, lib, "SDL_GetRenderDriver")
 	// purego.RegisterLibFunc(&sdlGetRenderer, lib, "SDL_GetRenderer")
 	// purego.RegisterLibFunc(&sdlGetRendererFromTexture, lib, "SDL_GetRendererFromTexture")
 	purego.RegisterLibFunc(&sdlGetRendererName, lib, "SDL_GetRendererName")

@@ -4,7 +4,10 @@ import (
 	"unsafe"
 
 	"github.com/ebitengine/purego"
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
+
+const SoftwareRenderer = "software"
 
 type RendererLogicalPresentation uint32
 
@@ -32,6 +35,12 @@ type Texture struct {
 	W        int32
 	H        int32
 	Refcount int32
+}
+
+type Vertex struct {
+	Position FPoint
+	Color    FColor
+	TexCoord FPoint
 }
 
 // CreateWindowAndRenderer creates a window and default renderer.
@@ -103,9 +112,14 @@ func DestroyTexture(texture *Texture) {
 //	return sdlConvertEventToRenderCoordinates(renderer, event)
 // }
 
-// func CreateRenderer(window *Window, name string) *Renderer {
-//	return sdlCreateRenderer(window, name)
-// }
+// CreateRenderer creates a 2D rendering context for a window.
+// The name parameter can be one driver, a comma-separated list of drivers or "" to let SDL choose one.
+func CreateRenderer(window *Window, name string) *Renderer {
+	if len(name) == 0 {
+		return sdlCreateRenderer(window, nil)
+	}
+	return sdlCreateRenderer(window, convert.ToBytePtr(name))
+}
 
 // func CreateRendererWithProperties(props PropertiesID) *Renderer {
 //	return sdlCreateRendererWithProperties(props)
@@ -131,9 +145,9 @@ func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess,
 //	return sdlGetCurrentRenderOutputSize(renderer, w, h)
 // }
 
-// func GetNumRenderDrivers() int32 {
-//	return sdlGetNumRenderDrivers()
-// }
+func GetNumRenderDrivers() int32 {
+	return sdlGetNumRenderDrivers()
+}
 
 // func GetRenderClipRect(renderer *Renderer, rect *Rect) bool {
 //	return sdlGetRenderClipRect(renderer, rect)
@@ -155,9 +169,9 @@ func CreateTexture(renderer *Renderer, format PixelFormat, access TextureAccess,
 //	return sdlGetRenderDrawColorFloat(renderer, r, g, b, a)
 // }
 
-// func GetRenderDriver(index int32) string {
-//	return sdlGetRenderDriver(index)
-// }
+func GetRenderDriver(index int32) string {
+	return sdlGetRenderDriver(index)
+}
 
 // func GetRenderer(window *Window) *Renderer {
 //	return sdlGetRenderer(window)

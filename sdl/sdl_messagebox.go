@@ -44,10 +44,9 @@ func (m *MessageBoxButtonData) Text() string {
 	return convert.ToString(m.text)
 }
 
-// SetText sets the text of a button. It returns an error, if s contains a null byte at any location.
-func (m *MessageBoxButtonData) SetText(s string) (err error) {
-	m.text, err = convert.ToBytePtr(s)
-	return
+// SetText sets the text of a button.
+func (m *MessageBoxButtonData) SetText(s string) {
+	m.text = convert.ToBytePtr(s)
 }
 
 type MessageBoxColor struct {
@@ -72,20 +71,18 @@ func (m *MessageBoxData) Title() string {
 	return convert.ToString(m.title)
 }
 
-// SetTitle sets the title of a MessageBox. It returns an error, if s contains a null byte at any location.
-func (m *MessageBoxData) SetTitle(s string) (err error) {
-	m.title, err = convert.ToBytePtr(s)
-	return
+// SetTitle sets the title of a MessageBox.
+func (m *MessageBoxData) SetTitle(s string) {
+	m.title = convert.ToBytePtr(s)
 }
 
 func (m *MessageBoxData) Message() string {
 	return convert.ToString(m.message)
 }
 
-// SetMessage sets the message text of a MessageBox. It returns an error, if s contains a null byte at any location.
-func (m *MessageBoxData) SetMessage(s string) (err error) {
-	m.message, err = convert.ToBytePtr(s)
-	return
+// SetMessage sets the message text of a MessageBox.
+func (m *MessageBoxData) SetMessage(s string) {
+	m.message = convert.ToBytePtr(s)
 }
 
 func (m *MessageBoxData) Buttons() []MessageBoxButtonData {

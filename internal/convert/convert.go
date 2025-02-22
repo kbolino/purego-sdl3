@@ -2,19 +2,20 @@ package convert
 
 import (
 	"strings"
-	"syscall"
 	"unsafe"
 )
 
-// ToBytePtr converts a Go string into a null-terminated C-style string.
-// It returns an [syscall.EINVAL] error, if s contains a null byte at any location.
-func ToBytePtr(s string) (*byte, error) {
-	if strings.IndexByte(s, 0) != -1 {
-		return nil, syscall.EINVAL
+// ToBytePtr converts a Go string to a null-terminated C-style string by just appending a null byte,
+// if s doesn't already contain one.
+func ToBytePtr(s string) *byte {
+	size := len(s) + 1
+	if index := strings.IndexByte(s, 0); index != -1 {
+		size = index + 1
 	}
-	result := make([]byte, len(s)+1)
+
+	result := make([]byte, size)
 	copy(result, s)
-	return &result[0], nil
+	return &result[0]
 }
 
 // ToString converts a null-terminated C-style string into a Go string.
