@@ -1,5 +1,12 @@
 package sdl
 
+import (
+	"unsafe"
+
+	"github.com/ebitengine/purego"
+	"github.com/jupiterrider/purego-sdl3/internal/convert"
+)
+
 type PropertyType uint32
 
 const (
@@ -13,86 +20,108 @@ const (
 
 type PropertiesID uint32
 
-// func ClearProperty(props PropertiesID, name string) bool {
-//	return sdlClearProperty(props, name)
-// }
+type CleanupPropertyCallback uintptr
 
-// func CopyProperties(src PropertiesID, dst PropertiesID) bool {
-//	return sdlCopyProperties(src, dst)
-// }
+func NewCleanupPropertyCallback(callback func(userdata, value unsafe.Pointer)) CleanupPropertyCallback {
+	cb := purego.NewCallback(func(userdata, value unsafe.Pointer) uintptr {
+		callback(userdata, value)
+		return 0
+	})
 
-// func CreateProperties() PropertiesID {
-//	return sdlCreateProperties()
-// }
+	return CleanupPropertyCallback(cb)
+}
 
-// func DestroyProperties(props PropertiesID)  {
-//	sdlDestroyProperties(props)
-// }
+type EnumeratePropertiesCallback uintptr
 
-// func EnumerateProperties(props PropertiesID, callback EnumeratePropertiesCallback, userdata unsafe.Pointer) bool {
-//	return sdlEnumerateProperties(props, callback, userdata)
-// }
+func NewEnumeratePropertiesCallback(callback func(userdata unsafe.Pointer, props PropertiesID, name string)) EnumeratePropertiesCallback {
+	cb := purego.NewCallback(func(userdata unsafe.Pointer, props PropertiesID, name *byte) uintptr {
+		callback(userdata, props, convert.ToString(name))
+		return 0
+	})
 
-// func GetBooleanProperty(props PropertiesID, name string, default_value bool) bool {
-//	return sdlGetBooleanProperty(props, name, default_value)
-// }
+	return EnumeratePropertiesCallback(cb)
+}
 
-// func GetFloatProperty(props PropertiesID, name string, default_value float32) float32 {
-//	return sdlGetFloatProperty(props, name, default_value)
-// }
+func ClearProperty(props PropertiesID, name string) bool {
+	return sdlClearProperty(props, name)
+}
 
-// func GetGlobalProperties() PropertiesID {
-//	return sdlGetGlobalProperties()
-// }
+func CopyProperties(src PropertiesID, dst PropertiesID) bool {
+	return sdlCopyProperties(src, dst)
+}
 
-// func GetNumberProperty(props PropertiesID, name string, default_value int64) int64 {
-//	return sdlGetNumberProperty(props, name, default_value)
-// }
+func CreateProperties() PropertiesID {
+	return sdlCreateProperties()
+}
 
-// func GetPointerProperty(props PropertiesID, name string, default_value unsafe.Pointer) unsafe.Pointer {
-//	return sdlGetPointerProperty(props, name, default_value)
-// }
+func DestroyProperties(props PropertiesID) {
+	sdlDestroyProperties(props)
+}
 
-// func GetPropertyType(props PropertiesID, name string) PropertyType {
-//	return sdlGetPropertyType(props, name)
-// }
+func EnumerateProperties(props PropertiesID, callback EnumeratePropertiesCallback, userdata unsafe.Pointer) bool {
+	return sdlEnumerateProperties(props, callback, userdata)
+}
 
-// func GetStringProperty(props PropertiesID, name string, default_value string) string {
-//	return sdlGetStringProperty(props, name, default_value)
-// }
+func GetBooleanProperty(props PropertiesID, name string, defaultValue bool) bool {
+	return sdlGetBooleanProperty(props, name, defaultValue)
+}
 
-// func HasProperty(props PropertiesID, name string) bool {
-//	return sdlHasProperty(props, name)
-// }
+func GetFloatProperty(props PropertiesID, name string, defaultValue float32) float32 {
+	return sdlGetFloatProperty(props, name, defaultValue)
+}
 
-// func LockProperties(props PropertiesID) bool {
-//	return sdlLockProperties(props)
-// }
+func GetGlobalProperties() PropertiesID {
+	return sdlGetGlobalProperties()
+}
 
-// func SetBooleanProperty(props PropertiesID, name string, value bool) bool {
-//	return sdlSetBooleanProperty(props, name, value)
-// }
+func GetNumberProperty(props PropertiesID, name string, defaultValue int64) int64 {
+	return sdlGetNumberProperty(props, name, defaultValue)
+}
 
-// func SetFloatProperty(props PropertiesID, name string, value float32) bool {
-//	return sdlSetFloatProperty(props, name, value)
-// }
+func GetPointerProperty(props PropertiesID, name string, defaultValue unsafe.Pointer) unsafe.Pointer {
+	return sdlGetPointerProperty(props, name, defaultValue)
+}
 
-// func SetNumberProperty(props PropertiesID, name string, value int64) bool {
-//	return sdlSetNumberProperty(props, name, value)
-// }
+func GetPropertyType(props PropertiesID, name string) PropertyType {
+	return sdlGetPropertyType(props, name)
+}
 
-// func SetPointerProperty(props PropertiesID, name string, value unsafe.Pointer) bool {
-//	return sdlSetPointerProperty(props, name, value)
-// }
+func GetStringProperty(props PropertiesID, name string, defaultValue string) string {
+	return sdlGetStringProperty(props, name, defaultValue)
+}
 
-// func SetPointerPropertyWithCleanup(props PropertiesID, name string, value unsafe.Pointer, cleanup CleanupPropertyCallback, userdata unsafe.Pointer) bool {
-//	return sdlSetPointerPropertyWithCleanup(props, name, value, cleanup, userdata)
-// }
+func HasProperty(props PropertiesID, name string) bool {
+	return sdlHasProperty(props, name)
+}
 
-// func SetStringProperty(props PropertiesID, name string, value string) bool {
-//	return sdlSetStringProperty(props, name, value)
-// }
+func LockProperties(props PropertiesID) bool {
+	return sdlLockProperties(props)
+}
 
-// func UnlockProperties(props PropertiesID)  {
-//	sdlUnlockProperties(props)
-// }
+func SetBooleanProperty(props PropertiesID, name string, value bool) bool {
+	return sdlSetBooleanProperty(props, name, value)
+}
+
+func SetFloatProperty(props PropertiesID, name string, value float32) bool {
+	return sdlSetFloatProperty(props, name, value)
+}
+
+func SetNumberProperty(props PropertiesID, name string, value int64) bool {
+	return sdlSetNumberProperty(props, name, value)
+}
+
+func SetPointerProperty(props PropertiesID, name string, value unsafe.Pointer) bool {
+	return sdlSetPointerProperty(props, name, value)
+}
+
+func SetPointerPropertyWithCleanup(props PropertiesID, name string, value unsafe.Pointer, cleanup CleanupPropertyCallback, userdata unsafe.Pointer) bool {
+	return sdlSetPointerPropertyWithCleanup(props, name, value, cleanup, userdata)
+}
+
+func SetStringProperty(props PropertiesID, name string, value string) bool {
+	return sdlSetStringProperty(props, name, value)
+}
+
+func UnlockProperties(props PropertiesID) {
+	sdlUnlockProperties(props)
+}
