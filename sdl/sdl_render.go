@@ -390,9 +390,29 @@ func RenderFillRects(renderer *Renderer, rects ...FRect) bool {
 	return byte(ret) != 0
 }
 
-// func RenderGeometry(renderer *Renderer, texture *Texture, vertices *Vertex, num_vertices int32, indices *int32, num_indices int32) bool {
-//	return sdlRenderGeometry(renderer, texture, vertices, num_vertices, indices, num_indices)
-// }
+func RenderGeometry(renderer *Renderer, texture *Texture, vertices []Vertex, indices []int32) bool {
+	numVertices := len(vertices)
+	var verticesPtr *Vertex
+	if numVertices > 0 {
+		verticesPtr = &vertices[0]
+	}
+
+	numIndices := len(vertices)
+	var indicesPtr *int32
+	if numIndices > 0 {
+		indicesPtr = &indices[0]
+	}
+
+	ret, _, _ := purego.SyscallN(sdlRenderGeometry,
+		uintptr(unsafe.Pointer(renderer)),
+		uintptr(unsafe.Pointer(texture)),
+		uintptr(unsafe.Pointer(verticesPtr)),
+		uintptr(numVertices),
+		uintptr(unsafe.Pointer(indicesPtr)),
+		uintptr(numIndices))
+
+	return byte(ret) != 0
+}
 
 // func RenderGeometryRaw(renderer *Renderer, texture *Texture, xy *float32, xy_stride int32, color *FColor, color_stride int32, uv *float32, uv_stride int32, num_vertices int32, indices unsafe.Pointer, num_indices int32, size_indices int32) bool {
 //	return sdlRenderGeometryRaw(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices)

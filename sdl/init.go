@@ -872,7 +872,7 @@ var (
 	// sdlRenderDebugTextFormat                 func(*Renderer, float32, float32, string) bool
 	sdlRenderFillRect  uintptr
 	sdlRenderFillRects uintptr
-	// sdlRenderGeometry                        func(*Renderer, *Texture, *Vertex, int32, *int32, int32) bool
+	sdlRenderGeometry  uintptr
 	// sdlRenderGeometryRaw                     func(*Renderer, *Texture, *float32, int32, *FColor, int32, *float32, int32, int32, unsafe.Pointer, int32, int32) bool
 	sdlRenderLine    func(*Renderer, float32, float32, float32, float32) bool
 	sdlRenderLines   uintptr
@@ -2098,7 +2098,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlRenderDebugTextFormat, lib, "SDL_RenderDebugTextFormat")
 	sdlRenderFillRect = shared.Get(lib, "SDL_RenderFillRect")
 	sdlRenderFillRects = shared.Get(lib, "SDL_RenderFillRects")
-	// purego.RegisterLibFunc(&sdlRenderGeometry, lib, "SDL_RenderGeometry")
+	sdlRenderGeometry = shared.Get(lib, "SDL_RenderGeometry")
 	// purego.RegisterLibFunc(&sdlRenderGeometryRaw, lib, "SDL_RenderGeometryRaw")
 	purego.RegisterLibFunc(&sdlRenderLine, lib, "SDL_RenderLine")
 	sdlRenderLines = shared.Get(lib, "SDL_RenderLines")
