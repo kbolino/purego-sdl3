@@ -1,6 +1,7 @@
 package sdl
 
 import (
+	"fmt"
 	"unsafe"
 
 	"github.com/ebitengine/purego"
@@ -99,6 +100,15 @@ const (
 	PropTextureVulkanTextureNumber          = "SDL.texture.vulkan.texture"
 )
 
+const (
+	RendererVsyncDisabled = 0
+	RendererVsyncAdaptive = -1
+)
+
+const (
+	DebugTextFontCharacterSize = 8
+)
+
 type RendererLogicalPresentation uint32
 
 const (
@@ -194,9 +204,9 @@ func DestroyTexture(texture *Texture) {
 	sdlDestroyTexture(texture)
 }
 
-// func AddVulkanRenderSemaphores(renderer *Renderer, wait_stage_mask uint32, wait_semaphore int64, signal_semaphore int64) bool {
-//	return sdlAddVulkanRenderSemaphores(renderer, wait_stage_mask, wait_semaphore, signal_semaphore)
-// }
+func AddVulkanRenderSemaphores(renderer *Renderer, wait_stage_mask uint32, wait_semaphore int64, signal_semaphore int64) bool {
+	return sdlAddVulkanRenderSemaphores(renderer, wait_stage_mask, wait_semaphore, signal_semaphore)
+}
 
 func ConvertEventToRenderCoordinates(renderer *Renderer, event *Event) bool {
 	return sdlConvertEventToRenderCoordinates(renderer, event)
@@ -227,9 +237,10 @@ func CreateTextureWithProperties(renderer *Renderer, props PropertiesID) *Textur
 	return sdlCreateTextureWithProperties(renderer, props)
 }
 
-// func FlushRenderer(renderer *Renderer) bool {
-//	return sdlFlushRenderer(renderer)
-// }
+func FlushRenderer(renderer *Renderer) bool {
+	ret, _, _ := purego.SyscallN(sdlFlushRenderer, uintptr(unsafe.Pointer(renderer)))
+	return byte(ret) != 0
+}
 
 func GetCurrentRenderOutputSize(renderer *Renderer, w *int32, h *int32) bool {
 	return sdlGetCurrentRenderOutputSize(renderer, w, h)
@@ -288,13 +299,13 @@ func GetRenderLogicalPresentationRect(renderer *Renderer, rect *FRect) bool {
 	return sdlGetRenderLogicalPresentationRect(renderer, rect)
 }
 
-// func GetRenderMetalCommandEncoder(renderer *Renderer) unsafe.Pointer {
-//	return sdlGetRenderMetalCommandEncoder(renderer)
-// }
+func GetRenderMetalCommandEncoder(renderer *Renderer) unsafe.Pointer {
+	return sdlGetRenderMetalCommandEncoder(renderer)
+}
 
-// func GetRenderMetalLayer(renderer *Renderer) unsafe.Pointer {
-//	return sdlGetRenderMetalLayer(renderer)
-// }
+func GetRenderMetalLayer(renderer *Renderer) unsafe.Pointer {
+	return sdlGetRenderMetalLayer(renderer)
+}
 
 func GetRenderOutputSize(renderer *Renderer, w *int32, h *int32) bool {
 	return sdlGetRenderOutputSize(renderer, w, h)
@@ -316,9 +327,9 @@ func GetRenderViewport(renderer *Renderer, rect *Rect) bool {
 	return sdlGetRenderViewport(renderer, rect)
 }
 
-// func GetRenderVSync(renderer *Renderer, vsync *int32) bool {
-//	return sdlGetRenderVSync(renderer, vsync)
-// }
+func GetRenderVSync(renderer *Renderer, vsync *int32) bool {
+	return sdlGetRenderVSync(renderer, vsync)
+}
 
 func GetRenderWindow(renderer *Renderer) *Window {
 	return sdlGetRenderWindow(renderer)
@@ -376,9 +387,9 @@ func RenderCoordinatesToWindow(renderer *Renderer, x float32, y float32, windowX
 	return sdlRenderCoordinatesToWindow(renderer, x, y, windowX, windowY)
 }
 
-// func RenderDebugTextFormat(renderer *Renderer, x float32, y float32, fmt string) bool {
-//	return sdlRenderDebugTextFormat(renderer, x, y, fmt)
-// }
+func RenderDebugTextFormat(renderer *Renderer, x float32, y float32, format string, a ...any) bool {
+	return sdlRenderDebugTextFormat(renderer, x, y, fmt.Sprintf(format, a...))
+}
 
 func RenderFillRects(renderer *Renderer, rects ...FRect) bool {
 	count := len(rects)
@@ -414,9 +425,23 @@ func RenderGeometry(renderer *Renderer, texture *Texture, vertices []Vertex, ind
 	return byte(ret) != 0
 }
 
-// func RenderGeometryRaw(renderer *Renderer, texture *Texture, xy *float32, xy_stride int32, color *FColor, color_stride int32, uv *float32, uv_stride int32, num_vertices int32, indices unsafe.Pointer, num_indices int32, size_indices int32) bool {
-//	return sdlRenderGeometryRaw(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices)
-// }
+func RenderGeometryRaw(renderer *Renderer, texture *Texture, xy *float32, xyStride int32, color *FColor, colorStride int32, uv *float32, uvStride int32, numVertices int32, indices unsafe.Pointer, numIndices int32, sizeIndices int32) bool {
+	ret, _, _ := purego.SyscallN(sdlRenderGeometryRaw,
+		uintptr(unsafe.Pointer(renderer)),
+		uintptr(unsafe.Pointer(texture)),
+		uintptr(unsafe.Pointer(xy)),
+		uintptr(xyStride),
+		uintptr(unsafe.Pointer(color)),
+		uintptr(colorStride),
+		uintptr(unsafe.Pointer(uv)),
+		uintptr(uvStride),
+		uintptr(numVertices),
+		uintptr(indices),
+		uintptr(numIndices),
+		uintptr(sizeIndices))
+
+	return byte(ret) != 0
+}
 
 func RenderLine(renderer *Renderer, x1 float32, y1 float32, x2 float32, y2 float32) bool {
 	return sdlRenderLine(renderer, x1, y1, x2, y2)

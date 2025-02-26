@@ -24,7 +24,7 @@ var (
 	// sdlAddSurfaceAlternateImage              func(*Surface, *Surface) bool
 	// sdlAddTimer                              func(uint32, TimerCallback, unsafe.Pointer) TimerID
 	// sdlAddTimerNS                            func(uint64, NSTimerCallback, unsafe.Pointer) TimerID
-	// sdlAddVulkanRenderSemaphores             func(*Renderer, uint32, int64, int64) bool
+	sdlAddVulkanRenderSemaphores func(*Renderer, uint32, int64, int64) bool
 	// sdlaligned_alloc                         func(uint64, uint64) unsafe.Pointer
 	// sdlaligned_free                          func(unsafe.Pointer)
 	// sdlasin                                  func(float64) float64
@@ -223,7 +223,7 @@ var (
 	sdlFlushEvent  func(EventType)
 	sdlFlushEvents func(EventType, EventType)
 	// sdlFlushIO                               func(*IOStream) bool
-	// sdlFlushRenderer                         func(*Renderer) bool
+	sdlFlushRenderer uintptr
 	// sdlfmod                                  func(float64, float64) float64
 	// sdlfmodf                                 func(float32, float32) float32
 	sdlfree uintptr
@@ -484,16 +484,16 @@ var (
 	sdlGetRendererProperties            func(*Renderer) PropertiesID
 	sdlGetRenderLogicalPresentation     func(*Renderer, *int32, *int32, *RendererLogicalPresentation) bool
 	sdlGetRenderLogicalPresentationRect func(*Renderer, *FRect) bool
-	// sdlGetRenderMetalCommandEncoder          func(*Renderer) unsafe.Pointer
-	// sdlGetRenderMetalLayer                   func(*Renderer) unsafe.Pointer
-	sdlGetRenderOutputSize func(*Renderer, *int32, *int32) bool
-	sdlGetRenderSafeArea   func(*Renderer, *Rect) bool
-	sdlGetRenderScale      func(*Renderer, *float32, *float32) bool
-	sdlGetRenderTarget     func(*Renderer) *Texture
-	sdlGetRenderViewport   func(*Renderer, *Rect) bool
-	// sdlGetRenderVSync                        func(*Renderer, *int32) bool
-	sdlGetRenderWindow func(*Renderer) *Window
-	sdlGetRevision     func() string
+	sdlGetRenderMetalCommandEncoder     func(*Renderer) unsafe.Pointer
+	sdlGetRenderMetalLayer              func(*Renderer) unsafe.Pointer
+	sdlGetRenderOutputSize              func(*Renderer, *int32, *int32) bool
+	sdlGetRenderSafeArea                func(*Renderer, *Rect) bool
+	sdlGetRenderScale                   func(*Renderer, *float32, *float32) bool
+	sdlGetRenderTarget                  func(*Renderer) *Texture
+	sdlGetRenderViewport                func(*Renderer, *Rect) bool
+	sdlGetRenderVSync                   func(*Renderer, *int32) bool
+	sdlGetRenderWindow                  func(*Renderer) *Window
+	sdlGetRevision                      func() string
 	// sdlGetRGB                                func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8)
 	// sdlGetRGBA                               func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8, *uint8)
 	// sdlGetSandbox                            func() Sandbox
@@ -869,25 +869,25 @@ var (
 	sdlRenderCoordinatesFromWindow func(*Renderer, float32, float32, *float32, *float32) bool
 	sdlRenderCoordinatesToWindow   func(*Renderer, float32, float32, *float32, *float32) bool
 	sdlRenderDebugText             func(*Renderer, float32, float32, string) bool
-	// sdlRenderDebugTextFormat                 func(*Renderer, float32, float32, string) bool
-	sdlRenderFillRect  uintptr
-	sdlRenderFillRects uintptr
-	sdlRenderGeometry  uintptr
-	// sdlRenderGeometryRaw                     func(*Renderer, *Texture, *float32, int32, *FColor, int32, *float32, int32, int32, unsafe.Pointer, int32, int32) bool
-	sdlRenderLine           func(*Renderer, float32, float32, float32, float32) bool
-	sdlRenderLines          uintptr
-	sdlRenderPoint          func(*Renderer, float32, float32) bool
-	sdlRenderPoints         uintptr
-	sdlRenderPresent        uintptr
-	sdlRenderReadPixels     func(*Renderer, *Rect) *Surface
-	sdlRenderRect           uintptr
-	sdlRenderRects          uintptr
-	sdlRenderTexture        uintptr
-	sdlRenderTexture9Grid   func(*Renderer, *Texture, *FRect, float32, float32, float32, float32, float32, *FRect) bool
-	sdlRenderTextureAffine  uintptr
-	sdlRenderTextureRotated func(*Renderer, *Texture, *FRect, *FRect, float64, *FPoint, FlipMode) bool
-	sdlRenderTextureTiled   func(*Renderer, *Texture, *FRect, float32, *FRect) bool
-	sdlRenderViewportSet    func(*Renderer) bool
+	sdlRenderDebugTextFormat       func(*Renderer, float32, float32, string) bool
+	sdlRenderFillRect              uintptr
+	sdlRenderFillRects             uintptr
+	sdlRenderGeometry              uintptr
+	sdlRenderGeometryRaw           uintptr
+	sdlRenderLine                  func(*Renderer, float32, float32, float32, float32) bool
+	sdlRenderLines                 uintptr
+	sdlRenderPoint                 func(*Renderer, float32, float32) bool
+	sdlRenderPoints                uintptr
+	sdlRenderPresent               uintptr
+	sdlRenderReadPixels            func(*Renderer, *Rect) *Surface
+	sdlRenderRect                  uintptr
+	sdlRenderRects                 uintptr
+	sdlRenderTexture               uintptr
+	sdlRenderTexture9Grid          func(*Renderer, *Texture, *FRect, float32, float32, float32, float32, float32, *FRect) bool
+	sdlRenderTextureAffine         uintptr
+	sdlRenderTextureRotated        func(*Renderer, *Texture, *FRect, *FRect, float64, *FPoint, FlipMode) bool
+	sdlRenderTextureTiled          func(*Renderer, *Texture, *FRect, float32, *FRect) bool
+	sdlRenderViewportSet           func(*Renderer) bool
 	// sdlReportAssertion                       func(*AssertData, string, string, int32) AssertState
 	// sdlResetAssertionReport                  func()
 	sdlResetHint  func(string) bool
@@ -1250,7 +1250,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlAddSurfaceAlternateImage, lib, "SDL_AddSurfaceAlternateImage")
 	// purego.RegisterLibFunc(&sdlAddTimer, lib, "SDL_AddTimer")
 	// purego.RegisterLibFunc(&sdlAddTimerNS, lib, "SDL_AddTimerNS")
-	// purego.RegisterLibFunc(&sdlAddVulkanRenderSemaphores, lib, "SDL_AddVulkanRenderSemaphores")
+	purego.RegisterLibFunc(&sdlAddVulkanRenderSemaphores, lib, "SDL_AddVulkanRenderSemaphores")
 	// purego.RegisterLibFunc(&sdlaligned_alloc, lib, "SDL_aligned_alloc")
 	// purego.RegisterLibFunc(&sdlaligned_free, lib, "SDL_aligned_free")
 	// purego.RegisterLibFunc(&sdlasin, lib, "SDL_asin")
@@ -1449,7 +1449,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlFlushEvent, lib, "SDL_FlushEvent")
 	purego.RegisterLibFunc(&sdlFlushEvents, lib, "SDL_FlushEvents")
 	// purego.RegisterLibFunc(&sdlFlushIO, lib, "SDL_FlushIO")
-	// purego.RegisterLibFunc(&sdlFlushRenderer, lib, "SDL_FlushRenderer")
+	sdlFlushRenderer = shared.Get(lib, "SDL_FlushRenderer")
 	// purego.RegisterLibFunc(&sdlfmod, lib, "SDL_fmod")
 	// purego.RegisterLibFunc(&sdlfmodf, lib, "SDL_fmodf")
 	sdlfree = shared.Get(lib, "SDL_free")
@@ -1710,14 +1710,14 @@ func init() {
 	purego.RegisterLibFunc(&sdlGetRendererProperties, lib, "SDL_GetRendererProperties")
 	purego.RegisterLibFunc(&sdlGetRenderLogicalPresentation, lib, "SDL_GetRenderLogicalPresentation")
 	purego.RegisterLibFunc(&sdlGetRenderLogicalPresentationRect, lib, "SDL_GetRenderLogicalPresentationRect")
-	// purego.RegisterLibFunc(&sdlGetRenderMetalCommandEncoder, lib, "SDL_GetRenderMetalCommandEncoder")
-	// purego.RegisterLibFunc(&sdlGetRenderMetalLayer, lib, "SDL_GetRenderMetalLayer")
+	purego.RegisterLibFunc(&sdlGetRenderMetalCommandEncoder, lib, "SDL_GetRenderMetalCommandEncoder")
+	purego.RegisterLibFunc(&sdlGetRenderMetalLayer, lib, "SDL_GetRenderMetalLayer")
 	purego.RegisterLibFunc(&sdlGetRenderOutputSize, lib, "SDL_GetRenderOutputSize")
 	purego.RegisterLibFunc(&sdlGetRenderSafeArea, lib, "SDL_GetRenderSafeArea")
 	purego.RegisterLibFunc(&sdlGetRenderScale, lib, "SDL_GetRenderScale")
 	purego.RegisterLibFunc(&sdlGetRenderTarget, lib, "SDL_GetRenderTarget")
 	purego.RegisterLibFunc(&sdlGetRenderViewport, lib, "SDL_GetRenderViewport")
-	// purego.RegisterLibFunc(&sdlGetRenderVSync, lib, "SDL_GetRenderVSync")
+	purego.RegisterLibFunc(&sdlGetRenderVSync, lib, "SDL_GetRenderVSync")
 	purego.RegisterLibFunc(&sdlGetRenderWindow, lib, "SDL_GetRenderWindow")
 	purego.RegisterLibFunc(&sdlGetRevision, lib, "SDL_GetRevision")
 	// purego.RegisterLibFunc(&sdlGetRGB, lib, "SDL_GetRGB")
@@ -2095,11 +2095,11 @@ func init() {
 	purego.RegisterLibFunc(&sdlRenderCoordinatesFromWindow, lib, "SDL_RenderCoordinatesFromWindow")
 	purego.RegisterLibFunc(&sdlRenderCoordinatesToWindow, lib, "SDL_RenderCoordinatesToWindow")
 	purego.RegisterLibFunc(&sdlRenderDebugText, lib, "SDL_RenderDebugText")
-	// purego.RegisterLibFunc(&sdlRenderDebugTextFormat, lib, "SDL_RenderDebugTextFormat")
+	purego.RegisterLibFunc(&sdlRenderDebugTextFormat, lib, "SDL_RenderDebugTextFormat")
 	sdlRenderFillRect = shared.Get(lib, "SDL_RenderFillRect")
 	sdlRenderFillRects = shared.Get(lib, "SDL_RenderFillRects")
 	sdlRenderGeometry = shared.Get(lib, "SDL_RenderGeometry")
-	// purego.RegisterLibFunc(&sdlRenderGeometryRaw, lib, "SDL_RenderGeometryRaw")
+	sdlRenderGeometryRaw = shared.Get(lib, "SDL_RenderGeometryRaw")
 	purego.RegisterLibFunc(&sdlRenderLine, lib, "SDL_RenderLine")
 	sdlRenderLines = shared.Get(lib, "SDL_RenderLines")
 	purego.RegisterLibFunc(&sdlRenderPoint, lib, "SDL_RenderPoint")
