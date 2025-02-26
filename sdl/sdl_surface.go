@@ -38,6 +38,13 @@ type Surface struct {
 	Reserved unsafe.Pointer
 }
 
+func MustLock(surface *Surface) bool {
+	if surface == nil {
+		return InvalidParamError("surface")
+	}
+	return surface.Flags&SurfaceLockNeeded == SurfaceLockNeeded
+}
+
 // LoadBMPIO loads a BMP image from a seekable SDL data stream.
 func LoadBMPIO(src *IOStream, closeio bool) *Surface {
 	return sdlLoadBMPIO(src, closeio)

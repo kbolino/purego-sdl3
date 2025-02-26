@@ -942,7 +942,7 @@ var (
 	sdlSetCursor func(*Cursor) bool
 	// sdlsetenv_unsafe                         func(string, string, int32) int32
 	// sdlSetEnvironmentVariable                func(*Environment, string, string, bool) bool
-	// sdlSetError                              func(string) bool
+	sdlSetError func(string) bool
 	// sdlSetErrorV                             func(string, va_list) bool
 	sdlSetEventEnabled  func(EventType, bool)
 	sdlSetEventFilter   func(EventFilter, unsafe.Pointer)
@@ -2168,7 +2168,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlSetCursor, lib, "SDL_SetCursor")
 	// purego.RegisterLibFunc(&sdlsetenv_unsafe, lib, "SDL_setenv_unsafe")
 	// purego.RegisterLibFunc(&sdlSetEnvironmentVariable, lib, "SDL_SetEnvironmentVariable")
-	// purego.RegisterLibFunc(&sdlSetError, lib, "SDL_SetError")
+	purego.RegisterLibFunc(&sdlSetError, lib, "SDL_SetError")
 	// purego.RegisterLibFunc(&sdlSetErrorV, lib, "SDL_SetErrorV")
 	purego.RegisterLibFunc(&sdlSetEventEnabled, lib, "SDL_SetEventEnabled")
 	purego.RegisterLibFunc(&sdlSetEventFilter, lib, "SDL_SetEventFilter")

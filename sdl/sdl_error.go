@@ -1,5 +1,7 @@
 package sdl
 
+import "fmt"
+
 // GetError retrieves a message about the last error that occurred on the current thread.
 func GetError() string {
 	return sdlGetError()
@@ -14,10 +16,15 @@ func ClearError() bool {
 //	return sdlOutOfMemory()
 // }
 
-// func SetError(fmt string) bool {
-//	return sdlSetError(fmt)
-// }
+// SetError sets the SDL error message for the current thread.
+func SetError(format string, a ...any) bool {
+	return sdlSetError(fmt.Sprintf(format, a...))
+}
 
 // func SetErrorV(fmt string, ap va_list) bool {
 //	return sdlSetErrorV(fmt, ap)
 // }
+
+func InvalidParamError(param string) bool {
+	return SetError("Parameter '%s' is invalid", param)
+}
