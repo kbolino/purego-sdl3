@@ -874,12 +874,12 @@ var (
 	sdlRenderFillRects uintptr
 	sdlRenderGeometry  uintptr
 	// sdlRenderGeometryRaw                     func(*Renderer, *Texture, *float32, int32, *FColor, int32, *float32, int32, int32, unsafe.Pointer, int32, int32) bool
-	sdlRenderLine    func(*Renderer, float32, float32, float32, float32) bool
-	sdlRenderLines   uintptr
-	sdlRenderPoint   func(*Renderer, float32, float32) bool
-	sdlRenderPoints  uintptr
-	sdlRenderPresent uintptr
-	// sdlRenderReadPixels                      func(*Renderer, *Rect) *Surface
+	sdlRenderLine           func(*Renderer, float32, float32, float32, float32) bool
+	sdlRenderLines          uintptr
+	sdlRenderPoint          func(*Renderer, float32, float32) bool
+	sdlRenderPoints         uintptr
+	sdlRenderPresent        uintptr
+	sdlRenderReadPixels     func(*Renderer, *Rect) *Surface
 	sdlRenderRect           uintptr
 	sdlRenderRects          uintptr
 	sdlRenderTexture        uintptr
@@ -2105,7 +2105,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlRenderPoint, lib, "SDL_RenderPoint")
 	sdlRenderPoints = shared.Get(lib, "SDL_RenderPoints")
 	sdlRenderPresent = shared.Get(lib, "SDL_RenderPresent")
-	// purego.RegisterLibFunc(&sdlRenderReadPixels, lib, "SDL_RenderReadPixels")
+	purego.RegisterLibFunc(&sdlRenderReadPixels, lib, "SDL_RenderReadPixels")
 	sdlRenderRect = shared.Get(lib, "SDL_RenderRect")
 	sdlRenderRects = shared.Get(lib, "SDL_RenderRects")
 	sdlRenderTexture = shared.Get(lib, "SDL_RenderTexture")

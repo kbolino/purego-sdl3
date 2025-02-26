@@ -446,9 +446,9 @@ func RenderPoints(renderer *Renderer, points ...FPoint) bool {
 	return byte(ret) != 0
 }
 
-// func RenderReadPixels(renderer *Renderer, rect *Rect) *Surface {
-//	return sdlRenderReadPixels(renderer, rect)
-// }
+func RenderReadPixels(renderer *Renderer, rect *Rect) *Surface {
+	return sdlRenderReadPixels(renderer, rect)
+}
 
 func RenderRects(renderer *Renderer, rects ...FRect) bool {
 	count := len(rects)
