@@ -204,8 +204,8 @@ func DestroyTexture(texture *Texture) {
 	sdlDestroyTexture(texture)
 }
 
-func AddVulkanRenderSemaphores(renderer *Renderer, wait_stage_mask uint32, wait_semaphore int64, signal_semaphore int64) bool {
-	return sdlAddVulkanRenderSemaphores(renderer, wait_stage_mask, wait_semaphore, signal_semaphore)
+func AddVulkanRenderSemaphores(renderer *Renderer, waitStageMask uint32, waitSemaphore int64, signalSemaphore int64) bool {
+	return sdlAddVulkanRenderSemaphores(renderer, waitStageMask, waitSemaphore, signalSemaphore)
 }
 
 func ConvertEventToRenderCoordinates(renderer *Renderer, event *Event) bool {
