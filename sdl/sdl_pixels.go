@@ -1,5 +1,12 @@
 package sdl
 
+const (
+	AlphaOpaque           = 255
+	AlphaOpaqueFloat      = 1.0
+	AlphaTransparent      = 0
+	AlphaTransparentFloat = 0.0
+)
+
 type Colorspace uint32
 
 const (
