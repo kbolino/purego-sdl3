@@ -13,10 +13,10 @@ type GamepadAxis int32
 
 const (
 	GamepadAxisInvalid GamepadAxis = iota - 1
-	GamepadAxisLeftx
-	GamepadAxisLefty
-	GamepadAxisRightx
-	GamepadAxisRighty
+	GamepadAxisLeftX
+	GamepadAxisLeftY
+	GamepadAxisRightX
+	GamepadAxisRightY
 	GamepadAxisLeftTrigger
 	GamepadAxisRightTrigger
 	GamepadAxisCount
@@ -75,10 +75,10 @@ const (
 	GamepadTypeUnknown GamepadType = iota
 	GamepadTypeStandard
 	GamepadTypeXbox360
-	GamepadTypeXboxone
-	GamepadTypePs3
-	GamepadTypePs4
-	GamepadTypePs5
+	GamepadTypeXboxOne
+	GamepadTypePS3
+	GamepadTypePS4
+	GamepadTypePS5
 	GamepadTypeNintendoSwitchPro
 	GamepadTypeNintendoSwitchJoyconLeft
 	GamepadTypeNintendoSwitchJoyconRight
