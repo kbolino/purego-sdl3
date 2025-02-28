@@ -8,6 +8,10 @@ import (
 
 const FltEpsilon = 0x0.000002p0
 
+func FourCC(a, b, c, d byte) uint32 {
+	return uint32(a) | uint32(b)<<8 | uint32(c)<<16 | uint32(d)<<24
+}
+
 // func abs(x int32) int32 {
 //	return sdlabs(x)
 // }

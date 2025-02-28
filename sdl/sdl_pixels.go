@@ -282,6 +282,10 @@ func (p *Palette) Colors() []Color {
 	return unsafe.Slice(p.colors, p.ncolors)
 }
 
+func DefinePixelFourCC(a, b, c, d byte) PixelFormat {
+	return PixelFormat(FourCC(a, b, c, d))
+}
+
 func CreatePalette(ncolors int32) *Palette {
 	return sdlCreatePalette(ncolors)
 }
