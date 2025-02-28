@@ -132,7 +132,7 @@ var (
 	// sdlCreateGPUTransferBuffer               func(*GPUDevice, *GPUTransferBufferCreateInfo) *GPUTransferBuffer
 	// sdlCreateHapticEffect                    func(*Haptic, *HapticEffect) int32
 	// sdlCreateMutex                           func() *Mutex
-	// sdlCreatePalette                         func(int32) *Palette
+	sdlCreatePalette func(int32) *Palette
 	// sdlCreatePopupWindow                     func(*Window, int32, int32, int32, int32, WindowFlags) *Window
 	// sdlCreateProcess                         func(**byte, bool) *Process
 	// sdlCreateProcessWithProperties           func(PropertiesID) *Process
@@ -143,9 +143,9 @@ var (
 	// sdlCreateSemaphore                       func(uint32) *Semaphore
 	sdlCreateSoftwareRenderer func(*Surface) *Renderer
 	// sdlCreateStorageDirectory                func(*Storage, string) bool
-	sdlCreateSurface func(int32, int32, PixelFormat) *Surface
-	// sdlCreateSurfaceFrom                     func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
-	// sdlCreateSurfacePalette                  func(*Surface) *Palette
+	sdlCreateSurface               func(int32, int32, PixelFormat) *Surface
+	sdlCreateSurfaceFrom           func(int32, int32, PixelFormat, unsafe.Pointer, int32) *Surface
+	sdlCreateSurfacePalette        func(*Surface) *Palette
 	sdlCreateSystemCursor          func(SystemCursor) *Cursor
 	sdlCreateTexture               func(*Renderer, PixelFormat, TextureAccess, int32, int32) *Texture
 	sdlCreateTextureFromSurface    func(*Renderer, *Surface) *Texture
@@ -171,7 +171,7 @@ var (
 	// sdlDestroyGPUDevice                      func(*GPUDevice)
 	// sdlDestroyHapticEffect                   func(*Haptic, int32)
 	// sdlDestroyMutex                          func(*Mutex)
-	// sdlDestroyPalette                        func(*Palette)
+	sdlDestroyPalette func(*Palette)
 	// sdlDestroyProcess                        func(*Process)
 	sdlDestroyProperties func(PropertiesID)
 	sdlDestroyRenderer   func(*Renderer)
@@ -523,10 +523,10 @@ var (
 	// sdlGetSurfaceClipRect                    func(*Surface, *Rect) bool
 	// sdlGetSurfaceColorKey                    func(*Surface, *uint32) bool
 	// sdlGetSurfaceColorMod                    func(*Surface, *uint8, *uint8, *uint8) bool
-	// sdlGetSurfaceColorspace                  func(*Surface) Colorspace
+	sdlGetSurfaceColorspace func(*Surface) Colorspace
 	// sdlGetSurfaceImages                      func(*Surface, *int32) **Surface
-	// sdlGetSurfacePalette                     func(*Surface) *Palette
-	// sdlGetSurfaceProperties                  func(*Surface) PropertiesID
+	sdlGetSurfacePalette    func(*Surface) *Palette
+	sdlGetSurfaceProperties func(*Surface) PropertiesID
 	// sdlGetSystemRAM                          func() int32
 	// sdlGetSystemTheme                        func() SystemTheme
 	// sdlGetTextInputArea                      func(*Window, *Rect, *int32) bool
@@ -982,8 +982,8 @@ var (
 	// sdlSetMainReady                          func()
 	// sdlSetMemoryFunctions                    func(malloc_func, calloc_func, realloc_func, free_func) bool
 	// sdlSetModState                           func(Keymod)
-	sdlSetNumberProperty func(PropertiesID, string, int64) bool
-	// sdlSetPaletteColors                      func(*Palette, *Color, int32, int32) bool
+	sdlSetNumberProperty             func(PropertiesID, string, int64) bool
+	sdlSetPaletteColors              func(*Palette, *Color, int32, int32) bool
 	sdlSetPointerProperty            func(PropertiesID, string, unsafe.Pointer) bool
 	sdlSetPointerPropertyWithCleanup func(PropertiesID, string, unsafe.Pointer, CleanupPropertyCallback, unsafe.Pointer) bool
 	// sdlSetPrimarySelectionText               func(string) bool
@@ -1004,8 +1004,8 @@ var (
 	// sdlSetSurfaceClipRect                    func(*Surface, *Rect) bool
 	// sdlSetSurfaceColorKey                    func(*Surface, bool, uint32) bool
 	// sdlSetSurfaceColorMod                    func(*Surface, uint8, uint8, uint8) bool
-	// sdlSetSurfaceColorspace                  func(*Surface, Colorspace) bool
-	// sdlSetSurfacePalette                     func(*Surface, *Palette) bool
+	sdlSetSurfaceColorspace func(*Surface, Colorspace) bool
+	sdlSetSurfacePalette    func(*Surface, *Palette) bool
 	// sdlSetSurfaceRLE                         func(*Surface, bool) bool
 	// sdlSetTextInputArea                      func(*Window, *Rect, int32) bool
 	sdlSetTextureAlphaMod      uintptr
@@ -1358,7 +1358,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCreateGPUTransferBuffer, lib, "SDL_CreateGPUTransferBuffer")
 	// purego.RegisterLibFunc(&sdlCreateHapticEffect, lib, "SDL_CreateHapticEffect")
 	// purego.RegisterLibFunc(&sdlCreateMutex, lib, "SDL_CreateMutex")
-	// purego.RegisterLibFunc(&sdlCreatePalette, lib, "SDL_CreatePalette")
+	purego.RegisterLibFunc(&sdlCreatePalette, lib, "SDL_CreatePalette")
 	// purego.RegisterLibFunc(&sdlCreatePopupWindow, lib, "SDL_CreatePopupWindow")
 	// purego.RegisterLibFunc(&sdlCreateProcess, lib, "SDL_CreateProcess")
 	// purego.RegisterLibFunc(&sdlCreateProcessWithProperties, lib, "SDL_CreateProcessWithProperties")
@@ -1370,8 +1370,8 @@ func init() {
 	purego.RegisterLibFunc(&sdlCreateSoftwareRenderer, lib, "SDL_CreateSoftwareRenderer")
 	// purego.RegisterLibFunc(&sdlCreateStorageDirectory, lib, "SDL_CreateStorageDirectory")
 	purego.RegisterLibFunc(&sdlCreateSurface, lib, "SDL_CreateSurface")
-	// purego.RegisterLibFunc(&sdlCreateSurfaceFrom, lib, "SDL_CreateSurfaceFrom")
-	// purego.RegisterLibFunc(&sdlCreateSurfacePalette, lib, "SDL_CreateSurfacePalette")
+	purego.RegisterLibFunc(&sdlCreateSurfaceFrom, lib, "SDL_CreateSurfaceFrom")
+	purego.RegisterLibFunc(&sdlCreateSurfacePalette, lib, "SDL_CreateSurfacePalette")
 	purego.RegisterLibFunc(&sdlCreateSystemCursor, lib, "SDL_CreateSystemCursor")
 	purego.RegisterLibFunc(&sdlCreateTexture, lib, "SDL_CreateTexture")
 	purego.RegisterLibFunc(&sdlCreateTextureFromSurface, lib, "SDL_CreateTextureFromSurface")
@@ -1397,7 +1397,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlDestroyGPUDevice, lib, "SDL_DestroyGPUDevice")
 	// purego.RegisterLibFunc(&sdlDestroyHapticEffect, lib, "SDL_DestroyHapticEffect")
 	// purego.RegisterLibFunc(&sdlDestroyMutex, lib, "SDL_DestroyMutex")
-	// purego.RegisterLibFunc(&sdlDestroyPalette, lib, "SDL_DestroyPalette")
+	purego.RegisterLibFunc(&sdlDestroyPalette, lib, "SDL_DestroyPalette")
 	// purego.RegisterLibFunc(&sdlDestroyProcess, lib, "SDL_DestroyProcess")
 	purego.RegisterLibFunc(&sdlDestroyProperties, lib, "SDL_DestroyProperties")
 	purego.RegisterLibFunc(&sdlDestroyRenderer, lib, "SDL_DestroyRenderer")
@@ -1749,10 +1749,10 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetSurfaceClipRect, lib, "SDL_GetSurfaceClipRect")
 	// purego.RegisterLibFunc(&sdlGetSurfaceColorKey, lib, "SDL_GetSurfaceColorKey")
 	// purego.RegisterLibFunc(&sdlGetSurfaceColorMod, lib, "SDL_GetSurfaceColorMod")
-	// purego.RegisterLibFunc(&sdlGetSurfaceColorspace, lib, "SDL_GetSurfaceColorspace")
+	purego.RegisterLibFunc(&sdlGetSurfaceColorspace, lib, "SDL_GetSurfaceColorspace")
 	// purego.RegisterLibFunc(&sdlGetSurfaceImages, lib, "SDL_GetSurfaceImages")
-	// purego.RegisterLibFunc(&sdlGetSurfacePalette, lib, "SDL_GetSurfacePalette")
-	// purego.RegisterLibFunc(&sdlGetSurfaceProperties, lib, "SDL_GetSurfaceProperties")
+	purego.RegisterLibFunc(&sdlGetSurfacePalette, lib, "SDL_GetSurfacePalette")
+	purego.RegisterLibFunc(&sdlGetSurfaceProperties, lib, "SDL_GetSurfaceProperties")
 	// purego.RegisterLibFunc(&sdlGetSystemRAM, lib, "SDL_GetSystemRAM")
 	// purego.RegisterLibFunc(&sdlGetSystemTheme, lib, "SDL_GetSystemTheme")
 	// purego.RegisterLibFunc(&sdlGetTextInputArea, lib, "SDL_GetTextInputArea")
@@ -2209,7 +2209,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetMemoryFunctions, lib, "SDL_SetMemoryFunctions")
 	// purego.RegisterLibFunc(&sdlSetModState, lib, "SDL_SetModState")
 	purego.RegisterLibFunc(&sdlSetNumberProperty, lib, "SDL_SetNumberProperty")
-	// purego.RegisterLibFunc(&sdlSetPaletteColors, lib, "SDL_SetPaletteColors")
+	purego.RegisterLibFunc(&sdlSetPaletteColors, lib, "SDL_SetPaletteColors")
 	purego.RegisterLibFunc(&sdlSetPointerProperty, lib, "SDL_SetPointerProperty")
 	purego.RegisterLibFunc(&sdlSetPointerPropertyWithCleanup, lib, "SDL_SetPointerPropertyWithCleanup")
 	// purego.RegisterLibFunc(&sdlSetPrimarySelectionText, lib, "SDL_SetPrimarySelectionText")
@@ -2230,8 +2230,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetSurfaceClipRect, lib, "SDL_SetSurfaceClipRect")
 	// purego.RegisterLibFunc(&sdlSetSurfaceColorKey, lib, "SDL_SetSurfaceColorKey")
 	// purego.RegisterLibFunc(&sdlSetSurfaceColorMod, lib, "SDL_SetSurfaceColorMod")
-	// purego.RegisterLibFunc(&sdlSetSurfaceColorspace, lib, "SDL_SetSurfaceColorspace")
-	// purego.RegisterLibFunc(&sdlSetSurfacePalette, lib, "SDL_SetSurfacePalette")
+	purego.RegisterLibFunc(&sdlSetSurfaceColorspace, lib, "SDL_SetSurfaceColorspace")
+	purego.RegisterLibFunc(&sdlSetSurfacePalette, lib, "SDL_SetSurfacePalette")
 	// purego.RegisterLibFunc(&sdlSetSurfaceRLE, lib, "SDL_SetSurfaceRLE")
 	// purego.RegisterLibFunc(&sdlSetTextInputArea, lib, "SDL_SetTextInputArea")
 	sdlSetTextureAlphaMod = shared.Get(lib, "SDL_SetTextureAlphaMod")

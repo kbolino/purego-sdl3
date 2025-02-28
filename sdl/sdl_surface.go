@@ -2,6 +2,12 @@ package sdl
 
 import "unsafe"
 
+const (
+	PropSurfaceSdrWhitePointFloat    = "SDL.surface.SDR_white_point"
+	PropSurfaceHdrHeadroomFloat      = "SDL.surface.HDR_headroom"
+	PropSurfaceTonemapOperatorString = "SDL.surface.tonemap"
+)
+
 type FlipMode uint32
 
 const (
@@ -113,13 +119,13 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 	return sdlCreateSurface(width, height, format)
 }
 
-// func CreateSurfaceFrom(width int32, height int32, format PixelFormat, pixels unsafe.Pointer, pitch int32) *Surface {
-//	return sdlCreateSurfaceFrom(width, height, format, pixels, pitch)
-// }
+func CreateSurfaceFrom(width int32, height int32, format PixelFormat, pixels unsafe.Pointer, pitch int32) *Surface {
+	return sdlCreateSurfaceFrom(width, height, format, pixels, pitch)
+}
 
-// func CreateSurfacePalette(surface *Surface) *Palette {
-//	return sdlCreateSurfacePalette(surface)
-// }
+func CreateSurfacePalette(surface *Surface) *Palette {
+	return sdlCreateSurfacePalette(surface)
+}
 
 // func DuplicateSurface(surface *Surface) *Surface {
 //	return sdlDuplicateSurface(surface)
@@ -157,21 +163,21 @@ func CreateSurface(width int32, height int32, format PixelFormat) *Surface {
 //	return sdlGetSurfaceColorMod(surface, r, g, b)
 // }
 
-// func GetSurfaceColorspace(surface *Surface) Colorspace {
-//	return sdlGetSurfaceColorspace(surface)
-// }
+func GetSurfaceColorspace(surface *Surface) Colorspace {
+	return sdlGetSurfaceColorspace(surface)
+}
 
 // func GetSurfaceImages(surface *Surface, count *int32) **Surface {
 //	return sdlGetSurfaceImages(surface, count)
 // }
 
-// func GetSurfacePalette(surface *Surface) *Palette {
-//	return sdlGetSurfacePalette(surface)
-// }
+func GetSurfacePalette(surface *Surface) *Palette {
+	return sdlGetSurfacePalette(surface)
+}
 
-// func GetSurfaceProperties(surface *Surface) PropertiesID {
-//	return sdlGetSurfaceProperties(surface)
-// }
+func GetSurfaceProperties(surface *Surface) PropertiesID {
+	return sdlGetSurfaceProperties(surface)
+}
 
 func LoadBMP(file string) *Surface {
 	return sdlLoadBMP(file)
@@ -242,13 +248,13 @@ func LockSurface(surface *Surface) bool {
 //	return sdlSetSurfaceColorMod(surface, r, g, b)
 // }
 
-// func SetSurfaceColorspace(surface *Surface, colorspace Colorspace) bool {
-//	return sdlSetSurfaceColorspace(surface, colorspace)
-// }
+func SetSurfaceColorspace(surface *Surface, colorspace Colorspace) bool {
+	return sdlSetSurfaceColorspace(surface, colorspace)
+}
 
-// func SetSurfacePalette(surface *Surface, palette *Palette) bool {
-//	return sdlSetSurfacePalette(surface, palette)
-// }
+func SetSurfacePalette(surface *Surface, palette *Palette) bool {
+	return sdlSetSurfacePalette(surface, palette)
+}
 
 // func SetSurfaceRLE(surface *Surface, enabled bool) bool {
 //	return sdlSetSurfaceRLE(surface, enabled)

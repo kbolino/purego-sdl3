@@ -1,5 +1,7 @@
 package sdl
 
+import "unsafe"
+
 const (
 	AlphaOpaque           = 255
 	AlphaOpaqueFloat      = 1.0
@@ -264,13 +266,29 @@ type FColor struct {
 	R, G, B, A float32
 }
 
-// func CreatePalette(ncolors int32) *Palette {
-//	return sdlCreatePalette(ncolors)
-// }
+type Palette struct {
+	ncolors int32
+	colors  *Color
+	// Version is for internal use only, do not touch.
+	Version uint32
+	// Refcount is for internal use only, do not touch.
+	Refcount int32
+}
 
-// func DestroyPalette(palette *Palette)  {
-//	sdlDestroyPalette(palette)
-// }
+func (p *Palette) Colors() []Color {
+	if p == nil || p.colors == nil {
+		return nil
+	}
+	return unsafe.Slice(p.colors, p.ncolors)
+}
+
+func CreatePalette(ncolors int32) *Palette {
+	return sdlCreatePalette(ncolors)
+}
+
+func DestroyPalette(palette *Palette) {
+	sdlDestroyPalette(palette)
+}
 
 // func GetMasksForPixelFormat(format PixelFormat, bpp *int32, Rmask *uint32, Gmask *uint32, Bmask *uint32, Amask *uint32) bool {
 //	return sdlGetMasksForPixelFormat(format, bpp, Rmask, Gmask, Bmask, Amask)
@@ -304,6 +322,11 @@ type FColor struct {
 //	return sdlMapRGBA(format, palette, r, g, b, a)
 // }
 
-// func SetPaletteColors(palette *Palette, colors *Color, firstcolor int32, ncolors int32) bool {
-//	return sdlSetPaletteColors(palette, colors, firstcolor, ncolors)
-// }
+func SetPaletteColors(palette *Palette, firstcolor int32, Colors ...Color) bool {
+	ncolors := len(Colors)
+	var ptrColors *Color
+	if ncolors > 0 {
+		ptrColors = &Colors[0]
+	}
+	return sdlSetPaletteColors(palette, ptrColors, firstcolor, int32(ncolors))
+}
