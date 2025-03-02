@@ -35,34 +35,35 @@ func CloseCamera(camera *Camera) {
 	sdlCloseCamera(camera)
 }
 
-// func GetCameraDriver(index int32) string {
-//	return sdlGetCameraDriver(index)
-// }
+// GetCameraDriver returns the name of the camera driver at the requested index, or "" if an invalid index was specified.
+func GetCameraDriver(index int32) string {
+	return sdlGetCameraDriver(index)
+}
 
-// func GetCameraFormat(camera *Camera, spec *CameraSpec) bool {
-//	return sdlGetCameraFormat(camera, spec)
-// }
+func GetCameraFormat(camera *Camera, spec *CameraSpec) bool {
+	return sdlGetCameraFormat(camera, spec)
+}
 
-// func GetCameraID(camera *Camera) CameraID {
-//	return sdlGetCameraID(camera)
-// }
+func GetCameraID(camera *Camera) CameraID {
+	return sdlGetCameraID(camera)
+}
 
 // GetCameraName returns a human-readable device name or "" on failure.
 func GetCameraName(instanceId CameraID) string {
 	return sdlGetCameraName(instanceId)
 }
 
-// func GetCameraPermissionState(camera *Camera) int32 {
-//	return sdlGetCameraPermissionState(camera)
-// }
+func GetCameraPermissionState(camera *Camera) int32 {
+	return sdlGetCameraPermissionState(camera)
+}
 
-// func GetCameraPosition(instance_id CameraID) CameraPosition {
-//	return sdlGetCameraPosition(instance_id)
-// }
+func GetCameraPosition(instanceId CameraID) CameraPosition {
+	return sdlGetCameraPosition(instanceId)
+}
 
-// func GetCameraProperties(camera *Camera) PropertiesID {
-//	return sdlGetCameraProperties(camera)
-// }
+func GetCameraProperties(camera *Camera) PropertiesID {
+	return sdlGetCameraProperties(camera)
+}
 
 func GetCameras() []CameraID {
 	var count int32
@@ -84,13 +85,14 @@ func GetCameraSupportedFormats(instanceId CameraID) []*CameraSpec {
 	return mem.Copy(formats, count)
 }
 
-// func GetCurrentCameraDriver() string {
-//	return sdlGetCurrentCameraDriver()
-// }
+// GetCurrentCameraDriver returns the name of the current camera driver or "" if no driver has been initialized.
+func GetCurrentCameraDriver() string {
+	return sdlGetCurrentCameraDriver()
+}
 
-// func GetNumCameraDrivers() int32 {
-//	return sdlGetNumCameraDrivers()
-// }
+func GetNumCameraDrivers() int32 {
+	return sdlGetNumCameraDrivers()
+}
 
 func OpenCamera(instanceId CameraID, spec *CameraSpec) *Camera {
 	return sdlOpenCamera(instanceId, spec)

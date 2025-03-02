@@ -262,14 +262,14 @@ var (
 	// sdlGetAudioStreamProperties              func(*AudioStream) PropertiesID
 	// sdlGetAudioStreamQueued                  func(*AudioStream) int32
 	// sdlGetBasePath                           func() string
-	sdlGetBooleanProperty func(PropertiesID, string, bool) bool
-	// sdlGetCameraDriver                       func(int32) string
-	// sdlGetCameraFormat                       func(*Camera, *CameraSpec) bool
-	// sdlGetCameraID                           func(*Camera) CameraID
-	sdlGetCameraName func(CameraID) string
-	// sdlGetCameraPermissionState              func(*Camera) int32
-	// sdlGetCameraPosition                     func(CameraID) CameraPosition
-	// sdlGetCameraProperties                   func(*Camera) PropertiesID
+	sdlGetBooleanProperty        func(PropertiesID, string, bool) bool
+	sdlGetCameraDriver           func(int32) string
+	sdlGetCameraFormat           func(*Camera, *CameraSpec) bool
+	sdlGetCameraID               func(*Camera) CameraID
+	sdlGetCameraName             func(CameraID) string
+	sdlGetCameraPermissionState  func(*Camera) int32
+	sdlGetCameraPosition         func(CameraID) CameraPosition
+	sdlGetCameraProperties       func(*Camera) PropertiesID
 	sdlGetCameras                func(*int32) *CameraID
 	sdlGetCameraSupportedFormats func(CameraID, *int32) **CameraSpec
 	// sdlGetClipboardData                      func(string, *uint64) unsafe.Pointer
@@ -278,7 +278,7 @@ var (
 	// sdlGetClosestFullscreenDisplayMode       func(DisplayID, int32, int32, float32, bool, *DisplayMode) bool
 	// sdlGetCPUCacheLineSize                   func() int32
 	// sdlGetCurrentAudioDriver                 func() string
-	// sdlGetCurrentCameraDriver                func() string
+	sdlGetCurrentCameraDriver func() string
 	// sdlGetCurrentDirectory                   func() string
 	// sdlGetCurrentDisplayMode                 func(DisplayID) *DisplayMode
 	// sdlGetCurrentDisplayOrientation          func(DisplayID) DisplayOrientation
@@ -430,8 +430,8 @@ var (
 	// sdlGetNaturalDisplayOrientation          func(DisplayID) DisplayOrientation
 	// sdlGetNumAllocations                     func() int32
 	// sdlGetNumAudioDrivers                    func() int32
-	sdlGetNumberProperty func(PropertiesID, string, int64) int64
-	// sdlGetNumCameraDrivers                   func() int32
+	sdlGetNumberProperty   func(PropertiesID, string, int64) int64
+	sdlGetNumCameraDrivers func() int32
 	// sdlGetNumGamepadTouchpadFingers          func(*Gamepad, int32) int32
 	// sdlGetNumGamepadTouchpads                func(*Gamepad) int32
 	// sdlGetNumGPUDrivers                      func() int32
@@ -1489,13 +1489,13 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetAudioStreamQueued, lib, "SDL_GetAudioStreamQueued")
 	// purego.RegisterLibFunc(&sdlGetBasePath, lib, "SDL_GetBasePath")
 	purego.RegisterLibFunc(&sdlGetBooleanProperty, lib, "SDL_GetBooleanProperty")
-	// purego.RegisterLibFunc(&sdlGetCameraDriver, lib, "SDL_GetCameraDriver")
-	// purego.RegisterLibFunc(&sdlGetCameraFormat, lib, "SDL_GetCameraFormat")
-	// purego.RegisterLibFunc(&sdlGetCameraID, lib, "SDL_GetCameraID")
+	purego.RegisterLibFunc(&sdlGetCameraDriver, lib, "SDL_GetCameraDriver")
+	purego.RegisterLibFunc(&sdlGetCameraFormat, lib, "SDL_GetCameraFormat")
+	purego.RegisterLibFunc(&sdlGetCameraID, lib, "SDL_GetCameraID")
 	purego.RegisterLibFunc(&sdlGetCameraName, lib, "SDL_GetCameraName")
-	// purego.RegisterLibFunc(&sdlGetCameraPermissionState, lib, "SDL_GetCameraPermissionState")
-	// purego.RegisterLibFunc(&sdlGetCameraPosition, lib, "SDL_GetCameraPosition")
-	// purego.RegisterLibFunc(&sdlGetCameraProperties, lib, "SDL_GetCameraProperties")
+	purego.RegisterLibFunc(&sdlGetCameraPermissionState, lib, "SDL_GetCameraPermissionState")
+	purego.RegisterLibFunc(&sdlGetCameraPosition, lib, "SDL_GetCameraPosition")
+	purego.RegisterLibFunc(&sdlGetCameraProperties, lib, "SDL_GetCameraProperties")
 	purego.RegisterLibFunc(&sdlGetCameras, lib, "SDL_GetCameras")
 	purego.RegisterLibFunc(&sdlGetCameraSupportedFormats, lib, "SDL_GetCameraSupportedFormats")
 	// purego.RegisterLibFunc(&sdlGetClipboardData, lib, "SDL_GetClipboardData")
@@ -1504,7 +1504,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetClosestFullscreenDisplayMode, lib, "SDL_GetClosestFullscreenDisplayMode")
 	// purego.RegisterLibFunc(&sdlGetCPUCacheLineSize, lib, "SDL_GetCPUCacheLineSize")
 	// purego.RegisterLibFunc(&sdlGetCurrentAudioDriver, lib, "SDL_GetCurrentAudioDriver")
-	// purego.RegisterLibFunc(&sdlGetCurrentCameraDriver, lib, "SDL_GetCurrentCameraDriver")
+	purego.RegisterLibFunc(&sdlGetCurrentCameraDriver, lib, "SDL_GetCurrentCameraDriver")
 	// purego.RegisterLibFunc(&sdlGetCurrentDirectory, lib, "SDL_GetCurrentDirectory")
 	// purego.RegisterLibFunc(&sdlGetCurrentDisplayMode, lib, "SDL_GetCurrentDisplayMode")
 	// purego.RegisterLibFunc(&sdlGetCurrentDisplayOrientation, lib, "SDL_GetCurrentDisplayOrientation")
@@ -1657,7 +1657,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetNumAllocations, lib, "SDL_GetNumAllocations")
 	// purego.RegisterLibFunc(&sdlGetNumAudioDrivers, lib, "SDL_GetNumAudioDrivers")
 	purego.RegisterLibFunc(&sdlGetNumberProperty, lib, "SDL_GetNumberProperty")
-	// purego.RegisterLibFunc(&sdlGetNumCameraDrivers, lib, "SDL_GetNumCameraDrivers")
+	purego.RegisterLibFunc(&sdlGetNumCameraDrivers, lib, "SDL_GetNumCameraDrivers")
 	// purego.RegisterLibFunc(&sdlGetNumGamepadTouchpadFingers, lib, "SDL_GetNumGamepadTouchpadFingers")
 	// purego.RegisterLibFunc(&sdlGetNumGamepadTouchpads, lib, "SDL_GetNumGamepadTouchpads")
 	// purego.RegisterLibFunc(&sdlGetNumGPUDrivers, lib, "SDL_GetNumGPUDrivers")
