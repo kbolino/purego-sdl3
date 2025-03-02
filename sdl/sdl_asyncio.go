@@ -1,19 +1,19 @@
 package sdl
 
-type AsyncIoTaskType uint32
+type AsyncIOTaskType uint32
 
 const (
-	AsyncIoTaskRead AsyncIoTaskType = iota
-	AsyncIoTaskWrite
-	AsyncIoTaskClose
+	AsyncIOTaskRead AsyncIOTaskType = iota
+	AsyncIOTaskWrite
+	AsyncIOTaskClose
 )
 
-type AsyncIoResult uint32
+type AsyncIOResult uint32
 
 const (
-	AsyncIoComplete AsyncIoResult = iota
-	AsyncIoFailure
-	AsyncIoCanceled
+	AsyncIOComplete AsyncIOResult = iota
+	AsyncIOFailure
+	AsyncIOCanceled
 )
 
 // func AsyncIOFromFile(file string, mode string) *AsyncIO {

@@ -1,22 +1,22 @@
 package sdl
 
-type IoStatus uint32
+type IOStatus uint32
 
 const (
-	IoStatusReady IoStatus = iota
-	IoStatusError
-	IoStatusEof
-	IoStatusNotReady
-	IoStatusReadOnly
-	IoStatusWriteOnly
+	IOStatusReady IOStatus = iota
+	IOStatusError
+	IOStatusEof
+	IOStatusNotReady
+	IOStatusReadOnly
+	IOStatusWriteOnly
 )
 
-type IoWhence uint32
+type IOWhence uint32
 
 const (
-	IoSeekSet IoWhence = iota
-	IoSeekCur
-	IoSeekEnd
+	IOSeekSet IOWhence = iota
+	IOSeekCur
+	IOSeekEnd
 )
 
 type IOStream struct{}

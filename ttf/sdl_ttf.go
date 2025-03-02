@@ -9,9 +9,9 @@ import (
 
 const (
 	PropFontCreateFilenameString           = "SDL_ttf.font.create.filename"
-	PropFontCreateIostreamPointer          = "SDL_ttf.font.create.iostream"
-	PropFontCreateIostreamOffsetNumber     = "SDL_ttf.font.create.iostream.offset"
-	PropFontCreateIostreamAutocloseBoolean = "SDL_ttf.font.create.iostream.autoclose"
+	PropFontCreateIOStreamPointer          = "SDL_ttf.font.create.iostream"
+	PropFontCreateIOStreamOffsetNumber     = "SDL_ttf.font.create.iostream.offset"
+	PropFontCreateIOStreamAutocloseBoolean = "SDL_ttf.font.create.iostream.autoclose"
 	PropFontCreateSizeFloat                = "SDL_ttf.font.create.size"
 	PropFontCreateFaceNumber               = "SDL_ttf.font.create.face"
 	PropFontCreateHorizontalDpiNumber      = "SDL_ttf.font.create.hdpi"
