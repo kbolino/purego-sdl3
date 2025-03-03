@@ -28,3 +28,20 @@ func ToString(p *byte) string {
 	}
 	return string(unsafe.Slice(p, i))
 }
+
+// ToStringSlice converts a null-terminated list of C-style strings to a slice of Go strings.
+func ToStringSlice(pointers **byte) []string {
+	if pointers == nil {
+		return nil
+	}
+
+	strings := make([]string, 0)
+
+	ptr := unsafe.Pointer(pointers)
+	for *(**byte)(ptr) != nil {
+		strings = append(strings, ToString(*(**byte)(ptr)))
+		ptr = unsafe.Add(ptr, 8)
+	}
+
+	return strings
+}
