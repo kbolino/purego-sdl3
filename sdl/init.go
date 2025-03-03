@@ -1049,8 +1049,8 @@ var (
 	// sdlShouldQuit                            func(*InitState) bool
 	sdlShowCursor func() bool
 	// sdlShowFileDialogWithProperties          func(FileDialogType, DialogFileCallback, unsafe.Pointer, PropertiesID)
-	sdlShowMessageBox func(*MessageBoxData, *int32) bool
-	// sdlShowOpenFileDialog                    func(DialogFileCallback, unsafe.Pointer, *Window, *DialogFileFilter, int32, string, bool)
+	sdlShowMessageBox     func(*MessageBoxData, *int32) bool
+	sdlShowOpenFileDialog func(DialogFileCallback, unsafe.Pointer, *Window, []DialogFileFilter, int32, *byte, bool)
 	// sdlShowOpenFolderDialog                  func(DialogFileCallback, unsafe.Pointer, *Window, string, bool)
 	// sdlShowSaveFileDialog                    func(DialogFileCallback, unsafe.Pointer, *Window, *DialogFileFilter, int32, string)
 	sdlShowSimpleMessageBox func(MessageBoxFlags, string, string, *Window) bool
@@ -2276,7 +2276,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlShowCursor, lib, "SDL_ShowCursor")
 	// purego.RegisterLibFunc(&sdlShowFileDialogWithProperties, lib, "SDL_ShowFileDialogWithProperties")
 	purego.RegisterLibFunc(&sdlShowMessageBox, lib, "SDL_ShowMessageBox")
-	// purego.RegisterLibFunc(&sdlShowOpenFileDialog, lib, "SDL_ShowOpenFileDialog")
+	purego.RegisterLibFunc(&sdlShowOpenFileDialog, lib, "SDL_ShowOpenFileDialog")
 	// purego.RegisterLibFunc(&sdlShowOpenFolderDialog, lib, "SDL_ShowOpenFolderDialog")
 	// purego.RegisterLibFunc(&sdlShowSaveFileDialog, lib, "SDL_ShowSaveFileDialog")
 	purego.RegisterLibFunc(&sdlShowSimpleMessageBox, lib, "SDL_ShowSimpleMessageBox")
