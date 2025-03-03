@@ -47,11 +47,7 @@ func NewDialogFileCallback(callback func(userdata unsafe.Pointer, filelist []str
 // }
 
 func ShowOpenFileDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, filters []DialogFileFilter, defaultLocation string, allowMany bool) {
-	if len(defaultLocation) > 0 {
-		sdlShowOpenFileDialog(callback, userdata, window, filters, int32(len(filters)), convert.ToBytePtr(defaultLocation), allowMany)
-	} else {
-		sdlShowOpenFileDialog(callback, userdata, window, filters, int32(len(filters)), nil, allowMany)
-	}
+	sdlShowOpenFileDialog(callback, userdata, window, filters, int32(len(filters)), convert.ToBytePtrNullable(defaultLocation), allowMany)
 }
 
 // func ShowOpenFolderDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, default_location string, allow_many bool)  {

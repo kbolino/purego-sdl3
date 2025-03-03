@@ -18,6 +18,14 @@ func ToBytePtr(s string) *byte {
 	return &result[0]
 }
 
+// ToBytePtrNullable does the same thing as [ToBytePtr], except that an empty string returns nil.
+func ToBytePtrNullable(s string) *byte {
+	if len(s) == 0 {
+		return nil
+	}
+	return ToBytePtr(s)
+}
+
 // ToString converts a null-terminated C-style string into a Go string.
 func ToString(p *byte) string {
 	if p == nil {

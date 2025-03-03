@@ -215,10 +215,7 @@ func ConvertEventToRenderCoordinates(renderer *Renderer, event *Event) bool {
 // CreateRenderer creates a 2D rendering context for a window.
 // The name parameter can be one driver, a comma-separated list of drivers or "" to let SDL choose one.
 func CreateRenderer(window *Window, name string) *Renderer {
-	if len(name) == 0 {
-		return sdlCreateRenderer(window, nil)
-	}
-	return sdlCreateRenderer(window, convert.ToBytePtr(name))
+	return sdlCreateRenderer(window, convert.ToBytePtrNullable(name))
 }
 
 func CreateRendererWithProperties(props PropertiesID) *Renderer {
