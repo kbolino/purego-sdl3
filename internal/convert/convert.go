@@ -37,10 +37,8 @@ func ToStringSlice(pointers **byte) []string {
 
 	strings := make([]string, 0)
 
-	ptr := unsafe.Pointer(pointers)
-	for *(**byte)(ptr) != nil {
+	for ptr := unsafe.Pointer(pointers); *(**byte)(ptr) != nil; ptr = unsafe.Add(ptr, 8) {
 		strings = append(strings, ToString(*(**byte)(ptr)))
-		ptr = unsafe.Add(ptr, 8)
 	}
 
 	return strings
