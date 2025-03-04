@@ -80,9 +80,9 @@ const (
 	GamepadTypePS4
 	GamepadTypePS5
 	GamepadTypeNintendoSwitchPro
-	GamepadTypeNintendoSwitchJoyconLeft
-	GamepadTypeNintendoSwitchJoyconRight
-	GamepadTypeNintendoSwitchJoyconPair
+	GamepadTypeNintendoSwitchJoyConLeft
+	GamepadTypeNintendoSwitchJoyConRight
+	GamepadTypeNintendoSwitchJoyConPair
 	GamepadTypeCount
 )
 

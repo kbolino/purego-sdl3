@@ -19,37 +19,37 @@ const (
 	HitTestResizeLeft
 )
 
-type GlAttr uint32
+type GLAttr uint32
 
 const (
-	GlRedSize GlAttr = iota
-	GlGreenSize
-	GlBlueSize
-	GlAlphaSize
-	GlBufferSize
-	GlDoublebuffer
-	GlDepthSize
-	GlStencilSize
-	GlAccumRedSize
-	GlAccumGreenSize
-	GlAccumBlueSize
-	GlAccumAlphaSize
-	GlStereo
-	GlMultisamplebuffers
-	GlMultisamplesamples
-	GlAcceleratedVisual
-	GlRetainedBacking
-	GlContextMajorVersion
-	GlContextMinorVersion
-	GlContextFlags
-	GlContextProfileMask
-	GlShareWithCurrentContext
-	GlFramebufferSrgbCapable
-	GlContextReleaseBehavior
-	GlContextResetNotification
-	GlContextNoError
-	GlFloatbuffers
-	GlEglPlatform
+	GLRedSize GLAttr = iota
+	GLGreenSize
+	GLBlueSize
+	GLAlphaSize
+	GLBufferSize
+	GLDoublebuffer
+	GLDepthSize
+	GLStencilSize
+	GLAccumRedSize
+	GLAccumGreenSize
+	GLAccumBlueSize
+	GLAccumAlphaSize
+	GLStereo
+	GLMultisamplebuffers
+	GLMultisamplesamples
+	GLAcceleratedVisual
+	GLRetainedBacking
+	GLContextMajorVersion
+	GLContextMinorVersion
+	GLContextFlags
+	GLContextProfileMask
+	GLShareWithCurrentContext
+	GLFramebufferSRGBCapable
+	GLContextReleaseBehavior
+	GLContextResetNotification
+	GLContextNoError
+	GLFloatbuffers
+	GLEGLPlatform
 )
 
 type FlashOperation uint32

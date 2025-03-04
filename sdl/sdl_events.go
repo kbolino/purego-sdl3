@@ -54,7 +54,7 @@ const (
 	EventWindowFocusLost            EventType = 0x20F
 	EventWindowCloseRequested       EventType = 0x210
 	EventWindowHitTest              EventType = 0x211
-	EventWindowIccprofChanged       EventType = 0x212
+	EventWindowICCProfChanged       EventType = 0x212
 	EventWindowDisplayChanged       EventType = 0x213
 	EventWindowDisplayScaleChanged  EventType = 0x214
 	EventWindowSafeAreaChanged      EventType = 0x215
@@ -62,7 +62,7 @@ const (
 	EventWindowEnterFullscreen      EventType = 0x217
 	EventWindowLeaveFullscreen      EventType = 0x218
 	EventWindowDestroyed            EventType = 0x219
-	EventWindowHdrStateChanged      EventType = 0x21A
+	EventWindowHDRStateChanged      EventType = 0x21A
 	EventWindowLast                 EventType = 0x21A
 	EventKeyDown                    EventType = 0x300
 	EventKeyUp                      EventType = 0x301
@@ -156,7 +156,7 @@ func (e *Event) Window() WindowEvent {
 	return *(*WindowEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Kdevice() KeyboardDeviceEvent {
+func (e *Event) KDevice() KeyboardDeviceEvent {
 	return *(*KeyboardDeviceEvent)(unsafe.Pointer(e))
 }
 
@@ -176,7 +176,7 @@ func (e *Event) Text() TextInputEvent {
 	return *(*TextInputEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Mdevice() MouseDeviceEvent {
+func (e *Event) MDevice() MouseDeviceEvent {
 	return *(*MouseDeviceEvent)(unsafe.Pointer(e))
 }
 
@@ -192,55 +192,55 @@ func (e *Event) Wheel() MouseWheelEvent {
 	return *(*MouseWheelEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jdevice() JoyDeviceEvent {
+func (e *Event) JDevice() JoyDeviceEvent {
 	return *(*JoyDeviceEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jaxis() JoyAxisEvent {
+func (e *Event) JAxis() JoyAxisEvent {
 	return *(*JoyAxisEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jball() JoyBallEvent {
+func (e *Event) JBall() JoyBallEvent {
 	return *(*JoyBallEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jhat() JoyHatEvent {
+func (e *Event) JHat() JoyHatEvent {
 	return *(*JoyHatEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jbutton() JoyButtonEvent {
+func (e *Event) JButton() JoyButtonEvent {
 	return *(*JoyButtonEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Jbattery() JoyBatteryEvent {
+func (e *Event) JBattery() JoyBatteryEvent {
 	return *(*JoyBatteryEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Gdevice() GamepadDeviceEvent {
+func (e *Event) GDevice() GamepadDeviceEvent {
 	return *(*GamepadDeviceEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Gaxis() GamepadAxisEvent {
+func (e *Event) GAxis() GamepadAxisEvent {
 	return *(*GamepadAxisEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Gbutton() GamepadButtonEvent {
+func (e *Event) GButton() GamepadButtonEvent {
 	return *(*GamepadButtonEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Gtouchpad() GamepadTouchpadEvent {
+func (e *Event) GTouchpad() GamepadTouchpadEvent {
 	return *(*GamepadTouchpadEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Gsensor() GamepadSensorEvent {
+func (e *Event) GSensor() GamepadSensorEvent {
 	return *(*GamepadSensorEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Adevice() AudioDeviceEvent {
+func (e *Event) ADevice() AudioDeviceEvent {
 	return *(*AudioDeviceEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Cdevice() CameraDeviceEvent {
+func (e *Event) CDevice() CameraDeviceEvent {
 	return *(*CameraDeviceEvent)(unsafe.Pointer(e))
 }
 
@@ -256,22 +256,22 @@ func (e *Event) User() UserEvent {
 	return *(*UserEvent)(unsafe.Pointer(e))
 }
 
-func (e *Event) Tfinger() TouchFingerEvent {
+func (e *Event) TFinger() TouchFingerEvent {
 	return *(*TouchFingerEvent)(unsafe.Pointer(e))
 }
-func (e *Event) Pproximity() PenProximityEvent {
+func (e *Event) PProximity() PenProximityEvent {
 	return *(*PenProximityEvent)(unsafe.Pointer(e))
 }
-func (e *Event) Ptouch() PenTouchEvent {
+func (e *Event) PTouch() PenTouchEvent {
 	return *(*PenTouchEvent)(unsafe.Pointer(e))
 }
-func (e *Event) Pmotion() PenMotionEvent {
+func (e *Event) PMotion() PenMotionEvent {
 	return *(*PenMotionEvent)(unsafe.Pointer(e))
 }
-func (e *Event) Pbutton() PenButtonEvent {
+func (e *Event) PButton() PenButtonEvent {
 	return *(*PenButtonEvent)(unsafe.Pointer(e))
 }
-func (e *Event) Paxis() PenAxisEvent {
+func (e *Event) PAxis() PenAxisEvent {
 	return *(*PenAxisEvent)(unsafe.Pointer(e))
 }
 func (e *Event) Render() RenderEvent {

@@ -13,9 +13,9 @@ type Colorspace uint32
 
 const (
 	ColorspaceUnknown       Colorspace = 0
-	ColorspaceSrgb          Colorspace = 0x120005a0
-	ColorspaceSrgbLinear    Colorspace = 0x12000500
-	ColorspaceHdr10         Colorspace = 0x12002600
+	ColorspaceSRGB          Colorspace = 0x120005a0
+	ColorspaceSRGBLinear    Colorspace = 0x12000500
+	ColorspaceHDR10         Colorspace = 0x12002600
 	ColorspaceJpeg          Colorspace = 0x220004c6
 	ColorspaceBt601Limited  Colorspace = 0x211018c6
 	ColorspaceBt601Full     Colorspace = 0x221018c6
@@ -23,7 +23,7 @@ const (
 	ColorspaceBt709Full     Colorspace = 0x22100421
 	ColorspaceBt2020Limited Colorspace = 0x21102609
 	ColorspaceBt2020Full    Colorspace = 0x22102609
-	ColorspaceRgbDefault    Colorspace = ColorspaceSrgb
+	ColorspaceRgbDefault    Colorspace = ColorspaceSRGB
 	ColorspaceYuvDefault    Colorspace = ColorspaceJpeg
 )
 
@@ -71,7 +71,7 @@ const (
 	TransferCharacteristicsLog100Sqrt10 TransferCharacteristics = 10
 	TransferCharacteristicsIec61966     TransferCharacteristics = 11
 	TransferCharacteristicsBt1361       TransferCharacteristics = 12
-	TransferCharacteristicsSrgb         TransferCharacteristics = 13
+	TransferCharacteristicsSRGB         TransferCharacteristics = 13
 	TransferCharacteristicsBt202010Bit  TransferCharacteristics = 14
 	TransferCharacteristicsBt202012Bit  TransferCharacteristics = 15
 	TransferCharacteristicsPq           TransferCharacteristics = 16

@@ -26,7 +26,7 @@ package main
 import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
-	if !sdl.SetHint(sdl.HintRenderVsync, "1") {
+	if !sdl.SetHint(sdl.HintRenderVSync, "1") {
 		panic(sdl.GetError())
 	}
 

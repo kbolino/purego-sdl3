@@ -4,10 +4,10 @@ type HidBusType uint32
 
 const (
 	HidApiBusUnknown HidBusType = iota
-	HidApiBusUsb
+	HidApiBusUSB
 	HidApiBusBluetooth
 	HidApiBusI2C
-	HidApiBusSpi
+	HidApiBusSPI
 )
 
 // func hid_ble_scan(active bool)  {

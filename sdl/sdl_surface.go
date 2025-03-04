@@ -3,8 +3,8 @@ package sdl
 import "unsafe"
 
 const (
-	PropSurfaceSdrWhitePointFloat    = "SDL.surface.SDR_white_point"
-	PropSurfaceHdrHeadroomFloat      = "SDL.surface.HDR_headroom"
+	PropSurfaceSDRWhitePointFloat    = "SDL.surface.SDR_white_point"
+	PropSurfaceHDRHeadroomFloat      = "SDL.surface.HDR_headroom"
 	PropSurfaceTonemapOperatorString = "SDL.surface.tonemap"
 )
 

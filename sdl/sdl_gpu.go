@@ -3,16 +3,16 @@ package sdl
 type GPUSwapchainComposition uint32
 
 const (
-	GPUSwapchainCompositionSdr GPUSwapchainComposition = iota
-	GPUSwapchainCompositionSdrLinear
-	GPUSwapchainCompositionHdrExtendedLinear
-	GPUSwapchainCompositionHdr10St2084
+	GPUSwapchainCompositionSDR GPUSwapchainComposition = iota
+	GPUSwapchainCompositionSDRLinear
+	GPUSwapchainCompositionHDRExtendedLinear
+	GPUSwapchainCompositionHDR10St2084
 )
 
 type GPUPresentMode uint32
 
 const (
-	GPUPresentModeVsync GPUPresentMode = iota
+	GPUPresentModeVSync GPUPresentMode = iota
 	GPUPresentModeImmediate
 	GPUPresentModeMailbox
 )
@@ -222,14 +222,14 @@ const (
 	GPUTextureFormatB5G5R5A1Unorm
 	GPUTextureFormatB4G4R4A4Unorm
 	GPUTextureFormatB8G8R8A8Unorm
-	GPUTextureFormatBc1RgbaUnorm
-	GPUTextureFormatBc2RgbaUnorm
-	GPUTextureFormatBc3RgbaUnorm
-	GPUTextureFormatBc4RUnorm
-	GPUTextureFormatBc5RgUnorm
-	GPUTextureFormatBc7RgbaUnorm
-	GPUTextureFormatBc6HRgbFloat
-	GPUTextureFormatBc6HRgbUfloat
+	GPUTextureFormatBC1RGBAUnorm
+	GPUTextureFormatBC2RGBAUnorm
+	GPUTextureFormatBC3RGBAUnorm
+	GPUTextureFormatBC4RUnorm
+	GPUTextureFormatBC5RGUnorm
+	GPUTextureFormatBC7RGBAUnorm
+	GPUTextureFormatBC6HRGBFloat
+	GPUTextureFormatBC6HRGBUfloat
 	GPUTextureFormatR8Snorm
 	GPUTextureFormatR8G8Snorm
 	GPUTextureFormatR8G8B8A8Snorm
@@ -261,12 +261,12 @@ const (
 	GPUTextureFormatR32Int
 	GPUTextureFormatR32G32Int
 	GPUTextureFormatR32G32B32A32Int
-	GPUTextureFormatR8G8B8A8UnormSrgb
-	GPUTextureFormatB8G8R8A8UnormSrgb
-	GPUTextureFormatBc1RgbaUnormSrgb
-	GPUTextureFormatBc2RgbaUnormSrgb
-	GPUTextureFormatBc3RgbaUnormSrgb
-	GPUTextureFormatBc7RgbaUnormSrgb
+	GPUTextureFormatR8G8B8A8UnormSRGB
+	GPUTextureFormatB8G8R8A8UnormSRGB
+	GPUTextureFormatBC1RGBAUnormSRGB
+	GPUTextureFormatBC2RGBAUnormSRGB
+	GPUTextureFormatBC3RGBAUnormSRGB
+	GPUTextureFormatBC7RGBAUnormSRGB
 	GPUTextureFormatD16Unorm
 	GPUTextureFormatD24Unorm
 	GPUTextureFormatD32Float
@@ -286,20 +286,20 @@ const (
 	GPUTextureFormatAstc10x10Unorm
 	GPUTextureFormatAstc12x10Unorm
 	GPUTextureFormatAstc12x12Unorm
-	GPUTextureFormatAstc4x4UnormSrgb
-	GPUTextureFormatAstc5x4UnormSrgb
-	GPUTextureFormatAstc5x5UnormSrgb
-	GPUTextureFormatAstc6x5UnormSrgb
-	GPUTextureFormatAstc6x6UnormSrgb
-	GPUTextureFormatAstc8x5UnormSrgb
-	GPUTextureFormatAstc8x6UnormSrgb
-	GPUTextureFormatAstc8x8UnormSrgb
-	GPUTextureFormatAstc10x5UnormSrgb
-	GPUTextureFormatAstc10x6UnormSrgb
-	GPUTextureFormatAstc10x8UnormSrgb
-	GPUTextureFormatAstc10x10UnormSrgb
-	GPUTextureFormatAstc12x10UnormSrgb
-	GPUTextureFormatAstc12x12UnormSrgb
+	GPUTextureFormatAstc4x4UnormSRGB
+	GPUTextureFormatAstc5x4UnormSRGB
+	GPUTextureFormatAstc5x5UnormSRGB
+	GPUTextureFormatAstc6x5UnormSRGB
+	GPUTextureFormatAstc6x6UnormSRGB
+	GPUTextureFormatAstc8x5UnormSRGB
+	GPUTextureFormatAstc8x6UnormSRGB
+	GPUTextureFormatAstc8x8UnormSRGB
+	GPUTextureFormatAstc10x5UnormSRGB
+	GPUTextureFormatAstc10x6UnormSRGB
+	GPUTextureFormatAstc10x8UnormSRGB
+	GPUTextureFormatAstc10x10UnormSRGB
+	GPUTextureFormatAstc12x10UnormSRGB
+	GPUTextureFormatAstc12x12UnormSRGB
 	GPUTextureFormatAstc4x4Float
 	GPUTextureFormatAstc5x4Float
 	GPUTextureFormatAstc5x5Float
