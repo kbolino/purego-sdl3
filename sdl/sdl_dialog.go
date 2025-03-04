@@ -7,6 +7,17 @@ import (
 	"github.com/jupiterrider/purego-sdl3/internal/convert"
 )
 
+const (
+	PropFileDialogFiltersPointer = "SDL.filedialog.filters"
+	PropFileDialogNfiltersNumber = "SDL.filedialog.nfilters"
+	PropFileDialogWindowPointer  = "SDL.filedialog.window"
+	PropFileDialogLocationString = "SDL.filedialog.location"
+	PropFileDialogManyBoolean    = "SDL.filedialog.many"
+	PropFileDialogTitleString    = "SDL.filedialog.title"
+	PropFileDialogAcceptString   = "SDL.filedialog.accept"
+	PropFileDialogCancelString   = "SDL.filedialog.cancel"
+)
+
 type FileDialogType uint32
 
 const (
@@ -42,18 +53,18 @@ func NewDialogFileCallback(callback func(userdata unsafe.Pointer, filelist []str
 	return DialogFileCallback(cb)
 }
 
-// func ShowFileDialogWithProperties(type FileDialogType, callback DialogFileCallback, userdata unsafe.Pointer, props PropertiesID)  {
-//	sdlShowFileDialogWithProperties(type, callback, userdata, props)
-// }
+func ShowFileDialogWithProperties(dialogType FileDialogType, callback DialogFileCallback, userdata unsafe.Pointer, props PropertiesID) {
+	sdlShowFileDialogWithProperties(dialogType, callback, userdata, props)
+}
 
 func ShowOpenFileDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, filters []DialogFileFilter, defaultLocation string, allowMany bool) {
 	sdlShowOpenFileDialog(callback, userdata, window, filters, int32(len(filters)), convert.ToBytePtrNullable(defaultLocation), allowMany)
 }
 
-// func ShowOpenFolderDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, default_location string, allow_many bool)  {
-//	sdlShowOpenFolderDialog(callback, userdata, window, default_location, allow_many)
-// }
+func ShowOpenFolderDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, defaultLocation string, allowMany bool) {
+	sdlShowOpenFolderDialog(callback, userdata, window, defaultLocation, allowMany)
+}
 
-// func ShowSaveFileDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, filters *DialogFileFilter, nfilters int32, default_location string)  {
-//	sdlShowSaveFileDialog(callback, userdata, window, filters, nfilters, default_location)
-// }
+func ShowSaveFileDialog(callback DialogFileCallback, userdata unsafe.Pointer, window *Window, filters []DialogFileFilter, defaultLocation string) {
+	sdlShowSaveFileDialog(callback, userdata, window, filters, int32(len(filters)), defaultLocation)
+}
