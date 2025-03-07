@@ -6,7 +6,7 @@ const (
 	GPUSwapchainCompositionSDR GPUSwapchainComposition = iota
 	GPUSwapchainCompositionSDRLinear
 	GPUSwapchainCompositionHDRExtendedLinear
-	GPUSwapchainCompositionHDR10St2084
+	GPUSwapchainCompositionHDR10ST2084
 )
 
 type GPUPresentMode uint32
