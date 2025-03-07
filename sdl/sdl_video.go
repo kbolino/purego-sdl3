@@ -9,13 +9,13 @@ type HitTestResult uint32
 const (
 	HitTestNormal HitTestResult = iota
 	HitTestDraggable
-	HitTestResizeTopleft
+	HitTestResizeTopLeft
 	HitTestResizeTop
-	HitTestResizeTopright
+	HitTestResizeTopRight
 	HitTestResizeRight
-	HitTestResizeBottomright
+	HitTestResizeBottomRight
 	HitTestResizeBottom
-	HitTestResizeBottomleft
+	HitTestResizeBottomLeft
 	HitTestResizeLeft
 )
 
@@ -27,7 +27,7 @@ const (
 	GLBlueSize
 	GLAlphaSize
 	GLBufferSize
-	GLDoublebuffer
+	GLDoubleBuffer
 	GLDepthSize
 	GLStencilSize
 	GLAccumRedSize
@@ -35,8 +35,8 @@ const (
 	GLAccumBlueSize
 	GLAccumAlphaSize
 	GLStereo
-	GLMultisamplebuffers
-	GLMultisamplesamples
+	GLMultisampleBuffers
+	GLMultisampleSamples
 	GLAcceleratedVisual
 	GLRetainedBacking
 	GLContextMajorVersion
@@ -48,7 +48,7 @@ const (
 	GLContextReleaseBehavior
 	GLContextResetNotification
 	GLContextNoError
-	GLFloatbuffers
+	GLFloatBuffers
 	GLEGLPlatform
 )
 

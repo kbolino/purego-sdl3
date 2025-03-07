@@ -5,7 +5,7 @@ import "unsafe"
 const (
 	PropSurfaceSDRWhitePointFloat    = "SDL.surface.SDR_white_point"
 	PropSurfaceHDRHeadroomFloat      = "SDL.surface.HDR_headroom"
-	PropSurfaceTonemapOperatorString = "SDL.surface.tonemap"
+	PropSurfaceToneMapOperatorString = "SDL.surface.tonemap"
 )
 
 type FlipMode uint32
@@ -29,7 +29,7 @@ const (
 	SurfacePreallocated SurfaceFlags = 1 << iota
 	SurfaceLockNeeded
 	SurfaceLocked
-	SurfaceSimdAligned
+	SurfaceSIMDAligned
 )
 
 // Surface is a collection of pixels used in software blitting.

@@ -7,7 +7,7 @@ const (
 	SandboxUnknownContainer
 	SandboxFlatpak
 	SandboxSnap
-	SandboxMacos
+	SandboxMacOS
 )
 
 // func GetSandbox() Sandbox {

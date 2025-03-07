@@ -4,8 +4,8 @@ type PenAxis uint32
 
 const (
 	PenAxisPressure PenAxis = iota
-	PenAxisXtilt
-	PenAxisYtilt
+	PenAxisXTilt
+	PenAxisYTilt
 	PenAxisDistance
 	PenAxisRotation
 	PenAxisSlider

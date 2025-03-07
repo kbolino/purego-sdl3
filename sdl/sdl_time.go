@@ -3,16 +3,16 @@ package sdl
 type DateFormat uint32
 
 const (
-	DateFormatYyyymmdd DateFormat = iota
-	DateFormatDdmmyyyy
-	DateFormatMmddyyyy
+	DateFormatYYYYMMDD DateFormat = iota
+	DateFormatDDMMYYYY
+	DateFormatMMDDYYYY
 )
 
 type TimeFormat uint32
 
 const (
-	TimeFormat24Hr TimeFormat = iota
-	TimeFormat12Hr
+	TimeFormat24HR TimeFormat = iota
+	TimeFormat12HR
 )
 
 // func DateTimeToTime(dt *DateTime, ticks *Time) bool {

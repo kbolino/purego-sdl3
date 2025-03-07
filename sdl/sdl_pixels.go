@@ -16,15 +16,15 @@ const (
 	ColorspaceSRGB          Colorspace = 0x120005a0
 	ColorspaceSRGBLinear    Colorspace = 0x12000500
 	ColorspaceHDR10         Colorspace = 0x12002600
-	ColorspaceJpeg          Colorspace = 0x220004c6
-	ColorspaceBt601Limited  Colorspace = 0x211018c6
-	ColorspaceBt601Full     Colorspace = 0x221018c6
-	ColorspaceBt709Limited  Colorspace = 0x21100421
-	ColorspaceBt709Full     Colorspace = 0x22100421
-	ColorspaceBt2020Limited Colorspace = 0x21102609
-	ColorspaceBt2020Full    Colorspace = 0x22102609
-	ColorspaceRgbDefault    Colorspace = ColorspaceSRGB
-	ColorspaceYuvDefault    Colorspace = ColorspaceJpeg
+	ColorspaceJPEG          Colorspace = 0x220004c6
+	ColorspaceBT601Limited  Colorspace = 0x211018c6
+	ColorspaceBT601Full     Colorspace = 0x221018c6
+	ColorspaceBT709Limited  Colorspace = 0x21100421
+	ColorspaceBT709Full     Colorspace = 0x22100421
+	ColorspaceBT2020Limited Colorspace = 0x21102609
+	ColorspaceBT2020Full    Colorspace = 0x22102609
+	ColorspaceRGBDefault    Colorspace = ColorspaceSRGB
+	ColorspaceYUVDefault    Colorspace = ColorspaceJPEG
 )
 
 type ChromaLocation uint32
@@ -33,26 +33,26 @@ const (
 	ChromaLocationNone ChromaLocation = iota
 	ChromaLocationLeft
 	ChromaLocationCenter
-	ChromaLocationTopleft
+	ChromaLocationTopLeft
 )
 
 type MatrixCoefficients uint32
 
 const (
 	MatrixCoefficientsIdentity         MatrixCoefficients = 0
-	MatrixCoefficientsBt709            MatrixCoefficients = 1
+	MatrixCoefficientsBT709            MatrixCoefficients = 1
 	MatrixCoefficientsUnspecified      MatrixCoefficients = 2
-	MatrixCoefficientsFcc              MatrixCoefficients = 4
-	MatrixCoefficientsBt470Bg          MatrixCoefficients = 5
-	MatrixCoefficientsBt601            MatrixCoefficients = 6
-	MatrixCoefficientsSmpte240         MatrixCoefficients = 7
-	MatrixCoefficientsYcgco            MatrixCoefficients = 8
-	MatrixCoefficientsBt2020Ncl        MatrixCoefficients = 9
-	MatrixCoefficientsBt2020Cl         MatrixCoefficients = 10
-	MatrixCoefficientsSmpte2085        MatrixCoefficients = 11
-	MatrixCoefficientsChromaDerivedNcl MatrixCoefficients = 12
-	MatrixCoefficientsChromaDerivedCl  MatrixCoefficients = 13
-	MatrixCoefficientsIctcp            MatrixCoefficients = 14
+	MatrixCoefficientsFCC              MatrixCoefficients = 4
+	MatrixCoefficientsBT470BG          MatrixCoefficients = 5
+	MatrixCoefficientsBT601            MatrixCoefficients = 6
+	MatrixCoefficientsSMPTE240         MatrixCoefficients = 7
+	MatrixCoefficientsYCGCO            MatrixCoefficients = 8
+	MatrixCoefficientsBT2020NCL        MatrixCoefficients = 9
+	MatrixCoefficientsBT2020CL         MatrixCoefficients = 10
+	MatrixCoefficientsSMPTE2085        MatrixCoefficients = 11
+	MatrixCoefficientsChromaDerivedNCL MatrixCoefficients = 12
+	MatrixCoefficientsChromaDerivedCL  MatrixCoefficients = 13
+	MatrixCoefficientsICTCP            MatrixCoefficients = 14
 	MatrixCoefficientsCustom           MatrixCoefficients = 31
 )
 
@@ -60,23 +60,23 @@ type TransferCharacteristics uint32
 
 const (
 	TransferCharacteristicsUnknown      TransferCharacteristics = 0
-	TransferCharacteristicsBt709        TransferCharacteristics = 1
+	TransferCharacteristicsBT709        TransferCharacteristics = 1
 	TransferCharacteristicsUnspecified  TransferCharacteristics = 2
 	TransferCharacteristicsGamma22      TransferCharacteristics = 4
 	TransferCharacteristicsGamma28      TransferCharacteristics = 5
-	TransferCharacteristicsBt601        TransferCharacteristics = 6
-	TransferCharacteristicsSmpte240     TransferCharacteristics = 7
+	TransferCharacteristicsBT601        TransferCharacteristics = 6
+	TransferCharacteristicsSMPTE240     TransferCharacteristics = 7
 	TransferCharacteristicsLinear       TransferCharacteristics = 8
 	TransferCharacteristicsLog100       TransferCharacteristics = 9
 	TransferCharacteristicsLog100Sqrt10 TransferCharacteristics = 10
-	TransferCharacteristicsIec61966     TransferCharacteristics = 11
-	TransferCharacteristicsBt1361       TransferCharacteristics = 12
+	TransferCharacteristicsIEC61966     TransferCharacteristics = 11
+	TransferCharacteristicsBT1361       TransferCharacteristics = 12
 	TransferCharacteristicsSRGB         TransferCharacteristics = 13
-	TransferCharacteristicsBt202010Bit  TransferCharacteristics = 14
-	TransferCharacteristicsBt202012Bit  TransferCharacteristics = 15
-	TransferCharacteristicsPq           TransferCharacteristics = 16
-	TransferCharacteristicsSmpte428     TransferCharacteristics = 17
-	TransferCharacteristicsHlg          TransferCharacteristics = 18
+	TransferCharacteristicsBT202010Bit  TransferCharacteristics = 14
+	TransferCharacteristicsBT202012Bit  TransferCharacteristics = 15
+	TransferCharacteristicsPQ           TransferCharacteristics = 16
+	TransferCharacteristicsSMPTE428     TransferCharacteristics = 17
+	TransferCharacteristicsHLG          TransferCharacteristics = 18
 	TransferCharacteristicsCustom       TransferCharacteristics = 31
 )
 
@@ -84,18 +84,18 @@ type ColorPrimaries uint32
 
 const (
 	ColorPrimariesUnknown     ColorPrimaries = 0
-	ColorPrimariesBt709       ColorPrimaries = 1
+	ColorPrimariesBT709       ColorPrimaries = 1
 	ColorPrimariesUnspecified ColorPrimaries = 2
-	ColorPrimariesBt470M      ColorPrimaries = 4
-	ColorPrimariesBt470Bg     ColorPrimaries = 5
-	ColorPrimariesBt601       ColorPrimaries = 6
-	ColorPrimariesSmpte240    ColorPrimaries = 7
+	ColorPrimariesBT470M      ColorPrimaries = 4
+	ColorPrimariesBT470BG     ColorPrimaries = 5
+	ColorPrimariesBT601       ColorPrimaries = 6
+	ColorPrimariesSMPTE240    ColorPrimaries = 7
 	ColorPrimariesGenericFilm ColorPrimaries = 8
-	ColorPrimariesBt2020      ColorPrimaries = 9
-	ColorPrimariesXyz         ColorPrimaries = 10
-	ColorPrimariesSmpte431    ColorPrimaries = 11
-	ColorPrimariesSmpte432    ColorPrimaries = 12
-	ColorPrimariesEbu3213     ColorPrimaries = 22
+	ColorPrimariesBT2020      ColorPrimaries = 9
+	ColorPrimariesXYZ         ColorPrimaries = 10
+	ColorPrimariesSMPTE431    ColorPrimaries = 11
+	ColorPrimariesSMPTE432    ColorPrimaries = 12
+	ColorPrimariesEBU3213     ColorPrimaries = 22
 	ColorPrimariesCustom      ColorPrimaries = 31
 )
 
@@ -111,8 +111,8 @@ type ColorType uint32
 
 const (
 	ColorTypeUnknown ColorType = iota
-	ColorTypeRgb
-	ColorTypeYcbcr
+	ColorTypeRGB
+	ColorTypeYCBCR
 )
 
 type PixelType uint32
@@ -125,11 +125,11 @@ const (
 	PixelTypePacked8
 	PixelTypePacked16
 	PixelTypePacked32
-	PixelTypeArrayu8
-	PixelTypeArrayu16
-	PixelTypeArrayu32
-	PixelTypeArrayf16
-	PixelTypeArrayf32
+	PixelTypeArrayU8
+	PixelTypeArrayU16
+	PixelTypeArrayU32
+	PixelTypeArrayF16
+	PixelTypeArrayF32
 	PixelTypeIndex2
 )
 
@@ -145,26 +145,26 @@ type PackedOrder uint32
 
 const (
 	PackedOrderNone PackedOrder = iota
-	PackedOrderXrgb
-	PackedOrderRgbx
-	PackedOrderArgb
-	PackedOrderRgba
-	PackedOrderXbgr
-	PackedOrderBgrx
-	PackedOrderAbgr
-	PackedOrderBgra
+	PackedOrderXRGB
+	PackedOrderRGBX
+	PackedOrderARGB
+	PackedOrderRGBA
+	PackedOrderXBGR
+	PackedOrderBGRX
+	PackedOrderABGR
+	PackedOrderBGRA
 )
 
 type ArrayOrder uint32
 
 const (
 	ArrayOrderNone ArrayOrder = iota
-	ArrayOrderRgb
-	ArrayOrderRgba
-	ArrayOrderArgb
-	ArrayOrderBgr
-	ArrayOrderBgra
-	ArrayOrderAbgr
+	ArrayOrderRGB
+	ArrayOrderRGBA
+	ArrayOrderARGB
+	ArrayOrderBGR
+	ArrayOrderBGRA
+	ArrayOrderABGR
 )
 
 type PackedLayout uint32
@@ -185,77 +185,77 @@ type PixelFormat uint32
 
 const (
 	PixelFormatUnknown      PixelFormat = 0
-	PixelFormatIndex1lsb    PixelFormat = 0x11100100
-	PixelFormatIndex1msb    PixelFormat = 0x11200100
-	PixelFormatIndex2lsb    PixelFormat = 0x1C100200
-	PixelFormatIndex2msb    PixelFormat = 0x1C200200
-	PixelFormatIndex4lsb    PixelFormat = 0x12100400
-	PixelFormatIndex4msb    PixelFormat = 0x12200400
+	PixelFormatIndex1LSB    PixelFormat = 0x11100100
+	PixelFormatIndex1MSB    PixelFormat = 0x11200100
+	PixelFormatIndex2LSB    PixelFormat = 0x1C100200
+	PixelFormatIndex2MSB    PixelFormat = 0x1C200200
+	PixelFormatIndex4LSB    PixelFormat = 0x12100400
+	PixelFormatIndex4MSB    PixelFormat = 0x12200400
 	PixelFormatIndex8       PixelFormat = 0x13000801
-	PixelFormatRgb332       PixelFormat = 0x14110801
-	PixelFormatXrgb4444     PixelFormat = 0x15120C02
-	PixelFormatXbgr4444     PixelFormat = 0x15520C02
-	PixelFormatXrgb1555     PixelFormat = 0x15130F02
-	PixelFormatXbgr1555     PixelFormat = 0x15530F02
-	PixelFormatArgb4444     PixelFormat = 0x15321002
-	PixelFormatRgba4444     PixelFormat = 0x15421002
-	PixelFormatAbgr4444     PixelFormat = 0x15721002
-	PixelFormatBgra4444     PixelFormat = 0x15821002
-	PixelFormatArgb1555     PixelFormat = 0x15331002
-	PixelFormatRgba5551     PixelFormat = 0x15441002
-	PixelFormatAbgr1555     PixelFormat = 0x15731002
-	PixelFormatBgra5551     PixelFormat = 0x15841002
-	PixelFormatRgb565       PixelFormat = 0x15151002
-	PixelFormatBgr565       PixelFormat = 0x15551002
-	PixelFormatRgb24        PixelFormat = 0x17101803
-	PixelFormatBgr24        PixelFormat = 0x17401803
-	PixelFormatXrgb8888     PixelFormat = 0x16161804
-	PixelFormatRgbx8888     PixelFormat = 0x16261804
-	PixelFormatXbgr8888     PixelFormat = 0x16561804
-	PixelFormatBgrx8888     PixelFormat = 0x16661804
-	PixelFormatArgb8888     PixelFormat = 0x16362004
-	PixelFormatRgba8888     PixelFormat = 0x16462004
-	PixelFormatAbgr8888     PixelFormat = 0x16762004
-	PixelFormatBgra8888     PixelFormat = 0x16862004
-	PixelFormatXrgb2101010  PixelFormat = 0x16172004
-	PixelFormatXbgr2101010  PixelFormat = 0x16572004
-	PixelFormatArgb2101010  PixelFormat = 0x16372004
-	PixelFormatAbgr2101010  PixelFormat = 0x16772004
-	PixelFormatRgb48        PixelFormat = 0x18103006
-	PixelFormatBgr48        PixelFormat = 0x18403006
-	PixelFormatRgba64       PixelFormat = 0x18204008
-	PixelFormatArgb64       PixelFormat = 0x18304008
-	PixelFormatBgra64       PixelFormat = 0x18504008
-	PixelFormatAbgr64       PixelFormat = 0x18604008
-	PixelFormatRgb48Float   PixelFormat = 0x1A103006
-	PixelFormatBgr48Float   PixelFormat = 0x1A403006
-	PixelFormatRgba64Float  PixelFormat = 0x1A204008
-	PixelFormatArgb64Float  PixelFormat = 0x1A304008
-	PixelFormatBgra64Float  PixelFormat = 0x1A504008
-	PixelFormatAbgr64Float  PixelFormat = 0x1A604008
-	PixelFormatRgb96Float   PixelFormat = 0x1B10600C
-	PixelFormatBgr96Float   PixelFormat = 0x1B40600C
-	PixelFormatRgba128Float PixelFormat = 0x1B208010
-	PixelFormatArgb128Float PixelFormat = 0x1B308010
-	PixelFormatBgra128Float PixelFormat = 0x1B508010
-	PixelFormatAbgr128Float PixelFormat = 0x1B608010
-	PixelFormatYv12         PixelFormat = 0x32315659
-	PixelFormatIyuv         PixelFormat = 0x56555949
-	PixelFormatYuy2         PixelFormat = 0x32595559
-	PixelFormatUyvy         PixelFormat = 0x59565955
-	PixelFormatYvyu         PixelFormat = 0x55595659
-	PixelFormatNv12         PixelFormat = 0x3231564E
-	PixelFormatNv21         PixelFormat = 0x3132564E
+	PixelFormatRGB332       PixelFormat = 0x14110801
+	PixelFormatXRGB4444     PixelFormat = 0x15120C02
+	PixelFormatXBGR4444     PixelFormat = 0x15520C02
+	PixelFormatXRGB1555     PixelFormat = 0x15130F02
+	PixelFormatXBGR1555     PixelFormat = 0x15530F02
+	PixelFormatARGB4444     PixelFormat = 0x15321002
+	PixelFormatRGBA4444     PixelFormat = 0x15421002
+	PixelFormatABGR4444     PixelFormat = 0x15721002
+	PixelFormatBGRA4444     PixelFormat = 0x15821002
+	PixelFormatARGB1555     PixelFormat = 0x15331002
+	PixelFormatRGBA5551     PixelFormat = 0x15441002
+	PixelFormatABGR1555     PixelFormat = 0x15731002
+	PixelFormatBGRA5551     PixelFormat = 0x15841002
+	PixelFormatRGB565       PixelFormat = 0x15151002
+	PixelFormatBGR565       PixelFormat = 0x15551002
+	PixelFormatRGB24        PixelFormat = 0x17101803
+	PixelFormatBGR24        PixelFormat = 0x17401803
+	PixelFormatXRGB8888     PixelFormat = 0x16161804
+	PixelFormatRGBX8888     PixelFormat = 0x16261804
+	PixelFormatXBGR8888     PixelFormat = 0x16561804
+	PixelFormatBGRX8888     PixelFormat = 0x16661804
+	PixelFormatARGB8888     PixelFormat = 0x16362004
+	PixelFormatRGBA8888     PixelFormat = 0x16462004
+	PixelFormatABGR8888     PixelFormat = 0x16762004
+	PixelFormatBGRA8888     PixelFormat = 0x16862004
+	PixelFormatXRGB2101010  PixelFormat = 0x16172004
+	PixelFormatXBGR2101010  PixelFormat = 0x16572004
+	PixelFormatARGB2101010  PixelFormat = 0x16372004
+	PixelFormatABGR2101010  PixelFormat = 0x16772004
+	PixelFormatRGB48        PixelFormat = 0x18103006
+	PixelFormatBGR48        PixelFormat = 0x18403006
+	PixelFormatRGBA64       PixelFormat = 0x18204008
+	PixelFormatARGB64       PixelFormat = 0x18304008
+	PixelFormatBGRA64       PixelFormat = 0x18504008
+	PixelFormatABGR64       PixelFormat = 0x18604008
+	PixelFormatRGB48Float   PixelFormat = 0x1A103006
+	PixelFormatBGR48Float   PixelFormat = 0x1A403006
+	PixelFormatRGBA64Float  PixelFormat = 0x1A204008
+	PixelFormatARGB64Float  PixelFormat = 0x1A304008
+	PixelFormatBGRA64Float  PixelFormat = 0x1A504008
+	PixelFormatABGR64Float  PixelFormat = 0x1A604008
+	PixelFormatRGB96Float   PixelFormat = 0x1B10600C
+	PixelFormatBGR96Float   PixelFormat = 0x1B40600C
+	PixelFormatRGBA128Float PixelFormat = 0x1B208010
+	PixelFormatARGB128Float PixelFormat = 0x1B308010
+	PixelFormatBGRA128Float PixelFormat = 0x1B508010
+	PixelFormatABGR128Float PixelFormat = 0x1B608010
+	PixelFormatYV12         PixelFormat = 0x32315659
+	PixelFormatIYUV         PixelFormat = 0x56555949
+	PixelFormatYUY2         PixelFormat = 0x32595559
+	PixelFormatUYVY         PixelFormat = 0x59565955
+	PixelFormatYVYU         PixelFormat = 0x55595659
+	PixelFormatNV12         PixelFormat = 0x3231564E
+	PixelFormatNV21         PixelFormat = 0x3132564E
 	PixelFormatP010         PixelFormat = 0x30313050
-	PixelFormatExternalOes  PixelFormat = 0x2053454F
-	PixelFormatRgba32       PixelFormat = PixelFormatAbgr8888
-	PixelFormatArgb32       PixelFormat = PixelFormatBgra8888
-	PixelFormatBgra32       PixelFormat = PixelFormatArgb8888
-	PixelFormatAbgr32       PixelFormat = PixelFormatRgba8888
-	PixelFormatRgbx32       PixelFormat = PixelFormatXbgr8888
-	PixelFormatXrgb32       PixelFormat = PixelFormatBgrx8888
-	PixelFormatBgrx32       PixelFormat = PixelFormatXrgb8888
-	PixelFormatXbgr32       PixelFormat = PixelFormatRgbx8888
+	PixelFormatExternalOES  PixelFormat = 0x2053454F
+	PixelFormatRGBA32       PixelFormat = PixelFormatABGR8888
+	PixelFormatARGB32       PixelFormat = PixelFormatBGRA8888
+	PixelFormatBGRA32       PixelFormat = PixelFormatARGB8888
+	PixelFormatABGR32       PixelFormat = PixelFormatRGBA8888
+	PixelFormatRGBX32       PixelFormat = PixelFormatXBGR8888
+	PixelFormatXRGB32       PixelFormat = PixelFormatBGRX8888
+	PixelFormatBGRX32       PixelFormat = PixelFormatXRGB8888
+	PixelFormatXBGR32       PixelFormat = PixelFormatRGBX8888
 )
 
 type Color struct {
