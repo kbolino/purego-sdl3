@@ -789,7 +789,7 @@ var (
 	// sdlOpenSensor                            func(SensorID) *Sensor
 	// sdlOpenStorage                           func(*StorageInterface, unsafe.Pointer) *Storage
 	// sdlOpenTitleStorage                      func(string, PropertiesID) *Storage
-	// sdlOpenURL                               func(string) bool
+	sdlOpenURL func(string) bool
 	// sdlOpenUserStorage                       func(string, string, PropertiesID) *Storage
 	// sdlOutOfMemory                           func() bool
 	// sdlPauseAudioDevice                      func(AudioDeviceID) bool
@@ -2015,7 +2015,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlOpenSensor, lib, "SDL_OpenSensor")
 	// purego.RegisterLibFunc(&sdlOpenStorage, lib, "SDL_OpenStorage")
 	// purego.RegisterLibFunc(&sdlOpenTitleStorage, lib, "SDL_OpenTitleStorage")
-	// purego.RegisterLibFunc(&sdlOpenURL, lib, "SDL_OpenURL")
+	purego.RegisterLibFunc(&sdlOpenURL, lib, "SDL_OpenURL")
 	// purego.RegisterLibFunc(&sdlOpenUserStorage, lib, "SDL_OpenUserStorage")
 	// purego.RegisterLibFunc(&sdlOutOfMemory, lib, "SDL_OutOfMemory")
 	// purego.RegisterLibFunc(&sdlPauseAudioDevice, lib, "SDL_PauseAudioDevice")
