@@ -21,20 +21,20 @@ const (
 	SystemCursorWait
 	SystemCursorCrosshair
 	SystemCursorProgress
-	SystemCursorNwseResize
-	SystemCursorNeswResize
-	SystemCursorEwResize
-	SystemCursorNsResize
+	SystemCursorNWSEResize
+	SystemCursorNESWResize
+	SystemCursorEWResize
+	SystemCursorNSResize
 	SystemCursorMove
 	SystemCursorNotAllowed
 	SystemCursorPointer
-	SystemCursorNwResize
+	SystemCursorNWResize
 	SystemCursorNResize
-	SystemCursorNeResize
+	SystemCursorNEResize
 	SystemCursorEResize
-	SystemCursorSeResize
+	SystemCursorSEResize
 	SystemCursorSResize
-	SystemCursorSwResize
+	SystemCursorSWResize
 	SystemCursorWResize
 	SystemCursorCount
 )
@@ -50,11 +50,11 @@ const (
 	ButtonX1
 	ButtonX2
 
-	ButtonLmask  MouseButtonFlags = 1 << (ButtonLeft - 1)
-	ButtonMmask  MouseButtonFlags = 1 << (ButtonMiddle - 1)
-	ButtonRmask  MouseButtonFlags = 1 << (ButtonRight - 1)
-	ButtonX1mask MouseButtonFlags = 1 << (ButtonX1 - 1)
-	ButtonX2mask MouseButtonFlags = 1 << (ButtonX2 - 1)
+	ButtonLMask  MouseButtonFlags = 1 << (ButtonLeft - 1)
+	ButtonMMask  MouseButtonFlags = 1 << (ButtonMiddle - 1)
+	ButtonRMask  MouseButtonFlags = 1 << (ButtonRight - 1)
+	ButtonX1Mask MouseButtonFlags = 1 << (ButtonX1 - 1)
+	ButtonX2Mask MouseButtonFlags = 1 << (ButtonX2 - 1)
 )
 
 type Cursor struct{}
