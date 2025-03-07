@@ -30,8 +30,8 @@ const (
 type MessageBoxButtonFlags uint32
 
 const (
-	MessageBoxButtonReturnkeyDefault MessageBoxButtonFlags = 0x00000001
-	MessageBoxButtonEscapekeyDefault MessageBoxButtonFlags = 0x00000002
+	MessageBoxButtonReturnKeyDefault MessageBoxButtonFlags = 0x00000001
+	MessageBoxButtonEscapeKeyDefault MessageBoxButtonFlags = 0x00000002
 )
 
 type MessageBoxButtonData struct {

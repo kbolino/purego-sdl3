@@ -11,12 +11,12 @@ func main() {
 	messageBox.SetMessage("Are you sure?")
 
 	var yesButton sdl.MessageBoxButtonData
-	yesButton.Flags = sdl.MessageBoxButtonReturnkeyDefault
+	yesButton.Flags = sdl.MessageBoxButtonReturnKeyDefault
 	yesButton.ButtonID = 1
 	yesButton.SetText("Yes")
 
 	var noButton sdl.MessageBoxButtonData
-	noButton.Flags = sdl.MessageBoxButtonEscapekeyDefault
+	noButton.Flags = sdl.MessageBoxButtonEscapeKeyDefault
 	noButton.ButtonID = 2
 	noButton.SetText("No")
 	messageBox.SetButtons(yesButton, noButton)
