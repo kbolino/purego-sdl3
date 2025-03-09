@@ -286,6 +286,10 @@ func DefinePixelFourCC(a, b, c, d byte) PixelFormat {
 	return PixelFormat(FourCC(a, b, c, d))
 }
 
+func DefinePixelFormat[T BitmapOrder | PackedOrder | ArrayOrder](pixelType PixelType, order T, layout PackedLayout, bitsPerPixel, bytesPerPixel byte) PixelFormat {
+	return 1<<28 | PixelFormat(pixelType)<<24 | PixelFormat(order)<<20 | PixelFormat(layout)<<16 | PixelFormat(bitsPerPixel)<<8 | PixelFormat(bytesPerPixel)
+}
+
 func CreatePalette(ncolors int32) *Palette {
 	return sdlCreatePalette(ncolors)
 }
