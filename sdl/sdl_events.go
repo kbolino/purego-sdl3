@@ -705,7 +705,7 @@ func HasEvents(minType, maxType EventType) bool {
 	return sdlHasEvents(minType, maxType)
 }
 
-// PeepEvents checks the event queue for messages and optionally return them.
+// PeepEvents checks the event queue for messages and optionally returns them.
 //
 // Example:
 //
