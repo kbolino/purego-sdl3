@@ -79,9 +79,9 @@ var (
 	// sdlCleanupTLS                            func()
 	// sdlClearAudioStream                      func(*AudioStream) bool
 	// sdlClearClipboardData                    func() bool
-	// sdlClearComposition                      func(*Window) bool
-	sdlClearError    func() bool
-	sdlClearProperty func(PropertiesID, string) bool
+	sdlClearComposition func(*Window) bool
+	sdlClearError       func() bool
+	sdlClearProperty    func(PropertiesID, string) bool
 	// sdlClearSurface                          func(*Surface, float32, float32, float32, float32) bool
 	// sdlClickTrayEntry                        func(*TrayEntry)
 	// sdlCloseAsyncIO                          func(*AsyncIO, bool, *AsyncIOQueue, unsafe.Pointer) bool
@@ -409,13 +409,13 @@ var (
 	// sdlGetJoystickTypeForID                  func(JoystickID) JoystickType
 	// sdlGetJoystickVendor                     func(*Joystick) uint16
 	// sdlGetJoystickVendorForID                func(JoystickID) uint16
-	// sdlGetKeyboardFocus                      func() *Window
-	// sdlGetKeyboardNameForID                  func(KeyboardID) string
-	// sdlGetKeyboards                          func(*int32) *KeyboardID
-	// sdlGetKeyboardState                      func(*int32) *bool
-	// sdlGetKeyFromName                        func(string) Keycode
-	// sdlGetKeyFromScancode                    func(Scancode, Keymod, bool) Keycode
-	sdlGetKeyName func(Keycode) string
+	sdlGetKeyboardFocus     func() *Window
+	sdlGetKeyboardNameForID func(KeyboardID) string
+	sdlGetKeyboards         func(*int32) *KeyboardID
+	sdlGetKeyboardState     func(*int32) *bool
+	sdlGetKeyFromName       func(string) Keycode
+	sdlGetKeyFromScancode   func(Scancode, Keymod, bool) Keycode
+	sdlGetKeyName           func(Keycode) string
 	// sdlGetLogOutputFunction                  func(*LogOutputFunction, *unsafe.Pointer)
 	// sdlGetLogPriority                        func(int32) LogPriority
 	// sdlGetMasksForPixelFormat                func(PixelFormat, *int32, *uint32, *uint32, *uint32, *uint32) bool
@@ -497,9 +497,9 @@ var (
 	// sdlGetRGB                                func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8)
 	// sdlGetRGBA                               func(uint32, *PixelFormatDetails, *Palette, *uint8, *uint8, *uint8, *uint8)
 	// sdlGetSandbox                            func() Sandbox
-	// sdlGetScancodeFromKey                    func(Keycode, *Keymod) Scancode
-	// sdlGetScancodeFromName                   func(string) Scancode
-	// sdlGetScancodeName                       func(Scancode) string
+	sdlGetScancodeFromKey  func(Keycode, *Keymod) Scancode
+	sdlGetScancodeFromName func(string) Scancode
+	sdlGetScancodeName     func(Scancode) string
 	// sdlGetSemaphoreValue                     func(*Semaphore) uint32
 	// sdlGetSensorData                         func(*Sensor, *float32, int32) bool
 	// sdlGetSensorFromID                       func(SensorID) *Sensor
@@ -529,7 +529,7 @@ var (
 	sdlGetSurfaceProperties func(*Surface) PropertiesID
 	// sdlGetSystemRAM                          func() int32
 	// sdlGetSystemTheme                        func() SystemTheme
-	// sdlGetTextInputArea                      func(*Window, *Rect, *int32) bool
+	sdlGetTextInputArea        func(*Window, *Rect, *int32) bool
 	sdlGetTextureAlphaMod      func(*Texture, *uint8) bool
 	sdlGetTextureAlphaModFloat func(*Texture, *float32) bool
 	sdlGetTextureBlendMode     func(*Texture, *BlendMode) bool
@@ -625,7 +625,7 @@ var (
 	// sdlHasExactlyOneBitSet32                 func(uint32) bool
 	// sdlHasGamepad                            func() bool
 	// sdlHasJoystick                           func() bool
-	// sdlHasKeyboard                           func() bool
+	sdlHasKeyboard func() bool
 	// sdlHasLASX                               func() bool
 	// sdlHasLSX                                func() bool
 	// sdlHasMMX                                func() bool
@@ -635,7 +635,7 @@ var (
 	sdlHasProperty              func(PropertiesID, string) bool
 	sdlHasRectIntersection      func(*Rect, *Rect) bool
 	sdlHasRectIntersectionFloat func(*FRect, *FRect) bool
-	// sdlHasScreenKeyboardSupport              func() bool
+	sdlHasScreenKeyboardSupport func() bool
 	// sdlHasSSE                                func() bool
 	// sdlHasSSE2                               func() bool
 	// sdlHasSSE3                               func() bool
@@ -890,9 +890,9 @@ var (
 	sdlRenderViewportSet           func(*Renderer) bool
 	// sdlReportAssertion                       func(*AssertData, string, string, int32) AssertState
 	// sdlResetAssertionReport                  func()
-	sdlResetHint  func(string) bool
-	sdlResetHints func()
-	// sdlResetKeyboard                         func()
+	sdlResetHint     func(string) bool
+	sdlResetHints    func()
+	sdlResetKeyboard func()
 	// sdlResetLogPriorities                    func()
 	sdlRestoreWindow func(*Window) bool
 	// sdlResumeAudioDevice                     func(AudioDeviceID) bool
@@ -914,7 +914,7 @@ var (
 	// sdlscalbn                                func(float64, int32) float64
 	// sdlscalbnf                               func(float32, int32) float32
 	// sdlScaleSurface                          func(*Surface, int32, int32, ScaleMode) *Surface
-	// sdlScreenKeyboardShown                   func(*Window) bool
+	sdlScreenKeyboardShown func(*Window) bool
 	// sdlScreenSaverEnabled                    func() bool
 	// sdlSeekIO                                func(*IOStream, int64, IOWhence) int64
 	// sdlSendGamepadEffect                     func(*Gamepad, unsafe.Pointer, int32) bool
@@ -981,7 +981,7 @@ var (
 	// sdlSetLogPriorityPrefix                  func(LogPriority, string) bool
 	// sdlSetMainReady                          func()
 	// sdlSetMemoryFunctions                    func(malloc_func, calloc_func, realloc_func, free_func) bool
-	// sdlSetModState                           func(Keymod)
+	sdlSetModState                   func(Keymod)
 	sdlSetNumberProperty             func(PropertiesID, string, int64) bool
 	sdlSetPaletteColors              func(*Palette, *Color, int32, int32) bool
 	sdlSetPointerProperty            func(PropertiesID, string, unsafe.Pointer) bool
@@ -997,8 +997,8 @@ var (
 	sdlSetRenderTarget              func(*Renderer, *Texture) bool
 	sdlSetRenderViewport            func(*Renderer, *Rect) bool
 	sdlSetRenderVSync               func(*Renderer, int32) bool
-	// sdlSetScancodeName                       func(Scancode, string) bool
-	sdlSetStringProperty func(PropertiesID, string, string) bool
+	sdlSetScancodeName              func(Scancode, string) bool
+	sdlSetStringProperty            func(PropertiesID, string, string) bool
 	// sdlSetSurfaceAlphaMod                    func(*Surface, uint8) bool
 	// sdlSetSurfaceBlendMode                   func(*Surface, BlendMode) bool
 	// sdlSetSurfaceClipRect                    func(*Surface, *Rect) bool
@@ -1007,7 +1007,7 @@ var (
 	sdlSetSurfaceColorspace func(*Surface, Colorspace) bool
 	sdlSetSurfacePalette    func(*Surface, *Palette) bool
 	// sdlSetSurfaceRLE                         func(*Surface, bool) bool
-	// sdlSetTextInputArea                      func(*Window, *Rect, int32) bool
+	sdlSetTextInputArea        func(*Window, *Rect, int32) bool
 	sdlSetTextureAlphaMod      uintptr
 	sdlSetTextureAlphaModFloat func(*Texture, float32) bool
 	sdlSetTextureBlendMode     func(*Texture, BlendMode) bool
@@ -1070,8 +1070,8 @@ var (
 	// sdlsqrtf                                 func(float32) float32
 	// sdlsrand                                 func(uint64)
 	// sdlsscanf                                func(string, string) int32
-	sdlStartTextInput func(*Window) bool
-	// sdlStartTextInputWithProperties          func(*Window, PropertiesID) bool
+	sdlStartTextInput               func(*Window) bool
+	sdlStartTextInputWithProperties func(*Window, PropertiesID) bool
 	// sdlStepBackUTF8                          func(string, **byte) uint32
 	// sdlStepUTF8                              func(**byte, *uint64) uint32
 	// sdlStopHapticEffect                      func(*Haptic, int32) bool
@@ -1116,7 +1116,7 @@ var (
 	// sdltan                                   func(float64) float64
 	// sdltanf                                  func(float32) float32
 	// sdlTellIO                                func(*IOStream) int64
-	// sdlTextInputActive                       func(*Window) bool
+	sdlTextInputActive func(*Window) bool
 	// sdlTimeFromWindows                       func(uint32, uint32) Time
 	// sdlTimeToDateTime                        func(Time, *DateTime, bool) bool
 	// sdlTimeToWindows                         func(Time, *uint32, *uint32)
@@ -1305,7 +1305,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlCleanupTLS, lib, "SDL_CleanupTLS")
 	// purego.RegisterLibFunc(&sdlClearAudioStream, lib, "SDL_ClearAudioStream")
 	// purego.RegisterLibFunc(&sdlClearClipboardData, lib, "SDL_ClearClipboardData")
-	// purego.RegisterLibFunc(&sdlClearComposition, lib, "SDL_ClearComposition")
+	purego.RegisterLibFunc(&sdlClearComposition, lib, "SDL_ClearComposition")
 	purego.RegisterLibFunc(&sdlClearError, lib, "SDL_ClearError")
 	purego.RegisterLibFunc(&sdlClearProperty, lib, "SDL_ClearProperty")
 	// purego.RegisterLibFunc(&sdlClearSurface, lib, "SDL_ClearSurface")
@@ -1635,12 +1635,12 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetJoystickTypeForID, lib, "SDL_GetJoystickTypeForID")
 	// purego.RegisterLibFunc(&sdlGetJoystickVendor, lib, "SDL_GetJoystickVendor")
 	// purego.RegisterLibFunc(&sdlGetJoystickVendorForID, lib, "SDL_GetJoystickVendorForID")
-	// purego.RegisterLibFunc(&sdlGetKeyboardFocus, lib, "SDL_GetKeyboardFocus")
-	// purego.RegisterLibFunc(&sdlGetKeyboardNameForID, lib, "SDL_GetKeyboardNameForID")
-	// purego.RegisterLibFunc(&sdlGetKeyboards, lib, "SDL_GetKeyboards")
-	// purego.RegisterLibFunc(&sdlGetKeyboardState, lib, "SDL_GetKeyboardState")
-	// purego.RegisterLibFunc(&sdlGetKeyFromName, lib, "SDL_GetKeyFromName")
-	// purego.RegisterLibFunc(&sdlGetKeyFromScancode, lib, "SDL_GetKeyFromScancode")
+	purego.RegisterLibFunc(&sdlGetKeyboardFocus, lib, "SDL_GetKeyboardFocus")
+	purego.RegisterLibFunc(&sdlGetKeyboardNameForID, lib, "SDL_GetKeyboardNameForID")
+	purego.RegisterLibFunc(&sdlGetKeyboards, lib, "SDL_GetKeyboards")
+	purego.RegisterLibFunc(&sdlGetKeyboardState, lib, "SDL_GetKeyboardState")
+	purego.RegisterLibFunc(&sdlGetKeyFromName, lib, "SDL_GetKeyFromName")
+	purego.RegisterLibFunc(&sdlGetKeyFromScancode, lib, "SDL_GetKeyFromScancode")
 	purego.RegisterLibFunc(&sdlGetKeyName, lib, "SDL_GetKeyName")
 	// purego.RegisterLibFunc(&sdlGetLogOutputFunction, lib, "SDL_GetLogOutputFunction")
 	// purego.RegisterLibFunc(&sdlGetLogPriority, lib, "SDL_GetLogPriority")
@@ -1723,9 +1723,9 @@ func init() {
 	// purego.RegisterLibFunc(&sdlGetRGB, lib, "SDL_GetRGB")
 	// purego.RegisterLibFunc(&sdlGetRGBA, lib, "SDL_GetRGBA")
 	// purego.RegisterLibFunc(&sdlGetSandbox, lib, "SDL_GetSandbox")
-	// purego.RegisterLibFunc(&sdlGetScancodeFromKey, lib, "SDL_GetScancodeFromKey")
-	// purego.RegisterLibFunc(&sdlGetScancodeFromName, lib, "SDL_GetScancodeFromName")
-	// purego.RegisterLibFunc(&sdlGetScancodeName, lib, "SDL_GetScancodeName")
+	purego.RegisterLibFunc(&sdlGetScancodeFromKey, lib, "SDL_GetScancodeFromKey")
+	purego.RegisterLibFunc(&sdlGetScancodeFromName, lib, "SDL_GetScancodeFromName")
+	purego.RegisterLibFunc(&sdlGetScancodeName, lib, "SDL_GetScancodeName")
 	// purego.RegisterLibFunc(&sdlGetSemaphoreValue, lib, "SDL_GetSemaphoreValue")
 	// purego.RegisterLibFunc(&sdlGetSensorData, lib, "SDL_GetSensorData")
 	// purego.RegisterLibFunc(&sdlGetSensorFromID, lib, "SDL_GetSensorFromID")
@@ -1755,7 +1755,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlGetSurfaceProperties, lib, "SDL_GetSurfaceProperties")
 	// purego.RegisterLibFunc(&sdlGetSystemRAM, lib, "SDL_GetSystemRAM")
 	// purego.RegisterLibFunc(&sdlGetSystemTheme, lib, "SDL_GetSystemTheme")
-	// purego.RegisterLibFunc(&sdlGetTextInputArea, lib, "SDL_GetTextInputArea")
+	purego.RegisterLibFunc(&sdlGetTextInputArea, lib, "SDL_GetTextInputArea")
 	purego.RegisterLibFunc(&sdlGetTextureAlphaMod, lib, "SDL_GetTextureAlphaMod")
 	purego.RegisterLibFunc(&sdlGetTextureAlphaModFloat, lib, "SDL_GetTextureAlphaModFloat")
 	purego.RegisterLibFunc(&sdlGetTextureBlendMode, lib, "SDL_GetTextureBlendMode")
@@ -1851,7 +1851,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlHasExactlyOneBitSet32, lib, "SDL_HasExactlyOneBitSet32")
 	// purego.RegisterLibFunc(&sdlHasGamepad, lib, "SDL_HasGamepad")
 	// purego.RegisterLibFunc(&sdlHasJoystick, lib, "SDL_HasJoystick")
-	// purego.RegisterLibFunc(&sdlHasKeyboard, lib, "SDL_HasKeyboard")
+	purego.RegisterLibFunc(&sdlHasKeyboard, lib, "SDL_HasKeyboard")
 	// purego.RegisterLibFunc(&sdlHasLASX, lib, "SDL_HasLASX")
 	// purego.RegisterLibFunc(&sdlHasLSX, lib, "SDL_HasLSX")
 	// purego.RegisterLibFunc(&sdlHasMMX, lib, "SDL_HasMMX")
@@ -1861,7 +1861,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlHasProperty, lib, "SDL_HasProperty")
 	purego.RegisterLibFunc(&sdlHasRectIntersection, lib, "SDL_HasRectIntersection")
 	purego.RegisterLibFunc(&sdlHasRectIntersectionFloat, lib, "SDL_HasRectIntersectionFloat")
-	// purego.RegisterLibFunc(&sdlHasScreenKeyboardSupport, lib, "SDL_HasScreenKeyboardSupport")
+	purego.RegisterLibFunc(&sdlHasScreenKeyboardSupport, lib, "SDL_HasScreenKeyboardSupport")
 	// purego.RegisterLibFunc(&sdlHasSSE, lib, "SDL_HasSSE")
 	// purego.RegisterLibFunc(&sdlHasSSE2, lib, "SDL_HasSSE2")
 	// purego.RegisterLibFunc(&sdlHasSSE3, lib, "SDL_HasSSE3")
@@ -2118,7 +2118,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlResetAssertionReport, lib, "SDL_ResetAssertionReport")
 	purego.RegisterLibFunc(&sdlResetHint, lib, "SDL_ResetHint")
 	purego.RegisterLibFunc(&sdlResetHints, lib, "SDL_ResetHints")
-	// purego.RegisterLibFunc(&sdlResetKeyboard, lib, "SDL_ResetKeyboard")
+	purego.RegisterLibFunc(&sdlResetKeyboard, lib, "SDL_ResetKeyboard")
 	// purego.RegisterLibFunc(&sdlResetLogPriorities, lib, "SDL_ResetLogPriorities")
 	purego.RegisterLibFunc(&sdlRestoreWindow, lib, "SDL_RestoreWindow")
 	// purego.RegisterLibFunc(&sdlResumeAudioDevice, lib, "SDL_ResumeAudioDevice")
@@ -2140,7 +2140,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlscalbn, lib, "SDL_scalbn")
 	// purego.RegisterLibFunc(&sdlscalbnf, lib, "SDL_scalbnf")
 	// purego.RegisterLibFunc(&sdlScaleSurface, lib, "SDL_ScaleSurface")
-	// purego.RegisterLibFunc(&sdlScreenKeyboardShown, lib, "SDL_ScreenKeyboardShown")
+	purego.RegisterLibFunc(&sdlScreenKeyboardShown, lib, "SDL_ScreenKeyboardShown")
 	// purego.RegisterLibFunc(&sdlScreenSaverEnabled, lib, "SDL_ScreenSaverEnabled")
 	// purego.RegisterLibFunc(&sdlSeekIO, lib, "SDL_SeekIO")
 	// purego.RegisterLibFunc(&sdlSendGamepadEffect, lib, "SDL_SendGamepadEffect")
@@ -2207,7 +2207,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetLogPriorityPrefix, lib, "SDL_SetLogPriorityPrefix")
 	// purego.RegisterLibFunc(&sdlSetMainReady, lib, "SDL_SetMainReady")
 	// purego.RegisterLibFunc(&sdlSetMemoryFunctions, lib, "SDL_SetMemoryFunctions")
-	// purego.RegisterLibFunc(&sdlSetModState, lib, "SDL_SetModState")
+	purego.RegisterLibFunc(&sdlSetModState, lib, "SDL_SetModState")
 	purego.RegisterLibFunc(&sdlSetNumberProperty, lib, "SDL_SetNumberProperty")
 	purego.RegisterLibFunc(&sdlSetPaletteColors, lib, "SDL_SetPaletteColors")
 	purego.RegisterLibFunc(&sdlSetPointerProperty, lib, "SDL_SetPointerProperty")
@@ -2223,7 +2223,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlSetRenderTarget, lib, "SDL_SetRenderTarget")
 	purego.RegisterLibFunc(&sdlSetRenderViewport, lib, "SDL_SetRenderViewport")
 	purego.RegisterLibFunc(&sdlSetRenderVSync, lib, "SDL_SetRenderVSync")
-	// purego.RegisterLibFunc(&sdlSetScancodeName, lib, "SDL_SetScancodeName")
+	purego.RegisterLibFunc(&sdlSetScancodeName, lib, "SDL_SetScancodeName")
 	purego.RegisterLibFunc(&sdlSetStringProperty, lib, "SDL_SetStringProperty")
 	// purego.RegisterLibFunc(&sdlSetSurfaceAlphaMod, lib, "SDL_SetSurfaceAlphaMod")
 	// purego.RegisterLibFunc(&sdlSetSurfaceBlendMode, lib, "SDL_SetSurfaceBlendMode")
@@ -2233,7 +2233,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlSetSurfaceColorspace, lib, "SDL_SetSurfaceColorspace")
 	purego.RegisterLibFunc(&sdlSetSurfacePalette, lib, "SDL_SetSurfacePalette")
 	// purego.RegisterLibFunc(&sdlSetSurfaceRLE, lib, "SDL_SetSurfaceRLE")
-	// purego.RegisterLibFunc(&sdlSetTextInputArea, lib, "SDL_SetTextInputArea")
+	purego.RegisterLibFunc(&sdlSetTextInputArea, lib, "SDL_SetTextInputArea")
 	sdlSetTextureAlphaMod = shared.Get(lib, "SDL_SetTextureAlphaMod")
 	purego.RegisterLibFunc(&sdlSetTextureAlphaModFloat, lib, "SDL_SetTextureAlphaModFloat")
 	purego.RegisterLibFunc(&sdlSetTextureBlendMode, lib, "SDL_SetTextureBlendMode")
@@ -2297,7 +2297,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlsrand, lib, "SDL_srand")
 	// purego.RegisterLibFunc(&sdlsscanf, lib, "SDL_sscanf")
 	purego.RegisterLibFunc(&sdlStartTextInput, lib, "SDL_StartTextInput")
-	// purego.RegisterLibFunc(&sdlStartTextInputWithProperties, lib, "SDL_StartTextInputWithProperties")
+	purego.RegisterLibFunc(&sdlStartTextInputWithProperties, lib, "SDL_StartTextInputWithProperties")
 	// purego.RegisterLibFunc(&sdlStepBackUTF8, lib, "SDL_StepBackUTF8")
 	// purego.RegisterLibFunc(&sdlStepUTF8, lib, "SDL_StepUTF8")
 	// purego.RegisterLibFunc(&sdlStopHapticEffect, lib, "SDL_StopHapticEffect")
@@ -2342,7 +2342,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdltan, lib, "SDL_tan")
 	// purego.RegisterLibFunc(&sdltanf, lib, "SDL_tanf")
 	// purego.RegisterLibFunc(&sdlTellIO, lib, "SDL_TellIO")
-	// purego.RegisterLibFunc(&sdlTextInputActive, lib, "SDL_TextInputActive")
+	purego.RegisterLibFunc(&sdlTextInputActive, lib, "SDL_TextInputActive")
 	// purego.RegisterLibFunc(&sdlTimeFromWindows, lib, "SDL_TimeFromWindows")
 	// purego.RegisterLibFunc(&sdlTimeToDateTime, lib, "SDL_TimeToDateTime")
 	// purego.RegisterLibFunc(&sdlTimeToWindows, lib, "SDL_TimeToWindows")
