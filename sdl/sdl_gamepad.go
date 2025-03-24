@@ -86,6 +86,8 @@ const (
 	GamepadTypeCount
 )
 
+type Gamepad struct{}
+
 // func AddGamepadMapping(mapping string) int32 {
 //	return sdlAddGamepadMapping(mapping)
 // }
