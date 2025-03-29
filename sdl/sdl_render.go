@@ -164,9 +164,9 @@ func RenderPresent(renderer *Renderer) bool {
 }
 
 // RenderClear clears the current rendering target with the drawing color.
-func RenderClear(renderer *Renderer) bool {
+func RenderClear(renderer *Renderer) error {
 	ret, _, _ := purego.SyscallN(sdlRenderClear, uintptr(unsafe.Pointer(renderer)))
-	return byte(ret) != 0
+	return checkBool(byte(ret) != 0)
 }
 
 // DestroyRenderer destroys the rendering context for a window and free all associated textures.
