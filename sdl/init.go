@@ -920,8 +920,8 @@ var (
 	// sdlSendGamepadEffect                     func(*Gamepad, unsafe.Pointer, int32) bool
 	// sdlSendJoystickEffect                    func(*Joystick, unsafe.Pointer, int32) bool
 	// sdlSendJoystickVirtualSensorData         func(*Joystick, SensorType, uint64, *float32, int32) bool
-	// sdlSetAppMetadata                        func(string, string, string) bool
-	// sdlSetAppMetadataProperty                func(string, string) bool
+	sdlSetAppMetadata         func(string, string, string) bool
+	sdlSetAppMetadataProperty func(string, string) bool
 	// sdlSetAssertionHandler                   func(AssertionHandler, unsafe.Pointer)
 	// sdlSetAtomicInt                          func(*AtomicInt, int32) int32
 	// sdlSetAtomicPointer                      func(*unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2146,8 +2146,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSendGamepadEffect, lib, "SDL_SendGamepadEffect")
 	// purego.RegisterLibFunc(&sdlSendJoystickEffect, lib, "SDL_SendJoystickEffect")
 	// purego.RegisterLibFunc(&sdlSendJoystickVirtualSensorData, lib, "SDL_SendJoystickVirtualSensorData")
-	// purego.RegisterLibFunc(&sdlSetAppMetadata, lib, "SDL_SetAppMetadata")
-	// purego.RegisterLibFunc(&sdlSetAppMetadataProperty, lib, "SDL_SetAppMetadataProperty")
+	purego.RegisterLibFunc(&sdlSetAppMetadata, lib, "SDL_SetAppMetadata")
+	purego.RegisterLibFunc(&sdlSetAppMetadataProperty, lib, "SDL_SetAppMetadataProperty")
 	// purego.RegisterLibFunc(&sdlSetAssertionHandler, lib, "SDL_SetAssertionHandler")
 	// purego.RegisterLibFunc(&sdlSetAtomicInt, lib, "SDL_SetAtomicInt")
 	// purego.RegisterLibFunc(&sdlSetAtomicPointer, lib, "SDL_SetAtomicPointer")

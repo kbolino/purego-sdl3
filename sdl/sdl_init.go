@@ -59,13 +59,13 @@ func IsMainThread() bool {
 //	return sdlRunOnMainThread(callback, userdata, wait_complete)
 // }
 
-// func SetAppMetadata(appname string, appversion string, appidentifier string) bool {
-//	return sdlSetAppMetadata(appname, appversion, appidentifier)
-// }
+func SetAppMetadata(appname string, appversion string, appidentifier string) error {
+	return checkBool(sdlSetAppMetadata(appname, appversion, appidentifier))
+}
 
-// func SetAppMetadataProperty(name string, value string) bool {
-//	return sdlSetAppMetadataProperty(name, value)
-// }
+func SetAppMetadataProperty(name string, value string) error {
+	return checkBool(sdlSetAppMetadataProperty(name, value))
+}
 
 // func WasInit(flags InitFlags) InitFlags {
 //	return sdlWasInit(flags)
