@@ -242,8 +242,9 @@ func FlushRenderer(renderer *Renderer) bool {
 	return byte(ret) != 0
 }
 
-func GetCurrentRenderOutputSize(renderer *Renderer, w *int32, h *int32) bool {
-	return sdlGetCurrentRenderOutputSize(renderer, w, h)
+func GetCurrentRenderOutputSize(renderer *Renderer) (w int32, h int32, err error) {
+	err = checkBool(sdlGetCurrentRenderOutputSize(renderer, &w, &h))
+	return
 }
 
 func GetNumRenderDrivers() int32 {
