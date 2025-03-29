@@ -890,11 +890,11 @@ var (
 	sdlRenderViewportSet           func(*Renderer) bool
 	// sdlReportAssertion                       func(*AssertData, string, string, int32) AssertState
 	// sdlResetAssertionReport                  func()
-	sdlResetHint     func(string) bool
-	sdlResetHints    func()
-	sdlResetKeyboard func()
-	// sdlResetLogPriorities                    func()
-	sdlRestoreWindow func(*Window) bool
+	sdlResetHint          func(string) bool
+	sdlResetHints         func()
+	sdlResetKeyboard      func()
+	sdlResetLogPriorities func()
+	sdlRestoreWindow      func(*Window) bool
 	// sdlResumeAudioDevice                     func(AudioDeviceID) bool
 	// sdlResumeAudioStreamDevice               func(*AudioStream) bool
 	// sdlResumeHaptic                          func(*Haptic) bool
@@ -976,8 +976,8 @@ var (
 	// sdlSetLinuxThreadPriority                func(int64, int32) bool
 	// sdlSetLinuxThreadPriorityAndPolicy       func(int64, int32, int32) bool
 	// sdlSetLogOutputFunction                  func(LogOutputFunction, unsafe.Pointer)
-	// sdlSetLogPriorities                      func(LogPriority)
-	// sdlSetLogPriority                        func(int32, LogPriority)
+	sdlSetLogPriorities func(LogPriority)
+	sdlSetLogPriority   func(int32, LogPriority)
 	// sdlSetLogPriorityPrefix                  func(LogPriority, string) bool
 	// sdlSetMainReady                          func()
 	// sdlSetMemoryFunctions                    func(malloc_func, calloc_func, realloc_func, free_func) bool
@@ -2119,7 +2119,7 @@ func init() {
 	purego.RegisterLibFunc(&sdlResetHint, lib, "SDL_ResetHint")
 	purego.RegisterLibFunc(&sdlResetHints, lib, "SDL_ResetHints")
 	purego.RegisterLibFunc(&sdlResetKeyboard, lib, "SDL_ResetKeyboard")
-	// purego.RegisterLibFunc(&sdlResetLogPriorities, lib, "SDL_ResetLogPriorities")
+	purego.RegisterLibFunc(&sdlResetLogPriorities, lib, "SDL_ResetLogPriorities")
 	purego.RegisterLibFunc(&sdlRestoreWindow, lib, "SDL_RestoreWindow")
 	// purego.RegisterLibFunc(&sdlResumeAudioDevice, lib, "SDL_ResumeAudioDevice")
 	// purego.RegisterLibFunc(&sdlResumeAudioStreamDevice, lib, "SDL_ResumeAudioStreamDevice")
@@ -2202,8 +2202,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSetLinuxThreadPriority, lib, "SDL_SetLinuxThreadPriority")
 	// purego.RegisterLibFunc(&sdlSetLinuxThreadPriorityAndPolicy, lib, "SDL_SetLinuxThreadPriorityAndPolicy")
 	// purego.RegisterLibFunc(&sdlSetLogOutputFunction, lib, "SDL_SetLogOutputFunction")
-	// purego.RegisterLibFunc(&sdlSetLogPriorities, lib, "SDL_SetLogPriorities")
-	// purego.RegisterLibFunc(&sdlSetLogPriority, lib, "SDL_SetLogPriority")
+	purego.RegisterLibFunc(&sdlSetLogPriorities, lib, "SDL_SetLogPriorities")
+	purego.RegisterLibFunc(&sdlSetLogPriority, lib, "SDL_SetLogPriority")
 	// purego.RegisterLibFunc(&sdlSetLogPriorityPrefix, lib, "SDL_SetLogPriorityPrefix")
 	// purego.RegisterLibFunc(&sdlSetMainReady, lib, "SDL_SetMainReady")
 	// purego.RegisterLibFunc(&sdlSetMemoryFunctions, lib, "SDL_SetMemoryFunctions")
