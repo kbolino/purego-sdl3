@@ -266,8 +266,8 @@ func NewHintCallback(callback func(userdata unsafe.Pointer, name, oldValue, newV
 }
 
 // SetHint sets a hint with normal priority.
-func SetHint(name, value string) bool {
-	return sdlSetHint(name, value)
+func SetHint(name, value string) error {
+	return checkBool(sdlSetHint(name, value))
 }
 
 func AddHintCallback(name string, callback HintCallback, userdata unsafe.Pointer) bool {

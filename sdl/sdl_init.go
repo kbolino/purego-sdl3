@@ -22,8 +22,8 @@ const (
 )
 
 // Init initializes the SDL library.
-func Init(flags InitFlags) bool {
-	return sdlInit(flags)
+func Init(flags InitFlags) error {
+	return checkBool(sdlInit(flags))
 }
 
 // InitSubSystem is a compatibility function to initialize the SDL library.

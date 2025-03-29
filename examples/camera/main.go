@@ -4,8 +4,8 @@ import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
 	defer sdl.Quit()
-	if !sdl.Init(sdl.InitVideo | sdl.InitCamera) {
-		panic(sdl.GetError())
+	if err := sdl.Init(sdl.InitVideo | sdl.InitCamera); err != nil {
+		panic(err)
 	}
 
 	var window *sdl.Window

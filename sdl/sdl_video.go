@@ -119,8 +119,8 @@ func DestroyWindow(window *Window) {
 //	return sdlCreatePopupWindow(parent, offset_x, offset_y, w, h, flags)
 // }
 
-func CreateWindow(title string, w int32, h int32, flags WindowFlags) *Window {
-	return sdlCreateWindow(title, w, h, flags)
+func CreateWindow(title string, w int32, h int32, flags WindowFlags) (*Window, error) {
+	return checkPtr(sdlCreateWindow(title, w, h, flags))
 }
 
 // func CreateWindowWithProperties(props PropertiesID) *Window {

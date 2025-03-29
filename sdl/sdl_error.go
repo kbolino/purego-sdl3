@@ -28,3 +28,30 @@ func SetError(format string, a ...any) bool {
 func InvalidParamError(param string) bool {
 	return SetError("Parameter '%s' is invalid", param)
 }
+
+type Err struct {
+	msg string
+}
+
+func (e Err) Error() string {
+	return "SDL error: " + e.msg
+}
+
+func checkBool(b bool) error {
+	if !b {
+		return getErr()
+	}
+	return nil
+}
+
+func checkPtr[T any](p *T) (*T, error) {
+	if p == nil {
+		return nil, getErr()
+	} else {
+		return p, nil
+	}
+}
+
+func getErr() Err {
+	return Err{msg: GetError()}
+}

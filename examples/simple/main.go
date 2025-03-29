@@ -3,13 +3,13 @@ package main
 import "github.com/jupiterrider/purego-sdl3/sdl"
 
 func main() {
-	if !sdl.SetHint(sdl.HintRenderVSync, "1") {
-		panic(sdl.GetError())
+	if err := sdl.SetHint(sdl.HintRenderVSync, "1"); err != nil {
+		panic(err)
 	}
 
 	defer sdl.Quit()
-	if !sdl.Init(sdl.InitVideo) {
-		panic(sdl.GetError())
+	if err := sdl.Init(sdl.InitVideo); err != nil {
+		panic(err)
 	}
 
 	var window *sdl.Window
