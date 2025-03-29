@@ -175,15 +175,15 @@ func DestroyRenderer(renderer *Renderer) {
 }
 
 // RenderRect draws a rectangle on the current rendering target at subpixel precision.
-func RenderRect(renderer *Renderer, rect *FRect) bool {
+func RenderRect(renderer *Renderer, rect *FRect) error {
 	ret, _, _ := purego.SyscallN(sdlRenderRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
-	return byte(ret) != 0
+	return checkBool(byte(ret) != 0)
 }
 
 // RenderFillRect fills a rectangle on the current rendering target with the drawing color at subpixel precision.
-func RenderFillRect(renderer *Renderer, rect *FRect) bool {
+func RenderFillRect(renderer *Renderer, rect *FRect) error {
 	ret, _, _ := purego.SyscallN(sdlRenderFillRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
-	return byte(ret) != 0
+	return checkBool(byte(ret) != 0)
 }
 
 // RenderDebugText draws debug text to a [Renderer].
