@@ -158,9 +158,9 @@ func SetRenderDrawColor(renderer *Renderer, r, g, b, a uint8) error {
 }
 
 // RenderPresent updates the screen with any rendering performed since the previous call.
-func RenderPresent(renderer *Renderer) bool {
+func RenderPresent(renderer *Renderer) error {
 	ret, _, _ := purego.SyscallN(sdlRenderPresent, uintptr(unsafe.Pointer(renderer)))
-	return byte(ret) != 0
+	return checkBool(byte(ret) != 0)
 }
 
 // RenderClear clears the current rendering target with the drawing color.
