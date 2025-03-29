@@ -144,8 +144,11 @@ type Vertex struct {
 }
 
 // CreateWindowAndRenderer creates a window and default renderer.
-func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlags, window **Window, renderer **Renderer) bool {
-	return sdlCreateWindowAndRenderer(title, width, height, flags, window, renderer)
+func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlags) (*Window, *Renderer, error) {
+	var window *Window
+	var renderer *Renderer
+	err := checkBool(sdlCreateWindowAndRenderer(title, width, height, flags, &window, &renderer))
+	return window, renderer, err
 }
 
 // SetRenderDrawColor sets the color used for drawing operations.
@@ -214,8 +217,8 @@ func ConvertEventToRenderCoordinates(renderer *Renderer, event *Event) bool {
 
 // CreateRenderer creates a 2D rendering context for a window.
 // The name parameter can be one driver, a comma-separated list of drivers or "" to let SDL choose one.
-func CreateRenderer(window *Window, name string) *Renderer {
-	return sdlCreateRenderer(window, convert.ToBytePtrNullable(name))
+func CreateRenderer(window *Window, name string) (*Renderer, error) {
+	return checkPtr(sdlCreateRenderer(window, convert.ToBytePtrNullable(name)))
 }
 
 func CreateRendererWithProperties(props PropertiesID) *Renderer {

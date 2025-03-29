@@ -12,10 +12,9 @@ func main() {
 		panic(err)
 	}
 
-	var window *sdl.Window
-	var renderer *sdl.Renderer
-	if !sdl.CreateWindowAndRenderer("Hello, World!", 1280, 720, sdl.WindowResizable, &window, &renderer) {
-		panic(sdl.GetError())
+	window, renderer, err := sdl.CreateWindowAndRenderer("Hello, World!", 1280, 720, sdl.WindowResizable)
+	if err != nil {
+		panic(err)
 	}
 	defer sdl.DestroyRenderer(renderer)
 	defer sdl.DestroyWindow(window)

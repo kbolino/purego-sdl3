@@ -8,10 +8,9 @@ func main() {
 		panic(err)
 	}
 
-	var window *sdl.Window
-	var renderer *sdl.Renderer
-	if !sdl.CreateWindowAndRenderer("examples/camera", 640, 480, 0, &window, &renderer) {
-		panic(sdl.GetError())
+	window, renderer, err := sdl.CreateWindowAndRenderer("examples/camera", 640, 480, 0)
+	if err != nil {
+		panic(err)
 	}
 	defer sdl.DestroyRenderer(renderer)
 	defer sdl.DestroyWindow(window)
