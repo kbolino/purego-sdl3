@@ -152,9 +152,9 @@ func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlag
 }
 
 // SetRenderDrawColor sets the color used for drawing operations.
-func SetRenderDrawColor(renderer *Renderer, r, g, b, a uint8) bool {
+func SetRenderDrawColor(renderer *Renderer, r, g, b, a uint8) error {
 	ret, _, _ := purego.SyscallN(sdlSetRenderDrawColor, uintptr(unsafe.Pointer(renderer)), uintptr(r), uintptr(g), uintptr(b), uintptr(a))
-	return byte(ret) != 0
+	return checkBool(byte(ret) != 0)
 }
 
 // RenderPresent updates the screen with any rendering performed since the previous call.
@@ -262,12 +262,14 @@ func GetRenderDrawBlendMode(renderer *Renderer, blendMode *BlendMode) bool {
 	return sdlGetRenderDrawBlendMode(renderer, blendMode)
 }
 
-func GetRenderDrawColor(renderer *Renderer, r *uint8, g *uint8, b *uint8, a *uint8) bool {
-	return sdlGetRenderDrawColor(renderer, r, g, b, a)
+func GetRenderDrawColor(renderer *Renderer) (r, g, b, a uint8, err error) {
+	err = checkBool(sdlGetRenderDrawColor(renderer, &r, &g, &b, &a))
+	return
 }
 
-func GetRenderDrawColorFloat(renderer *Renderer, r *float32, g *float32, b *float32, a *float32) bool {
-	return sdlGetRenderDrawColorFloat(renderer, r, g, b, a)
+func GetRenderDrawColorFloat(renderer *Renderer) (r, g, b, a float32, err error) {
+	err = checkBool(sdlGetRenderDrawColorFloat(renderer, &r, &g, &b, &a))
+	return
 }
 
 func GetRenderDriver(index int32) string {
@@ -526,8 +528,8 @@ func SetRenderDrawBlendMode(renderer *Renderer, blendMode BlendMode) bool {
 	return sdlSetRenderDrawBlendMode(renderer, blendMode)
 }
 
-func SetRenderDrawColorFloat(renderer *Renderer, r float32, g float32, b float32, a float32) bool {
-	return sdlSetRenderDrawColorFloat(renderer, r, g, b, a)
+func SetRenderDrawColorFloat(renderer *Renderer, r float32, g float32, b float32, a float32) error {
+	return checkBool(sdlSetRenderDrawColorFloat(renderer, r, g, b, a))
 }
 
 func SetRenderLogicalPresentation(renderer *Renderer, w int32, h int32, mode RendererLogicalPresentation) bool {
