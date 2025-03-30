@@ -1,7 +1,6 @@
 package sdl
 
 import (
-	"fmt"
 	"unsafe"
 
 	"github.com/ebitengine/purego"
@@ -187,8 +186,8 @@ func RenderFillRect(renderer *Renderer, rect *FRect) error {
 }
 
 // RenderDebugText draws debug text to a [Renderer].
-func RenderDebugText(renderer *Renderer, x, y float32, str string) bool {
-	return sdlRenderDebugText(renderer, x, y, str)
+func RenderDebugText(renderer *Renderer, x, y float32, str string) error {
+	return checkBool(sdlRenderDebugText(renderer, x, y, str))
 }
 
 // CreateTextureFromSurface creates a texture from an existing surface.
@@ -390,9 +389,10 @@ func RenderCoordinatesToWindow(renderer *Renderer, x float32, y float32, windowX
 	return sdlRenderCoordinatesToWindow(renderer, x, y, windowX, windowY)
 }
 
-func RenderDebugTextFormat(renderer *Renderer, x float32, y float32, format string, a ...any) bool {
-	return sdlRenderDebugTextFormat(renderer, x, y, fmt.Sprintf(format, a...))
-}
+// unsafe: if fmt.Sprintf(format, a...) contains % specifiers, they will be interpreted by SDL
+// func RenderDebugTextFormat(renderer *Renderer, x float32, y float32, format string, a ...any) bool {
+// 	return sdlRenderDebugTextFormat(renderer, x, y, fmt.Sprintf(format, a...))
+// }
 
 func RenderFillRects(renderer *Renderer, rects ...FRect) bool {
 	count := len(rects)
