@@ -93,22 +93,22 @@ func LogError(category LogCategory, format string, a ...any) {
 //	sdlLogWarn(category, fmt)
 // }
 
-// func ResetLogPriorities()  {
-//	sdlResetLogPriorities()
-// }
+func ResetLogPriorities() {
+	sdlResetLogPriorities()
+}
 
 // func SetLogOutputFunction(callback LogOutputFunction, userdata unsafe.Pointer)  {
 //	sdlSetLogOutputFunction(callback, userdata)
 // }
 
-// func SetLogPriorities(priority LogPriority)  {
-//	sdlSetLogPriorities(priority)
-// }
+func SetLogPriorities(priority LogPriority) {
+	sdlSetLogPriorities(priority)
+}
 
-// func SetLogPriority(category int32, priority LogPriority)  {
-//	sdlSetLogPriority(category, priority)
-// }
+func SetLogPriority(category int32, priority LogPriority) {
+	sdlSetLogPriority(category, priority)
+}
 
-// func SetLogPriorityPrefix(priority LogPriority, prefix string) bool {
-//	return sdlSetLogPriorityPrefix(priority, prefix)
-// }
+func SetLogPriorityPrefix(priority LogPriority, prefix string) bool {
+	return sdlSetLogPriorityPrefix(priority, prefix)
+}
