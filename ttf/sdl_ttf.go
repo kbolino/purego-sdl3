@@ -148,8 +148,8 @@ func GetFreeTypeVersion() (major, minor, patch int32) {
 }
 
 // Init initializes SDL_ttf.
-func Init() bool {
-	return ttfInit()
+func Init() error {
+	return sdl.CheckBool(ttfInit())
 }
 
 // GetHarfBuzzVersion queries the version of the HarfBuzz library in use.

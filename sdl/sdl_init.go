@@ -23,7 +23,7 @@ const (
 
 // Init initializes the SDL library.
 func Init(flags InitFlags) error {
-	return checkBool(sdlInit(flags))
+	return CheckBool(sdlInit(flags))
 }
 
 // InitSubSystem is a compatibility function to initialize the SDL library.
@@ -60,11 +60,11 @@ func IsMainThread() bool {
 // }
 
 func SetAppMetadata(appname string, appversion string, appidentifier string) error {
-	return checkBool(sdlSetAppMetadata(appname, appversion, appidentifier))
+	return CheckBool(sdlSetAppMetadata(appname, appversion, appidentifier))
 }
 
 func SetAppMetadataProperty(name string, value string) error {
-	return checkBool(sdlSetAppMetadataProperty(name, value))
+	return CheckBool(sdlSetAppMetadataProperty(name, value))
 }
 
 // func WasInit(flags InitFlags) InitFlags {

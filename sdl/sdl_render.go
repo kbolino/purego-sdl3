@@ -146,26 +146,26 @@ type Vertex struct {
 func CreateWindowAndRenderer(title string, width, height int32, flags WindowFlags) (*Window, *Renderer, error) {
 	var window *Window
 	var renderer *Renderer
-	err := checkBool(sdlCreateWindowAndRenderer(title, width, height, flags, &window, &renderer))
+	err := CheckBool(sdlCreateWindowAndRenderer(title, width, height, flags, &window, &renderer))
 	return window, renderer, err
 }
 
 // SetRenderDrawColor sets the color used for drawing operations.
 func SetRenderDrawColor(renderer *Renderer, r, g, b, a uint8) error {
 	ret, _, _ := purego.SyscallN(sdlSetRenderDrawColor, uintptr(unsafe.Pointer(renderer)), uintptr(r), uintptr(g), uintptr(b), uintptr(a))
-	return checkBool(byte(ret) != 0)
+	return CheckBool(byte(ret) != 0)
 }
 
 // RenderPresent updates the screen with any rendering performed since the previous call.
 func RenderPresent(renderer *Renderer) error {
 	ret, _, _ := purego.SyscallN(sdlRenderPresent, uintptr(unsafe.Pointer(renderer)))
-	return checkBool(byte(ret) != 0)
+	return CheckBool(byte(ret) != 0)
 }
 
 // RenderClear clears the current rendering target with the drawing color.
 func RenderClear(renderer *Renderer) error {
 	ret, _, _ := purego.SyscallN(sdlRenderClear, uintptr(unsafe.Pointer(renderer)))
-	return checkBool(byte(ret) != 0)
+	return CheckBool(byte(ret) != 0)
 }
 
 // DestroyRenderer destroys the rendering context for a window and free all associated textures.
@@ -176,18 +176,18 @@ func DestroyRenderer(renderer *Renderer) {
 // RenderRect draws a rectangle on the current rendering target at subpixel precision.
 func RenderRect(renderer *Renderer, rect *FRect) error {
 	ret, _, _ := purego.SyscallN(sdlRenderRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
-	return checkBool(byte(ret) != 0)
+	return CheckBool(byte(ret) != 0)
 }
 
 // RenderFillRect fills a rectangle on the current rendering target with the drawing color at subpixel precision.
 func RenderFillRect(renderer *Renderer, rect *FRect) error {
 	ret, _, _ := purego.SyscallN(sdlRenderFillRect, uintptr(unsafe.Pointer(renderer)), uintptr(unsafe.Pointer(rect)))
-	return checkBool(byte(ret) != 0)
+	return CheckBool(byte(ret) != 0)
 }
 
 // RenderDebugText draws debug text to a [Renderer].
 func RenderDebugText(renderer *Renderer, x, y float32, str string) error {
-	return checkBool(sdlRenderDebugText(renderer, x, y, str))
+	return CheckBool(sdlRenderDebugText(renderer, x, y, str))
 }
 
 // CreateTextureFromSurface creates a texture from an existing surface.
@@ -217,7 +217,7 @@ func ConvertEventToRenderCoordinates(renderer *Renderer, event *Event) bool {
 // CreateRenderer creates a 2D rendering context for a window.
 // The name parameter can be one driver, a comma-separated list of drivers or "" to let SDL choose one.
 func CreateRenderer(window *Window, name string) (*Renderer, error) {
-	return checkPtr(sdlCreateRenderer(window, convert.ToBytePtrNullable(name)))
+	return CheckPtr(sdlCreateRenderer(window, convert.ToBytePtrNullable(name)))
 }
 
 func CreateRendererWithProperties(props PropertiesID) *Renderer {
@@ -242,7 +242,7 @@ func FlushRenderer(renderer *Renderer) bool {
 }
 
 func GetCurrentRenderOutputSize(renderer *Renderer) (w int32, h int32, err error) {
-	err = checkBool(sdlGetCurrentRenderOutputSize(renderer, &w, &h))
+	err = CheckBool(sdlGetCurrentRenderOutputSize(renderer, &w, &h))
 	return
 }
 
@@ -263,12 +263,12 @@ func GetRenderDrawBlendMode(renderer *Renderer, blendMode *BlendMode) bool {
 }
 
 func GetRenderDrawColor(renderer *Renderer) (r, g, b, a uint8, err error) {
-	err = checkBool(sdlGetRenderDrawColor(renderer, &r, &g, &b, &a))
+	err = CheckBool(sdlGetRenderDrawColor(renderer, &r, &g, &b, &a))
 	return
 }
 
 func GetRenderDrawColorFloat(renderer *Renderer) (r, g, b, a float32, err error) {
-	err = checkBool(sdlGetRenderDrawColorFloat(renderer, &r, &g, &b, &a))
+	err = CheckBool(sdlGetRenderDrawColorFloat(renderer, &r, &g, &b, &a))
 	return
 }
 
@@ -530,7 +530,7 @@ func SetRenderDrawBlendMode(renderer *Renderer, blendMode BlendMode) bool {
 }
 
 func SetRenderDrawColorFloat(renderer *Renderer, r float32, g float32, b float32, a float32) error {
-	return checkBool(sdlSetRenderDrawColorFloat(renderer, r, g, b, a))
+	return CheckBool(sdlSetRenderDrawColorFloat(renderer, r, g, b, a))
 }
 
 func SetRenderLogicalPresentation(renderer *Renderer, w int32, h int32, mode RendererLogicalPresentation) bool {

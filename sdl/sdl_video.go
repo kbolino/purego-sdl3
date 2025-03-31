@@ -120,7 +120,7 @@ func DestroyWindow(window *Window) {
 // }
 
 func CreateWindow(title string, w int32, h int32, flags WindowFlags) (*Window, error) {
-	return checkPtr(sdlCreateWindow(title, w, h, flags))
+	return CheckPtr(sdlCreateWindow(title, w, h, flags))
 }
 
 // func CreateWindowWithProperties(props PropertiesID) *Window {

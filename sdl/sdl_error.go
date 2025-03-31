@@ -2,9 +2,17 @@ package sdl
 
 import "fmt"
 
+type Error struct {
+	msg string
+}
+
+func (e Error) Error() string {
+	return e.msg
+}
+
 // GetError retrieves a message about the last error that occurred on the current thread.
-func GetError() string {
-	return sdlGetError()
+func GetError() Error {
+	return Error{sdlGetError()}
 }
 
 // ClearError clears any previous error message for this thread.
@@ -29,29 +37,18 @@ func InvalidParamError(param string) bool {
 	return SetError("Parameter '%s' is invalid", param)
 }
 
-type Err struct {
-	msg string
-}
-
-func (e Err) Error() string {
-	return "SDL error: " + e.msg
-}
-
-func checkBool(b bool) error {
+func CheckBool(b bool) error {
 	if !b {
-		return getErr()
+		return GetError()
+	} else {
+		return nil
 	}
-	return nil
 }
 
-func checkPtr[T any](p *T) (*T, error) {
+func CheckPtr[T any](p *T) (*T, error) {
 	if p == nil {
-		return nil, getErr()
+		return nil, GetError()
 	} else {
 		return p, nil
 	}
-}
-
-func getErr() Err {
-	return Err{msg: GetError()}
 }
