@@ -920,8 +920,8 @@ var (
 	// sdlSendGamepadEffect                     func(*Gamepad, unsafe.Pointer, int32) bool
 	// sdlSendJoystickEffect                    func(*Joystick, unsafe.Pointer, int32) bool
 	// sdlSendJoystickVirtualSensorData         func(*Joystick, SensorType, uint64, *float32, int32) bool
-	// sdlSetAppMetadata                        func(string, string, string) bool
-	// sdlSetAppMetadataProperty                func(string, string) bool
+	sdlSetAppMetadata         func(string, string, string) bool
+	sdlSetAppMetadataProperty func(string, string) bool
 	// sdlSetAssertionHandler                   func(AssertionHandler, unsafe.Pointer)
 	// sdlSetAtomicInt                          func(*AtomicInt, int32) int32
 	// sdlSetAtomicPointer                      func(*unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -1180,7 +1180,7 @@ var (
 	// sdlWaitThread                            func(*Thread, *int32)
 	sdlWarpMouseGlobal   func(float32, float32) bool
 	sdlWarpMouseInWindow func(*Window, float32, float32)
-	// sdlWasInit                               func(InitFlags) InitFlags
+	sdlWasInit           func(InitFlags) InitFlags
 	// sdlwcscasecmp                            func(*wchar_t, *wchar_t) int32
 	// sdlwcscmp                                func(*wchar_t, *wchar_t) int32
 	// sdlwcsdup                                func(*wchar_t) *wchar_t
@@ -2146,8 +2146,8 @@ func init() {
 	// purego.RegisterLibFunc(&sdlSendGamepadEffect, lib, "SDL_SendGamepadEffect")
 	// purego.RegisterLibFunc(&sdlSendJoystickEffect, lib, "SDL_SendJoystickEffect")
 	// purego.RegisterLibFunc(&sdlSendJoystickVirtualSensorData, lib, "SDL_SendJoystickVirtualSensorData")
-	// purego.RegisterLibFunc(&sdlSetAppMetadata, lib, "SDL_SetAppMetadata")
-	// purego.RegisterLibFunc(&sdlSetAppMetadataProperty, lib, "SDL_SetAppMetadataProperty")
+	purego.RegisterLibFunc(&sdlSetAppMetadata, lib, "SDL_SetAppMetadata")
+	purego.RegisterLibFunc(&sdlSetAppMetadataProperty, lib, "SDL_SetAppMetadataProperty")
 	// purego.RegisterLibFunc(&sdlSetAssertionHandler, lib, "SDL_SetAssertionHandler")
 	// purego.RegisterLibFunc(&sdlSetAtomicInt, lib, "SDL_SetAtomicInt")
 	// purego.RegisterLibFunc(&sdlSetAtomicPointer, lib, "SDL_SetAtomicPointer")
@@ -2406,7 +2406,7 @@ func init() {
 	// purego.RegisterLibFunc(&sdlWaitThread, lib, "SDL_WaitThread")
 	purego.RegisterLibFunc(&sdlWarpMouseGlobal, lib, "SDL_WarpMouseGlobal")
 	purego.RegisterLibFunc(&sdlWarpMouseInWindow, lib, "SDL_WarpMouseInWindow")
-	// purego.RegisterLibFunc(&sdlWasInit, lib, "SDL_WasInit")
+	purego.RegisterLibFunc(&sdlWasInit, lib, "SDL_WasInit")
 	// purego.RegisterLibFunc(&sdlwcscasecmp, lib, "SDL_wcscasecmp")
 	// purego.RegisterLibFunc(&sdlwcscmp, lib, "SDL_wcscmp")
 	// purego.RegisterLibFunc(&sdlwcsdup, lib, "SDL_wcsdup")
